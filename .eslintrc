@@ -1,0 +1,48 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@next/next/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/forbid-prop-types": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "no-return-await": "off",
+    "@typescript-eslint/return-await": ["off"],
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": ["off"],
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    "import/order": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    // defaultProps rule to be deprecated on function components
+    // https://github.com/reactjs/rfcs/pull/107
+    "react/require-default-props": [
+      "error",
+      {
+        "ignoreFunctionalComponents": true
+      }
+    ]
+  }
+}

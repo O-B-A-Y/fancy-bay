@@ -1,0 +1,9 @@
+.next
+public
+node_modules
+yarn.lock
+package-lock.json
+**/*.test.ts
+coverage
+commitlint.config.js
+next.config.js
