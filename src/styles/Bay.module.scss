@@ -1,0 +1,52 @@
+@use 'sass:map';
+@import 'variables.scss';
+
+.container {
+  padding: 50;
+}
+
+.inner {
+  display: none;
+}
+
+.rowItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  margin-bottom: 10px;
+  .metaLabel {
+    font-weight: 400;
+    color: map.get($theme-colors, 'light-text');
+  }
+}
+
+.metaContainer {
+  color: white;
+  height: 60vh;
+  font-size: map.get($font-size, 'text');
+  .bayName {
+    font-weight: 'bold';
+    font-size: map.get($font-size, 'large-header');
+  }
+  .bayAddress {
+    color: map.get($theme-colors, 'light-green');
+    font-size: map.get($font-size, 'text');
+    margin-bottom: 10px;
+  }
+  .separator {
+  }
+}
+
+.bottomContainer {
+  .rowItem {
+    p {
+      font-size: 13px;
+    }
+    margin-bottom: 10px;
+  }
+}
+
+.bayInfo {
+  color: white;
+}
