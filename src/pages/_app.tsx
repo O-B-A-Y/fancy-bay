@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
@@ -17,7 +18,11 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Use layout defined at top-level if available
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
+    <Provider store={store}>
+      <ChakraProvider resetCSS={false}>
+        {getLayout(<Component {...pageProps} />)}
+      </ChakraProvider>
+    </Provider>
   );
 };
 
