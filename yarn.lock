@@ -148,7 +148,7 @@
     "@chakra-ui/react-utils" "1.1.2"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/button@1.4.5":
+"@chakra-ui/button@1.4.5", "@chakra-ui/button@^1.4.5":
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/button/-/button-1.4.5.tgz#dacb2d05b3c23c32fb877878640d2447af8408e4"
   integrity sha512-fWwSpgM0h0e+TcXEq6cCJhHSRxTsKDvaE2KJa9KJcqKSjad6p4SSQf1UEw0TstxhrqbgvjDlvYcUjJ4MH6u04Q==
@@ -271,7 +271,7 @@
     "@chakra-ui/hooks" "1.6.1"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/input@1.2.11":
+"@chakra-ui/input@1.2.11", "@chakra-ui/input@^1.2.11":
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/@chakra-ui/input/-/input-1.2.11.tgz#4e29b896e72518ab1ceaaf2a46e513bc20a0c291"
   integrity sha512-/UaUcdSoVA2Bd9sdODnuNpK0+lI68fyigzHWe3z6lF1wmLZB546MxXxt70ZvZWsu+eJ41qBNpx81BZZ9zCJP8w==
@@ -280,7 +280,7 @@
     "@chakra-ui/react-utils" "1.1.2"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/layout@1.4.10":
+"@chakra-ui/layout@1.4.10", "@chakra-ui/layout@^1.4.10":
   version "1.4.10"
   resolved "https://registry.yarnpkg.com/@chakra-ui/layout/-/layout-1.4.10.tgz#283804f206ea05d9158a7238ce2a1fa6cc954968"
   integrity sha512-KtJOKCYyCzUBRrBRNAr9SAhvC6KtSxzIM1NynA0dJSGEVHdkeVchfoZRSNfji60T0vNVA6hVGdgBi9DjZlh02Q==
@@ -2066,6 +2066,16 @@ csstype@^3.0.2, csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.9.tgz#6410af31b26bd0520933d02cbc64fce9ce3fbf0b"
   integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
 
+currency-symbol-map@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/currency-symbol-map/-/currency-symbol-map-5.0.1.tgz#447629c7e26730299aa6174c55bde281f682b2e5"
+  integrity sha512-2yHvoVBPIS9Dx7fjritu9l7UHWo4Z3D2oQnQj8AYwUee2j/PAcoHB4issCqwabfbipISZ/iG6vVYsfrAoks2eA==
+
+currency.js@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/currency.js/-/currency.js-2.0.4.tgz#a8a4d69be3b2e509bf67a560c78220bc04809cf1"
+  integrity sha512-6/OplJYgJ0RUlli74d93HJ/OsKVBi8lB1+Z6eJYS1YZzBuIp4qKKHpJ7ad+GvTlWmLR/hLJOWTykN5Nm8NJ7+w==
+
 damerau-levenshtein@^1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.7.tgz#64368003512a1a6992593741a09a9d31a836f55d"
@@ -3702,6 +3712,11 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5103,9 +5118,9 @@ timers-browserify@2.0.12:
     setimmediate "^1.0.4"
 
 tiny-invariant@^1.0.6:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
-  integrity sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.1.0.tgz#634c5f8efdc27714b7f386c35e6760991d230875"
+  integrity sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
