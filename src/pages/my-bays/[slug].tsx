@@ -1,16 +1,20 @@
-import { Button } from '@chakra-ui/button';
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
-import { Box, Grid, GridItem } from '@chakra-ui/layout';
-import moment from 'moment';
-import type { NextPage } from 'next';
-import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
 import Image from 'next/image';
-import React from 'react';
-import { CurrencyUtils } from '../../utils';
+import React, { ReactElement } from 'react';
 import styles from './Bay.module.scss';
+import Head from 'next/head';
+import moment from 'moment';
+import { CurrencyUtils } from 'src/utils';
+import { NextPageWithLayout } from '../_app';
+import { DefaultLayout } from 'src/layouts';
+import { useRouter } from 'next/dist/client/router';
+import { Button, Container, Grid, TextInput } from 'src/components';
+import LogoIcon from '../../../public/icons/icon-74x68.png';
+import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
+import ReactTooltip from 'react-tooltip';
+import colors from '../../styles/colors.module.scss';
+import cn from 'classnames';
 
-const myLoader = ({
+const ImageLoader = ({
   src,
   width,
   quality,
@@ -27,7 +31,7 @@ const RowItem = ({ label, content }: { label: string; content: any }) => (
   </div>
 );
 
-const Bay: NextPage = () => {
+const Bay: NextPageWithLayout = () => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -48,7 +52,62 @@ const Bay: NextPage = () => {
 
   const handler = {
     Stake: () => {},
+    Leave: () => {},
   };
+
+  const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
+
+  const RenderMetaContainer = React.memo(() => (
+    <div className={styles.metaContainer}>
+      <Image
+        loader={ImageLoader as any}
+        src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
+        alt={slug as string}
+        width={2250}
+        height={1390}
+        layout="responsive"
+      />
+      <br />
+      <h1 className={styles.bayName}>{slug}</h1>
+      <p
+        data-tip={mockAddress}
+        data-for="address-tooltip"
+        data-place="bottom"
+        className={styles.bayAddress}
+      >
+        {`${mockAddress.substring(0, 30).trim()}...`}
+      </p>
+
+      {mockBayInfo.map(({ content, label }) => (
+        <RowItem label={label} content={content} />
+      ))}
+    </div>
+  ));
+
+  const RenderBottomContainer = () => (
+    <div className={styles.bottomContainer}>
+      <div className={styles.rowItem}>
+        <p
+          data-tip={mockAddress}
+          data-for="address-tooltip"
+          data-place="bottom"
+        >
+          <Image src={MetamaskIcon} width={15} height={15} />
+          <span style={{ marginLeft: 10 }}>{`${mockAddress
+            .substring(0, 10)
+            .trim()}...`}</span>
+        </p>
+        <div style={{ alignItems: 'center' }}>
+          <span>100 </span>
+          <Image src={LogoIcon} width={15} height={15} />
+        </div>
+      </div>
+      <div className={styles.rowItem}>
+        <div className={styles.metaLabel}>Total</div>
+        <p className={styles.metaContent}>{0.00005867} OBAY</p>
+      </div>
+    </div>
+  );
 
   return (
     <div>
@@ -58,55 +117,15 @@ const Bay: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Box className={styles.container} paddingX={100} paddingY={50}>
-          <Grid
-            templateRows="repeat(2, 1fr)"
-            templateColumns="repeat(7, 1fr)"
-            gap={2}
-            className={styles.inner}
-          >
-            <GridItem
-              colSpan={2}
-              rowSpan={2}
-              bg="#1B1B1B"
-              borderWidth="2"
-              borderColor="#4A4A4A"
-              borderRadius={10}
-              className={styles.bayInfo}
-              paddingX="10"
-              paddingY="8"
-            >
-              <div className={styles.bayInfoInner}>
-                <div className={styles.metaContainer}>
-                  <Image
-                    loader={myLoader as any}
-                    src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
-                    alt={slug as string}
-                    width={2250}
-                    height={1390}
-                    layout="responsive"
-                  />
-                  <br />
-                  <h1 className={styles.bayName}>{slug}</h1>
-                  <p className={styles.bayAddress}>
-                    0x460aDc7A9b5253A765e662A031D26C8743a2EbB6
-                  </p>
-                  {mockBayInfo.map(({ content, label }) => (
-                    <RowItem label={label} content={content} />
-                  ))}
-                </div>
+      <Container>
+        <div className={styles.container}>
+          <Grid container spacing="sm" style={{ height: '100%' }}>
+            <Grid item lg={3}>
+              <div className={cn(styles.bayInfoInner, styles.subContainer)}>
+                <RenderMetaContainer />
                 <div className={styles.separator} />
-                <div className={styles.bottomContainer}>
-                  <div className={styles.rowItem}>
-                    <p>
-                      {`${'0x460aDc7A9b5253A765e662A031D26C8743a2EbB6'
-                        .substring(0, 10)
-                        .trim()}...`}
-                    </p>
-                    <p>100 OBAY</p>
-                  </div>
-                  <InputGroup size="md" marginBottom="4">
+                <RenderBottomContainer />
+                {/* <InputGroup size="md" marginBottom="4">
                     <Input
                       borderColor="#4E4E4E"
                       pr="4.5rem"
@@ -124,39 +143,41 @@ const Bay: NextPage = () => {
                         Stake
                       </Button>
                     </InputRightElement>
-                  </InputGroup>
-                  <div className={styles.rowItem}>
-                    <div className={styles.metaLabel}>Total</div>
-                    <p className={styles.metaContent}>{0.00005867} OBAY</p>
-                  </div>
-                </div>
+                  </InputGroup> */}
+                <TextInput
+                  hasButton
+                  placeholder="Enter the amount"
+                  buttonText="Stake"
+                />
                 <Button
-                  bg="#303030"
-                  borderWidth="2"
-                  borderColor="#4E4E4E"
-                  colorScheme="teal"
-                  size="md"
-                  width="full"
+                  backgroundColor="#303030"
+                  color="white"
+                  size="full"
+                  textAlign="center"
+                  paddingVertical={10}
+                  onClick={handler.Leave}
                 >
                   Leave the bay
                 </Button>
               </div>
-            </GridItem>
-            <GridItem
-              colSpan={5}
-              rowSpan={2}
-              bg="#1B1B1B"
-              borderWidth="2"
-              borderColor="#4A4A4A"
-              borderRadius={10}
-              paddingX="10"
-              paddingY="8"
-            />
+            </Grid>
+            <Grid item lg={8}>
+              <div className={styles.subContainer}>Hey 2</div>
+            </Grid>
           </Grid>
-        </Box>
-      </main>
+        </div>
+      </Container>
+      <ReactTooltip
+        id="address-tooltip"
+        textColor={colors.dark0}
+        backgroundColor={colors.dark800}
+      />
     </div>
   );
+};
+
+Bay.getLayout = function getLayout(page: ReactElement) {
+  return <DefaultLayout>{page}</DefaultLayout>;
 };
 
 export default Bay;
