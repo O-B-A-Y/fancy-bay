@@ -1,25 +1,5 @@
 /** Global variables module **/
-// Dark Palette
-$dark100: #ebebeb;
-$dark200: #d6d6d6;
-$dark300: #c2c2c2;
-$dark400: #666666;
-$dark500: #4a4a4a;
-$dark600: #333333;
-$dark700: #252525;
-$dark800: #1b1b1b;
-$dark900: #000000;
-
-// Teal palette
-$teal100: #7ef8ec;
-$teal200: #70e0d5;
-$teal300: #69d4ca;
-$teal400: #5bbbc8;
-$teal500: #4e9ea8;
-$teal600: #4c9594;
-$teal700: #3b7475;
-$teal800: #2d5657;
-$teal900: #1e3a3b;
+@import './abstracts/colors';
 
 :export {
   dark100: $dark100;

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ReactElement } from 'react';
 import Container from '../components/Container';
 import { DefaultLayout } from '../layouts';
+import styles from './index.module.scss';
 import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => (
@@ -12,7 +13,7 @@ const Home: NextPageWithLayout = () => (
       <meta key="description" name="description" content="OBAY" />
     </Head>
     <Container>
-      <h1>
+      <h1 className={styles.tealHeader}>
         Welcome to{' '}
         <Link href="/">
           <a>OBAY</a>

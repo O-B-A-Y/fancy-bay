@@ -7,14 +7,11 @@ interface ContainerProps {
 }
 
 const Container: React.FC<ContainerProps> = ({
-  size = ContainerSize.ExtremeLarge,
   children,
-  ...rest
+  size = ContainerSize.ExtremeLarge,
 }) => (
   <>
-    <div className={styles[`container-${size}`]} {...rest}>
-      {children}
-    </div>
+    <div className={styles[`container-${size}`]}>{children}</div>
   </>
 );
 
