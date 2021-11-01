@@ -1,1 +1,4 @@
-export * as currencyUtil from './currency';
+/* eslint-disable import/prefer-default-export */
+import CurrencyUtils from './currency';
+
+export { CurrencyUtils };

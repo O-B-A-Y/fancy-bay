@@ -7,7 +7,7 @@ import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
-import { currencyUtil } from 'src/utils';
+import { CurrencyUtils } from '../../utils';
 import styles from './Bay.module.scss';
 
 const myLoader = ({
@@ -34,7 +34,7 @@ const Bay: NextPage = () => {
   const mockBayInfo = [
     {
       label: 'Total Fund',
-      content: `${currencyUtil.formatByUnit(1521000, 'USD')} USD`,
+      content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
     },
     {
       label: 'Member',
