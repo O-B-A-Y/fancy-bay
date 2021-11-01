@@ -35,9 +35,8 @@
     "class-methods-use-this": "off",
     "no-plusplus": "off",
     "import/order": "off",
+    "jsx-a11y/anchor-is-valid": ["off"],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    // defaultProps rule to be deprecated on function components
-    // https://github.com/reactjs/rfcs/pull/107
     "react/require-default-props": [
       "error",
       {

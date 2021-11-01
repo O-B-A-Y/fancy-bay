@@ -1,0 +1,80 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/mixins';
+
+.header {
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  background-color: $dark700;
+  @include respond-to('sm') {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  @include respond-to('md') {
+    height: 81px;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 42px;
+    width: 100vw;
+    border-bottom: 1px solid $dark400;
+  }
+}
+
+.headerItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerLink {
+  color: $dark0;
+  font-size: map-get($font-sizes, medium);
+  font-style: normal;
+  font-weight: normal;
+  padding: 14px 16px;
+  text-decoration: none;
+  &:hover {
+    color: $dark300;
+  }
+}
+
+.headerLogo {
+  display: inline-flex;
+  font-weight: 800;
+  padding: 14px 16px;
+  text-decoration: none;
+  span {
+    background: -webkit-linear-gradient($teal400, #49fdc0);
+    font-size: map-get($font-sizes, large);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+}
+
+.wallet {
+  display: flex;
+  background-color: $dark500;
+  color: $dark0;
+  width: 280px;
+  border-radius: 20px;
+  height: 32px;
+  padding: 2px 20px;
+  align-items: center;
+  justify-content: space-between;
+  .balance {
+    display: inline-flex;
+    font-size: 17px;
+  }
+  .address {
+    font-size: map-get($font-sizes, regular);
+  }
+}

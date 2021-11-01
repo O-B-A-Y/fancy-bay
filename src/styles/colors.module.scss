@@ -1,0 +1,23 @@
+/** Global variables module **/
+@import './abstracts/colors';
+
+:export {
+  dark100: $dark100;
+  dark200: $dark200;
+  dark300: $dark300;
+  dark400: $dark400;
+  dark500: $dark500;
+  dark600: $dark600;
+  dark700: $dark700;
+  dark800: $dark800;
+  dark900: $dark900;
+  teal100: $teal100;
+  teal200: $teal200;
+  teal300: $teal300;
+  teal400: $teal400;
+  teal500: $teal500;
+  teal600: $teal600;
+  teal700: $teal700;
+  teal800: $teal800;
+  teal900: $teal900;
+}

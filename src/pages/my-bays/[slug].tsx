@@ -1,14 +1,14 @@
-import type { NextPage } from 'next';
-import Image from 'next/image';
-import { useRouter } from 'next/dist/client/router';
-import styles from '../../styles/Bay.module.scss';
-import Head from 'next/head';
-import React from 'react';
-import { Box, Grid, GridItem } from '@chakra-ui/layout';
-import { currencyUtil } from 'src/utils';
-import moment from 'moment';
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
+import { Box, Grid, GridItem } from '@chakra-ui/layout';
+import moment from 'moment';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
+import Image from 'next/image';
+import React from 'react';
+import { CurrencyUtils } from '../../utils';
+import styles from './Bay.module.scss';
 
 const myLoader = ({
   src,
@@ -34,7 +34,7 @@ const Bay: NextPage = () => {
   const mockBayInfo = [
     {
       label: 'Total Fund',
-      content: `${currencyUtil.formatByUnit(1521000, 'USD')} USD`,
+      content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
     },
     {
       label: 'Member',

@@ -1,0 +1,22 @@
+/* eslint-disable no-nested-ternary */
+import { NextPageContext } from 'next';
+import React from 'react';
+
+interface ErrorComponentProps {
+  statusCode?: number;
+}
+
+const Error = ({ statusCode }: ErrorComponentProps) => (
+  <p>
+    {statusCode
+      ? `An error ${statusCode} occurred on server`
+      : 'An error occurred on client'}
+  </p>
+);
+
+Error.getInitialProps = ({ res, err }: NextPageContext) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  return { statusCode };
+};
+
+export default Error;
