@@ -1,0 +1,74 @@
+@use 'sass:math';
+@import '../../styles/abstracts/breakpoints';
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/attributes';
+
+.grid {
+  display: grid;
+  height: 100%;
+
+  // Auto-flow row
+  &-flow-row {
+    grid-auto-flow: row;
+  }
+
+  &-flow-col {
+    grid-auto-flow: column;
+  }
+
+  // Responsive 2D dimensions
+  @each $bp, $value in $breakpoints {
+    // Template Columns
+    @include respond-to($bp) {
+      @for $i from 1 to 13 {
+        &-cols-#{$i}\@#{$bp} {
+          grid-template-columns: repeat($i, minmax(0, #{$i}fr));
+        }
+      }
+    }
+
+    // Template Rows
+    @include respond-to($bp) {
+      @for $i from 1 to 13 {
+        &-rows-#{$i}\@#{$bp} {
+          grid-template-rows: repeat($i, minmax(0, #{$i}fr));
+        }
+      }
+    }
+  }
+}
+
+// Column gap
+@each $size, $value in $gap-sizes {
+  .gap-col-#{$size} {
+    column-gap: $value;
+  }
+}
+
+// Row gap
+@each $size, $value in $gap-sizes {
+  .gap-row-#{$size} {
+    row-gap: $value;
+  }
+}
+
+// Justify items
+@each $value in $justifyValues {
+  .justify-items-#{$value} {
+    justify-items: $value;
+  }
+}
+
+// Align items
+@each $value in $alignValues {
+  .align-self-#{$value} {
+    align-items: $value;
+  }
+}
+
+// Justify content
+@each $value in $justifyContentValues {
+  .justify-content-#{$value} {
+    justify-content: $value;
+  }
+}

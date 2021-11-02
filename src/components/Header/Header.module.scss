@@ -16,7 +16,8 @@
   }
 
   @include respond-to('md') {
-    height: 81px;
+    padding-top: 10px;
+    height: 58px;
     display: inline-flex;
     flex-direction: row;
     gap: 42px;
