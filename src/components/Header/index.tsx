@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
 import colors from '../../styles/colors.module.scss';
+import NoSSR from '../NoSSR';
 import styles from './Header.module.scss';
 
 const mockWallet = {
@@ -63,13 +64,15 @@ const Header: React.FC = () => {
                 data-for="address-tooltip"
                 data-place="bottom"
               >
-                {`${mockWallet.address.slice(0, 12)}...`}
+                {`${mockWallet.address.slice(0, 16)}...`}
               </p>
-              <ReactTooltip
-                id="address-tooltip"
-                textColor={colors.dark0}
-                backgroundColor={colors.dark800}
-              />
+              <NoSSR>
+                <ReactTooltip
+                  id="address-tooltip"
+                  textColor={colors.dark0}
+                  backgroundColor={colors.dark800}
+                />
+              </NoSSR>
             </div>
           </div>
         </li>

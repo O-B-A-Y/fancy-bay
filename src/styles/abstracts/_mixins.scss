@@ -7,7 +7,7 @@
   // If the key exists in the map
   @if map-has-key($breakpoints, $breakpoint) {
     // Prints a media query based on the value
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
       @content;
     }
   }

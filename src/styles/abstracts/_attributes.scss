@@ -1,0 +1,11 @@
+$justifyValues: 'start', 'end', 'center', 'stretch';
+$justifyContentValues: 'start', 'end', 'center', 'stretch', 'space-around',
+  'space-between', 'space-evenly';
+$alignValues: 'start', 'end', 'center', 'stretch';
+$gap-sizes: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 36px,
+);

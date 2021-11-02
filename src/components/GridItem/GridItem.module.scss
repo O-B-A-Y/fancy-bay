@@ -1,0 +1,59 @@
+@import '../../styles/abstracts/breakpoints';
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/attributes';
+
+@each $bp, $value in $breakpoints {
+  // Row Span
+  @include respond-to($bp) {
+    @for $i from 1 to 13 {
+      .row-span-#{$i}\@#{$bp} {
+        grid-row: span $i / span $i;
+      }
+    }
+
+    // Column Span
+    @for $i from 1 to 13 {
+      .col-span-#{$i}\@#{$bp} {
+        grid-column: span $i / span $i;
+      }
+    }
+
+    // Row Start Position
+    @for $i from 1 to 14 {
+      .row-start-#{$i}\@#{$bp} {
+        grid-row-start: $i;
+      }
+    }
+    // Row End Position
+    @for $i from 1 to 14 {
+      .row-end-#{$i}\@#{$bp} {
+        grid-row-end: $i;
+      }
+    }
+
+    // Column Start Position
+    @for $i from 1 to 14 {
+      .col-start-#{$i}\@#{$bp} {
+        grid-column-start: $i;
+      }
+    }
+    // Column End Position
+    @for $i from 1 to 14 {
+      .col-end-#{$i}\@#{$bp} {
+        grid-column-end: $i;
+      }
+    }
+  }
+}
+
+@each $value in $justifyValues {
+  .justify-self-#{$value} {
+    justify-self: $value;
+  }
+}
+
+@each $value in $alignValues {
+  .align-self-#{$value} {
+    align-self: $value;
+  }
+}

@@ -19,22 +19,22 @@ import TextAlign from 'src/constants/textAlign';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextInputVariant from 'src/constants/textInputVariant';
 
-const ImageLoader = ({
-  src,
-  width,
-  quality,
-}: {
-  src: string;
-  width: number;
-  quality: number;
-}) => `${src}?w=${width}&q=${quality || 75}`;
+// const ImageLoader = ({
+//   src,
+//   width,
+//   quality,
+// }: {
+//   src: string;
+//   width: number;
+//   quality: number;
+// }) => `${src}?w=${width}&q=${quality || 75}`;
 
-const RowItem = ({ label, content }: { label: string; content: any }) => (
-  <div className={styles.rowItem}>
-    <h3 className={styles.metaLabel}>{label}</h3>
-    <p className={styles.metaContent}>{content}</p>
-  </div>
-);
+// const RowItem = ({ label, content }: { label: string; content: any }) => (
+//   <div className={styles.rowItem}>
+//     <h3 className={styles.metaLabel}>{label}</h3>
+//     <p className={styles.metaContent}>{content}</p>
+//   </div>
+// );
 
 const Bay: NextPageWithLayout = () => {
   const router = useRouter();
@@ -43,20 +43,20 @@ const Bay: NextPageWithLayout = () => {
   });
   const { slug } = router.query;
 
-  const mockBayInfo = [
-    {
-      label: 'Total Fund',
-      content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
-    },
-    {
-      label: 'Member',
-      content: 120,
-    },
-    {
-      label: 'Created at',
-      content: moment().format('DD-MM-YYYY'),
-    },
-  ];
+  // const mockBayInfo = [
+  //   {
+  //     label: 'Total Fund',
+  //     content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
+  //   },
+  //   {
+  //     label: 'Member',
+  //     content: 120,
+  //   },
+  //   {
+  //     label: 'Created at',
+  //     content: moment().format('DD-MM-YYYY'),
+  //   },
+  // ];
 
   const handler = {
     Stake: () => {},
@@ -66,34 +66,34 @@ const Bay: NextPageWithLayout = () => {
     },
   };
 
-  const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
+  // const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
 
-  const RenderMetaContainer = React.memo(() => (
-    <div className={styles.metaContainer}>
-      <Image
-        loader={ImageLoader as any}
-        src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
-        alt={slug as string}
-        width={2250}
-        height={1390}
-        layout="responsive"
-      />
-      <br />
-      <h1 className={styles.bayName}>{slug}</h1>
-      <p
-        data-tip={mockAddress}
-        data-for="address-tooltip"
-        data-place="bottom"
-        className={styles.bayAddress}
-      >
-        {`${mockAddress.substring(0, 30).trim()}...`}
-      </p>
+  // const RenderMetaContainer = React.memo(() => (
+  //   <div className={styles.metaContainer}>
+  //     <Image
+  //       loader={ImageLoader as any}
+  //       src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
+  //       alt={slug as string}
+  //       width={2250}
+  //       height={1390}
+  //       layout="responsive"
+  //     />
+  //     <br />
+  //     <h1 className={styles.bayName}>{slug}</h1>
+  //     <p
+  //       data-tip={mockAddress}
+  //       data-for="address-tooltip"
+  //       data-place="bottom"
+  //       className={styles.bayAddress}
+  //     >
+  //       {`${mockAddress.substring(0, 30).trim()}...`}
+  //     </p>
 
-      {mockBayInfo.map(({ content, label }) => (
-        <RowItem label={label} content={content} />
-      ))}
-    </div>
-  ));
+  //     {mockBayInfo.map(({ content, label }) => (
+  //       <RowItem label={label} content={content} />
+  //     ))}
+  //   </div>
+  // ));
 
   return (
     <div>
@@ -171,11 +171,11 @@ const Bay: NextPageWithLayout = () => {
         backgroundColor={colors.dark800}
       />
     </div>
-  );
+        );
 };
 
-Bay.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
-};
+// Bay.getLayout = function getLayout(page: ReactElement) {
+//   return <DefaultLayout>{page}</DefaultLayout>;
+// };
 
 export default Bay;
