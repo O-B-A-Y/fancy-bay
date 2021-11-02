@@ -40,12 +40,12 @@ const GridItem: React.FC<GridItemProps> = ({
 }) => {
   const classNames = clsx({
     // Default Spans & Positions
-    [styles[`row-span-${rowSpan}@${Size.ExtraSmall}`]]: rowSpan,
-    [styles[`col-span-${colSpan}@${Size.ExtraSmall}`]]: colSpan,
-    [styles[`row-start-${rowStart}@${Size.ExtraSmall}`]]: rowStart,
-    [styles[`row-end-${rowEnd}@${Size.ExtraSmall}`]]: rowEnd,
-    [styles[`col-start-${colStart}@${Size.ExtraSmall}`]]: colStart,
-    [styles[`col-end-${colEnd}@${Size.ExtraSmall}`]]: colEnd,
+    [styles[`row-span-${rowSpan}@${Size.NotAvailable}`]]: rowSpan,
+    [styles[`col-span-${colSpan}@${Size.NotAvailable}`]]: colSpan,
+    [styles[`row-start-${rowStart}@${Size.NotAvailable}`]]: rowStart,
+    [styles[`row-end-${rowEnd}@${Size.NotAvailable}`]]: rowEnd,
+    [styles[`col-start-${colStart}@${Size.NotAvailable}`]]: colStart,
+    [styles[`col-end-${colEnd}@${Size.NotAvailable}`]]: colEnd,
     /* * Responsive Spans * */
     // xs
     [styles[
@@ -147,6 +147,7 @@ const GridItem: React.FC<GridItemProps> = ({
     // Align Self
     [styles[`align-self-${alignSelf}`]]: alignSelf,
   });
+
   return (
     <div className={classNames} style={style}>
       {children}
