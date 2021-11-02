@@ -1,12 +1,12 @@
 /**
  * Enumerates for different container sizes
  */
-enum ContainerSize {
-  ExtremeSmall = 'xs',
+enum Size {
+  ExtraSmall = 'xs',
   Small = 'sm',
   Medium = 'md',
   Large = 'lg',
-  ExtremeLarge = 'xl',
+  ExtraLarge = 'xl',
 }
 
-export default ContainerSize;
+export default Size;

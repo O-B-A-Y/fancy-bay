@@ -32,11 +32,9 @@
     "*.{json,md,css}": "yarn prettier:fix"
   },
   "dependencies": {
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.24.0",
-    "classnames": "^2.3.1",
+    "clsx": "^1.1.1",
     "currency-symbol-map": "^5.0.1",
     "currency.js": "^2.0.4",
     "framer-motion": "^4",

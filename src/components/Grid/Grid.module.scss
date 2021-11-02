@@ -1,85 +1,74 @@
-$spacing: (
-  'sm': 8px,
-  'md': 16px,
-  'lg': 24px,
-);
+@use 'sass:math';
+@import '../../styles/abstracts/breakpoints';
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/attributes';
 
-$breakpoints: (
-  'sm': 600px,
-  'md': 960px,
-  'lg': 1280px,
-);
+.grid {
+  display: grid;
+  height: 100%;
 
-$justifyContent: (flex-start, flex-end, center, space-between);
-$alignItems: (flex-start, flex-end, center);
+  // Auto-flow row
+  &-flow-row {
+    grid-auto-flow: row;
+  }
 
-@mixin breakpoint($name) {
-  @media screen and (min-width: map-get($breakpoints, $name )) {
-    @content;
+  &-flow-col {
+    grid-auto-flow: column;
+  }
+
+  // Responsive 2D dimensions
+  @each $bp, $value in $breakpoints {
+    // Template Columns
+    @include respond-to($bp) {
+      @for $i from 1 to 13 {
+        &-cols-#{$i}\@#{$bp} {
+          grid-template-columns: repeat($i, minmax(0, #{$i}fr));
+        }
+      }
+    }
+
+    // Template Rows
+    @include respond-to($bp) {
+      @for $i from 1 to 13 {
+        &-rows-#{$i}\@#{$bp} {
+          grid-template-rows: repeat($i, minmax(0, #{$i}fr));
+        }
+      }
+    }
   }
 }
 
-.Grid {
-  &_container {
-    display: flex;
-    flex-wrap: wrap;
-
-    height: 100%;
+// Column gap
+@each $size, $value in $gap-sizes {
+  .gap-col-#{$size} {
+    column-gap: $value;
   }
+}
 
-  &_item {
-    display: block;
+// Row gap
+@each $size, $value in $gap-sizes {
+  .gap-row-#{$size} {
+    row-gap: $value;
   }
+}
 
-  @for $i from 1 to 13 {
-    &_xs_#{$i} {
-      flex-basis: $i/12 * 100%;
-    }
+// Justify items
+@each $value in $justifyValues {
+  .justify-items-#{$value} {
+    justify-items: $value;
   }
+}
 
-  @include breakpoint('sm') {
-    @for $i from 1 to 13 {
-      &_sm_#{$i} {
-        flex-basis: $i/12 * 100%;
-      }
-    }
+// Align items
+@each $value in $alignValues {
+  .align-self-#{$value} {
+    align-items: $value;
   }
+}
 
-  @include breakpoint('md') {
-    @for $i from 1 to 13 {
-      &_md_#{$i} {
-        flex-basis: $i/12 * 100%;
-      }
-    }
-  }
-
-  @include breakpoint('lg') {
-    @for $i from 1 to 13 {
-      &_lg_#{$i} {
-        flex-basis: $i/12 * 100%;
-      }
-    }
-  }
-
-  @each $name, $value in $spacing {
-    &_spacing_#{$name} {
-      margin: -$value;
-    }
-
-    &_spacing_#{$name} > &_item {
-      padding: $value;
-    }
-  }
-
-  @each $value in $justifyContent {
-    &_justifyContent_#{$value} {
-      justify-content: $value;
-    }
-  }
-
-  @each $value in $alignItems {
-    &_alignItems_#{$value} {
-      align-items: $value;
-    }
+// Justify content
+@each $value in $justifyContentValues {
+  .justify-content-#{$value} {
+    justify-content: $value;
   }
 }

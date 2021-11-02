@@ -1,183 +1,185 @@
-import Image from 'next/image';
-import React, { ReactElement } from 'react';
-import styles from './Bay.module.scss';
-import Head from 'next/head';
-import moment from 'moment';
-import { CurrencyUtils } from 'src/utils';
+/* eslint-disable arrow-body-style */
+// import clsx from 'clsx';
+// import moment from 'moment';
+// import { useRouter } from 'next/dist/client/router';
+// import Head from 'next/head';
+// import Image from 'next/image';
+import React from 'react';
+// import ReactTooltip from 'react-tooltip';
+// import { Button, Container, Grid, TextInput } from 'src/components';
+// import { DefaultLayout } from 'src/layouts';
+// import { CurrencyUtils } from 'src/utils';
+// import LogoIcon from '../../../public/icons/icon-74x68.png';
+// import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
+// import colors from '../../styles/colors.module.scss';
 import { NextPageWithLayout } from '../_app';
-import { DefaultLayout } from 'src/layouts';
-import { useRouter } from 'next/dist/client/router';
-import { Button, Container, Grid, TextInput } from 'src/components';
-import LogoIcon from '../../../public/icons/icon-74x68.png';
-import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
-import ReactTooltip from 'react-tooltip';
-import colors from '../../styles/colors.module.scss';
-import cn from 'classnames';
+// import styles from './Bay.module.scss';
 
-const ImageLoader = ({
-  src,
-  width,
-  quality,
-}: {
-  src: string;
-  width: number;
-  quality: number;
-}) => `${src}?w=${width}&q=${quality || 75}`;
+// const ImageLoader = ({
+//   src,
+//   width,
+//   quality,
+// }: {
+//   src: string;
+//   width: number;
+//   quality: number;
+// }) => `${src}?w=${width}&q=${quality || 75}`;
 
-const RowItem = ({ label, content }: { label: string; content: any }) => (
-  <div className={styles.rowItem}>
-    <h3 className={styles.metaLabel}>{label}</h3>
-    <p className={styles.metaContent}>{content}</p>
-  </div>
-);
+// const RowItem = ({ label, content }: { label: string; content: any }) => (
+//   <div className={styles.rowItem}>
+//     <h3 className={styles.metaLabel}>{label}</h3>
+//     <p className={styles.metaContent}>{content}</p>
+//   </div>
+// );
 
 const Bay: NextPageWithLayout = () => {
-  const router = useRouter();
-  const { slug } = router.query;
+  // const router = useRouter();
+  // const { slug } = router.query;
 
-  const mockBayInfo = [
-    {
-      label: 'Total Fund',
-      content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
-    },
-    {
-      label: 'Member',
-      content: 120,
-    },
-    {
-      label: 'Created at',
-      content: moment().format('DD-MM-YYYY'),
-    },
-  ];
+  // const mockBayInfo = [
+  //   {
+  //     label: 'Total Fund',
+  //     content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
+  //   },
+  //   {
+  //     label: 'Member',
+  //     content: 120,
+  //   },
+  //   {
+  //     label: 'Created at',
+  //     content: moment().format('DD-MM-YYYY'),
+  //   },
+  // ];
 
-  const handler = {
-    Stake: () => {},
-    Leave: () => {},
-  };
+  // const handler = {
+  //   Stake: () => {},
+  //   Leave: () => {},
+  // };
 
-  const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
+  // const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
 
-  const RenderMetaContainer = React.memo(() => (
-    <div className={styles.metaContainer}>
-      <Image
-        loader={ImageLoader as any}
-        src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
-        alt={slug as string}
-        width={2250}
-        height={1390}
-        layout="responsive"
-      />
-      <br />
-      <h1 className={styles.bayName}>{slug}</h1>
-      <p
-        data-tip={mockAddress}
-        data-for="address-tooltip"
-        data-place="bottom"
-        className={styles.bayAddress}
-      >
-        {`${mockAddress.substring(0, 30).trim()}...`}
-      </p>
+  // const RenderMetaContainer = React.memo(() => (
+  //   <div className={styles.metaContainer}>
+  //     <Image
+  //       loader={ImageLoader as any}
+  //       src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy81YTc5NDA0YjQ2ZTYyNWFhYTFkYTBhNDJlMmU4Y2JiYy5qcGc=.jpg"
+  //       alt={slug as string}
+  //       width={2250}
+  //       height={1390}
+  //       layout="responsive"
+  //     />
+  //     <br />
+  //     <h1 className={styles.bayName}>{slug}</h1>
+  //     <p
+  //       data-tip={mockAddress}
+  //       data-for="address-tooltip"
+  //       data-place="bottom"
+  //       className={styles.bayAddress}
+  //     >
+  //       {`${mockAddress.substring(0, 30).trim()}...`}
+  //     </p>
 
-      {mockBayInfo.map(({ content, label }) => (
-        <RowItem label={label} content={content} />
-      ))}
-    </div>
-  ));
+  //     {mockBayInfo.map(({ content, label }) => (
+  //       <RowItem label={label} content={content} />
+  //     ))}
+  //   </div>
+  // ));
 
-  const RenderBottomContainer = () => (
-    <div className={styles.bottomContainer}>
-      <div className={styles.rowItem}>
-        <p
-          data-tip={mockAddress}
-          data-for="address-tooltip"
-          data-place="bottom"
-        >
-          <Image src={MetamaskIcon} width={15} height={15} />
-          <span style={{ marginLeft: 10 }}>{`${mockAddress
-            .substring(0, 10)
-            .trim()}...`}</span>
-        </p>
-        <div style={{ alignItems: 'center' }}>
-          <span>100 </span>
-          <Image src={LogoIcon} width={15} height={15} />
-        </div>
-      </div>
-      <div className={styles.rowItem}>
-        <div className={styles.metaLabel}>Total</div>
-        <p className={styles.metaContent}>{0.00005867} OBAY</p>
-      </div>
-    </div>
-  );
+  // const RenderBottomContainer = () => (
+  //   <div className={styles.bottomContainer}>
+  //     <div className={styles.rowItem}>
+  //       <p
+  //         data-tip={mockAddress}
+  //         data-for="address-tooltip"
+  //         data-place="bottom"
+  //       >
+  //         <Image src={MetamaskIcon} width={15} height={15} />
+  //         <span style={{ marginLeft: 10 }}>{`${mockAddress
+  //           .substring(0, 10)
+  //           .trim()}...`}</span>
+  //       </p>
+  //       <div style={{ alignItems: 'center' }}>
+  //         <span>100 </span>
+  //         <Image src={LogoIcon} width={15} height={15} />
+  //       </div>
+  //     </div>
+  //     <div className={styles.rowItem}>
+  //       <div className={styles.metaLabel}>Total</div>
+  //       <p className={styles.metaContent}>{0.00005867} OBAY</p>
+  //     </div>
+  //   </div>
+  // );
 
-  return (
-    <div>
-      <Head>
-        <title>{(slug as string)?.toUpperCase()}</title>
-        <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  // return (
+  //   <div>
+  //     <Head>
+  //       <title>{(slug as string)?.toUpperCase()}</title>
+  //       <meta name="description" content="Generated by create next app" />
+  //       <link rel="icon" href="/favicon.ico" />
+  //     </Head>
 
-      <Container>
-        <div className={styles.container}>
-          <Grid container spacing="sm" style={{ height: '100%' }}>
-            <Grid item lg={3}>
-              <div className={cn(styles.bayInfoInner, styles.subContainer)}>
-                <RenderMetaContainer />
-                <div className={styles.separator} />
-                <RenderBottomContainer />
-                {/* <InputGroup size="md" marginBottom="4">
-                    <Input
-                      borderColor="#4E4E4E"
-                      pr="4.5rem"
-                      type="text"
-                      background="#181818"
-                      placeholder="Amount"
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button
-                        bg="#373339"
-                        h="1.75rem"
-                        size="sm"
-                        onClick={handler.Stake}
-                      >
-                        Stake
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup> */}
-                <TextInput
-                  hasButton
-                  placeholder="Enter the amount"
-                  buttonText="Stake"
-                />
-                <Button
-                  backgroundColor="#303030"
-                  color="white"
-                  size="full"
-                  textAlign="center"
-                  paddingVertical={10}
-                  onClick={handler.Leave}
-                >
-                  Leave the bay
-                </Button>
-              </div>
-            </Grid>
-            <Grid item lg={8}>
-              <div className={styles.subContainer}>Hey 2</div>
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
-      <ReactTooltip
-        id="address-tooltip"
-        textColor={colors.dark0}
-        backgroundColor={colors.dark800}
-      />
-    </div>
-  );
+  //     <Container>
+  //       <div className={styles.container}>
+  //         <Grid spacing="sm" style={{ height: '100%' }}>
+  //           <Grid item lg={3}>
+  //             <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
+  //               <RenderMetaContainer />
+  //               <div className={styles.separator} />
+  //               <RenderBottomContainer />
+  //               {/* <InputGroup size="md" marginBottom="4">
+  //                   <Input
+  //                     borderColor="#4E4E4E"
+  //                     pr="4.5rem"
+  //                     type="text"
+  //                     background="#181818"
+  //                     placeholder="Amount"
+  //                   />
+  //                   <InputRightElement width="4.5rem">
+  //                     <Button
+  //                       bg="#373339"
+  //                       h="1.75rem"
+  //                       size="sm"
+  //                       onClick={handler.Stake}
+  //                     >
+  //                       Stake
+  //                     </Button>
+  //                   </InputRightElement>
+  //                 </InputGroup> */}
+  //               <TextInput
+  //                 hasButton
+  //                 placeholder="Enter the amount"
+  //                 buttonText="Stake"
+  //               />
+  //               <Button
+  //                 backgroundColor="#303030"
+  //                 color="white"
+  //                 size="full"
+  //                 textAlign="center"
+  //                 paddingVertical={10}
+  //                 onClick={handler.Leave}
+  //               >
+  //                 Leave the bay
+  //               </Button>
+  //             </div>
+  //           </Grid>
+  //           <Grid item lg={8}>
+  //             <div className={styles.subContainer}>Hey 2</div>
+  //           </Grid>
+  //         </Grid>
+  //       </div>
+  //     </Container>
+  //     <ReactTooltip
+  //       id="address-tooltip"
+  //       textColor={colors.dark0}
+  //       backgroundColor={colors.dark800}
+  //     />
+  //   </div>
+  // );
+  return <div />;
 };
 
-Bay.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
-};
+// Bay.getLayout = function getLayout(page: ReactElement) {
+//   return <DefaultLayout>{page}</DefaultLayout>;
+// };
 
 export default Bay;
