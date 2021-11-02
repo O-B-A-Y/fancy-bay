@@ -1,8 +1,21 @@
 @use 'sass:map';
-@import '../../styles/variables.scss';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/mixins';
+
+$container-height: fit-content;
 
 .container {
-  padding: 50;
+  margin: 0px auto;
+  padding: 30px 60px;
+}
+
+.subContainer {
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  padding: 25px 30px;
+  height: $container-height;
+  border: 1px solid $dark500;
 }
 
 .inner {
@@ -14,24 +27,26 @@
   align-items: center;
   justify-content: space-between;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   .metaLabel {
     font-weight: 400;
-    color: map.get($theme-colors, 'light-text');
+    color: $dark200;
+  }
+  .metaContent {
+    font-size: 16px;
   }
 }
 
 .metaContainer {
   color: white;
-  height: 60vh;
-  font-size: map.get($font-size, 'text');
+  font-size: map-get($font-sizes, regular);
   .bayName {
     font-weight: 'bold';
-    font-size: map.get($font-size, 'large-header');
+    font-size: map-get($font-sizes, medium);
   }
   .bayAddress {
-    color: map.get($theme-colors, 'light-green');
-    font-size: map.get($font-size, 'text');
+    color: #49fdc0;
+    font-size: map-get($font-sizes, regular);
     margin-bottom: 10px;
   }
   .separator {
