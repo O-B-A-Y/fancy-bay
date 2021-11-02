@@ -1,7 +1,6 @@
 @import '../../styles/abstracts/colors';
 
 .container {
-  border: 1px solid $dark500;
   &:hover {
     background-color: #5ba7c8 !important;
     transition: 0.3s;

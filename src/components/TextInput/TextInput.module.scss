@@ -1,0 +1,12 @@
+.inputContainer {
+  &:focus {
+    outline: none;
+  }
+}
+
+.buttonContainer {
+  &:hover {
+    background-color: #5ba7c8 !important;
+    cursor: pointer;
+  }
+}
