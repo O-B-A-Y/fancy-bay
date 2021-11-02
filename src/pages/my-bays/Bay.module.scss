@@ -18,6 +18,15 @@ $container-height: fit-content;
   border: 1px solid $dark500;
 }
 
+.inputButton {
+  background-color: $dark600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: unset;
+  color: white;
+  font-weight: bold;
+}
+
 .inner {
   display: none;
 }
