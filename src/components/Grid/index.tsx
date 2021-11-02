@@ -56,8 +56,8 @@ const Grid: React.FC<GridProps> = ({
   const classNames = clsx({
     [styles.grid]: children,
     // Default rows & columns
-    [styles[`grid-rows-${rows}@${Size.ExtraSmall}`]]: rows as Rows,
-    [styles[`grid-cols-${cols}@${Size.ExtraSmall}`]]: cols as Cols,
+    [styles[`grid-rows-${rows}@${Size.NotAvailable}`]]: rows,
+    [styles[`grid-cols-${cols}@${Size.NotAvailable}`]]: cols,
     // Responsive rows
     [styles[`grid-rows-${(rows as GridBreakpoint).xs}@${Size.ExtraSmall}`]]: (
       rows as GridBreakpoint
