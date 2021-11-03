@@ -2,7 +2,7 @@ import React from 'react';
 import TextInputVariant from 'src/constants/textInputVariant';
 import styles from './TextInput.module.scss';
 import colors from '../../styles/colors.module.scss';
-import cn from 'classnames';
+import clsx from 'clsx';
 
 type TextInputProps = {
   backgroundColor: string;
@@ -56,7 +56,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
       }}
     >
       <input
-        className={cn([styles.inputContainer, inputClassName])}
+        className={clsx([styles.inputContainer, inputClassName])}
         onChange={onValueChanged}
         placeholder={placeholder}
         value={value}
@@ -70,7 +70,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
       {hasButton && (
         <button
           type="submit"
-          className={cn([buttonClassName, styles.buttonContainer])}
+          className={clsx([buttonClassName, styles.buttonContainer])}
         >
           {buttonText || 'Submit'}
         </button>

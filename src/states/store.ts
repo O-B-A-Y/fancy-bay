@@ -1,9 +1,11 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import greetingSlice from '../states/greeting/slice';
+import walletSlice from '../states/wallet/slice';
 /* Main Redux Global Store configurations */
 export const store = configureStore({
   reducer: {
     greetingSlice,
+    walletSlice,
   },
 });
 

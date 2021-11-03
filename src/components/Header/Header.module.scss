@@ -6,7 +6,6 @@
   list-style-type: none;
   margin: auto;
   padding: 0;
-  overflow: hidden;
   background-color: $dark700;
   @include respond-to('sm') {
     display: flex;
@@ -61,12 +60,24 @@
   }
 }
 
+.network {
+  border-radius: 5px;
+  background-color: $dark900;
+  height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  padding: 0px 20px;
+  margin-right: 10px;
+}
+
 .wallet {
   display: flex;
   background-color: $dark500;
+  border: unset;
   color: $dark0;
-  width: 280px;
-  border-radius: 20px;
+  width: 330px;
+  border-radius: 5px;
   height: 32px;
   padding: 2px 20px;
   align-items: center;
@@ -77,5 +88,35 @@
   }
   .address {
     font-size: map-get($font-sizes, regular);
+  }
+  &:hover {
+    background: $dark600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+}
+
+.dropdown {
+  &_container {
+    justify-content: center;
+    align-items: center;
+    margin-right: 45px;
+  }
+  &_base {
+    background-color: $dark500;
+    padding-left: 10px;
+    border-radius: 10px;
+    border-color: $dark600;
+    cursor: pointer;
+  }
+  &_menu {
+    z-index: 1000;
+    background-color: $dark300;
+    border-color: unset;
+    border-radius: 10px;
+    color: white;
+  }
+  &_placeholder {
+    color: $dark300;
   }
 }
