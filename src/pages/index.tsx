@@ -39,7 +39,6 @@ const Home: NextPageWithLayout = () => (
       >
         <GridItem
           rowSpan={1}
-          colSpan={2}
           style={{
             backgroundColor: '#5bbbc8',
             padding: 16,
@@ -58,8 +57,7 @@ const Home: NextPageWithLayout = () => (
           #2
         </GridItem>
         <GridItem
-          rowSpan={2}
-          colSpan={1}
+          rowSpan={1}
           style={{
             backgroundColor: '#5bbbc8',
             padding: 16,
@@ -69,6 +67,8 @@ const Home: NextPageWithLayout = () => (
           #3
         </GridItem>
         <GridItem
+          rowSpan={1}
+          colSpan={2}
           style={{
             backgroundColor: '#5bbbc8',
             padding: 16,
