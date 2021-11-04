@@ -100,12 +100,11 @@
   &_container {
     justify-content: center;
     align-items: center;
-    margin-right: 45px;
   }
   &_base {
     background-color: $dark500;
     padding-left: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     border-color: $dark600;
     cursor: pointer;
   }
@@ -119,4 +118,13 @@
   &_placeholder {
     color: $dark300;
   }
+}
+
+.inputButton {
+  background-color: $dark600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: unset;
+  color: white;
+  font-weight: bold;
 }

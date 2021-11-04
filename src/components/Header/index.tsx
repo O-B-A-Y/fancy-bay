@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import ReactDropdown from 'react-dropdown';
+import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 import { chainNetworkMapping, connectors } from 'src/connectors';
 import useEagerConnect from 'src/hooks/useEagerConnect';
@@ -15,6 +17,13 @@ import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import { switchConnector } from 'src/states/wallet/slice';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import ConnectorImage from '../ConnectorImage';
+import Loader from 'react-loader-spinner';
+import { Button, TextInput } from '..';
+import TextInputVariant from 'src/constants/textInputVariant';
+import { FaTimes } from 'react-icons/fa';
+import ButtonVariant from 'src/constants/buttonVariant';
+import ButtonSize from 'src/constants/buttonConstant';
+import TextAlign from 'src/constants/textAlign';
 
 // eslint-disable-next-line arrow-body-style
 const Header: React.FC = () => {
@@ -23,6 +32,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const [activating, setActivating] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [toggleModal, setToggleModal] = React.useState<boolean>(false);
   const {
     connector,
     account,
@@ -76,20 +86,25 @@ const Header: React.FC = () => {
   /** Handle the logic to connect in reaction to certain events on the injected ethereum provider */
   useInactiveListener(!triedEager || !!activatingConnector);
 
-  let disabled =
-    !triedEager || !!activatingConnector || !!error || activatingConnector;
+  let disabled = !!activatingConnector || !!error || activatingConnector;
 
   const handler = {
-    SelectConnector: () => {},
     ChangeDropDownValue: (value: keyof typeof connectors) => {
       const currentConnector = connectors[value].core;
       setActivating(currentConnector === activatingConnector);
       const connected = currentConnector === connector;
       disabled = disabled || connected;
       setActivatingConnector(currentConnector);
-      activate(currentConnector);
-      dispatch(switchConnector(value));
+      activate(currentConnector).then(() => {
+        dispatch(switchConnector(value));
+      });
     },
+    Deactivate: () => {
+      deactivate();
+      dispatch(switchConnector(null));
+    },
+    OpenModal: () => setToggleModal(true),
+    CloseModal: () => setToggleModal(false),
   };
 
   const RenderLeftSidedBoxesContainer = () => (
@@ -125,16 +140,22 @@ const Header: React.FC = () => {
     <>
       <li className={styles.headerItem}>
         {!active || !data.connector ? (
-          <ReactDropdown
-            options={Object.keys(connectors)}
-            onChange={({ value }) => handler.ChangeDropDownValue(value as any)}
-            placeholder="Connect to wallet"
-            placeholderClassName={styles.dropdown_placeholder}
-            menuClassName={styles.dropdown_menu}
-            controlClassName={styles.dropdown_base}
-            className={styles.dropdown_container}
-            disabled={!!disabled}
-          />
+          <div style={{ marginRight: 45 }}>
+            <ReactDropdown
+              options={Object.keys(connectors)}
+              onChange={({ value }) =>
+                handler.ChangeDropDownValue(value as any)
+              }
+              placeholder="Connect to wallet"
+              placeholderClassName={styles.dropdown_placeholder}
+              menuClassName={styles.dropdown_menu}
+              controlClassName={styles.dropdown_base}
+              className={styles.dropdown_container}
+              // disabled={!!disabled}
+            />
+          </div>
+        ) : loading || activating ? (
+          <Loader type="ThreeDots" color="#49fdc0" height={30} width={30} />
         ) : (
           <>
             {chainId && (
@@ -147,7 +168,7 @@ const Header: React.FC = () => {
             <button
               type="button"
               className={styles.wallet}
-              onClick={handler.SelectConnector}
+              onClick={handler.OpenModal}
             >
               <div className={styles.balance}>
                 <span>{parseFloat(balance).toFixed(2)}</span>
@@ -206,6 +227,108 @@ const Header: React.FC = () => {
         {/* Right-side boxes */}
         <RenderRightSidedBoxesContainer />
       </ul>
+      <Modal
+        isOpen={toggleModal}
+        onRequestClose={handler.CloseModal}
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: colors.dark800,
+            color: 'white',
+            border: `1px solid ${colors.dark600}`,
+          },
+          overlay: {
+            backgroundColor: 'rgba(0,0,0,.53)',
+          },
+        }}
+        contentLabel="Account"
+      >
+        <div style={{ width: 300 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <h3>Account</h3>
+            <FaTimes
+              style={{ cursor: 'pointer' }}
+              onClick={handler.CloseModal}
+            />
+          </div>
+        </div>
+        <div style={{ marginBottom: 10 }}>
+          <ReactDropdown
+            options={Object.keys(connectors)}
+            onChange={({ value }) => handler.ChangeDropDownValue(value as any)}
+            placeholder="Connect to wallet"
+            value={data.connector?.toString()}
+            placeholderClassName={styles.dropdown_placeholder}
+            menuClassName={styles.dropdown_menu}
+            controlClassName={styles.dropdown_base}
+            className={styles.dropdown_container}
+            // disabled={!!disabled}
+          />
+        </div>
+        {account && (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <p>Network</p>
+              <p style={{ color: '#49fdc0' }}>
+                {chainNetworkMapping[chainId as any]}
+              </p>
+            </div>
+            <TextInput
+              hasButton
+              buttonText="Injected"
+              value={`${account?.substring(0, 10).trim()}...${account
+                ?.substring(account.length - 5, account.length)
+                .trim()}`}
+              variant={TextInputVariant.filled}
+              borderWidth={1}
+              backgroundColor="#4E4E4E"
+              buttonClassName={styles.inputButton}
+              placeholderStyle={{
+                color: 'white',
+              }}
+              disabled
+            />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                fontSize: 12,
+              }}
+            >
+              <a
+                href={`https://etherscan.io/address/${account}`}
+                style={{ marginTop: 13 }}
+              >
+                <span style={{ color: colors.teal500 }}>View on Etherscan</span>
+              </a>
+              <p style={{ color: colors.teal500 }}>Copy address</p>
+            </div>
+          </>
+        )}
+        <Button
+          backgroundColor="#303030"
+          borderWidth={1.5}
+          color="white"
+          variant={ButtonVariant.filled}
+          size={ButtonSize.full}
+          textAlign={TextAlign.center}
+          paddingVertical={10}
+          onClick={handler.Deactivate}
+        >
+          Deactivate
+        </Button>
+      </Modal>
     </div>
   );
 };

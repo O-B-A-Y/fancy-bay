@@ -3,10 +3,10 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 
 const supportedChainIds = [
-  1, // mainnet
-  3, // ropsten
-  4, // rinkeby
-  42, // kovan
+  ChainId.KOVAN, // mainnet
+  ChainId.MAINNET, // ropsten
+  ChainId.ROPSTEN, // rinkeby
+  ChainId.GÖRLI, // kovan,
 ];
 
 export const chainNetworkMapping: any = {
@@ -14,6 +14,7 @@ export const chainNetworkMapping: any = {
   [ChainId.MAINNET]: 'Mainnet',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.RINKEBY]: 'Rinkeby',
+  [ChainId.GÖRLI]: 'Goerli',
 };
 
 const RPC = {
