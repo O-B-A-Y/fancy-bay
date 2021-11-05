@@ -22,10 +22,13 @@ const initialState: WalletState = {
 };
 
 const walletSlice = createSlice({
-  name: 'greeting',
+  name: 'wallet',
   initialState,
   reducers: {
-    switchConnector(state, action: PayloadAction<keyof typeof connectors>) {
+    switchConnector(
+      state,
+      action: PayloadAction<keyof typeof connectors | null>
+    ) {
       console.log(action);
       state.data.connector = action.payload;
     },

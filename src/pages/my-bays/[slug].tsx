@@ -109,7 +109,7 @@ const Bay: NextPageWithLayout = () => {
             cols={{
               xs: 1,
               md: 2,
-              lg: 2,
+              lg: 4,
             }}
             rows={{
               xs: 1,
@@ -173,7 +173,7 @@ const Bay: NextPageWithLayout = () => {
                 </Button>
               </div>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={2}>
+            <GridItem rowSpan={1} colSpan={3}>
               <div className={styles.subContainer}>Hey 2</div>
             </GridItem>
           </Grid>

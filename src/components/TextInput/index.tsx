@@ -15,6 +15,7 @@ type TextInputProps = {
   buttonText: string;
   borderWidth: number;
   buttonClassName: string;
+  disabled: boolean;
   inputClassName: string;
   hasButton: boolean;
   onValueChanged: React.ChangeEventHandler;
@@ -33,6 +34,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
   borderWidth,
   buttonClassName,
   inputClassName,
+  disabled,
   variant,
 }) => (
   <>
@@ -66,6 +68,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
           border: '2px solid transparent',
           ...placeholderStyle,
         }}
+        disabled
       />
       {hasButton && (
         <button
