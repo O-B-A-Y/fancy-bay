@@ -5,6 +5,7 @@ import colors from '../../styles/colors.module.scss';
 import clsx from 'clsx';
 
 type TextInputProps = {
+  style: React.CSSProperties;
   backgroundColor: string;
   placeholder: string;
   placeholderStyle: Partial<{
@@ -24,6 +25,7 @@ type TextInputProps = {
 };
 
 const TextInput: React.FC<Partial<TextInputProps>> = ({
+  style,
   placeholder,
   buttonText,
   hasButton,
@@ -55,6 +57,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
           variant === TextInputVariant.filled
             ? backgroundColor || 'transparent'
             : 'transparent',
+        ...style,
       }}
     >
       <input
@@ -68,7 +71,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
           border: '2px solid transparent',
           ...placeholderStyle,
         }}
-        disabled
+        disabled={disabled}
       />
       {hasButton && (
         <button

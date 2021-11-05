@@ -37,12 +37,69 @@ const RowItem = ({ label, content }: { label: string; content: any }) => (
   </div>
 );
 
+interface Proposal {
+  header: string;
+  oracle: string;
+  poolChanged: string;
+  requestBy: string;
+  percent: number;
+}
+
+const ProposalItem = ({ proposal }: { proposal: Proposal }) => (
+  <div className={styles.proposal_item}>
+    <p className={styles.proposal_item_header}>{proposal.header}</p>
+    <p className={styles.proposal_item_subHeader}>
+      {moment().format('DD-MM-YYYY')}
+    </p>
+    <div className={styles.rowItem}>
+      <p className={styles.proposal_item_label}>Expired in</p>
+      <p className={styles.proposal_item_time}>70 minutes</p>
+    </div>
+    <div className={styles.rowItem}>
+      <p className={styles.proposal_item_label}>Oracle</p>
+      <p className={styles.proposal_item_content}>{proposal.oracle}</p>
+    </div>
+    <div className={styles.rowItem}>
+      <p className={styles.proposal_item_label}>Pool changed</p>
+      <p className={styles.proposal_item_content}>{proposal.poolChanged}</p>
+    </div>
+    <div className={styles.rowItem}>
+      <p className={styles.proposal_item_label}>Requested by</p>
+      <p className={styles.proposal_item_content}>{`${proposal.requestBy
+        .substring(0, 10)
+        .trim()}...`}</p>
+    </div>
+    <div className={styles.rowItem}>
+      <p className={styles.proposal_item_label}>Approval</p>
+      <p className={styles.proposal_item_percent}>{proposal.percent}%</p>
+    </div>
+  </div>
+);
+
+enum LeftSidedContainerTab {
+  Proposal = 'Proposal',
+  Members = 'Members',
+  Portfolio = 'Portfolio',
+}
+
 const Bay: NextPageWithLayout = () => {
   const router = useRouter();
+  const [selectedTab, setSelectedTab] = React.useState<LeftSidedContainerTab>(
+    LeftSidedContainerTab.Proposal
+  );
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
+    searchProposalInput: '',
   });
   const { slug } = router.query;
+
+  const mockProposal = {
+    header: 'Buy 2000 SHIB',
+    oracle: 'Chainlink',
+    poolChanged: '200 OBAY',
+    requestBy: '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6',
+    percent: 35,
+  };
 
   const mockBayInfo = [
     {
@@ -62,6 +119,13 @@ const Bay: NextPageWithLayout = () => {
   const handler = {
     Stake: () => {},
     Leave: () => {},
+    SearchProposal: () => {},
+    ChangeSearchProposalInput: (e: ChangeEvent) => {
+      handleSetFieldValue('searchProposalInput', (e.target as any).value);
+    },
+    SwitchTab: (tab: LeftSidedContainerTab) => {
+      setSelectedTab(tab);
+    },
     ChangeStakedAmount: (e: ChangeEvent) => {
       handleSetFieldValue('stakedAmount', (e.target as any).value);
     },
@@ -91,7 +155,7 @@ const Bay: NextPageWithLayout = () => {
       </p>
 
       {mockBayInfo.map(({ content, label }) => (
-        <RowItem label={label} content={content} />
+        <RowItem key={label} label={label} content={content} />
       ))}
     </div>
   ));
@@ -109,7 +173,7 @@ const Bay: NextPageWithLayout = () => {
             cols={{
               xs: 1,
               md: 2,
-              lg: 4,
+              lg: 7,
             }}
             rows={{
               xs: 1,
@@ -119,7 +183,7 @@ const Bay: NextPageWithLayout = () => {
             rowGap="xs"
             colGap="md"
           >
-            <GridItem rowSpan={1} colSpan={1}>
+            <GridItem rowSpan={1} colSpan={2}>
               <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
                 <RenderMetaContainer />
                 <div className={styles.separator} />
@@ -144,7 +208,7 @@ const Bay: NextPageWithLayout = () => {
                     hasButton
                     variant={TextInputVariant.filled}
                     borderWidth={1}
-                    backgroundColor="#4E4E4E"
+                    backgroundColor={colors.$dark500}
                     placeholder="Enter the amount"
                     placeholderStyle={{
                       color: 'white',
@@ -173,8 +237,65 @@ const Bay: NextPageWithLayout = () => {
                 </Button>
               </div>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={3}>
-              <div className={styles.subContainer}>Hey 2</div>
+            <GridItem rowSpan={1} colSpan={5}>
+              <div className={styles.subContainer}>
+                <div className={styles.header}>
+                  <div className={styles.header_left}>
+                    {[
+                      LeftSidedContainerTab.Proposal,
+                      LeftSidedContainerTab.Members,
+                      LeftSidedContainerTab.Portfolio,
+                    ].map((tab) => (
+                      <button
+                        key={tab}
+                        type="button"
+                        onClick={() => handler.SwitchTab(tab)}
+                        className={clsx({
+                          [styles.tab]: true,
+                          [styles.tab_active]: selectedTab === tab,
+                        })}
+                      >
+                        <p className={styles.tabText}>{tab}</p>
+                      </button>
+                    ))}
+                  </div>
+                  <TextInput
+                    style={{ width: '100%' }}
+                    hasButton
+                    variant={TextInputVariant.outlined}
+                    borderWidth={1}
+                    backgroundColor={colors.dark500}
+                    placeholder="Search for proposal"
+                    placeholderStyle={{
+                      color: 'white',
+                    }}
+                    buttonClassName={styles.inputButton}
+                    buttonText="Search"
+                    onValueChanged={handler.SearchProposal}
+                    value={formValues.searchProposalInput}
+                  />
+                </div>
+                <div className={styles.subContainer_separator} />
+                <div className={styles.meta}>
+                  <div className={styles.meta_leftSide}>
+                    <p>
+                      Personal Return on Investment (PROI): <span>5%</span>
+                    </p>
+                  </div>
+                  <div className={styles.meta_rightSide}>
+                    <p>
+                      Next run: <span>22: 10: 30</span>
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.proposal_container}>
+                  {Array(4)
+                    .fill(mockProposal)
+                    .map((proposal) => (
+                      <ProposalItem proposal={proposal} />
+                    ))}
+                </div>
+              </div>
             </GridItem>
           </Grid>
         </div>

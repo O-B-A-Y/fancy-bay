@@ -3,19 +3,63 @@
 @import '../../styles/abstracts/measures';
 @import '../../styles/abstracts/mixins';
 
-$container-height: fit-content;
+$container-height: 90vh;
 
 .container {
   margin: 0px auto;
   padding: 30px 60px;
+  height: $container-height;
+  margin-bottom: 100px;
+  position: relative;
 }
 
 .subContainer {
+  position: relative;
   background-color: #1b1b1b;
+  // overflow: scroll;
   border-radius: 10px;
   padding: 25px 30px;
   height: $container-height;
+  // overflow: auto;
   border: 1px solid $dark500;
+  &_separator {
+    width: 100%;
+    height: 3px;
+    background-color: $dark600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    &_left {
+      display: flex;
+      justify-content: space-evenly;
+      .tab {
+        &_active {
+          color: white;
+          background-color: $teal500;
+          &:hover {
+            background-color: $teal700 !important;
+          }
+        }
+        &:hover {
+          background-color: $dark700;
+        }
+        color: $dark400;
+        background: transparent;
+        transition: 0.3s;
+        border: unset;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0px 35px;
+        font-size: 14px;
+        border-radius: 5px;
+        margin-right: 20px;
+      }
+    }
+  }
 }
 
 .inputButton {
@@ -54,11 +98,29 @@ $container-height: fit-content;
     font-size: map-get($font-sizes, medium);
   }
   .bayAddress {
-    color: #49fdc0;
+    color: $green500;
     font-size: map-get($font-sizes, regular);
     margin-bottom: 10px;
   }
-  .separator {
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  &_leftSide {
+    span {
+      color: $green500;
+      margin-left: 10px;
+    }
+  }
+  &_rightSide {
+    background-color: $dark600;
+    padding: 0px 20px;
+    border-radius: 5px;
+    span {
+      color: yellow;
+    }
   }
 }
 
@@ -73,4 +135,55 @@ $container-height: fit-content;
 
 .bayInfo {
   color: white;
+}
+
+.proposal {
+  &_container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    overflow: auto;
+    height: 500px;
+  }
+  &_item {
+    width: 27%;
+    border-radius: 20px;
+    border: 1px solid $dark500;
+    background-color: $dark700;
+    margin: 5px 10px 20px 0px;
+    padding: 15px 20px;
+    &:hover {
+      background-color: $dark600;
+      cursor: pointer;
+    }
+    p {
+      margin: 8px;
+    }
+    .rowItem {
+      margin-bottom: 0px;
+      font-size: 12px;
+    }
+    &_header {
+      color: white;
+      font-weight: bold;
+    }
+    &_subHeader {
+      color: $dark400;
+    }
+    &_label {
+      font-weight: bold;
+    }
+    &_content {
+      color: $dark400;
+    }
+    &_percent {
+      color: $green500;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    &_time {
+      color: rgb(214, 121, 0);
+    }
+  }
 }
