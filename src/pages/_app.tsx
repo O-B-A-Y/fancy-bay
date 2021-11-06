@@ -1,12 +1,12 @@
+import { Web3ReactProvider } from '@web3-react/core';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
-import { Provider } from 'react-redux';
-import { Web3ReactProvider } from '@web3-react/core';
-import { store } from '../states/store';
-import { Web3ReactUtils } from 'src/utils';
-import '../styles/globals.scss';
 import 'react-dropdown/style.css';
+import { Provider } from 'react-redux';
+import { Web3ReactUtils } from 'src/utils';
+import { store } from '../states/store';
+import '../styles/globals.scss';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

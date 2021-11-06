@@ -1,0 +1,65 @@
+@import '../../styles/abstracts/breakpoints';
+@import '../../styles/abstracts/mixins';
+
+$alignSelfValues: auto, flex-start, flex-end, center, baseline, stretch;
+
+@each $bp, $value in $breakpoints {
+  /* * Flex * */
+  @include respond-to($bp) {
+    .flex-one\@#{$bp} {
+      flex: 1 1 0%;
+    }
+
+    .flex-auto\@#{$bp} {
+      flex: 1 1 auto;
+    }
+
+    .flex-initial\@#{$bp} {
+      flex: 0 1 auto;
+    }
+
+    .flex-none\@#{$bp} {
+      flex: 0 1 auto;
+    }
+
+    /* * Flex grow * */
+    .flex-grow-0\@#{$bp} {
+      flex-grow: 0;
+    }
+    .flex-grow-1\@#{$bp} {
+      flex-grow: 1;
+    }
+
+    /* * Flex shrink * */
+    .flex-shrink-0\@#{$bp} {
+      flex-shrink: 0;
+    }
+    .flex-shrink-1\@#{$bp} {
+      flex-shrink: 1;
+    }
+
+    /* * Flex order * */
+    @for $i from 1 to 13 {
+      .order-#{$i}\@#{$bp} {
+        order: $i;
+      }
+    }
+    .order-first\@#{$bp} {
+      order: -9999;
+    }
+    .order-last\@#{$bp} {
+      order: 9999;
+    }
+
+    .order-none\@#{$bp} {
+      order: 0;
+    }
+
+    /* * Align Self * */
+    @each $value in $alignSelfValues {
+      .align-self-#{$value}\@#{$bp} {
+        align-self: $value;
+      }
+    }
+  }
+}
