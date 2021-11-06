@@ -1,7 +1,26 @@
 @use 'sass:math';
 @import '../../styles/abstracts/breakpoints';
 @import '../../styles/abstracts/mixins';
-@import '../../styles/abstracts/attributes';
+
+$alignItems: (start, end, center, stretch);
+$alignContent: (start, end, center, stretch, space-between, space-around);
+$justifyItems: (start, end, center, stretch);
+$justifyContent: (
+  start,
+  end,
+  center,
+  stretch,
+  space-around,
+  space-between,
+  space-evenly
+);
+$gaps: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 36px,
+);
 
 .grid {
   display: grid;
@@ -25,10 +44,8 @@
           grid-template-columns: repeat($i, minmax(0, #{$i}fr));
         }
       }
-    }
 
-    // Template Rows
-    @include respond-to($bp) {
+      // Template Rows
       @for $i from 1 to 13 {
         &-rows-#{$i}\@#{$bp} {
           grid-template-rows: repeat($i, minmax(0, #{$i}fr));
@@ -38,37 +55,47 @@
   }
 }
 
-// Column gap
-@each $size, $value in $gap-sizes {
-  .gap-col-#{$size} {
-    column-gap: $value;
-  }
-}
+@each $bp, $value in $breakpoints {
+  @include respond-to($bp) {
+    // Row gap
+    @each $size, $value in $gaps {
+      .gap-row-#{$size}\@#{$bp} {
+        row-gap: $value;
+      }
+    }
+    // Column gap
+    @each $size, $value in $gaps {
+      .gap-col-#{$size}\@#{$bp} {
+        column-gap: $value;
+      }
+    }
 
-// Row gap
-@each $size, $value in $gap-sizes {
-  .gap-row-#{$size} {
-    row-gap: $value;
-  }
-}
+    // Justify content
+    @each $value in $justifyContent {
+      .justify-content-#{$value}\@#{$bp} {
+        justify-content: $value;
+      }
+    }
 
-// Justify items
-@each $value in $justifyValues {
-  .justify-items-#{$value} {
-    justify-items: $value;
-  }
-}
+    // Justify items (GRID Only)
+    @each $value in $justifyItems {
+      .justify-items-#{$value}\@#{$bp} {
+        justify-items: $value;
+      }
+    }
 
-// Align items
-@each $value in $alignValues {
-  .align-self-#{$value} {
-    align-items: $value;
-  }
-}
+    // Align items
+    @each $value in $alignItems {
+      .align-items-#{$value}\@#{$bp} {
+        align-items: $value;
+      }
+    }
 
-// Justify content
-@each $value in $justifyContentValues {
-  .justify-content-#{$value} {
-    justify-content: $value;
+    // Align content
+    @each $value in $alignContent {
+      .align-content-#{$value}\@#{$bp} {
+        align-content: $value;
+      }
+    }
   }
 }

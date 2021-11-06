@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import React from 'react';
 import TextInputVariant from 'src/constants/textInputVariant';
-import styles from './TextInput.module.scss';
 import colors from '../../styles/colors.module.scss';
-import clsx from 'clsx';
+import styles from './TextInput.module.scss';
 
 type TextInputProps = {
   backgroundColor: string;
@@ -15,7 +15,7 @@ type TextInputProps = {
   buttonText: string;
   borderWidth: number;
   buttonClassName: string;
-  disabled: boolean;
+  disabled?: boolean;
   inputClassName: string;
   hasButton: boolean;
   onValueChanged: React.ChangeEventHandler;

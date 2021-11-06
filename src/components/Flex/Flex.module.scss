@@ -1,0 +1,86 @@
+@import '../../styles/abstracts/breakpoints';
+@import '../../styles/abstracts/mixins';
+
+$directions: (row, row-reverse, column, column-reverse);
+$wraps: (wrap, wrap-reverse, nowrap);
+$justifyContent: (
+  flex-start,
+  flex-end,
+  center,
+  space-between,
+  space-around,
+  space-evenly,
+  start,
+  end,
+  left,
+  right
+);
+$alignItems: (stretch, flex-start, flex-end, center, baseline);
+$alignContent: (
+  flex-start,
+  flex-end,
+  center,
+  stretch,
+  space-between,
+  space-around
+);
+$gap-sizes: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 36px,
+);
+.flex {
+  display: flex;
+
+  @each $bp, $value in $breakpoints {
+    @include respond-to($bp) {
+      @each $value in $directions {
+        &-#{$value}\@#{$bp} {
+          flex-direction: $value;
+        }
+      }
+
+      @each $value in $wraps {
+        &-#{$value}\@#{$bp} {
+          flex-wrap: $value;
+        }
+      }
+    }
+  }
+}
+
+/* * Placement classes * */
+@each $bp, $value in $breakpoints {
+  @include respond-to($bp) {
+    @each $value in $justifyContent {
+      .justify-content-#{$value}\@#{$bp} {
+        justify-content: $value;
+      }
+    }
+    @each $value in $alignItems {
+      .align-items-#{$value}\@#{$bp} {
+        align-items: $value;
+      }
+    }
+    @each $value in $alignContent {
+      .align-content-#{$value}\@#{$bp} {
+        align-content: $value;
+      }
+    }
+
+    // Row gap
+    @each $size, $value in $gap-sizes {
+      .gap-row-#{$size}\@#{$bp} {
+        row-gap: $value;
+      }
+    }
+    // Column gap
+    @each $size, $value in $gap-sizes {
+      .gap-col-#{$size}\@#{$bp} {
+        column-gap: $value;
+      }
+    }
+  }
+}
