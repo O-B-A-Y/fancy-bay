@@ -1,13 +1,13 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
+import Link from 'next/link';
 import clsx from 'clsx';
-import React, { ChangeEvent, ReactElement } from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
 import moment from 'moment';
 import { CurrencyUtils } from 'src/utils';
-import { NextPageWithLayout } from '../_app';
-import { DefaultLayout } from 'src/layouts';
-import { useRouter } from 'next/dist/client/router';
 import { Button, Container, Grid, TextInput } from 'src/components';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
@@ -37,12 +37,25 @@ const RowItem = ({ label, content }: { label: string; content: any }) => (
   </div>
 );
 
-const Bay: NextPageWithLayout = () => {
-  const router = useRouter();
+export enum LeftSidedContainerTab {
+  Proposals = 'Proposals',
+  Members = 'Members',
+  Portfolio = 'Portfolio',
+}
+
+const Bay = ({
+  slug,
+  selectedTab,
+  children,
+}: {
+  slug: string;
+  children: React.ReactNode;
+  selectedTab: LeftSidedContainerTab;
+}) => {
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
+    searchProposalInput: '',
   });
-  const { slug } = router.query;
 
   const mockBayInfo = [
     {
@@ -62,6 +75,10 @@ const Bay: NextPageWithLayout = () => {
   const handler = {
     Stake: () => {},
     Leave: () => {},
+    SearchProposal: () => {},
+    ChangeSearchProposalInput: (e: ChangeEvent) => {
+      handleSetFieldValue('searchProposalInput', (e.target as any).value);
+    },
     ChangeStakedAmount: (e: ChangeEvent) => {
       handleSetFieldValue('stakedAmount', (e.target as any).value);
     },
@@ -69,6 +86,7 @@ const Bay: NextPageWithLayout = () => {
 
   const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
 
+  /** Render meta information of a bay */
   const RenderMetaContainer = React.memo(() => (
     <div className={styles.metaContainer}>
       <Image
@@ -91,7 +109,7 @@ const Bay: NextPageWithLayout = () => {
       </p>
 
       {mockBayInfo.map(({ content, label }) => (
-        <RowItem label={label} content={content} />
+        <RowItem key={label} label={label} content={content} />
       ))}
     </div>
   ));
@@ -109,7 +127,7 @@ const Bay: NextPageWithLayout = () => {
             cols={{
               xs: 1,
               md: 2,
-              lg: 4,
+              lg: 7,
             }}
             rows={{
               xs: 1,
@@ -119,7 +137,7 @@ const Bay: NextPageWithLayout = () => {
             rowGap="xs"
             colGap="md"
           >
-            <GridItem rowSpan={1} colSpan={1}>
+            <GridItem rowSpan={1} colSpan={2}>
               <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
                 <RenderMetaContainer />
                 <div className={styles.separator} />
@@ -144,13 +162,14 @@ const Bay: NextPageWithLayout = () => {
                     hasButton
                     variant={TextInputVariant.filled}
                     borderWidth={1}
-                    backgroundColor="#4E4E4E"
+                    backgroundColor={colors.$dark500}
                     placeholder="Enter the amount"
                     placeholderStyle={{
                       color: 'white',
                     }}
                     buttonClassName={styles.inputButton}
                     buttonText="Stake"
+                    onButtonClicked={handler.Stake}
                     onValueChanged={handler.ChangeStakedAmount}
                     value={formValues.stakedAmount}
                   />
@@ -173,8 +192,61 @@ const Bay: NextPageWithLayout = () => {
                 </Button>
               </div>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={3}>
-              <div className={styles.subContainer}>Hey 2</div>
+            <GridItem rowSpan={1} colSpan={5}>
+              <div className={styles.subContainer}>
+                <div className={styles.header}>
+                  <div className={styles.header_left}>
+                    {[
+                      LeftSidedContainerTab.Proposals,
+                      LeftSidedContainerTab.Members,
+                      LeftSidedContainerTab.Portfolio,
+                    ].map((tab) => (
+                      <Link
+                        key={tab}
+                        href={`/my-bays/${slug}/${tab.toLowerCase()}`}
+                      >
+                        <div
+                          className={clsx({
+                            [styles.tab]: true,
+                            [styles.tab_active]: selectedTab === tab,
+                          })}
+                        >
+                          <p className={styles.tabText}>{tab}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <TextInput
+                    hasButton
+                    variant={TextInputVariant.outlined}
+                    borderWidth={1}
+                    backgroundColor={colors.dark500}
+                    placeholder="Search for proposal"
+                    placeholderStyle={{
+                      color: 'white',
+                    }}
+                    buttonClassName={styles.inputButton}
+                    buttonText="Search"
+                    onButtonClicked={handler.SearchProposal}
+                    onValueChanged={handler.ChangeSearchProposalInput}
+                    value={formValues.searchProposalInput}
+                  />
+                </div>
+                <div className={styles.subContainer_separator} />
+                <div className={styles.meta}>
+                  <div className={styles.meta_leftSide}>
+                    <p>
+                      Personal Return on Investment (PROI): <span>5%</span>
+                    </p>
+                  </div>
+                  <div className={styles.meta_rightSide}>
+                    <p>
+                      Next run: <span>22: 10: 30</span>
+                    </p>
+                  </div>
+                </div>
+                {children}
+              </div>
             </GridItem>
           </Grid>
         </div>
@@ -186,10 +258,6 @@ const Bay: NextPageWithLayout = () => {
       />
     </div>
   );
-};
-
-Bay.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
 };
 
 export default Bay;
