@@ -3,23 +3,23 @@
 @import '../../styles/abstracts/measures';
 @import '../../styles/abstracts/mixins';
 
-$container-height: 90vh;
+$container-height: 700px;
 
 .container {
   margin: 0px auto;
   padding: 30px 60px;
   height: $container-height;
-  margin-bottom: 100px;
+  max-height: 700px;
+  margin-bottom: 50px;
   position: relative;
 }
 
 .subContainer {
   position: relative;
   background-color: #1b1b1b;
-  // overflow: scroll;
   border-radius: 10px;
   padding: 25px 30px;
-  height: $container-height;
+  height: 100%;
   // overflow: auto;
   border: 1px solid $dark500;
   &_separator {
@@ -135,55 +135,4 @@ $container-height: 90vh;
 
 .bayInfo {
   color: white;
-}
-
-.proposal {
-  &_container {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-basis: auto;
-    overflow: auto;
-    height: 500px;
-  }
-  &_item {
-    width: 27%;
-    border-radius: 20px;
-    border: 1px solid $dark500;
-    background-color: $dark700;
-    margin: 5px 10px 20px 0px;
-    padding: 15px 20px;
-    &:hover {
-      background-color: $dark600;
-      cursor: pointer;
-    }
-    p {
-      margin: 8px;
-    }
-    .rowItem {
-      margin-bottom: 0px;
-      font-size: 12px;
-    }
-    &_header {
-      color: white;
-      font-weight: bold;
-    }
-    &_subHeader {
-      color: $dark400;
-    }
-    &_label {
-      font-weight: bold;
-    }
-    &_content {
-      color: $dark400;
-    }
-    &_percent {
-      color: $green500;
-      font-weight: bold;
-      font-size: 20px;
-    }
-    &_time {
-      color: rgb(214, 121, 0);
-    }
-  }
 }

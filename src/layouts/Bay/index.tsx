@@ -1,13 +1,13 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
+import Link from 'next/link';
 import clsx from 'clsx';
-import React, { ChangeEvent, ReactElement } from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
 import moment from 'moment';
 import { CurrencyUtils } from 'src/utils';
-import { NextPageWithLayout } from '../_app';
-import { DefaultLayout } from 'src/layouts';
-import { useRouter } from 'next/dist/client/router';
 import { Button, Container, Grid, TextInput } from 'src/components';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
@@ -37,69 +37,25 @@ const RowItem = ({ label, content }: { label: string; content: any }) => (
   </div>
 );
 
-interface Proposal {
-  header: string;
-  oracle: string;
-  poolChanged: string;
-  requestBy: string;
-  percent: number;
-}
-
-const ProposalItem = ({ proposal }: { proposal: Proposal }) => (
-  <div className={styles.proposal_item}>
-    <p className={styles.proposal_item_header}>{proposal.header}</p>
-    <p className={styles.proposal_item_subHeader}>
-      {moment().format('DD-MM-YYYY')}
-    </p>
-    <div className={styles.rowItem}>
-      <p className={styles.proposal_item_label}>Expired in</p>
-      <p className={styles.proposal_item_time}>70 minutes</p>
-    </div>
-    <div className={styles.rowItem}>
-      <p className={styles.proposal_item_label}>Oracle</p>
-      <p className={styles.proposal_item_content}>{proposal.oracle}</p>
-    </div>
-    <div className={styles.rowItem}>
-      <p className={styles.proposal_item_label}>Pool changed</p>
-      <p className={styles.proposal_item_content}>{proposal.poolChanged}</p>
-    </div>
-    <div className={styles.rowItem}>
-      <p className={styles.proposal_item_label}>Requested by</p>
-      <p className={styles.proposal_item_content}>{`${proposal.requestBy
-        .substring(0, 10)
-        .trim()}...`}</p>
-    </div>
-    <div className={styles.rowItem}>
-      <p className={styles.proposal_item_label}>Approval</p>
-      <p className={styles.proposal_item_percent}>{proposal.percent}%</p>
-    </div>
-  </div>
-);
-
-enum LeftSidedContainerTab {
-  Proposal = 'Proposal',
+export enum LeftSidedContainerTab {
+  Proposals = 'Proposals',
   Members = 'Members',
   Portfolio = 'Portfolio',
 }
 
-const Bay: NextPageWithLayout = () => {
-  const router = useRouter();
-  const [selectedTab, setSelectedTab] = React.useState<LeftSidedContainerTab>(
-    LeftSidedContainerTab.Proposal
-  );
+const Bay = ({
+  slug,
+  selectedTab,
+  children,
+}: {
+  slug: string;
+  children: React.ReactNode;
+  selectedTab: LeftSidedContainerTab;
+}) => {
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
     searchProposalInput: '',
   });
-  const { slug } = router.query;
-
-  const mockProposal = {
-    header: 'Buy 2000 SHIB',
-    oracle: 'Chainlink',
-    poolChanged: '200 OBAY',
-    requestBy: '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6',
-    percent: 35,
-  };
 
   const mockBayInfo = [
     {
@@ -123,9 +79,6 @@ const Bay: NextPageWithLayout = () => {
     ChangeSearchProposalInput: (e: ChangeEvent) => {
       handleSetFieldValue('searchProposalInput', (e.target as any).value);
     },
-    SwitchTab: (tab: LeftSidedContainerTab) => {
-      setSelectedTab(tab);
-    },
     ChangeStakedAmount: (e: ChangeEvent) => {
       handleSetFieldValue('stakedAmount', (e.target as any).value);
     },
@@ -133,6 +86,7 @@ const Bay: NextPageWithLayout = () => {
 
   const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
 
+  /** Render meta information of a bay */
   const RenderMetaContainer = React.memo(() => (
     <div className={styles.metaContainer}>
       <Image
@@ -215,6 +169,7 @@ const Bay: NextPageWithLayout = () => {
                     }}
                     buttonClassName={styles.inputButton}
                     buttonText="Stake"
+                    onButtonClicked={handler.Stake}
                     onValueChanged={handler.ChangeStakedAmount}
                     value={formValues.stakedAmount}
                   />
@@ -242,25 +197,26 @@ const Bay: NextPageWithLayout = () => {
                 <div className={styles.header}>
                   <div className={styles.header_left}>
                     {[
-                      LeftSidedContainerTab.Proposal,
+                      LeftSidedContainerTab.Proposals,
                       LeftSidedContainerTab.Members,
                       LeftSidedContainerTab.Portfolio,
                     ].map((tab) => (
-                      <button
+                      <Link
                         key={tab}
-                        type="button"
-                        onClick={() => handler.SwitchTab(tab)}
-                        className={clsx({
-                          [styles.tab]: true,
-                          [styles.tab_active]: selectedTab === tab,
-                        })}
+                        href={`/my-bays/${slug}/${tab.toLowerCase()}`}
                       >
-                        <p className={styles.tabText}>{tab}</p>
-                      </button>
+                        <div
+                          className={clsx({
+                            [styles.tab]: true,
+                            [styles.tab_active]: selectedTab === tab,
+                          })}
+                        >
+                          <p className={styles.tabText}>{tab}</p>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                   <TextInput
-                    style={{ width: '100%' }}
                     hasButton
                     variant={TextInputVariant.outlined}
                     borderWidth={1}
@@ -271,7 +227,8 @@ const Bay: NextPageWithLayout = () => {
                     }}
                     buttonClassName={styles.inputButton}
                     buttonText="Search"
-                    onValueChanged={handler.SearchProposal}
+                    onButtonClicked={handler.SearchProposal}
+                    onValueChanged={handler.ChangeSearchProposalInput}
                     value={formValues.searchProposalInput}
                   />
                 </div>
@@ -288,13 +245,7 @@ const Bay: NextPageWithLayout = () => {
                     </p>
                   </div>
                 </div>
-                <div className={styles.proposal_container}>
-                  {Array(4)
-                    .fill(mockProposal)
-                    .map((proposal) => (
-                      <ProposalItem proposal={proposal} />
-                    ))}
-                </div>
+                {children}
               </div>
             </GridItem>
           </Grid>
@@ -307,10 +258,6 @@ const Bay: NextPageWithLayout = () => {
       />
     </div>
   );
-};
-
-Bay.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
 };
 
 export default Bay;

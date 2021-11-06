@@ -1,0 +1,70 @@
+@use 'sass:map';
+@import '../../../../styles/abstracts/colors';
+@import '../../../../styles/abstracts/measures';
+@import '../../../../styles/abstracts/mixins';
+
+.rowItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  margin-bottom: 5px;
+  .metaLabel {
+    font-weight: 400;
+    color: $dark200;
+  }
+  .metaContent {
+    font-size: 16px;
+  }
+}
+.proposal {
+  &_container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    overflow: auto;
+    height: 550px;
+    position: relative;
+  }
+  &_item {
+    width: 27%;
+    border-radius: 20px;
+    border: 1px solid $dark500;
+    background-color: $dark700;
+    margin: 5px 10px 20px 0px;
+    padding: 15px 20px;
+    &:hover {
+      background-color: $dark600;
+      cursor: pointer;
+    }
+    p {
+      margin: 8px;
+    }
+    .rowItem {
+      margin-bottom: 0px;
+      font-size: 12px;
+    }
+    &_header {
+      color: white;
+      font-weight: bold;
+    }
+    &_subHeader {
+      color: $dark400;
+    }
+    &_label {
+      font-weight: bold;
+    }
+    &_content {
+      color: $dark400;
+    }
+    &_percent {
+      color: $green500;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    &_time {
+      color: rgb(214, 121, 0);
+    }
+  }
+}

@@ -20,6 +20,7 @@ type TextInputProps = {
   inputClassName: string;
   hasButton: boolean;
   onValueChanged: React.ChangeEventHandler;
+  onButtonClicked: () => void;
   value: any;
   variant: TextInputVariant;
 };
@@ -30,6 +31,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
   buttonText,
   hasButton,
   onValueChanged,
+  onButtonClicked,
   value,
   placeholderStyle,
   backgroundColor,
@@ -76,6 +78,7 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
       {hasButton && (
         <button
           type="submit"
+          onClick={onButtonClicked}
           className={clsx([buttonClassName, styles.buttonContainer])}
         >
           {buttonText || 'Submit'}
