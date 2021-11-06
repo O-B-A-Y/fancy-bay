@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import React, { ReactElement } from 'react';
 import { BayLayout, DefaultLayout } from 'src/layouts';
 import { LeftSidedContainerTab } from 'src/layouts/Bay';
+import ProposalModal from 'src/modals/ProposalModal';
 import { NextPageWithLayout } from 'src/pages/_app';
 import styles from './Proposals.module.scss';
 
@@ -15,8 +18,14 @@ interface Proposal {
   percent: number;
 }
 
-const ProposalItem = ({ proposal }: { proposal: Proposal }) => (
-  <div className={styles.proposal_item}>
+const ProposalItem = ({
+  proposal,
+  onClick,
+}: {
+  proposal: Proposal;
+  onClick: () => void;
+}) => (
+  <div onClick={onClick} className={styles.proposal_item}>
     <p className={styles.proposal_item_header}>{proposal.header}</p>
     <p className={styles.proposal_item_subHeader}>
       {moment().format('DD-MM-YYYY')}
@@ -47,6 +56,7 @@ const ProposalItem = ({ proposal }: { proposal: Proposal }) => (
 );
 
 const BayProposals: NextPageWithLayout = () => {
+  const [toggleModal, setToggleModal] = React.useState(false);
   const mockProposal = {
     header: 'Buy 2000 SHIB',
     oracle: 'Chainlink',
@@ -55,13 +65,23 @@ const BayProposals: NextPageWithLayout = () => {
     percent: 35,
   };
   return (
-    <div className={styles.proposal_container}>
-      {Array(10)
-        .fill(mockProposal)
-        .map((proposal, index) => (
-          <ProposalItem key={index} proposal={proposal} />
-        ))}
-    </div>
+    <>
+      <div className={styles.proposal_container}>
+        {Array(10)
+          .fill(mockProposal)
+          .map((proposal, index) => (
+            <ProposalItem
+              onClick={() => setToggleModal(true)}
+              key={index}
+              proposal={proposal}
+            />
+          ))}
+      </div>
+      <ProposalModal
+        toggleModal={toggleModal}
+        onRequestClose={() => setToggleModal(false)}
+      />
+    </>
   );
 };
 

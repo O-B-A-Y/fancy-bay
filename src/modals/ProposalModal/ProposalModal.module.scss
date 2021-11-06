@@ -1,0 +1,30 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/mixins';
+.currency {
+  &_container {
+    p {
+      margin: 0;
+    }
+  }
+}
+.rowItem {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  &_meta {
+    p {
+      &:last-child {
+        color: $dark400;
+      }
+    }
+  }
+}
+
+.metaContainer {
+  margin-bottom: 15px;
+  p {
+    margin: 0;
+    margin-top: 15px;
+  }
+}
