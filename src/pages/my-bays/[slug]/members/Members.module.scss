@@ -1,0 +1,38 @@
+@use 'sass:map';
+@import '../../../../styles/abstracts/colors';
+@import '../../../../styles/abstracts/measures';
+@import '../../../../styles/abstracts/mixins';
+
+$container-height: 700px;
+
+$shared_layout: 60%/4;
+.member {
+  &_container {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+    width: 100%;
+  }
+  &_item {
+    // background-color: $dark700;
+    text-align: center;
+    color: white;
+    &_rank {
+      color: yellow;
+    }
+    &_address {
+      color: white;
+    }
+    &_joinedAt {
+      color: $dark400;
+    }
+    &_contribution {
+      color: $green500;
+    }
+    &_stakedAmount {
+      color: white;
+    }
+    &_occupied {
+      color: white;
+    }
+  }
+}

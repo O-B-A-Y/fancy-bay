@@ -1,0 +1,10 @@
+.container {
+  border-collapse: separate;
+  border-spacing: 0px 10px;
+  width: 100%;
+  &_item {
+    // background-color: $dark700;
+    text-align: center;
+    color: white;
+  }
+}
