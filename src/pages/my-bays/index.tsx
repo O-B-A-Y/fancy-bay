@@ -76,7 +76,7 @@ const mockMyBays: BrowseTableData[][] = [
 // eslint-disable-next-line arrow-body-style
 const MyBays: NextPageWithLayout = () => {
   return (
-    <Container size={ContainerSize.ExtraLarge}>
+    <Container size={ContainerSize.Large}>
       <div className={styles.container}>
         {/* MyBay Header section */}
         <Flex

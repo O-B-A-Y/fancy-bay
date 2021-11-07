@@ -30,6 +30,10 @@ const mockInformation = {
 const mockBays: BrowseTableData[][] = [
   [
     {
+      value: NumberUtils.formatRank(1),
+      className: clsx(styles['bay-item']),
+    },
+    {
       value: 'Binance',
       className: clsx(styles['bay-item'], styles['bay-item-name']),
     },
@@ -44,10 +48,7 @@ const mockBays: BrowseTableData[][] = [
       ),
       className: clsx(styles['bay-item'], styles['bay-item-address']),
     },
-    {
-      value: NumberUtils.formatRank(1),
-      className: clsx(styles['bay-item']),
-    },
+
     {
       value: NumberUtils.formatSeparators(50000),
       className: clsx(styles['bay-item']),
@@ -67,6 +68,10 @@ const mockBays: BrowseTableData[][] = [
   ],
   [
     {
+      value: NumberUtils.formatRank(2),
+      className: clsx(styles['bay-item']),
+    },
+    {
       value: 'FinTech Club',
       className: clsx(styles['bay-item'], styles['bay-item-name']),
     },
@@ -81,10 +86,7 @@ const mockBays: BrowseTableData[][] = [
       ),
       className: clsx(styles['bay-item'], styles['bay-item-address']),
     },
-    {
-      value: NumberUtils.formatRank(2),
-      className: clsx(styles['bay-item']),
-    },
+
     {
       value: NumberUtils.formatSeparators(11),
       className: clsx(styles['bay-item']),
@@ -110,7 +112,7 @@ const Browse: NextPageWithLayout = () => (
       <title>Browse | OBAY</title>
       <meta key="description" name="description" content="Browse OBAY" />
     </Head>
-    <Container size={ContainerSize.ExtraLarge}>
+    <Container size={ContainerSize.Large}>
       {/* Title section */}
       <div className={styles.infoTitleSection}>Platform Information</div>
       {/* Stats Card section */}
@@ -129,12 +131,12 @@ const Browse: NextPageWithLayout = () => (
       <div className={styles.tableContainer}>
         <Table
           header={[
+            { value: 'Rank' },
             {
               value: 'Name',
             },
             { value: 'Logo' },
             { value: 'Address' },
-            { value: 'Rank' },
             { value: 'Members' },
             { value: 'Total value locked (TVL)' },
             { value: 'APR' },
