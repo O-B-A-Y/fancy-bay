@@ -1,29 +1,29 @@
 /* eslint-disable no-nested-ternary */
+import { formatEther } from '@ethersproject/units';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import ReactDropdown from 'react-dropdown';
+import { FaTimes } from 'react-icons/fa';
+import Loader from 'react-loader-spinner';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 import { chainNetworkMapping, connectors } from 'src/connectors';
+import ButtonSize from 'src/constants/buttonConstant';
+import ButtonVariant from 'src/constants/buttonVariant';
+import TextAlign from 'src/constants/textAlign';
+import TextInputVariant from 'src/constants/textInputVariant';
+import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
+import { useAppDispatch, useAppSelector } from 'src/states/hooks';
+import { switchConnector } from 'src/states/wallet/slice';
+import { Button, TextInput } from '..';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import colors from '../../styles/colors.module.scss';
-import { formatEther } from '@ethersproject/units';
+import ConnectorImage from '../ConnectorImage';
 import NoSSR from '../NoSSR';
 import styles from './Header.module.scss';
-import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
-import { switchConnector } from 'src/states/wallet/slice';
-import { useAppDispatch, useAppSelector } from 'src/states/hooks';
-import ConnectorImage from '../ConnectorImage';
-import Loader from 'react-loader-spinner';
-import { Button, TextInput } from '..';
-import TextInputVariant from 'src/constants/textInputVariant';
-import { FaTimes } from 'react-icons/fa';
-import ButtonVariant from 'src/constants/buttonVariant';
-import ButtonSize from 'src/constants/buttonConstant';
-import TextAlign from 'src/constants/textAlign';
 
 // eslint-disable-next-line arrow-body-style
 const Header: React.FC = () => {
@@ -124,8 +124,8 @@ const Header: React.FC = () => {
         </Link>
       </li>
       <li className={styles.headerItem}>
-        <Link href="/mybay">
-          <a className={styles.headerLink}>MyBay</a>
+        <Link href="/my-bays">
+          <a className={styles.headerLink}>MyBays</a>
         </Link>
       </li>
       <li className={styles.headerItem}>

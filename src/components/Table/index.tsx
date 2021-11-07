@@ -1,21 +1,25 @@
-import React from 'react';
-import styles from './Table.module.scss';
 import clsx from 'clsx';
+import Image from 'next/image';
+import React, { ReactElement } from 'react';
+import styles from './Table.module.scss';
 
 const Table: React.FC<{
   header?: {
     value: string;
     className?: string;
     style?: React.CSSProperties;
+    icon?: ReactElement;
   }[];
   data?: {
-    value: string | number;
+    value: string | number | StaticImageData;
     className?: string;
     style?: React.CSSProperties;
     isHyperLink?: boolean;
+    isImage?: boolean;
     link?: string;
   }[][];
   rowStyle?: React.CSSProperties;
+  tableClassName?: string;
   headerRowStyle?: React.CSSProperties;
   headerRowClassName?: string;
   rowClassName?: string;
@@ -26,20 +30,23 @@ const Table: React.FC<{
   rowStyle,
   style,
   data,
+  tableClassName,
   rowClassName,
   headerRowStyle,
   headerRowClassName,
   onFieldClick,
 }) => (
   <>
-    <table className={clsx(styles.container, style)}>
+    <table className={clsx(styles.container, tableClassName)} style={style}>
       <tr
         style={headerRowStyle}
         className={clsx(styles.container_item, headerRowClassName)}
       >
         {header?.map((d) => (
           <th style={d.style} className={d.className}>
-            <p>{d.value}</p>
+            <p>
+              {d.icon || <></>} {d.value}
+            </p>
           </th>
         ))}
       </tr>
@@ -50,11 +57,14 @@ const Table: React.FC<{
         >
           {d.map((e) => (
             <th onClick={onFieldClick} style={e.style} className={e.className}>
-              {e.isHyperLink ? (
-                <a href={e.link}>{e.value}</a>
-              ) : (
-                <p>{e.value}</p>
-              )}
+              {(e.isHyperLink && <a href={e.link}>{e.value}</a>) ||
+                (e.isImage && (
+                  <Image
+                    src={e.value as StaticImageData}
+                    width={40}
+                    height={40}
+                  />
+                )) || <p>{e.value}</p>}
             </th>
           ))}
         </tr>

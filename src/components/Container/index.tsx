@@ -3,12 +3,12 @@ import ContainerSize from '../../constants/containerSize';
 import styles from './Container.module.scss';
 
 interface ContainerProps {
-  size?: ContainerSize;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const Container: React.FC<ContainerProps> = ({
   children,
-  size = ContainerSize.ExtremeLarge,
+  size = ContainerSize.ExtraLarge,
 }) => (
   <>
     <div className={styles[`container-${size}`]}>{children}</div>
