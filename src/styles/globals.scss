@@ -7,6 +7,14 @@ body {
   background-color: #0c0c0a;
 }
 
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+}
+
 * {
   font-family: 'Rubik', sans-serif;
 }

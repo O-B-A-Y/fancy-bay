@@ -65,6 +65,7 @@
     "react-redux": "^7.2.6",
     "react-table": "^7.7.0",
     "react-tooltip": "^4.2.21",
+    "redux-logger": "^3.0.6",
     "sass": "^1.43.4",
     "web3-react": "^5.0.5"
   },
@@ -74,6 +75,7 @@
     "@types/node": "16.11.6",
     "@types/react": "17.0.33",
     "@types/react-modal": "^3.13.1",
+    "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "eslint": "7",

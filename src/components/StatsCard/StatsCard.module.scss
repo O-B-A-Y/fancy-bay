@@ -1,0 +1,35 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/effects';
+
+.container {
+  width: 296px;
+  height: 114px;
+  background: linear-gradient(
+    103.34deg,
+    #2c2b2b 2.53%,
+    rgba(38, 38, 38, 0.100328) 80.52%,
+    rgba(37, 37, 37, 0) 89.21%
+  );
+  border: 1px solid $dark500;
+  border-radius: map-get($border-radiuses, 'sm');
+  @include glow-shadow;
+
+  padding: 24px;
+}
+
+.title {
+  color: $teal400;
+  font-size: map-get($font-sizes, medium);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+  margin-bottom: 36px;
+}
+
+.stats {
+  color: $dark300;
+  font-size: map-get($font-sizes, 'super-large');
+  font-weight: 400;
+  line-height: 59px;
+}

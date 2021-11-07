@@ -1,0 +1,33 @@
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/effects';
+
+.container {
+  margin-top: 35px;
+  min-height: 85vh;
+  background-color: $dark800;
+  border: 1px solid $dark500;
+  box-sizing: border-box;
+  border-radius: map-get($border-radiuses, 'sm');
+  @include glow-shadow;
+}
+
+.divider {
+  width: 100%;
+  height: 9px;
+  background: rgba(90, 179, 200, 0.23);
+}
+
+.myBaysHeaderSection {
+  padding: 25px;
+}
+
+.baySearchInput {
+  width: 377px;
+}
+
+.firstItem {
+  margin-right: auto;
+  color: #fff;
+  font-size: map-get($font-sizes, medium);
+}

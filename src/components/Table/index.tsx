@@ -1,6 +1,7 @@
+import clsx from 'clsx';
+import Image from 'next/image';
 import React from 'react';
 import styles from './Table.module.scss';
-import clsx from 'clsx';
 
 const Table: React.FC<{
   header?: {
@@ -9,10 +10,11 @@ const Table: React.FC<{
     style?: React.CSSProperties;
   }[];
   data?: {
-    value: string | number;
+    value: string | number | StaticImageData;
     className?: string;
     style?: React.CSSProperties;
     isHyperLink?: boolean;
+    isImage?: boolean;
     link?: string;
   }[][];
   rowStyle?: React.CSSProperties;
@@ -32,7 +34,7 @@ const Table: React.FC<{
   onFieldClick,
 }) => (
   <>
-    <table className={clsx(styles.container, style)}>
+    <table className={clsx(styles.container)} style={style}>
       <tr
         style={headerRowStyle}
         className={clsx(styles.container_item, headerRowClassName)}
@@ -50,11 +52,14 @@ const Table: React.FC<{
         >
           {d.map((e) => (
             <th onClick={onFieldClick} style={e.style} className={e.className}>
-              {e.isHyperLink ? (
-                <a href={e.link}>{e.value}</a>
-              ) : (
-                <p>{e.value}</p>
-              )}
+              {(e.isHyperLink && <a href={e.link}>{e.value}</a>) ||
+                (e.isImage && (
+                  <Image
+                    src={e.value as StaticImageData}
+                    width={40}
+                    height={40}
+                  />
+                )) || <p>{e.value}</p>}
             </th>
           ))}
         </tr>
