@@ -129,11 +129,13 @@ const Browse: NextPageWithLayout = () => (
       <div className={styles.tableContainer}>
         <Table
           header={[
-            { value: 'Name of Bay' },
+            {
+              value: 'Name',
+            },
             { value: 'Logo' },
             { value: 'Address' },
             { value: 'Rank' },
-            { value: 'Number of members' },
+            { value: 'Members' },
             { value: 'Total value locked (TVL)' },
             { value: 'APR' },
             { value: 'Number of exchanges' },

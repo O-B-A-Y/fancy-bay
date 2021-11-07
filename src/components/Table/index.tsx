@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styles from './Table.module.scss';
 
 const Table: React.FC<{
@@ -8,6 +8,7 @@ const Table: React.FC<{
     value: string;
     className?: string;
     style?: React.CSSProperties;
+    icon?: ReactElement;
   }[];
   data?: {
     value: string | number | StaticImageData;
@@ -18,6 +19,7 @@ const Table: React.FC<{
     link?: string;
   }[][];
   rowStyle?: React.CSSProperties;
+  tableClassName?: string;
   headerRowStyle?: React.CSSProperties;
   headerRowClassName?: string;
   rowClassName?: string;
@@ -28,20 +30,23 @@ const Table: React.FC<{
   rowStyle,
   style,
   data,
+  tableClassName,
   rowClassName,
   headerRowStyle,
   headerRowClassName,
   onFieldClick,
 }) => (
   <>
-    <table className={clsx(styles.container)} style={style}>
+    <table className={clsx(styles.container, tableClassName)} style={style}>
       <tr
         style={headerRowStyle}
         className={clsx(styles.container_item, headerRowClassName)}
       >
         {header?.map((d) => (
           <th style={d.style} className={d.className}>
-            <p>{d.value}</p>
+            <p>
+              {d.icon || <></>} {d.value}
+            </p>
           </th>
         ))}
       </tr>

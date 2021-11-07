@@ -1,6 +1,7 @@
 @use 'sass:map';
 @import '../../styles/abstracts/colors';
 @import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/effects';
 @import '../../styles/abstracts/mixins';
 
 $container-height: 700px;
@@ -22,6 +23,8 @@ $container-height: 700px;
   height: 100%;
   // overflow: auto;
   border: 1px solid $dark500;
+  @include glow-shadow;
+
   &_separator {
     width: 100%;
     height: 3px;
