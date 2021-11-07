@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Currency } from '@sushiswap/sdk';
 import { connectors } from 'src/connectors';
+import { Token, TokenAllowed } from 'src/constants/token';
 import ThunkFetchState from '../../constants/fetch';
 
 export interface WalletState {
@@ -8,6 +9,9 @@ export interface WalletState {
   data: {
     connector: keyof typeof connectors | null;
     currencyId: string;
+    tokens: Partial<{
+      [key in TokenAllowed]: Token;
+    }>;
   };
   error: null | object | string;
 }
@@ -17,6 +21,7 @@ const initialState: WalletState = {
   data: {
     currencyId: '',
     connector: null,
+    tokens: {},
   },
   error: null,
 };
@@ -39,9 +44,16 @@ const walletSlice = createSlice({
         ? 'ETH'
         : '';
     },
+    addToken(state, action: PayloadAction<Token>) {
+      state.data.tokens = {
+        ...state.data.tokens,
+        [action.payload.symbol]: action.payload,
+      };
+    },
   },
 });
 
-export const { switchConnector, selectCurrency } = walletSlice.actions;
+export const { switchConnector, selectCurrency, addToken } =
+  walletSlice.actions;
 
 export default walletSlice.reducer;

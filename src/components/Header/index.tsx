@@ -16,8 +16,10 @@ import TextInputVariant from 'src/constants/textInputVariant';
 import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
+import useTokenInfo from 'src/hooks/useTokenInfo';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
-import { switchConnector } from 'src/states/wallet/slice';
+import { addToken, switchConnector } from 'src/states/wallet/slice';
+import NumberUtils from 'src/utils/number';
 import { Button, TextInput } from '..';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import colors from '../../styles/colors.module.scss';
@@ -44,6 +46,13 @@ const Header: React.FC = () => {
     error,
   } = useActiveWeb3React();
   const [balance, setBalance] = React.useState<any>();
+  const tokenInfo = useTokenInfo('0xe26d20Ef036bAa1200a639ac5E0ccA0804027789');
+
+  React.useEffect(() => {
+    if (tokenInfo) {
+      dispatch(addToken(tokenInfo));
+    }
+  }, [tokenInfo]);
 
   React.useEffect((): any => {
     if (!!account && !!library) {
@@ -171,13 +180,18 @@ const Header: React.FC = () => {
               onClick={handler.OpenModal}
             >
               <div className={styles.balance}>
-                <span>{parseFloat(balance).toFixed(2)}</span>
+                <span>{NumberUtils.truncate(balance, 3)}</span>
                 <span style={{ marginLeft: 5 }}>Ξ</span>
               </div>
-              <div className={styles.balance}>
-                <span>100</span>
-                <Image src={LogoIcon} width={21} height={21} />
-              </div>
+              {data.tokens.OBAY && (
+                <div className={styles.balance}>
+                  <span>
+                    {NumberUtils.truncate(data.tokens.OBAY.balance, 3)}
+                  </span>
+                  <Image src={LogoIcon} width={21} height={21} />
+                </div>
+              )}
+
               <div className={styles.address}>
                 <p
                   data-tip={account}
