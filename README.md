@@ -51,3 +51,9 @@ Must be one of the following:
 ##### Scope (Optional)
 
 The scope should be the name of the feature's scope that you're developing, it is OPTIONAL so feel free to skip it if you want to be more generic!
+
+##### Web3 Guideline
+
+- **OBAY Token address ENS**: https://app.ens.domains/name/obay.eth/details
+- **INFURA**: https://infura.io/
+- **Get OBAY Token on Uniswap**: https://app.uniswap.org/#/swap
