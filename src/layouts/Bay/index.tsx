@@ -20,6 +20,12 @@ import ButtonVariant from 'src/constants/buttonVariant';
 import TextInputVariant from 'src/constants/textInputVariant';
 import GridItem from 'src/components/GridItem';
 import ContainerSize from 'src/constants/containerSize';
+import useTokenInfo from 'src/hooks/useTokenInfo';
+import { addToken } from 'src/states/wallet/slice';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'src/states/hooks';
+import NumberUtils from 'src/utils/number';
+import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 
 const ImageLoader = ({
   src,
@@ -53,10 +59,20 @@ const Bay = ({
   children: React.ReactNode;
   selectedTab: LeftSidedContainerTab;
 }) => {
+  const dispatch = useDispatch();
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
     searchProposalInput: '',
   });
+  const { account } = useActiveWeb3React();
+  const walletSlice = useAppSelector((state) => state.walletSlice);
+  const tokenInfo = useTokenInfo('0xe26d20Ef036bAa1200a639ac5E0ccA0804027789');
+
+  React.useEffect(() => {
+    if (tokenInfo) {
+      dispatch(addToken(tokenInfo));
+    }
+  }, [tokenInfo]);
 
   const mockBayInfo = [
     {
@@ -85,8 +101,6 @@ const Bay = ({
     },
   };
 
-  const mockAddress = '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6';
-
   /** Render meta information of a bay */
   const RenderMetaContainer = React.memo(() => (
     <div className={styles.metaContainer}>
@@ -101,12 +115,12 @@ const Bay = ({
       <br />
       <h1 className={styles.bayName}>{slug}</h1>
       <p
-        data-tip={mockAddress}
+        data-tip={account}
         data-for="address-tooltip"
         data-place="bottom"
         className={styles.bayAddress}
       >
-        {`${mockAddress.substring(0, 30).trim()}...`}
+        {`${account?.substring(0, 30).trim()}...`}
       </p>
 
       {mockBayInfo.map(({ content, label }) => (
@@ -142,55 +156,87 @@ const Bay = ({
               <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
                 <RenderMetaContainer />
                 <div className={styles.separator} />
-                <div className={styles.bottomContainer}>
-                  <div className={styles.rowItem}>
-                    <p
-                      data-tip={mockAddress}
-                      data-for="address-tooltip"
-                      data-place="bottom"
+
+                {account && walletSlice.data.tokens.OBAY ? (
+                  <>
+                    <div className={styles.bottomContainer}>
+                      <div className={styles.rowItem}>
+                        <p
+                          data-tip={account}
+                          data-for="address-tooltip"
+                          data-place="bottom"
+                        >
+                          <Image src={MetamaskIcon} width={15} height={15} />
+                          <span style={{ marginLeft: 10 }}>{`${account
+                            .substring(0, 10)
+                            .trim()}...`}</span>
+                        </p>
+                        <div style={{ alignItems: 'center' }}>
+                          <span>
+                            {NumberUtils.truncate(
+                              walletSlice.data.tokens.OBAY.balance,
+                              3
+                            )}{' '}
+                          </span>
+                          <Image src={LogoIcon} width={15} height={15} />
+                        </div>
+                      </div>
+                      <TextInput
+                        hasButton
+                        variant={TextInputVariant.filled}
+                        borderWidth={1}
+                        backgroundColor={colors.$dark500}
+                        placeholder="Enter the amount"
+                        placeholderStyle={{
+                          color: 'white',
+                        }}
+                        buttonClassName={styles.inputButton}
+                        buttonText="Stake"
+                        onButtonClicked={handler.Stake}
+                        onValueChanged={handler.ChangeStakedAmount}
+                        value={formValues.stakedAmount}
+                      />
+                      <div className={styles.rowItem}>
+                        <div className={styles.metaLabel}>Total</div>
+                        <p className={styles.metaContent}>{0.00005867} OBAY</p>
+                      </div>
+                    </div>
+                    <Button
+                      backgroundColor="#303030"
+                      borderWidth={1.5}
+                      color="white"
+                      variant={ButtonVariant.filled}
+                      size={ButtonSize.full}
+                      textAlign={TextAlign.center}
+                      paddingVertical={10}
+                      onClick={handler.Leave}
                     >
-                      <Image src={MetamaskIcon} width={15} height={15} />
-                      <span style={{ marginLeft: 10 }}>{`${mockAddress
-                        .substring(0, 10)
-                        .trim()}...`}</span>
-                    </p>
-                    <div style={{ alignItems: 'center' }}>
-                      <span>100 </span>
-                      <Image src={LogoIcon} width={15} height={15} />
+                      Leave the bay
+                    </Button>
+                  </>
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: 250,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        color: colors.dark500,
+                      }}
+                    >
+                      <p style={{ fontSize: 55, margin: 0 }}>☻</p>
+                      <p>Wallet is not connected</p>
                     </div>
                   </div>
-                  <TextInput
-                    hasButton
-                    variant={TextInputVariant.filled}
-                    borderWidth={1}
-                    backgroundColor={colors.$dark500}
-                    placeholder="Enter the amount"
-                    placeholderStyle={{
-                      color: 'white',
-                    }}
-                    buttonClassName={styles.inputButton}
-                    buttonText="Stake"
-                    onButtonClicked={handler.Stake}
-                    onValueChanged={handler.ChangeStakedAmount}
-                    value={formValues.stakedAmount}
-                  />
-                  <div className={styles.rowItem}>
-                    <div className={styles.metaLabel}>Total</div>
-                    <p className={styles.metaContent}>{0.00005867} OBAY</p>
-                  </div>
-                </div>
-                <Button
-                  backgroundColor="#303030"
-                  borderWidth={1.5}
-                  color="white"
-                  variant={ButtonVariant.filled}
-                  size={ButtonSize.full}
-                  textAlign={TextAlign.center}
-                  paddingVertical={10}
-                  onClick={handler.Leave}
-                >
-                  Leave the bay
-                </Button>
+                )}
               </div>
             </GridItem>
             <GridItem rowSpan={1} colSpan={5}>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-nested-ternary */
 import { formatEther } from '@ethersproject/units';
 import Image from 'next/image';
@@ -18,6 +19,7 @@ import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
 import useTokenInfo from 'src/hooks/useTokenInfo';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
+import { toggleNoContractModal } from 'src/states/modal/slice';
 import { addToken, switchConnector } from 'src/states/wallet/slice';
 import NumberUtils from 'src/utils/number';
 import { Button, TextInput } from '..';
@@ -46,7 +48,12 @@ const Header: React.FC = () => {
     error,
   } = useActiveWeb3React();
   const [balance, setBalance] = React.useState<any>();
-  const tokenInfo = useTokenInfo('0xe26d20Ef036bAa1200a639ac5E0ccA0804027789');
+  const tokenInfo = useTokenInfo(
+    '0xe26d20Ef036bAa1200a639ac5E0ccA0804027789',
+    (success, _) => {
+      dispatch(toggleNoContractModal(!success));
+    }
+  );
 
   React.useEffect(() => {
     if (tokenInfo) {
@@ -179,10 +186,13 @@ const Header: React.FC = () => {
               className={styles.wallet}
               onClick={handler.OpenModal}
             >
-              <div className={styles.balance}>
-                <span>{NumberUtils.truncate(balance, 3)}</span>
-                <span style={{ marginLeft: 5 }}>Ξ</span>
-              </div>
+              {balance && (
+                <div className={styles.balance}>
+                  <span>{NumberUtils.truncate(balance, 3)}</span>
+                  <span style={{ marginLeft: 5 }}>Ξ</span>
+                </div>
+              )}
+
               {data.tokens.OBAY && (
                 <div className={styles.balance}>
                   <span>

@@ -1,10 +1,13 @@
 import clsx from 'clsx';
 import React from 'react';
 import ReactModal from 'react-modal';
+import { useDispatch } from 'react-redux';
 import { Button } from 'src/components';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
+import { useAppSelector } from 'src/states/hooks';
+import { toggleProposalModal } from 'src/states/modal/slice';
 import colors from '../../styles/colors.module.scss';
 import styles from './ProposalModal.module.scss';
 
@@ -58,15 +61,14 @@ const CurrencyContainer = ({
   </div>
 );
 
-const ProposalModal: React.FC<{
-  toggleModal: boolean;
-  onRequestClose: () => void;
-}> = ({ toggleModal, onRequestClose }) => {
+const ProposalModal = () => {
+  const { data } = useAppSelector((state) => state.modalSlice);
+  const dispatch = useDispatch();
   const handler = { Vote: () => {} };
   return (
     <ReactModal
-      isOpen={toggleModal}
-      onRequestClose={onRequestClose}
+      isOpen={data.proposal}
+      onRequestClose={() => dispatch(toggleProposalModal(false))}
       style={{
         content: {
           top: '50%',

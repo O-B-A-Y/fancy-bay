@@ -4,10 +4,11 @@
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import React, { ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
 import { BayLayout, DefaultLayout } from 'src/layouts';
 import { LeftSidedContainerTab } from 'src/layouts/Bay';
-import ProposalModal from 'src/modals/ProposalModal';
 import { NextPageWithLayout } from 'src/pages/_app';
+import { toggleProposalModal } from 'src/states/modal/slice';
 import styles from './Proposals.module.scss';
 
 interface Proposal {
@@ -56,7 +57,7 @@ const ProposalItem = ({
 );
 
 const BayProposals: NextPageWithLayout = () => {
-  const [toggleModal, setToggleModal] = React.useState(false);
+  const dispatch = useDispatch();
   const mockProposal = {
     header: 'Buy 2000 SHIB',
     oracle: 'Chainlink',
@@ -71,16 +72,12 @@ const BayProposals: NextPageWithLayout = () => {
           .fill(mockProposal)
           .map((proposal, index) => (
             <ProposalItem
-              onClick={() => setToggleModal(true)}
+              onClick={() => dispatch(toggleProposalModal(true))}
               key={index}
               proposal={proposal}
             />
           ))}
       </div>
-      <ProposalModal
-        toggleModal={toggleModal}
-        onRequestClose={() => setToggleModal(false)}
-      />
     </>
   );
 };

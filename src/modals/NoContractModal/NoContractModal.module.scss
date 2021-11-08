@@ -1,0 +1,14 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/mixins';
+
+.network {
+  border-radius: 5px;
+  background-color: $dark900;
+  height: 32px;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  padding: 0px 20px;
+}

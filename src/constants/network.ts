@@ -1,3 +1,4 @@
 const NetworkContextName = 'NETWORK';
+export const CompatibleNetworks = ['Ropsten', 'Kovan'];
 
-export default { NetworkContextName };
+export default { NetworkContextName, CompatibleNetworks };
