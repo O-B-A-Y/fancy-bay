@@ -13,7 +13,7 @@ export default function useTokenInfo(
   const { account, chainId } = useActiveWeb3React();
   const TokenContract: Erc20 = useTokenContract(tokenAddress, false) as any;
   React.useEffect(() => {
-    const fetchBalance = async () => {
+    const fetchBalance = async (): Promise<any> => {
       try {
         if (TokenContract) {
           const [balance, name, decimals, symbol] = await Promise.all<any>([
@@ -32,13 +32,13 @@ export default function useTokenInfo(
             });
           }
         }
-        callback?.(true, null);
+        return callback?.(true, null);
       } catch (error) {
-        callback?.(false, error);
+        return callback?.(false, error);
       }
     };
     fetchBalance();
-  }, [account, TokenContract, chainId]);
+  }, [account, TokenContract, chainId, tokenAddress]);
 
   return tokenInfo;
 }

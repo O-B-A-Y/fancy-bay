@@ -14,6 +14,7 @@ import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
 import TextInputVariant from 'src/constants/textInputVariant';
+import { TokenMapAddress } from 'src/constants/token';
 import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
@@ -48,12 +49,9 @@ const Header: React.FC = () => {
     error,
   } = useActiveWeb3React();
   const [balance, setBalance] = React.useState<any>();
-  const tokenInfo = useTokenInfo(
-    '0xe26d20Ef036bAa1200a639ac5E0ccA0804027789',
-    (success) => {
-      dispatch(toggleNoContractModal(!success));
-    }
-  );
+  const tokenInfo = useTokenInfo(TokenMapAddress.OBAY, (success) => {
+    dispatch(toggleNoContractModal(!success));
+  });
 
   React.useEffect(() => {
     if (tokenInfo) {
