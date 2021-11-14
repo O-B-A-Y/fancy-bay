@@ -6,5 +6,6 @@ export default function useTokenContract(
   tokenAddress?: string,
   withSignerIfPossible?: boolean
 ): Contract | null {
-  return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
+  const contract = useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
+  return contract;
 }

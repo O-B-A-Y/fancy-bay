@@ -66,7 +66,7 @@ const Bay = ({
   });
   const { account } = useActiveWeb3React();
   const walletSlice = useAppSelector((state) => state.walletSlice);
-  const tokenInfo = useTokenInfo('0xe26d20Ef036bAa1200a639ac5E0ccA0804027789');
+  const tokenInfo = useTokenInfo('OBAY');
 
   React.useEffect(() => {
     if (tokenInfo) {

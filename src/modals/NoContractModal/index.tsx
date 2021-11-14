@@ -2,16 +2,20 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import { chainNetworkMapping } from 'src/connectors';
 import { CompatibleNetworks } from 'src/constants/network';
-import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import { useAppSelector } from 'src/states/hooks';
 import colors from '../../styles/colors.module.scss';
 import styles from './NoContractModal.module.scss';
 
 const NoContractModal = () => {
   const { data } = useAppSelector((state) => state.modalSlice);
-  const { chainId } = useActiveWeb3React();
+  const {
+    data: {
+      environment: { chainId },
+    },
+  } = useAppSelector((state) => state.walletSlice);
   return (
     <ReactModal
+      ariaHideApp={false}
       isOpen={data.noContract}
       style={{
         content: {

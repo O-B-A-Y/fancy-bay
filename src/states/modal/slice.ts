@@ -6,6 +6,7 @@ export interface ModalState {
   data: {
     proposal: boolean;
     noContract: boolean;
+    bayCreation: boolean;
   };
   error: null | object | string;
 }
@@ -15,6 +16,7 @@ const initialState: ModalState = {
   data: {
     proposal: false,
     noContract: false,
+    bayCreation: false,
   },
   error: null,
 };
@@ -31,10 +33,17 @@ const modalSlice = createSlice({
       console.log(action);
       state.data.noContract = action.payload;
     },
+    toggleBayCreationModal(state, action: PayloadAction<boolean>) {
+      console.log(action);
+      state.data.bayCreation = action.payload;
+    },
   },
 });
 
-export const { toggleNoContractModal, toggleProposalModal } =
-  modalSlice.actions;
+export const {
+  toggleNoContractModal,
+  toggleProposalModal,
+  toggleBayCreationModal,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

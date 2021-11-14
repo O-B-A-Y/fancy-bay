@@ -8,6 +8,7 @@ type TextInputProps = {
   style: React.CSSProperties;
   backgroundColor: string;
   placeholder: string;
+  label: string;
   placeholderStyle: Partial<{
     fontSize: number;
     color: string;
@@ -27,6 +28,7 @@ type TextInputProps = {
 
 const TextInput: React.FC<Partial<TextInputProps>> = ({
   style,
+  label,
   placeholder,
   buttonText,
   hasButton,
@@ -62,6 +64,9 @@ const TextInput: React.FC<Partial<TextInputProps>> = ({
         ...style,
       }}
     >
+      {label && (
+        <p style={{ margin: 3, fontSize: 14, marginBottom: 5 }}>{label}</p>
+      )}
       <input
         className={clsx([styles.inputContainer, inputClassName])}
         onChange={onValueChanged}

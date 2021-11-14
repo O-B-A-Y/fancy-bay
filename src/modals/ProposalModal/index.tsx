@@ -67,6 +67,7 @@ const ProposalModal = () => {
   const handler = { Vote: () => {} };
   return (
     <ReactModal
+      ariaHideApp={false}
       isOpen={data.proposal}
       onRequestClose={() => dispatch(toggleProposalModal(false))}
       style={{

@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import 'react-dropdown/style.css';
 import { Provider } from 'react-redux';
+import BayCreationModal from 'src/modals/BayCreationModal';
 import NoContractModal from 'src/modals/NoContractModal';
 import ProposalModal from 'src/modals/ProposalModal';
 import { Web3ReactUtils } from 'src/utils';
@@ -27,6 +28,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         {getLayout(<Component {...pageProps} />)}
         <ProposalModal />
         <NoContractModal />
+        <BayCreationModal />
       </Provider>
     </Web3ReactProvider>
   );

@@ -9,20 +9,28 @@ import { FaTimes } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
-import { chainNetworkMapping, connectors } from 'src/connectors';
+import {
+  chainNetworkMapping,
+  connectors,
+  supportedChainIds,
+} from 'src/connectors';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
 import TextInputVariant from 'src/constants/textInputVariant';
-import { TokenMapAddress } from 'src/constants/token';
 import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
 import useTokenInfo from 'src/hooks/useTokenInfo';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import { toggleNoContractModal } from 'src/states/modal/slice';
-import { addToken, switchConnector } from 'src/states/wallet/slice';
+import {
+  addToken,
+  switchConnector,
+  switchWeb3Environment,
+} from 'src/states/wallet/slice';
 import NumberUtils from 'src/utils/number';
+import Web3 from 'web3';
 import { Button, TextInput } from '..';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import colors from '../../styles/colors.module.scss';
@@ -34,24 +42,50 @@ import styles from './Header.module.scss';
 const Header: React.FC = () => {
   const [activatingConnector, setActivatingConnector] = React.useState<any>();
   const { data } = useAppSelector((state) => state.walletSlice);
+  const {
+    data: { environment },
+  } = useAppSelector((state) => state.walletSlice);
   const dispatch = useAppDispatch();
   const [activating, setActivating] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [toggleModal, setToggleModal] = React.useState<boolean>(false);
-  const {
-    connector,
-    account,
-    activate,
-    library,
-    chainId,
-    deactivate,
-    active,
-    error,
-  } = useActiveWeb3React();
+  const activeWeb3React = useActiveWeb3React();
   const [balance, setBalance] = React.useState<any>();
-  const tokenInfo = useTokenInfo(TokenMapAddress.OBAY, (success) => {
+  const tokenInfo = useTokenInfo('OBAY', (success) => {
     dispatch(toggleNoContractModal(!success));
   });
+  const init = async () => {
+    setLoading(true);
+    const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
+    const [accounts, chainId] = await Promise.all([
+      web3.eth.getAccounts(),
+      web3.eth.getChainId(),
+    ]);
+    const scopedBalance = await web3.eth.getBalance(accounts[0]);
+    setBalance(formatEther(scopedBalance));
+    dispatch(
+      switchWeb3Environment({
+        active: true,
+        isDevelopment: true,
+        account: accounts[0] || activeWeb3React.account,
+        chainId: chainId || activeWeb3React.chainId,
+        error: undefined,
+        library: activeWeb3React.library,
+      })
+    );
+    dispatch(switchConnector('Injected'));
+    setLoading(false);
+  };
+  // For development only
+  React.useEffect(() => {
+    init();
+  }, [activeWeb3React.chainId, activeWeb3React.active]);
+  if (typeof window !== 'undefined') {
+    // browser code
+    (window as any).ethereum.on('accountsChanged', () => {
+      init();
+    });
+  }
 
   React.useEffect(() => {
     if (tokenInfo) {
@@ -60,12 +94,12 @@ const Header: React.FC = () => {
   }, [tokenInfo]);
 
   React.useEffect((): any => {
-    if (!!account && !!library) {
+    if (!!activeWeb3React.account && !!activeWeb3React.library) {
       setLoading(true);
       let stale = false;
 
-      library
-        .getBalance(account)
+      activeWeb3React.library
+        .getBalance(activeWeb3React.account)
         .then((_balance: any) => {
           if (!stale) {
             setBalance(formatEther(_balance));
@@ -86,35 +120,43 @@ const Header: React.FC = () => {
       };
     }
     return () => {};
-  }, [account, library, chainId]);
+  }, [
+    activeWeb3React.account,
+    activeWeb3React.library,
+    activeWeb3React.chainId,
+  ]);
 
   /** Handle logic to make sure the connector is connected */
   React.useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
+    if (
+      activatingConnector &&
+      activatingConnector === activeWeb3React.connector
+    ) {
       setActivatingConnector(undefined);
     }
-  }, [activatingConnector, connector]);
+  }, [activatingConnector, activeWeb3React.connector]);
 
   /** Handle the authorized injected web3 by using the custom useEagerConnect hook */
   const triedEager = useEagerConnect();
   /** Handle the logic to connect in reaction to certain events on the injected ethereum provider */
   useInactiveListener(!triedEager || !!activatingConnector);
 
-  let disabled = !!activatingConnector || !!error || activatingConnector;
+  let disabled =
+    !!activatingConnector || !!activeWeb3React.error || activatingConnector;
 
   const handler = {
     ChangeDropDownValue: (value: keyof typeof connectors) => {
       const currentConnector = connectors[value].core;
       setActivating(currentConnector === activatingConnector);
-      const connected = currentConnector === connector;
+      const connected = currentConnector === activeWeb3React.connector;
       disabled = disabled || connected;
       setActivatingConnector(currentConnector);
-      activate(currentConnector).then(() => {
+      activeWeb3React.activate?.(currentConnector)?.then(() => {
         dispatch(switchConnector(value));
       });
     },
     Deactivate: () => {
-      deactivate();
+      activeWeb3React.deactivate?.();
       dispatch(switchConnector(null));
     },
     OpenModal: () => setToggleModal(true),
@@ -153,7 +195,7 @@ const Header: React.FC = () => {
   const RenderRightSidedBoxesContainer = () => (
     <>
       <li className={styles.headerItem}>
-        {!active || !data.connector ? (
+        {!environment.active ? (
           <div style={{ marginRight: 45 }}>
             <ReactDropdown
               options={Object.keys(connectors)}
@@ -172,10 +214,10 @@ const Header: React.FC = () => {
           <Loader type="ThreeDots" color="#49fdc0" height={30} width={30} />
         ) : (
           <>
-            {chainId && (
+            {environment.chainId && (
               <div className={styles.network}>
                 <p style={{ color: '#49fdc0' }}>
-                  {chainNetworkMapping[chainId]}
+                  {chainNetworkMapping[environment.chainId]}
                 </p>
               </div>
             )}
@@ -202,11 +244,11 @@ const Header: React.FC = () => {
 
               <div className={styles.address}>
                 <p
-                  data-tip={account}
+                  data-tip={environment.account}
                   data-for="address-tooltip"
                   data-place="bottom"
                 >
-                  {`${account?.slice(0, 16)}...`}
+                  {`${environment.account?.slice(0, 16)}...`}
                 </p>
                 <NoSSR>
                   <ReactTooltip
@@ -220,7 +262,7 @@ const Header: React.FC = () => {
           </>
         )}
       </li>
-      {active && data.connector && (
+      {environment.active && data.connector && (
         <li
           className={styles.headerItem}
           style={{
@@ -250,6 +292,7 @@ const Header: React.FC = () => {
         <RenderRightSidedBoxesContainer />
       </ul>
       <Modal
+        ariaHideApp={false}
         isOpen={toggleModal}
         onRequestClose={handler.CloseModal}
         style={{
@@ -270,7 +313,11 @@ const Header: React.FC = () => {
         }}
         contentLabel="Account"
       >
-        <div style={{ width: 300 }}>
+        <div
+          data-aos="fade-down"
+          data-aos-duration="500"
+          style={{ width: 300 }}
+        >
           <div
             style={{
               display: 'flex',
@@ -284,72 +331,82 @@ const Header: React.FC = () => {
               onClick={handler.CloseModal}
             />
           </div>
-        </div>
-        <div style={{ marginBottom: 10 }}>
-          <ReactDropdown
-            options={Object.keys(connectors)}
-            onChange={({ value }) => handler.ChangeDropDownValue(value as any)}
-            placeholder="Connect to wallet"
-            value={data.connector?.toString()}
-            placeholderClassName={styles.dropdown_placeholder}
-            menuClassName={styles.dropdown_menu}
-            controlClassName={styles.dropdown_base}
-            className={styles.dropdown_container}
-            // disabled={!!disabled}
-          />
-        </div>
-        {account && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <p>Network</p>
-              <p style={{ color: '#49fdc0' }}>
-                {chainNetworkMapping[chainId as any]}
-              </p>
-            </div>
-            <TextInput
-              hasButton
-              buttonText="Injected"
-              value={`${account?.substring(0, 10).trim()}...${account
-                ?.substring(account.length - 5, account.length)
-                .trim()}`}
-              variant={TextInputVariant.filled}
-              borderWidth={1}
-              backgroundColor="#4E4E4E"
-              buttonClassName={styles.inputButton}
-              placeholderStyle={{
-                color: 'white',
-              }}
-              disabled
+
+          <div style={{ marginBottom: 10 }}>
+            <ReactDropdown
+              options={Object.keys(connectors)}
+              onChange={({ value }) =>
+                handler.ChangeDropDownValue(value as any)
+              }
+              placeholder="Connect to wallet"
+              value={data.connector?.toString()}
+              placeholderClassName={styles.dropdown_placeholder}
+              menuClassName={styles.dropdown_menu}
+              controlClassName={styles.dropdown_base}
+              className={styles.dropdown_container}
+              // disabled={!!disabled}
             />
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                fontSize: 12,
-              }}
-            >
-              <a
-                href={`https://etherscan.io/address/${account}`}
-                style={{ marginTop: 13 }}
+          </div>
+          {environment.account && (
+            <>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <p>Network</p>
+                <p style={{ color: '#49fdc0' }}>
+                  {chainNetworkMapping[environment.chainId as any]}
+                </p>
+              </div>
+              <TextInput
+                hasButton
+                buttonText="Injected"
+                value={`${environment.account
+                  ?.substring(0, 10)
+                  .trim()}...${environment.account
+                  ?.substring(
+                    environment.account.length - 5,
+                    environment.account.length
+                  )
+                  .trim()}`}
+                variant={TextInputVariant.filled}
+                borderWidth={1}
+                backgroundColor="#4E4E4E"
+                buttonClassName={styles.inputButton}
+                placeholderStyle={{
+                  color: 'white',
+                }}
+                disabled
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  fontSize: 12,
+                }}
               >
-                <span style={{ color: colors.teal500 }}>View on Etherscan</span>
-              </a>
-              <p style={{ color: colors.teal500 }}>Copy address</p>
-            </div>
-          </>
-        )}
-        <Button
-          backgroundColor="#303030"
-          borderWidth={1.5}
-          color="white"
-          variant={ButtonVariant.filled}
-          size={ButtonSize.full}
-          textAlign={TextAlign.center}
-          paddingVertical={10}
-          onClick={handler.Deactivate}
-        >
-          Deactivate
-        </Button>
+                <a
+                  href={`https://etherscan.io/address/${environment.account}`}
+                  style={{ marginTop: 13 }}
+                >
+                  <span style={{ color: colors.teal500 }}>
+                    View on Etherscan
+                  </span>
+                </a>
+                <p style={{ color: colors.teal500 }}>Copy address</p>
+              </div>
+            </>
+          )}
+          <Button
+            backgroundColor="#303030"
+            borderWidth={1.5}
+            color="white"
+            variant={ButtonVariant.filled}
+            size={ButtonSize.full}
+            textAlign={TextAlign.center}
+            paddingVertical={10}
+            onClick={handler.Deactivate}
+          >
+            Deactivate
+          </Button>
+        </div>
       </Modal>
     </div>
   );

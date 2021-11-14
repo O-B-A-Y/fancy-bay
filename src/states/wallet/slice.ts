@@ -1,9 +1,19 @@
+import { Web3Provider } from '@ethersproject/providers';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Currency } from '@sushiswap/sdk';
+import { ChainId, Currency } from '@sushiswap/sdk';
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types';
 import { connectors } from 'src/connectors';
 import { Token, TokenAllowed } from 'src/constants/token';
+import Web3 from 'web3';
 import ThunkFetchState from '../../constants/fetch';
 
+export type Web3Environment = Omit<
+  Web3ReactContextInterface<Web3Provider> & {
+    chainId?: ChainId | undefined;
+    isDevelopment: boolean;
+  },
+  'activate' | 'deactivate' | 'setError' | 'connector'
+>;
 export interface WalletState {
   status: ThunkFetchState;
   data: {
@@ -12,6 +22,7 @@ export interface WalletState {
     tokens: Partial<{
       [key in TokenAllowed]: Token;
     }>;
+    environment: Web3Environment;
   };
   error: null | object | string;
 }
@@ -22,6 +33,13 @@ const initialState: WalletState = {
     currencyId: '',
     connector: null,
     tokens: {},
+    environment: {
+      isDevelopment: false,
+      active: false,
+      account: null,
+      chainId: undefined,
+      error: undefined,
+    },
   },
   error: null,
 };
@@ -30,11 +48,13 @@ const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
+    switchWeb3Environment(state, action: PayloadAction<Web3Environment>) {
+      state.data.environment = { ...state.data.environment, ...action.payload };
+    },
     switchConnector(
       state,
       action: PayloadAction<keyof typeof connectors | null>
     ) {
-      console.log(action);
       state.data.connector = action.payload;
     },
     selectCurrency(state, action: PayloadAction<Currency>) {
@@ -53,7 +73,11 @@ const walletSlice = createSlice({
   },
 });
 
-export const { switchConnector, selectCurrency, addToken } =
-  walletSlice.actions;
+export const {
+  switchConnector,
+  selectCurrency,
+  addToken,
+  switchWeb3Environment,
+} = walletSlice.actions;
 
 export default walletSlice.reducer;

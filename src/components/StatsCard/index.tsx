@@ -6,8 +6,8 @@ interface StatsCardProps {
   stats: number | string;
 }
 
-const StatsCard: React.FC<StatsCardProps> = ({ title, stats }) => (
-  <div className={styles.container}>
+const StatsCard: React.FC<StatsCardProps> = ({ title, stats, ...props }) => (
+  <div {...props} className={styles.container}>
     <div className={styles.title}>{title}</div>
     <div className={styles.stats}>{stats}</div>
   </div>

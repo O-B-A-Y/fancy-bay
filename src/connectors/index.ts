@@ -2,12 +2,20 @@ import { ChainId } from '@sushiswap/sdk';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 
-const supportedChainIds = [
+export enum DevelopmentChainId {
+  OPTION_1 = 5777,
+  OPTION_2 = 1337,
+  OPTION_3 = 1,
+}
+
+export const supportedChainIds = [
   ChainId.KOVAN, // mainnet
   ChainId.MAINNET, // ropsten
   ChainId.ROPSTEN, // rinkeby
   ChainId.GÖRLI, // kovan,
 ];
+
+const DevChainName = 'Devnet';
 
 export const chainNetworkMapping: any = {
   [ChainId.KOVAN]: 'Kovan',
@@ -15,6 +23,9 @@ export const chainNetworkMapping: any = {
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.GÖRLI]: 'Goerli',
+  [DevelopmentChainId.OPTION_1]: DevChainName,
+  [DevelopmentChainId.OPTION_2]: DevChainName,
+  [DevelopmentChainId.OPTION_3]: DevChainName,
 };
 
 const RPC = {

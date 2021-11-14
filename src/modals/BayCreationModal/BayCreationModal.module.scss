@@ -1,0 +1,23 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/mixins';
+
+.rowItem {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.inputButton {
+  background-color: $dark600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: unset;
+  color: white;
+  font-weight: bold;
+}
+
+.textInput {
+  width: 100%;
+}
