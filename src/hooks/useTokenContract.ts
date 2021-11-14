@@ -1,11 +1,6 @@
-import { Contract } from 'ethers';
-import useContract from './useContract';
-import ERC20_ABI from '../constants/abis/erc20.json';
+import ERC20_ABI from '../contracts/ERC20.json';
+import useWeb3Contract from './useWeb3Contract';
 
-export default function useTokenContract(
-  tokenAddress?: string,
-  withSignerIfPossible?: boolean
-): Contract | null {
-  const contract = useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
-  return contract;
+export default function useTokenContract(tokenAddress?: string) {
+  return useWeb3Contract(tokenAddress, ERC20_ABI.abi);
 }

@@ -54,13 +54,13 @@ export interface MethodConstantReturnContext<TCallReturn> {
 export interface MethodReturnContext extends MethodPayableReturnContext {}
 
 export type ContractContext = Web3ContractContext<
-  Erc20,
-  Erc20MethodNames,
-  Erc20EventsContext,
-  Erc20Events
+  ERC20,
+  ERC20MethodNames,
+  ERC20EventsContext,
+  ERC20Events
 >;
-export type Erc20Events = 'Approval' | 'Transfer';
-export interface Erc20EventsContext {
+export type ERC20Events = 'Approval' | 'Transfer';
+export interface ERC20EventsContext {
   Approval(
     parameters: {
       filter?: { owner?: string | string[]; spender?: string | string[] };
@@ -80,19 +80,19 @@ export interface Erc20EventsContext {
     callback?: (error: Error, event: EventData) => void
   ): EventResponse;
 }
-export type Erc20MethodNames =
+export type ERC20MethodNames =
   | 'new'
-  | 'allowance'
-  | 'approve'
-  | 'balanceOf'
-  | 'decimals'
-  | 'decreaseAllowance'
-  | 'increaseAllowance'
   | 'name'
   | 'symbol'
+  | 'decimals'
   | 'totalSupply'
+  | 'balanceOf'
   | 'transfer'
-  | 'transferFrom';
+  | 'allowance'
+  | 'approve'
+  | 'transferFrom'
+  | 'increaseAllowance'
+  | 'decreaseAllowance';
 export interface ApprovalEventEmittedResponse {
   owner: string;
   spender: string;
@@ -103,7 +103,7 @@ export interface TransferEventEmittedResponse {
   to: string;
   value: string;
 }
-export interface Erc20 {
+export interface ERC20 {
   /**
    * Payable: false
    * Constant: false
@@ -113,6 +113,51 @@ export interface Erc20 {
    * @param symbol_ Type: string, Indexed: false
    */
   'new'(name_: string, symbol_: string): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  name(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  symbol(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  decimals(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  totalSupply(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   * @param account Type: address, Indexed: false
+   */
+  balanceOf(account: string): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   * @param recipient Type: address, Indexed: false
+   * @param amount Type: uint256, Indexed: false
+   */
+  transfer(recipient: string, amount: string): MethodReturnContext;
   /**
    * Payable: false
    * Constant: true
@@ -136,30 +181,17 @@ export interface Erc20 {
   approve(spender: string, amount: string): MethodReturnContext;
   /**
    * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param account Type: address, Indexed: false
-   */
-  balanceOf(account: string): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  decimals(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
    * Constant: false
    * StateMutability: nonpayable
    * Type: function
-   * @param spender Type: address, Indexed: false
-   * @param subtractedValue Type: uint256, Indexed: false
+   * @param sender Type: address, Indexed: false
+   * @param recipient Type: address, Indexed: false
+   * @param amount Type: uint256, Indexed: false
    */
-  decreaseAllowance(
-    spender: string,
-    subtractedValue: string
+  transferFrom(
+    sender: string,
+    recipient: string,
+    amount: string
   ): MethodReturnContext;
   /**
    * Payable: false
@@ -172,46 +204,14 @@ export interface Erc20 {
   increaseAllowance(spender: string, addedValue: string): MethodReturnContext;
   /**
    * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  name(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  symbol(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  totalSupply(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
    * Constant: false
    * StateMutability: nonpayable
    * Type: function
-   * @param recipient Type: address, Indexed: false
-   * @param amount Type: uint256, Indexed: false
+   * @param spender Type: address, Indexed: false
+   * @param subtractedValue Type: uint256, Indexed: false
    */
-  transfer(recipient: string, amount: string): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   * @param sender Type: address, Indexed: false
-   * @param recipient Type: address, Indexed: false
-   * @param amount Type: uint256, Indexed: false
-   */
-  transferFrom(
-    sender: string,
-    recipient: string,
-    amount: string
+  decreaseAllowance(
+    spender: string,
+    subtractedValue: string
   ): MethodReturnContext;
 }

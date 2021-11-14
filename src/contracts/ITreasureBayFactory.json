@@ -1,0 +1,1038 @@
+{
+  "contractName": "ITreasureBayFactory",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "bayAddress",
+          "type": "address"
+        }
+      ],
+      "name": "NewBayCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name_",
+          "type": "string"
+        },
+        {
+          "internalType": "uint64",
+          "name": "limitNumberOfMembers_",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "limitNumberOfTreasureHunters_",
+          "type": "uint64"
+        }
+      ],
+      "name": "createNewBay",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllBays",
+      "outputs": [
+        {
+          "internalType": "contract ITreasureBay[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "bayAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getBay",
+      "outputs": [
+        {
+          "internalType": "contract ITreasureBay",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"bayAddress\",\"type\":\"address\"}],\"name\":\"NewBayCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name_\",\"type\":\"string\"},{\"internalType\":\"uint64\",\"name\":\"limitNumberOfMembers_\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"limitNumberOfTreasureHunters_\",\"type\":\"uint64\"}],\"name\":\"createNewBay\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllBays\",\"outputs\":[{\"internalType\":\"contract ITreasureBay[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bayAddress\",\"type\":\"address\"}],\"name\":\"getBay\",\"outputs\":[{\"internalType\":\"contract ITreasureBay\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/features/dao/ITreasureBayFactory.sol\":\"ITreasureBayFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/features/dao/ITreasureBay.sol\":{\"keccak256\":\"0xb0969241a5865339a72de34e80fe84aa18d54e44dfa7a040dce7505c861d242f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9e70e67d8a2fb1529effbb134227d568335672be9e98faa594ce68cdc6215228\",\"dweb:/ipfs/QmVvWRUCvkGjXzVqfkY3bD72zLd9PYVjFjFTirFkZspHir\"]},\"project:/contracts/features/dao/ITreasureBayFactory.sol\":{\"keccak256\":\"0x3b675afdae2cceea0ea0eb995b71c73e83bd368217d0ece903073dd5c04ad8b3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://645ac2fb64b921384c47930bd4df6719f40070e6e2d044e3c8bfb73c864124a5\",\"dweb:/ipfs/QmNqFjrihGr7WWpSNYxbrygd3U7WSEYp6TbNmVESxJWcP6\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.0;\n\nimport \"./ITreasureBay.sol\";\n\ninterface ITreasureBayFactory {\n  // Require to  create a HD Wallet first before create a DAO\n  event NewBayCreated(\n    string indexed name,\n    address indexed creator,\n    address indexed bayAddress\n  );\n\n  function createNewBay(\n    string memory name_,\n    uint64 limitNumberOfMembers_,\n    uint64 limitNumberOfTreasureHunters_\n  ) external returns (bool);\n\n  function getAllBays() external returns (ITreasureBay[] memory);\n\n  function getBay(address bayAddress) external view returns (ITreasureBay);\n}\n",
+  "sourcePath": "/Users/chungquantin/Desktop/Projects/DecentralizedOpenSource/smart-bay/contracts/features/dao/ITreasureBayFactory.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/features/dao/ITreasureBayFactory.sol",
+    "exportedSymbols": {
+      "ITreasureBay": [
+        1581
+      ],
+      "ITreasureBayFactory": [
+        1619
+      ]
+    },
+    "id": 1620,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1583,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:13"
+      },
+      {
+        "absolutePath": "project:/contracts/features/dao/ITreasureBay.sol",
+        "file": "./ITreasureBay.sol",
+        "id": 1584,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1620,
+        "sourceUnit": 1582,
+        "src": "58:28:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ITreasureBayFactory",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 1619,
+        "linearizedBaseContracts": [
+          1619
+        ],
+        "name": "ITreasureBayFactory",
+        "nameLocation": "98:19:13",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "id": 1592,
+            "name": "NewBayCreated",
+            "nameLocation": "190:13:13",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1586,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nameLocation": "224:4:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "209:19:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1585,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "209:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1588,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "creator",
+                  "nameLocation": "250:7:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "234:23:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1587,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "234:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1590,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "bayAddress",
+                  "nameLocation": "279:10:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "263:26:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1589,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "263:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "203:90:13"
+            },
+            "src": "184:110:13"
+          },
+          {
+            "functionSelector": "0579e25b",
+            "id": 1603,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createNewBay",
+            "nameLocation": "307:12:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1599,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1594,
+                  "mutability": "mutable",
+                  "name": "name_",
+                  "nameLocation": "339:5:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "325:19:13",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1593,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1596,
+                  "mutability": "mutable",
+                  "name": "limitNumberOfMembers_",
+                  "nameLocation": "357:21:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "350:28:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1595,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "350:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1598,
+                  "mutability": "mutable",
+                  "name": "limitNumberOfTreasureHunters_",
+                  "nameLocation": "391:29:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "384:36:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1597,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "319:105:13"
+            },
+            "returnParameters": {
+              "id": 1602,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1601,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "443:4:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1600,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "443:4:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "442:6:13"
+            },
+            "scope": 1619,
+            "src": "298:151:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "49c26440",
+            "id": 1610,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAllBays",
+            "nameLocation": "462:10:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1604,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "472:2:13"
+            },
+            "returnParameters": {
+              "id": 1609,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1608,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1610,
+                  "src": "493:21:13",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_contract$_ITreasureBay_$1581_$dyn_memory_ptr",
+                    "typeString": "contract ITreasureBay[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1606,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 1605,
+                        "name": "ITreasureBay",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 1581,
+                        "src": "493:12:13"
+                      },
+                      "referencedDeclaration": 1581,
+                      "src": "493:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                        "typeString": "contract ITreasureBay"
+                      }
+                    },
+                    "id": 1607,
+                    "nodeType": "ArrayTypeName",
+                    "src": "493:14:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_contract$_ITreasureBay_$1581_$dyn_storage_ptr",
+                      "typeString": "contract ITreasureBay[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "492:23:13"
+            },
+            "scope": 1619,
+            "src": "453:63:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "9a41e3ef",
+            "id": 1618,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBay",
+            "nameLocation": "529:6:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1613,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1612,
+                  "mutability": "mutable",
+                  "name": "bayAddress",
+                  "nameLocation": "544:10:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1618,
+                  "src": "536:18:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1611,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "536:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "535:20:13"
+            },
+            "returnParameters": {
+              "id": 1617,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1616,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1618,
+                  "src": "579:12:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                    "typeString": "contract ITreasureBay"
+                  },
+                  "typeName": {
+                    "id": 1615,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1614,
+                      "name": "ITreasureBay",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1581,
+                      "src": "579:12:13"
+                    },
+                    "referencedDeclaration": 1581,
+                    "src": "579:12:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                      "typeString": "contract ITreasureBay"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "578:14:13"
+            },
+            "scope": 1619,
+            "src": "520:73:13",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1620,
+        "src": "88:507:13",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:564:13"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/features/dao/ITreasureBayFactory.sol",
+    "exportedSymbols": {
+      "ITreasureBay": [
+        1581
+      ],
+      "ITreasureBayFactory": [
+        1619
+      ]
+    },
+    "id": 1620,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1583,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:13"
+      },
+      {
+        "absolutePath": "project:/contracts/features/dao/ITreasureBay.sol",
+        "file": "./ITreasureBay.sol",
+        "id": 1584,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1620,
+        "sourceUnit": 1582,
+        "src": "58:28:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ITreasureBayFactory",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 1619,
+        "linearizedBaseContracts": [
+          1619
+        ],
+        "name": "ITreasureBayFactory",
+        "nameLocation": "98:19:13",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "id": 1592,
+            "name": "NewBayCreated",
+            "nameLocation": "190:13:13",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1586,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nameLocation": "224:4:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "209:19:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1585,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "209:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1588,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "creator",
+                  "nameLocation": "250:7:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "234:23:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1587,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "234:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1590,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "bayAddress",
+                  "nameLocation": "279:10:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1592,
+                  "src": "263:26:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1589,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "263:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "203:90:13"
+            },
+            "src": "184:110:13"
+          },
+          {
+            "functionSelector": "0579e25b",
+            "id": 1603,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createNewBay",
+            "nameLocation": "307:12:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1599,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1594,
+                  "mutability": "mutable",
+                  "name": "name_",
+                  "nameLocation": "339:5:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "325:19:13",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1593,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1596,
+                  "mutability": "mutable",
+                  "name": "limitNumberOfMembers_",
+                  "nameLocation": "357:21:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "350:28:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1595,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "350:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1598,
+                  "mutability": "mutable",
+                  "name": "limitNumberOfTreasureHunters_",
+                  "nameLocation": "391:29:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "384:36:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1597,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:6:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "319:105:13"
+            },
+            "returnParameters": {
+              "id": 1602,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1601,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1603,
+                  "src": "443:4:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1600,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "443:4:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "442:6:13"
+            },
+            "scope": 1619,
+            "src": "298:151:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "49c26440",
+            "id": 1610,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAllBays",
+            "nameLocation": "462:10:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1604,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "472:2:13"
+            },
+            "returnParameters": {
+              "id": 1609,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1608,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1610,
+                  "src": "493:21:13",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_contract$_ITreasureBay_$1581_$dyn_memory_ptr",
+                    "typeString": "contract ITreasureBay[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1606,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 1605,
+                        "name": "ITreasureBay",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 1581,
+                        "src": "493:12:13"
+                      },
+                      "referencedDeclaration": 1581,
+                      "src": "493:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                        "typeString": "contract ITreasureBay"
+                      }
+                    },
+                    "id": 1607,
+                    "nodeType": "ArrayTypeName",
+                    "src": "493:14:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_contract$_ITreasureBay_$1581_$dyn_storage_ptr",
+                      "typeString": "contract ITreasureBay[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "492:23:13"
+            },
+            "scope": 1619,
+            "src": "453:63:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "9a41e3ef",
+            "id": 1618,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBay",
+            "nameLocation": "529:6:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1613,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1612,
+                  "mutability": "mutable",
+                  "name": "bayAddress",
+                  "nameLocation": "544:10:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1618,
+                  "src": "536:18:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1611,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "536:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "535:20:13"
+            },
+            "returnParameters": {
+              "id": 1617,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1616,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1618,
+                  "src": "579:12:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                    "typeString": "contract ITreasureBay"
+                  },
+                  "typeName": {
+                    "id": 1615,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1614,
+                      "name": "ITreasureBay",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1581,
+                      "src": "579:12:13"
+                    },
+                    "referencedDeclaration": 1581,
+                    "src": "579:12:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ITreasureBay_$1581",
+                      "typeString": "contract ITreasureBay"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "578:14:13"
+            },
+            "scope": 1619,
+            "src": "520:73:13",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1620,
+        "src": "88:507:13",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:564:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.9+commit.e5eed63a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-11-14T12:36:39.872Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

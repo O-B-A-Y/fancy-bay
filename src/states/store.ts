@@ -3,6 +3,7 @@ import logger from 'redux-logger';
 import greetingSlice from '../states/greeting/slice';
 import walletSlice from '../states/wallet/slice';
 import modalSlice from '../states/modal/slice';
+import treasureBaySlice from '../states/treasureBay/slice';
 /* Main Redux Global Store configurations */
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
@@ -11,6 +12,7 @@ export const store = configureStore({
     greetingSlice,
     walletSlice,
     modalSlice,
+    treasureBaySlice,
   },
 });
 

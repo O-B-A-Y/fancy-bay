@@ -23,7 +23,11 @@
     "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
-    "gen-abi-types": "abi-types-generator ./src/constants/abis/*.json --output=./src/constants/abis"
+    "gat": "concurrently \"npm:gat-*\"",
+    "gat-token": "abi-types-generator ./src/contracts/ERC20.json --output=./src/types",
+    "gat-dao": "abi-types-generator ./src/contracts/TreasureBay.json --output=./src/types",
+    "gat-dao-factory": "abi-types-generator ./src/contracts/TreasureBayFactory.json --output=./src/types",
+    "gat-transfer-proposal": "abi-types-generator ./src/contracts/TransferProposal.json --output=./src/types"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -55,6 +59,7 @@
     "bignumber.js": "^9.0.1",
     "bn.js": "^5.2.0",
     "clsx": "^1.1.1",
+    "concurrently": "^6.4.0",
     "currency-symbol-map": "^5.0.1",
     "currency.js": "^2.0.4",
     "eip-712": "^0.4.3",

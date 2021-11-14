@@ -9,11 +9,7 @@ import { FaTimes } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
-import {
-  chainNetworkMapping,
-  connectors,
-  supportedChainIds,
-} from 'src/connectors';
+import { chainNetworkMapping, connectors } from 'src/connectors';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';

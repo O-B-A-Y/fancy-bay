@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
+import Loader from 'react-loader-spinner';
+import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
-import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
+// import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
 import { Container, Table } from '../../components';
 import Flex from '../../components/Flex';
 import StatsCard from '../../components/StatsCard';
@@ -12,6 +14,7 @@ import NumberUtils from '../../utils/number';
 import StringUtils from '../../utils/string';
 import { NextPageWithLayout } from '../_app';
 import styles from './Browse.module.scss';
+import colors from '../../styles/colors.module.scss';
 
 interface BrowseTableData {
   value: string | number | StaticImageData;
@@ -27,14 +30,15 @@ const mockInformation = {
   numOfExchanges: 187,
 };
 
-const mockBays: BrowseTableData[][] = [
-  [
+const Browse: NextPageWithLayout = () => {
+  const { bays, error, loading } = useFetchTreasureBay();
+  const mockBays: BrowseTableData[][] = bays.map((bay) => [
     {
       value: NumberUtils.formatRank(1),
       className: clsx(styles['bay-item']),
     },
     {
-      value: 'Binance',
+      value: bay.name,
       className: clsx(styles['bay-item'], styles['bay-item-name']),
     },
     {
@@ -42,10 +46,7 @@ const mockBays: BrowseTableData[][] = [
       isImage: true,
     },
     {
-      value: StringUtils.shortenAddress(
-        '0x18F16080a71d5F67fD1524410401323f297dE438',
-        10
-      ),
+      value: StringUtils.shortenAddress(bay.address, 10),
       className: clsx(styles['bay-item'], styles['bay-item-address']),
     },
 
@@ -65,93 +66,92 @@ const mockBays: BrowseTableData[][] = [
       value: NumberUtils.formatSeparators(10000),
       className: clsx(styles['bay-item']),
     },
-  ],
-  [
-    {
-      value: NumberUtils.formatRank(2),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: 'FinTech Club',
-      className: clsx(styles['bay-item'], styles['bay-item-name']),
-    },
-    {
-      value: FintechIcon500x500,
-      isImage: true,
-    },
-    {
-      value: StringUtils.shortenAddress(
-        '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6',
-        10
-      ),
-      className: clsx(styles['bay-item'], styles['bay-item-address']),
-    },
+  ]);
+  if (error) {
+    // eslint-disable-next-line no-alert
+    console.error(error);
+  }
 
-    {
-      value: NumberUtils.formatSeparators(11),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatSeparators(670.84),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatPercentage(20),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatSeparators(200),
-      className: clsx(styles['bay-item']),
-    },
-  ],
-];
-
-const Browse: NextPageWithLayout = () => (
-  <>
-    <Head>
-      <title>Browse | OBAY</title>
-      <meta key="description" name="description" content="Browse OBAY" />
-    </Head>
-    <Container size={ContainerSize.Large}>
-      {/* Title section */}
-      <div className={styles.infoTitleSection}>Platform Information</div>
-      {/* Stats Card section */}
-      <Flex colGap="xl">
-        <StatsCard title="Number of Bays" stats={mockInformation.numOfBays} />
-        <StatsCard title="Epoch" stats={mockInformation.epoch} />
-        <StatsCard title="Avg. Bay ROI" stats={mockInformation.avgBayROI} />
-        <StatsCard
-          title="Number of Exchanges"
-          stats={mockInformation.numOfExchanges}
-        />
-      </Flex>
-      {/* Bay Title section */}
-      <div className={styles.bayTitleSection}>Bays</div>
-      {/* Table of Bays */}
-      <div className={styles.tableContainer}>
-        <Table
-          header={[
-            { value: 'Rank' },
-            {
-              value: 'Name',
-            },
-            { value: 'Logo' },
-            { value: 'Address' },
-            { value: 'Members' },
-            { value: 'Total value locked (TVL)' },
-            { value: 'APR' },
-            { value: 'Number of exchanges' },
-          ]}
-          headerRowClassName={styles.headerRow}
-          rowStyle={{
-            cursor: 'pointer',
-          }}
-          data={mockBays}
-        />
-      </div>
-    </Container>
-  </>
-);
+  return (
+    <>
+      <Head>
+        <title>Browse | OBAY</title>
+        <meta key="description" name="description" content="Browse OBAY" />
+      </Head>
+      <Container size={ContainerSize.Large}>
+        {/* Title section */}
+        <div className={styles.infoTitleSection}>Platform Information</div>
+        {/* Stats Card section */}
+        <Flex colGap="xl">
+          <StatsCard title="Number of Bays" stats={bays.length} />
+          <StatsCard title="Epoch" stats={mockInformation.epoch} />
+          <StatsCard title="Avg. Bay ROI" stats={mockInformation.avgBayROI} />
+          <StatsCard
+            title="Number of Exchanges"
+            stats={mockInformation.numOfExchanges}
+          />
+        </Flex>
+        {/* Bay Title section */}
+        <div className={styles.bayTitleSection}>Bays</div>
+        {/* Table of Bays */}
+        <div className={styles.tableContainer}>
+          {loading && (
+            <div
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                height: '600px',
+                display: 'flex',
+              }}
+            >
+              <Loader type="Grid" color="#49fdc0" height={100} width={100} />
+            </div>
+          )}
+          {loading && bays.length > 0 ? (
+            <Table
+              header={[
+                { value: 'Rank' },
+                {
+                  value: 'Name',
+                },
+                { value: 'Logo' },
+                { value: 'Address' },
+                { value: 'Members' },
+                { value: 'Total value locked (TVL)' },
+                { value: 'APR' },
+                { value: 'Number of exchanges' },
+              ]}
+              headerRowClassName={styles.headerRow}
+              rowStyle={{
+                cursor: 'pointer',
+              }}
+              data={mockBays}
+            />
+          ) : (
+            <div
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                height: '600px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
+                ☹︎
+              </p>
+              <h3 style={{ color: colors.dark500 }}>
+                There are no Treasure Bay on the network
+              </h3>
+            </div>
+          )}
+        </div>
+      </Container>
+    </>
+  );
+};
 
 Browse.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
