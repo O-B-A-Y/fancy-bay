@@ -7,6 +7,7 @@ export interface ModalState {
     proposal: boolean;
     noContract: boolean;
     bayCreation: boolean;
+    injectedConnectorError: boolean;
   };
   error: null | object | string;
 }
@@ -17,6 +18,7 @@ const initialState: ModalState = {
     proposal: false,
     noContract: false,
     bayCreation: false,
+    injectedConnectorError: false,
   },
   error: null,
 };
@@ -37,6 +39,10 @@ const modalSlice = createSlice({
       console.log(action);
       state.data.bayCreation = action.payload;
     },
+    toggleInjectedConnectorErrorModal(state, action: PayloadAction<boolean>) {
+      console.log(action);
+      state.data.bayCreation = action.payload;
+    },
   },
 });
 
@@ -44,6 +50,7 @@ export const {
   toggleNoContractModal,
   toggleProposalModal,
   toggleBayCreationModal,
+  toggleInjectedConnectorErrorModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

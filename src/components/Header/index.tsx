@@ -19,7 +19,10 @@ import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
 import useTokenInfo from 'src/hooks/useTokenInfo';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
-import { toggleNoContractModal } from 'src/states/modal/slice';
+import {
+  toggleInjectedConnectorErrorModal,
+  toggleNoContractModal,
+} from 'src/states/modal/slice';
 import {
   addToken,
   switchConnector,
@@ -51,26 +54,31 @@ const Header: React.FC = () => {
     dispatch(toggleNoContractModal(!success));
   });
   const init = async () => {
-    setLoading(true);
-    const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
-    const [accounts, chainId] = await Promise.all([
-      web3.eth.getAccounts(),
-      web3.eth.getChainId(),
-    ]);
-    const scopedBalance = await web3.eth.getBalance(accounts[0]);
-    setBalance(formatEther(scopedBalance));
-    dispatch(
-      switchWeb3Environment({
-        active: true,
-        isDevelopment: true,
-        account: accounts[0] || activeWeb3React.account,
-        chainId: chainId || activeWeb3React.chainId,
-        error: undefined,
-        library: activeWeb3React.library,
-      })
-    );
-    dispatch(switchConnector('Injected'));
-    setLoading(false);
+    try {
+      setLoading(true);
+      const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
+      const [accounts, chainId] = await Promise.all([
+        web3.eth.getAccounts(),
+        web3.eth.getChainId(),
+      ]);
+      const scopedBalance = await web3.eth.getBalance(accounts[0]);
+      setBalance(formatEther(scopedBalance));
+      dispatch(
+        switchWeb3Environment({
+          active: true,
+          isDevelopment: true,
+          account: accounts[0] || activeWeb3React.account,
+          chainId: chainId || activeWeb3React.chainId,
+          error: undefined,
+          library: activeWeb3React.library,
+        })
+      );
+      dispatch(switchConnector('Injected'));
+      setLoading(false);
+    } catch (_) {
+      dispatch(toggleInjectedConnectorErrorModal(true));
+      setLoading(false);
+    }
   };
   // For development only
   React.useEffect(() => {

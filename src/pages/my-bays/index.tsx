@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import Loader from 'react-loader-spinner';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
 import { useAppDispatch } from 'src/states/hooks';
 import { toggleBayCreationModal } from 'src/states/modal/slice';
+import useFetchYourTreasureBays from 'src/states/treasureBay/hooks/useFetchYourTreasureBays';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
-import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
+// import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
 import { Container, Table, TextInput, Button } from '../../components';
 import Flex from '../../components/Flex';
 import FlexItem from '../../components/FlexItem';
@@ -27,61 +29,40 @@ interface BrowseTableData {
   isImage?: boolean;
 }
 
-const mockMyBays: BrowseTableData[][] = [
-  [
-    {
-      value: 'Binance',
-    },
-    {
-      value: BinanceIcon500x500,
-      isImage: true,
-    },
-    {
-      value: StringUtils.shortenAddress(
-        '0x18F16080a71d5F67fD1524410401323f297dE438',
-        10
-      ),
-      className: clsx(styles['bay-item'], styles['bay-item-address']),
-    },
-    {
-      value: NumberUtils.formatSeparators(58670.905),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatSeparators(50000),
-      className: clsx(styles['bay-item']),
-    },
-  ],
-  [
-    {
-      value: 'FinTech Club',
-      className: clsx(styles['bay-item'], styles['bay-item-name']),
-    },
-    {
-      value: FintechIcon500x500,
-      isImage: true,
-    },
-    {
-      value: StringUtils.shortenAddress(
-        '0x460aDc7A9b5253A765e662A031D26C8743a2EbB6',
-        10
-      ),
-      className: clsx(styles['bay-item'], styles['bay-item-address']),
-    },
-    {
-      value: NumberUtils.formatSeparators(670.84),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatSeparators(11),
-      className: clsx(styles['bay-item']),
-    },
-  ],
-];
-
 // eslint-disable-next-line arrow-body-style
 const MyBays: NextPageWithLayout = () => {
   const dispatch = useAppDispatch();
+  const { bays, loading, error } = useFetchYourTreasureBays();
+  if (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+
+  const fetchedTreasureBays: BrowseTableData[][] = React.useMemo(
+    () =>
+      bays.map((bay) => [
+        {
+          value: bay.name,
+        },
+        {
+          value: BinanceIcon500x500,
+          isImage: true,
+        },
+        {
+          value: StringUtils.shortenAddress(bay.address, 10),
+          className: clsx(styles['bay-item'], styles['bay-item-address']),
+        },
+        {
+          value: NumberUtils.formatSeparators(58670.905),
+          className: clsx(styles['bay-item']),
+        },
+        {
+          value: NumberUtils.formatSeparators(50000),
+          className: clsx(styles['bay-item']),
+        },
+      ]),
+    bays
+  );
   const handler = {
     AddNewBay: () => {
       dispatch(toggleBayCreationModal(true));
@@ -140,22 +121,55 @@ const MyBays: NextPageWithLayout = () => {
         {/* Divider */}
         <div className={styles.divider} />
         {/* MyBays table of items  */}
-        <Table
-          header={[
-            {
-              value: 'Name',
-            },
-            { value: 'Logo' },
+        {loading && (
+          <div
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '600px',
+              display: 'flex',
+            }}
+          >
+            <Loader type="Grid" color="#49fdc0" height={100} width={100} />
+          </div>
+        )}
+        {bays.length > 0 ? (
+          <Table
+            header={[
+              {
+                value: 'Name',
+              },
+              { value: 'Logo' },
 
-            { value: 'Address' },
-            { value: 'Total Value Locked (TVL)' },
-            { value: 'Members' },
-          ]}
-          tableClassName={styles.tableContainer}
-          headerRowClassName={styles.headerRow}
-          rowClassName={styles.tableRow}
-          data={mockMyBays}
-        />
+              { value: 'Address' },
+              { value: 'Total Value Locked (TVL)' },
+              { value: 'Members' },
+            ]}
+            tableClassName={styles.tableContainer}
+            headerRowClassName={styles.headerRow}
+            rowClassName={styles.tableRow}
+            data={fetchedTreasureBays}
+          />
+        ) : (
+          <div
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '600px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
+              ☃︎
+            </p>
+            <h3 style={{ color: colors.dark500 }}>
+              You have no treasure bays, create one now!
+            </h3>
+          </div>
+        )}
       </div>
     </Container>
   );

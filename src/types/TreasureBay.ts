@@ -176,6 +176,7 @@ export type TreasureBayMethodNames =
   | 'getAllTransferProposals'
   | 'getTransferProposal'
   | 'limitNumberOfStakeholders'
+  | 'listOfStakeholders'
   | 'minimumStakedAmount'
   | 'numberOfStakeholders'
   | 'owner'
@@ -238,6 +239,12 @@ export interface VotedEventEmittedResponse {
   voter: string;
 }
 export interface StakeholderResponse {
+  balance: string;
+  contractAddress: string;
+  claimedInterval: string;
+  joinedAt: string;
+}
+export interface ListOfStakeholdersResponse {
   balance: string;
   contractAddress: string;
   claimedInterval: string;
@@ -340,6 +347,16 @@ export interface TreasureBay {
    * Type: function
    */
   limitNumberOfStakeholders(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   * @param parameter0 Type: uint256, Indexed: false
+   */
+  listOfStakeholders(
+    parameter0: string
+  ): MethodConstantReturnContext<ListOfStakeholdersResponse>;
   /**
    * Payable: false
    * Constant: true

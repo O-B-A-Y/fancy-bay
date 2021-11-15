@@ -62,7 +62,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -95,7 +96,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -114,7 +116,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_title\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_sourceAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_destinationAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"NewTransferProposalAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"getAllTransferProposals\",\"outputs\":[{\"internalType\":\"contract TransferProposal[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_proposalAddress\",\"type\":\"address\"}],\"name\":\"getTransferProposal\",\"outputs\":[{\"internalType\":\"contract TransferProposal\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/features/dao/proposal/TreasureTransferChest.sol\":\"TreasureTransferChest\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x6bb804a310218875e89d12c053e94a13a4607cdf7cc2052f3e52bd32a0dc50a1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2ebbbe6d0011175bd9e7268b83de3f9c2f9d8d4cbfbaef12aff977d7d727163\",\"dweb:/ipfs/Qmd5c7Vxtis9wzkDNhxwc6A2QT5H9xn9kfjhx7qx44vpro\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26e8b38a7ac8e7b4463af00cf7fff1bf48ae9875765bf4f7751e100124d0bc8c\",\"dweb:/ipfs/QmWcsmkVr24xmmjfnBQZoemFniXjj3vwT78Cz6uqZW1Hux\"]},\"project:/contracts/features/dao/proposal/Proposal.sol\":{\"keccak256\":\"0x91fc09f691385958b7030e6ce396eacc03630af364b24eeb8e8a8aa045da226e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4e6560c625d13938a878edc9f87c4d33235d1b1fb3422f9dcde5d2cde422aef8\",\"dweb:/ipfs/QmZKfqHpQcC4dorsuYXJmyHFWy4YQn1PZ4TbsacEB2XMUb\"]},\"project:/contracts/features/dao/proposal/TransferProposal.sol\":{\"keccak256\":\"0x085e839317a2d5d5a0ae02715984410ea191d26737a2d5e8cb3a14dd06e0bea2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://31c5a4d1f836d5c713d2e82d33c8c78a0422f8f4eeb082a16e175eae42c2d49e\",\"dweb:/ipfs/QmWcoHVCPXctahpoMWXA6gDyuaTZHD564hTPFzZF4Q5o3G\"]},\"project:/contracts/features/dao/proposal/TreasureTransferChest.sol\":{\"keccak256\":\"0xcfa763bb9c0e2b2632800cd5a3a9dbaba9e8cd01f9b43404a375b14b73289672\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cf40d4990b107a22e4c3b4e26aa490d8a8e969acbe7bef93fd571c65d07f5e90\",\"dweb:/ipfs/QmdYbXK5wpd5ZwbkYSFpHRGxsb9BdFuVzvTWwUKkc6jPJQ\"]}},\"version\":1}",
@@ -5612,14 +5615,66 @@
   },
   "networks": {
     "5777": {
-      "events": {},
+      "events": {
+        "0xa9a62b7c28d7da43010d6fdf373b4026f4156bc0402ee1b0bdf2acf13a741421": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_sourceAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_destinationAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewTransferProposalAdded",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x892A40D6A3863fA50AF936bD2b877e27F3CbA4bF",
-      "transactionHash": "0x6c800c74bd3ccee2368beb33569ea73c5c586866c6d594ad19f23e1517e8cf19"
+      "address": "0xe62cFa6a1C347dd2985E15e6f7Ff5732557350A3",
+      "transactionHash": "0x2ea0e87873cd030a9cd28f75b0712f1c7dd9feda791b5dd96d6ab5757457d8bc"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-14T12:36:39.971Z",
+  "updatedAt": "2021-11-15T00:45:51.329Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

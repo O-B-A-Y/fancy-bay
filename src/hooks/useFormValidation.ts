@@ -16,7 +16,14 @@ function useFormValidation<S = {}>(
   // TODO i18n
   //   const translateError = (message) => (message ? i18n.t(message) : '');
 
-  const handleSetFieldValue = (name: any, value: any) => {
+  const handleSetFieldValue = (
+    name: keyof typeof initialFormValues,
+    value: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _options?: {
+      isNumeric: boolean;
+    }
+  ) => {
     setFormValues({ ...formValues, [name]: value });
   };
 

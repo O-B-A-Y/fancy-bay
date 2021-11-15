@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import Loader from 'react-loader-spinner';
-import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
+import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBays';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
 // import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
 import { Container, Table } from '../../components';
@@ -32,9 +32,9 @@ const mockInformation = {
 
 const Browse: NextPageWithLayout = () => {
   const { bays, error, loading } = useFetchTreasureBay();
-  const mockBays: BrowseTableData[][] = bays.map((bay) => [
+  const convertedBays: BrowseTableData[][] = bays.map((bay, index) => [
     {
-      value: NumberUtils.formatRank(1),
+      value: NumberUtils.formatRank(index + 1),
       className: clsx(styles['bay-item']),
     },
     {
@@ -68,7 +68,7 @@ const Browse: NextPageWithLayout = () => {
     },
   ]);
   if (error) {
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 
@@ -108,7 +108,7 @@ const Browse: NextPageWithLayout = () => {
               <Loader type="Grid" color="#49fdc0" height={100} width={100} />
             </div>
           )}
-          {loading && bays.length > 0 ? (
+          {!loading && bays.length > 0 ? (
             <Table
               header={[
                 { value: 'Rank' },
@@ -126,7 +126,7 @@ const Browse: NextPageWithLayout = () => {
               rowStyle={{
                 cursor: 'pointer',
               }}
-              data={mockBays}
+              data={convertedBays}
             />
           ) : (
             <div

@@ -10,6 +10,7 @@ import ProposalModal from 'src/modals/ProposalModal';
 import { Web3ReactUtils } from 'src/utils';
 import { store } from '../states/store';
 import '../styles/globals.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

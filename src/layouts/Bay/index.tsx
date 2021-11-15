@@ -97,7 +97,9 @@ const Bay = ({
       handleSetFieldValue('searchProposalInput', (e.target as any).value);
     },
     ChangeStakedAmount: (e: ChangeEvent) => {
-      handleSetFieldValue('stakedAmount', (e.target as any).value);
+      handleSetFieldValue('stakedAmount', (e.target as any).value, {
+        isNumeric: true,
+      });
     },
   };
 

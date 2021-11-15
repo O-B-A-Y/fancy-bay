@@ -18,7 +18,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"exchangeProposals\",\"outputs\":[{\"internalType\":\"contract ExchangeProposal\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/features/dao/proposal/TreasureExchangeChest.sol\":\"TreasureExchangeChest\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x6bb804a310218875e89d12c053e94a13a4607cdf7cc2052f3e52bd32a0dc50a1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2ebbbe6d0011175bd9e7268b83de3f9c2f9d8d4cbfbaef12aff977d7d727163\",\"dweb:/ipfs/Qmd5c7Vxtis9wzkDNhxwc6A2QT5H9xn9kfjhx7qx44vpro\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26e8b38a7ac8e7b4463af00cf7fff1bf48ae9875765bf4f7751e100124d0bc8c\",\"dweb:/ipfs/QmWcsmkVr24xmmjfnBQZoemFniXjj3vwT78Cz6uqZW1Hux\"]},\"project:/contracts/features/dao/proposal/ExchangeProposal.sol\":{\"keccak256\":\"0x2fcc7aa8989689781fc67439c365df53d9929e3c2a3e7be0cce9021b8d1876f6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bc93a9b69da7f602bc9696f9bbe143d60b3e1b50f3c2a1b27cd4fb31ffb7f45c\",\"dweb:/ipfs/QmZkzUogySYrngh7zAUHAr6bTnjuHyvexRyLQKSDe2GDuS\"]},\"project:/contracts/features/dao/proposal/Proposal.sol\":{\"keccak256\":\"0x91fc09f691385958b7030e6ce396eacc03630af364b24eeb8e8a8aa045da226e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4e6560c625d13938a878edc9f87c4d33235d1b1fb3422f9dcde5d2cde422aef8\",\"dweb:/ipfs/QmZKfqHpQcC4dorsuYXJmyHFWy4YQn1PZ4TbsacEB2XMUb\"]},\"project:/contracts/features/dao/proposal/TreasureExchangeChest.sol\":{\"keccak256\":\"0x86cce712291ad142aac60ff5a21bf229f7a2003422700287005398ba1f1b33a5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d234f305566e46445daf3c92aba827b8912e14932e704a38269a91ce77dc034d\",\"dweb:/ipfs/QmNjFxLuRAVCL8cNHmyMyXtRJoXj1RRaf4UiWjnP7XcFS4\"]}},\"version\":1}",
@@ -1258,12 +1259,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x231190B18d9794025D1F10314b55cB1fE4C3Df08",
-      "transactionHash": "0x97981837b917e3f1711f8f604e7903380c0e2e0c429e2c56cb7ec84c0203e9d2"
+      "address": "0xCf14d4a27d1ba2d6f200abe5c6C2F5AC9A419c8E",
+      "transactionHash": "0xc5d7bea36282a2f571277614632e60c92bfeffc1052e96dad9c5be736f8b3a1f"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-14T12:36:39.968Z",
+  "updatedAt": "2021-11-15T00:45:51.331Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
