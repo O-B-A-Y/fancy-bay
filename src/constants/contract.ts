@@ -15,6 +15,6 @@ export const ContractMapAddress: {
     TREASURE_BAY_FACTORY: '',
   },
   DEVELOPMENT: {
-    TREASURE_BAY_FACTORY: '0xc2fD453FBdea10303baba7126eBC43Bd5abE7893',
+    TREASURE_BAY_FACTORY: '0x32B6f072bf6d457216c668412eE9Ea7a34bFb67f',
   },
 };

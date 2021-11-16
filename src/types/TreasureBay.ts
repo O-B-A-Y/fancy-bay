@@ -171,13 +171,15 @@ export type TreasureBayMethodNames =
   | 'allowedRecipients'
   | 'claim'
   | 'createStakeholder'
-  | 'daoAddress'
+  | 'creator'
   | 'exchangeProposals'
   | 'getAllTransferProposals'
   | 'getTransferProposal'
   | 'limitNumberOfStakeholders'
+  | 'limitNumberOfTreasureHunters'
   | 'listOfStakeholders'
   | 'minimumStakedAmount'
+  | 'name'
   | 'numberOfStakeholders'
   | 'owner'
   | 'renounceOwnership'
@@ -188,12 +190,8 @@ export type TreasureBayMethodNames =
   | 'transferOwnership'
   | 'treasureHunters'
   | 'unstake'
-  | 'name'
-  | 'creator'
-  | 'limitNumberOfTreasureHunters'
   | 'listOfTreasureHunters'
   | 'createTreasureHunter'
-  | 'toggleIsActivated'
   | 'createNewTransferProposal';
 export interface NewPoolCreatedEventEmittedResponse {
   owner: string;
@@ -239,12 +237,6 @@ export interface VotedEventEmittedResponse {
   voter: string;
 }
 export interface StakeholderResponse {
-  balance: string;
-  contractAddress: string;
-  claimedInterval: string;
-  joinedAt: string;
-}
-export interface ListOfStakeholdersResponse {
   balance: string;
   contractAddress: string;
   claimedInterval: string;
@@ -314,7 +306,7 @@ export interface TreasureBay {
    * StateMutability: view
    * Type: function
    */
-  daoAddress(): MethodConstantReturnContext<string>;
+  creator(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true
@@ -352,11 +344,15 @@ export interface TreasureBay {
    * Constant: true
    * StateMutability: view
    * Type: function
-   * @param parameter0 Type: uint256, Indexed: false
    */
-  listOfStakeholders(
-    parameter0: string
-  ): MethodConstantReturnContext<ListOfStakeholdersResponse>;
+  limitNumberOfTreasureHunters(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  listOfStakeholders(): MethodConstantReturnContext<StakeholderResponse[]>;
   /**
    * Payable: false
    * Constant: true
@@ -364,6 +360,13 @@ export interface TreasureBay {
    * Type: function
    */
   minimumStakedAmount(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  name(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true
@@ -447,27 +450,6 @@ export interface TreasureBay {
    * StateMutability: view
    * Type: function
    */
-  name(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  creator(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  limitNumberOfTreasureHunters(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
   listOfTreasureHunters(): MethodConstantReturnContext<
     TreasurehunterResponse[]
   >;
@@ -478,14 +460,6 @@ export interface TreasureBay {
    * Type: function
    */
   createTreasureHunter(): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   * @param isActivated_ Type: bool, Indexed: false
-   */
-  toggleIsActivated(isActivated_: boolean): MethodReturnContext;
   /**
    * Payable: false
    * Constant: false

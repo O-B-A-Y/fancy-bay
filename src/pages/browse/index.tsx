@@ -15,6 +15,7 @@ import StringUtils from '../../utils/string';
 import { NextPageWithLayout } from '../_app';
 import styles from './Browse.module.scss';
 import colors from '../../styles/colors.module.scss';
+import { ToastContainer } from 'react-toastify';
 
 interface BrowseTableData {
   value: string | number | StaticImageData;
@@ -51,19 +52,21 @@ const Browse: NextPageWithLayout = () => {
     },
 
     {
-      value: NumberUtils.formatSeparators(50000),
+      value: NumberUtils.formatSeparators(bay.members.length),
       className: clsx(styles['bay-item']),
     },
     {
-      value: NumberUtils.formatSeparators(58670.905),
+      value: NumberUtils.formatSeparators(parseFloat(bay.totalValueLocked)),
       className: clsx(styles['bay-item']),
     },
     {
-      value: NumberUtils.formatPercentage(50),
-      className: clsx(styles['bay-item']),
+      value: StringUtils.shortenAddress(bay.creator, 10),
+      className: clsx(styles['bay-item'], styles['bay-item-address']),
     },
     {
-      value: NumberUtils.formatSeparators(10000),
+      value: NumberUtils.formatSeparators(
+        bay.transferProposals.length + bay.exchangeProposals.length
+      ),
       className: clsx(styles['bay-item']),
     },
   ]);
@@ -108,7 +111,7 @@ const Browse: NextPageWithLayout = () => {
               <Loader type="Grid" color="#49fdc0" height={100} width={100} />
             </div>
           )}
-          {!loading && bays.length > 0 ? (
+          {bays.length > 0 ? (
             <Table
               header={[
                 { value: 'Rank' },
@@ -118,9 +121,9 @@ const Browse: NextPageWithLayout = () => {
                 { value: 'Logo' },
                 { value: 'Address' },
                 { value: 'Members' },
-                { value: 'Total value locked (TVL)' },
-                { value: 'APR' },
-                { value: 'Number of exchanges' },
+                { value: 'Total staked amount' },
+                { value: 'Creator' },
+                { value: 'Number of proposals' },
               ]}
               headerRowClassName={styles.headerRow}
               rowStyle={{
@@ -129,25 +132,28 @@ const Browse: NextPageWithLayout = () => {
               data={convertedBays}
             />
           ) : (
-            <div
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                height: '600px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
-                ☹︎
-              </p>
-              <h3 style={{ color: colors.dark500 }}>
-                There are no Treasure Bay on the network
-              </h3>
-            </div>
+            !loading && (
+              <div
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '600px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
+                  ☹︎
+                </p>
+                <h3 style={{ color: colors.dark500 }}>
+                  There are no Treasure Bay on the network
+                </h3>
+              </div>
+            )
           )}
         </div>
+        <ToastContainer />
       </Container>
     </>
   );

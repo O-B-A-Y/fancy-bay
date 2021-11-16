@@ -57,7 +57,7 @@ const NoContractModal = () => {
             style={{ marginLeft: 10, marginRight: 10 }}
           >
             <p style={{ color: '#49fdc0' }}>
-              {chainNetworkMapping[chainId as any]}
+              {chainNetworkMapping[chainId as any] || 'Unknown'}
             </p>
           </div>
           network.

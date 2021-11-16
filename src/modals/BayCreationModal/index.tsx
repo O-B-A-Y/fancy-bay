@@ -12,12 +12,14 @@ import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import { toggleBayCreationModal } from 'src/states/modal/slice';
 import useTreasureBayFactoryContract from 'src/states/treasureBay/hooks/useTreasureBayFactoryContract';
 import { TreasureBayFactory } from 'src/types/TreasureBayFactory';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import colors from '../../styles/colors.module.scss';
 import styles from './BayCreationModal.module.scss';
 import Loader from 'react-loader-spinner';
 import StringUtils from 'src/utils/string';
-import { setYourBays } from 'src/states/treasureBay/slice';
+import useTreasureBayContract from 'src/states/treasureBay/hooks/useTreasureBayContract';
+import { TreasureBay } from 'src/types/TreasureBay';
+import { setFetching } from 'src/states/treasureBay/slice';
 
 const ReusableTextInput = ({
   label,
@@ -90,15 +92,14 @@ const BayCreationModal = () => {
                 from: environment.account,
               });
             if (response.events) {
-              dispatch(
-                setYourBays([
-                  ...treasureBays,
-                  {
-                    address: response.events?.[0].address,
-                    name: formValues.name,
-                  },
-                ])
+              const treasureBayContract = useTreasureBayContract(
+                response.events?.[0].address
               );
+              const method: TreasureBay = treasureBayContract.methods;
+              await method.createTreasureHunter().send({
+                from: environment.account,
+              });
+              dispatch(setFetching(true));
             }
             toast.success(
               `New bay created: ${StringUtils.shortenAddress(
@@ -254,7 +255,6 @@ const BayCreationModal = () => {
           </Grid>
         </div>
       </ReactModal>
-      <ToastContainer />
     </>
   );
 };

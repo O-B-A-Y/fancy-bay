@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
+import useFormValidation from 'src/hooks/useFormValidation';
 import { useAppDispatch } from 'src/states/hooks';
 import { toggleBayCreationModal } from 'src/states/modal/slice';
 import useFetchYourTreasureBays from 'src/states/treasureBay/hooks/useFetchYourTreasureBays';
@@ -32,6 +33,9 @@ interface BrowseTableData {
 // eslint-disable-next-line arrow-body-style
 const MyBays: NextPageWithLayout = () => {
   const dispatch = useAppDispatch();
+  const { formValues, handleSetFieldValue } = useFormValidation({
+    searchInput: '',
+  });
   const { bays, loading, error } = useFetchYourTreasureBays();
   if (error) {
     // eslint-disable-next-line no-console
@@ -40,28 +44,46 @@ const MyBays: NextPageWithLayout = () => {
 
   const fetchedTreasureBays: BrowseTableData[][] = React.useMemo(
     () =>
-      bays.map((bay) => [
-        {
-          value: bay.name,
-        },
-        {
-          value: BinanceIcon500x500,
-          isImage: true,
-        },
-        {
-          value: StringUtils.shortenAddress(bay.address, 10),
-          className: clsx(styles['bay-item'], styles['bay-item-address']),
-        },
-        {
-          value: NumberUtils.formatSeparators(58670.905),
-          className: clsx(styles['bay-item']),
-        },
-        {
-          value: NumberUtils.formatSeparators(50000),
-          className: clsx(styles['bay-item']),
-        },
-      ]),
-    bays
+      bays
+        .filter((bay) =>
+          (bay.name as string)
+            .toLowerCase()
+            .includes(formValues.searchInput.toLowerCase())
+        )
+        .map((bay) => [
+          {
+            value: bay.name,
+          },
+          {
+            value: BinanceIcon500x500,
+            isImage: true,
+          },
+          {
+            value: StringUtils.shortenAddress(bay.address, 10),
+            className: clsx(styles['bay-item'], styles['bay-item-address']),
+          },
+          {
+            value: StringUtils.shortenAddress(bay.creator, 10),
+            className: clsx(styles['bay-item'], styles['bay-item-address']),
+          },
+          {
+            value: NumberUtils.formatSeparators(
+              parseFloat(bay.totalValueLocked)
+            ),
+            className: clsx(styles['bay-item']),
+          },
+          {
+            value: NumberUtils.formatSeparators(bay.members.length),
+            className: clsx(styles['bay-item']),
+          },
+          {
+            value: NumberUtils.formatSeparators(
+              bay.exchangeProposals.length + bay.transferProposals.length
+            ),
+            className: clsx(styles['bay-item']),
+          },
+        ]),
+    [bays, formValues.searchInput]
   );
   const handler = {
     AddNewBay: () => {
@@ -96,6 +118,9 @@ const MyBays: NextPageWithLayout = () => {
                 backgroundColor={colors.dark500}
                 placeholder="Search for your Bays"
                 inputClassName={styles.baySearchInput}
+                onValueChanged={(e) =>
+                  handleSetFieldValue('searchInput', (e.target as any).value)
+                }
                 placeholderStyle={{
                   color: 'white',
                 }}
@@ -143,8 +168,10 @@ const MyBays: NextPageWithLayout = () => {
               { value: 'Logo' },
 
               { value: 'Address' },
-              { value: 'Total Value Locked (TVL)' },
+              { value: 'Creator' },
+              { value: 'Total Staked Amount' },
               { value: 'Members' },
+              { value: 'Proposals' },
             ]}
             tableClassName={styles.tableContainer}
             headerRowClassName={styles.headerRow}
@@ -152,23 +179,25 @@ const MyBays: NextPageWithLayout = () => {
             data={fetchedTreasureBays}
           />
         ) : (
-          <div
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-              height: '600px',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
-              ☃︎
-            </p>
-            <h3 style={{ color: colors.dark500 }}>
-              You have no treasure bays, create one now!
-            </h3>
-          </div>
+          !loading && (
+            <div
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                height: '600px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
+                ☃︎
+              </p>
+              <h3 style={{ color: colors.dark500 }}>
+                You have no treasure bays, create one now!
+              </h3>
+            </div>
+          )
         )}
       </div>
     </Container>

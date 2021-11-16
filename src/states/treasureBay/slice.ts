@@ -9,6 +9,7 @@ export const TREASURE_BAY_ACTION_FETCH_TREASURE_BAY = `${TREASURE_BAY_NAME}/FETC
 interface TreasureBayState {
   status: ThunkFetchState;
   data: {
+    fetching: boolean;
     treasureBays: TreasureBayType[];
     yourTreasureBays: TreasureBayType[];
   };
@@ -18,6 +19,7 @@ interface TreasureBayState {
 const initialState: TreasureBayState = {
   status: ThunkFetchState.Idle,
   data: {
+    fetching: false,
     treasureBays: [],
     yourTreasureBays: [],
   },
@@ -64,6 +66,9 @@ const treasureBaySlice = createSlice({
   name: TREASURE_BAY_NAME,
   initialState,
   reducers: {
+    setFetching(state, action: PayloadAction<boolean>) {
+      state.data.fetching = action.payload;
+    },
     setTreasureBays(state, action: PayloadAction<TreasureBayType[]>) {
       state.data.treasureBays = action.payload;
     },
@@ -73,6 +78,7 @@ const treasureBaySlice = createSlice({
   },
 });
 
-export const { setTreasureBays, setYourBays } = treasureBaySlice.actions;
+export const { setTreasureBays, setYourBays, setFetching } =
+  treasureBaySlice.actions;
 
 export default treasureBaySlice.reducer;

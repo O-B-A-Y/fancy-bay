@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 
 const useWeb3Contract = (
-  address: string | undefined,
+  address: string,
   ABI: any,
   options?: {
     from: any;
