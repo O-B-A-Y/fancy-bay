@@ -59,7 +59,7 @@ export type ContractContext = Web3ContractContext<
   TreasureBayFactoryEventsContext,
   TreasureBayFactoryEvents
 >;
-export type TreasureBayFactoryEvents = 'NewBayCreated';
+export type TreasureBayFactoryEvents = 'NewBayCreated' | 'OwnershipTransferred';
 export interface TreasureBayFactoryEventsContext {
   NewBayCreated(
     parameters: {
@@ -74,9 +74,25 @@ export interface TreasureBayFactoryEventsContext {
     },
     callback?: (error: Error, event: EventData) => void
   ): EventResponse;
+  OwnershipTransferred(
+    parameters: {
+      filter?: {
+        previousOwner?: string | string[];
+        newOwner?: string | string[];
+      };
+      fromBlock?: number;
+      toBlock?: 'latest' | number;
+      topics?: string[];
+    },
+    callback?: (error: Error, event: EventData) => void
+  ): EventResponse;
 }
 export type TreasureBayFactoryMethodNames =
+  | 'owner'
+  | 'renounceOwnership'
+  | 'transferOwnership'
   | 'createNewBay'
+  | 'deleteBay'
   | 'getAllBays'
   | 'getBay';
 export interface NewBayCreatedEventEmittedResponse {
@@ -84,7 +100,33 @@ export interface NewBayCreatedEventEmittedResponse {
   creator: string;
   bayAddress: string;
 }
+export interface OwnershipTransferredEventEmittedResponse {
+  previousOwner: string;
+  newOwner: string;
+}
 export interface TreasureBayFactory {
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  owner(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  renounceOwnership(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   * @param newOwner Type: address, Indexed: false
+   */
+  transferOwnership(newOwner: string): MethodReturnContext;
   /**
    * Payable: false
    * Constant: false
@@ -99,6 +141,14 @@ export interface TreasureBayFactory {
     limitNumberOfMembers_: string,
     limitNumberOfTreasureHunters_: string
   ): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   * @param bayAddress Type: address, Indexed: false
+   */
+  deleteBay(bayAddress: string): MethodReturnContext;
   /**
    * Payable: false
    * Constant: true

@@ -183,6 +183,7 @@ export type TreasureBayMethodNames =
   | 'name'
   | 'numberOfStakeholders'
   | 'owner'
+  | 'removeStakeholder'
   | 'renounceOwnership'
   | 'stake'
   | 'stakeholders'
@@ -192,6 +193,7 @@ export type TreasureBayMethodNames =
   | 'treasureHunters'
   | 'unstake'
   | 'listOfTreasureHunters'
+  | 'leaveBay'
   | 'createTreasureHunter'
   | 'createNewTransferProposal';
 export interface NewPoolCreatedEventEmittedResponse {
@@ -394,6 +396,14 @@ export interface TreasureBay {
    * Constant: false
    * StateMutability: nonpayable
    * Type: function
+   * @param stakeholder Type: address, Indexed: false
+   */
+  removeStakeholder(stakeholder: string): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
    */
   renounceOwnership(): MethodReturnContext;
   /**
@@ -461,6 +471,13 @@ export interface TreasureBay {
   listOfTreasureHunters(): MethodConstantReturnContext<
     TreasurehunterResponse[]
   >;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  leaveBay(): MethodReturnContext;
   /**
    * Payable: false
    * Constant: false

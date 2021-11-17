@@ -10,16 +10,10 @@ import TextInputVariant from 'src/constants/textInputVariant';
 import useFormValidation from 'src/hooks/useFormValidation';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import { toggleBayCreationModal } from 'src/states/modal/slice';
-import useTreasureBayFactoryContract from 'src/states/treasureBay/hooks/useTreasureBayFactoryContract';
-import { TreasureBayFactory } from 'src/types/TreasureBayFactory';
-import { toast } from 'react-toastify';
 import colors from '../../styles/colors.module.scss';
 import styles from './BayCreationModal.module.scss';
 import Loader from 'react-loader-spinner';
-import StringUtils from 'src/utils/string';
-import useTreasureBayContract from 'src/states/treasureBay/hooks/useTreasureBayContract';
-import { TreasureBay } from 'src/types/TreasureBay';
-import { setFetching } from 'src/states/treasureBay/slice';
+import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
 
 const ReusableTextInput = ({
   label,
@@ -50,81 +44,15 @@ const ReusableTextInput = ({
 
 const BayCreationModal = () => {
   const dispatch = useAppDispatch();
-  const factoryContract = useTreasureBayFactoryContract();
-  const factoryContractMethods: TreasureBayFactory = factoryContract.methods;
-  const [loading, setLoading] = React.useState(false);
+  const { createNewTreasureBay, loading } = useTreasureBayMutations({});
   const { formValues, handleSetFieldValue } = useFormValidation({
     name: '',
     limitNumberOfTreasureHunters: '',
     limitNumberOfStakeholders: '',
   });
   const { data } = useAppSelector((state) => state.modalSlice);
-  const {
-    data: { treasureBays },
-  } = useAppSelector((state) => state.treasureBaySlice);
-  const {
-    data: { environment },
-  } = useAppSelector((state) => state.walletSlice);
   const handler = {
-    AddNewBay: async () => {
-      if (environment.account) {
-        try {
-          setLoading(true);
-          const listOfBayName = treasureBays.map((bay) => bay.name);
-          if (listOfBayName.includes(formValues.name)) {
-            toast.error(`Treasure bay name has been used already`, {
-              position: 'top-right',
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-            });
-          } else {
-            const response = await factoryContractMethods
-              .createNewBay(
-                formValues.name,
-                formValues.limitNumberOfStakeholders,
-                formValues.limitNumberOfTreasureHunters
-              )
-              .send({
-                from: environment.account,
-              });
-            if (response.events) {
-              const treasureBayContract = useTreasureBayContract(
-                response.events?.[0].address
-              );
-              const method: TreasureBay = treasureBayContract.methods;
-              await method.createTreasureHunter().send({
-                from: environment.account,
-              });
-              dispatch(setFetching(true));
-            }
-            toast.success(
-              `New bay created: ${StringUtils.shortenAddress(
-                response.transactionHash,
-                10
-              )}...`,
-              {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-              }
-            );
-          }
-          setLoading(false);
-        } catch (error: any) {
-          // eslint-disable-next-line no-console
-          console.error(error.message);
-          setLoading(false);
-        }
-      }
-    },
+    AddNewBay: async () => createNewTreasureBay(formValues),
     CloseModal: () => dispatch(toggleBayCreationModal(false)),
   };
   return (
