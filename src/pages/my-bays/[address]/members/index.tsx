@@ -61,8 +61,8 @@ const BayMembers: NextPageWithLayout = () => {
         backgroundColor: colors.dark700,
         cursor: 'pointer',
       }}
-      data={mockMembers.map((memberData, index) =>
-        [
+      items={mockMembers.map((memberData, index) => ({
+        data: [
           {
             value: index + 1,
             className: styles.member_item_rank,
@@ -78,19 +78,20 @@ const BayMembers: NextPageWithLayout = () => {
           style: d.style || {},
           isHyperLink: d.isHyperLink,
           link: d.link,
-        }))
-      )}
+        })),
+        href: '',
+      }))}
     />
   );
 };
 BayMembers.getLayout = function getLayout(page: ReactElement) {
   const router = useRouter();
-  const { slug } = router.query;
+  const { address } = router.query;
   return (
     <DefaultLayout>
       <BayLayout
         selectedTab={LeftSidedContainerTab.Members}
-        slug={slug as string}
+        address={address as string}
       >
         {page}
       </BayLayout>

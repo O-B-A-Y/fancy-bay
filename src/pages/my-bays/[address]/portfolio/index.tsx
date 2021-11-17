@@ -12,12 +12,12 @@ const BayPortfolio: NextPageWithLayout = () => (
 
 BayPortfolio.getLayout = function getLayout(page: ReactElement) {
   const router = useRouter();
-  const { slug } = router.query;
+  const { address } = router.query;
   return (
     <DefaultLayout>
       <BayLayout
         selectedTab={LeftSidedContainerTab.Portfolio}
-        slug={slug as string}
+        address={address as string}
       >
         {page}
       </BayLayout>

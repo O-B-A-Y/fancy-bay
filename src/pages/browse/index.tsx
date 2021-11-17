@@ -33,43 +33,48 @@ const mockInformation = {
 
 const Browse: NextPageWithLayout = () => {
   const { bays, error, loading } = useFetchTreasureBay();
-  const convertedBays: BrowseTableData[][] = bays.map((bay, index) => [
-    {
-      value: NumberUtils.formatRank(index + 1),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: bay.name,
-      className: clsx(styles['bay-item'], styles['bay-item-name']),
-    },
-    {
-      value: BinanceIcon500x500,
-      isImage: true,
-    },
-    {
-      value: StringUtils.shortenAddress(bay.address, 10),
-      className: clsx(styles['bay-item'], styles['bay-item-address']),
-    },
+  const convertedBays: { data: BrowseTableData[]; href: string }[] = bays.map(
+    (bay, index) => ({
+      data: [
+        {
+          value: NumberUtils.formatRank(index + 1),
+          className: clsx(styles['bay-item']),
+        },
+        {
+          value: bay.name,
+          className: clsx(styles['bay-item'], styles['bay-item-name']),
+        },
+        {
+          value: BinanceIcon500x500,
+          isImage: true,
+        },
+        {
+          value: StringUtils.shortenAddress(bay.address, 10),
+          className: clsx(styles['bay-item'], styles['bay-item-address']),
+        },
 
-    {
-      value: NumberUtils.formatSeparators(bay.members.length),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: NumberUtils.formatSeparators(parseFloat(bay.totalValueLocked)),
-      className: clsx(styles['bay-item']),
-    },
-    {
-      value: StringUtils.shortenAddress(bay.creator, 10),
-      className: clsx(styles['bay-item'], styles['bay-item-address']),
-    },
-    {
-      value: NumberUtils.formatSeparators(
-        bay.transferProposals.length + bay.exchangeProposals.length
-      ),
-      className: clsx(styles['bay-item']),
-    },
-  ]);
+        {
+          value: NumberUtils.formatSeparators(bay.members.length),
+          className: clsx(styles['bay-item']),
+        },
+        {
+          value: NumberUtils.formatSeparators(parseFloat(bay.totalValueLocked)),
+          className: clsx(styles['bay-item']),
+        },
+        {
+          value: StringUtils.shortenAddress(bay.creator, 10),
+          className: clsx(styles['bay-item'], styles['bay-item-address']),
+        },
+        {
+          value: NumberUtils.formatSeparators(
+            bay.transferProposals.length + bay.exchangeProposals.length
+          ),
+          className: clsx(styles['bay-item']),
+        },
+      ],
+      href: `/bays/${bay.address}`,
+    })
+  );
   if (error) {
     // eslint-disable-next-line no-console
     console.error(error);
@@ -129,7 +134,7 @@ const Browse: NextPageWithLayout = () => {
               rowStyle={{
                 cursor: 'pointer',
               }}
-              data={convertedBays}
+              items={convertedBays}
             />
           ) : (
             !loading && (

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useMemo } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
 import moment from 'moment';
@@ -25,9 +25,9 @@ import { addToken } from 'src/states/wallet/slice';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'src/states/hooks';
 import NumberUtils from 'src/utils/number';
-import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
 import Loader from 'react-loader-spinner';
+import StringUtils from 'src/utils/string';
 
 const ImageLoader = ({
   src,
@@ -49,6 +49,7 @@ const RowItem = ({ label, content }: { label: string; content: any }) => (
 export enum LeftSidedContainerTab {
   Proposals = 'Proposals',
   Members = 'Members',
+  Stakeholders = 'Stakeholders',
   Portfolio = 'Portfolio',
 }
 
@@ -66,11 +67,12 @@ const Bay = ({
     stakedAmount: '',
     searchProposalInput: '',
   });
-  const { account } = useActiveWeb3React();
+  const { account } = useAppSelector(
+    (state) => state.walletSlice.data.environment
+  );
   const walletSlice = useAppSelector((state) => state.walletSlice);
   const tokenInfo = useTokenInfo('OBAY');
   const { bay, error, loading } = useFetchTreasureBay(address);
-
   if (!bay || error) {
     // eslint-disable-next-line no-console
     console.error(error);
@@ -82,20 +84,33 @@ const Bay = ({
     }
   }, [tokenInfo]);
 
-  const mockBayInfo = [
-    {
-      label: 'Total Fund',
-      content: `${CurrencyUtils.formatByUnit(1521000, 'USD')} USD`,
-    },
-    {
-      label: 'Member',
-      content: 120,
-    },
-    {
-      label: 'Created at',
-      content: moment().format('DD-MM-YYYY'),
-    },
-  ];
+  const bayInfo = useMemo(
+    () =>
+      bay
+        ? [
+            {
+              label: 'Total Fund',
+              content: `${CurrencyUtils.formatByUnit(
+                parseFloat(bay?.totalValueLocked),
+                'USD'
+              )} USD`,
+            },
+            {
+              label: 'Creator',
+              content: `${StringUtils.shortenAddress(bay.address, 10).trim()}`,
+            },
+            {
+              label: 'Treasure hunters',
+              content: bay.members.length,
+            },
+            {
+              label: 'Stakeholders',
+              content: bay.stakeholders.length,
+            },
+          ]
+        : [],
+    [bay]
+  );
 
   const handler = {
     Stake: () => {},
@@ -125,15 +140,15 @@ const Bay = ({
       <br />
       <h1 className={styles.bayName}>{bay?.name}</h1>
       <p
-        data-tip={account}
+        data-tip={bay?.address}
         data-for="address-tooltip"
         data-place="bottom"
         className={styles.bayAddress}
       >
-        {`${account?.substring(0, 30).trim()}...`}
+        {`${bay?.address?.substring(0, 30).trim()}...`}
       </p>
 
-      {mockBayInfo.map(({ content, label }) => (
+      {bayInfo.map(({ content, label }) => (
         <RowItem key={label} label={label} content={content} />
       ))}
     </div>
@@ -221,9 +236,7 @@ const Bay = ({
                         />
                         <div className={styles.rowItem}>
                           <div className={styles.metaLabel}>Total</div>
-                          <p className={styles.metaContent}>
-                            {0.00005867} OBAY
-                          </p>
+                          <p className={styles.metaContent}>{0} ETH</p>
                         </div>
                       </div>
                       <Button

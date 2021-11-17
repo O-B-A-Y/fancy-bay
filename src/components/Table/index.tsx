@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { ReactElement } from 'react';
 import styles from './Table.module.scss';
 
@@ -10,14 +11,17 @@ const Table: React.FC<{
     style?: React.CSSProperties;
     icon?: ReactElement;
   }[];
-  data?: {
-    value: string | number | StaticImageData;
-    className?: string;
-    style?: React.CSSProperties;
-    isHyperLink?: boolean;
-    isImage?: boolean;
-    link?: string;
-  }[][];
+  items?: {
+    data: {
+      value: string | number | StaticImageData;
+      className?: string;
+      style?: React.CSSProperties;
+      isHyperLink?: boolean;
+      isImage?: boolean;
+      link?: string;
+    }[];
+    href: string;
+  }[];
   rowStyle?: React.CSSProperties;
   tableClassName?: string;
   headerRowStyle?: React.CSSProperties;
@@ -29,7 +33,7 @@ const Table: React.FC<{
   header,
   rowStyle,
   style,
-  data,
+  items,
   tableClassName,
   rowClassName,
   headerRowStyle,
@@ -50,24 +54,30 @@ const Table: React.FC<{
           </th>
         ))}
       </tr>
-      {data?.map((d) => (
-        <tr
-          style={rowStyle}
-          className={clsx(styles.container_item, rowClassName)}
-        >
-          {d.map((e) => (
-            <th onClick={onFieldClick} style={e.style} className={e.className}>
-              {(e.isHyperLink && <a href={e.link}>{e.value}</a>) ||
-                (e.isImage && (
-                  <Image
-                    src={e.value as StaticImageData}
-                    width={40}
-                    height={40}
-                  />
-                )) || <p>{e.value}</p>}
-            </th>
-          ))}
-        </tr>
+      {items?.map((d) => (
+        <Link href={d.href} passHref>
+          <tr
+            style={rowStyle}
+            className={clsx(styles.container_item, rowClassName)}
+          >
+            {d.data.map((e) => (
+              <th
+                onClick={onFieldClick}
+                style={e.style}
+                className={e.className}
+              >
+                {(e.isHyperLink && <a href={e.link}>{e.value}</a>) ||
+                  (e.isImage && (
+                    <Image
+                      src={e.value as StaticImageData}
+                      width={40}
+                      height={40}
+                    />
+                  )) || <p>{e.value}</p>}
+              </th>
+            ))}
+          </tr>
+        </Link>
       ))}
     </table>
   </>

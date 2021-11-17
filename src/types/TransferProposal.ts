@@ -116,6 +116,7 @@ export type TransferProposalMethodNames =
   | 'amount'
   | 'checkApprovalStatus'
   | 'close'
+  | 'createdAt'
   | 'creator'
   | 'description'
   | 'numberOfNoVote'
@@ -192,6 +193,13 @@ export interface TransferProposal {
    * Type: function
    */
   close(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  createdAt(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true

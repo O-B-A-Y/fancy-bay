@@ -6,7 +6,7 @@ import 'react-dropdown/style.css';
 import { Provider } from 'react-redux';
 import BayCreationModal from 'src/modals/BayCreationModal';
 import NoContractModal from 'src/modals/NoContractModal';
-import ProposalModal from 'src/modals/ProposalModal';
+import ProposalModal from 'src/modals/ExchangeProposalModal';
 import { Web3ReactUtils } from 'src/utils';
 import { store } from '../states/store';
 import '../styles/globals.scss';

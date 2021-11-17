@@ -7,9 +7,9 @@ import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
 import { useAppSelector } from 'src/states/hooks';
-import { toggleProposalModal } from 'src/states/modal/slice';
+import { toggleExchangeProposalModal } from 'src/states/modal/slice';
 import colors from '../../styles/colors.module.scss';
-import styles from './ProposalModal.module.scss';
+import styles from './ExchangeProposalModal.module.scss';
 
 enum ProposalGenre {
   Exchange = 'Exchange',
@@ -61,15 +61,15 @@ const CurrencyContainer = ({
   </div>
 );
 
-const ProposalModal = () => {
+const ExchangeProposalModal = () => {
   const { data } = useAppSelector((state) => state.modalSlice);
   const dispatch = useDispatch();
   const handler = { Vote: () => {} };
   return (
     <ReactModal
       ariaHideApp={false}
-      isOpen={data.proposal}
-      onRequestClose={() => dispatch(toggleProposalModal(false))}
+      isOpen={data.exchangeProposal}
+      onRequestClose={() => dispatch(toggleExchangeProposalModal(false))}
       style={{
         content: {
           top: '50%',
@@ -86,7 +86,7 @@ const ProposalModal = () => {
           backgroundColor: 'rgba(0,0,0,.53)',
         },
       }}
-      contentLabel="ProposalModal"
+      contentLabel="ExchangeProposalModal"
     >
       <div className={styles.container} style={{ width: 400, maxWidth: 400 }}>
         <div
@@ -160,21 +160,36 @@ const ProposalModal = () => {
             </p>
           </div>
         </div>
-        <Button
-          backgroundColor="#303030"
-          borderWidth={1.5}
-          color="white"
-          variant={ButtonVariant.filled}
-          size={ButtonSize.full}
-          textAlign={TextAlign.center}
-          paddingVertical={10}
-          onClick={handler.Vote}
-        >
-          Vote
-        </Button>
+        <div style={{ display: 'flex' }}>
+          <Button
+            backgroundColor="#303030"
+            borderWidth={1.5}
+            color="white"
+            variant={ButtonVariant.filled}
+            size={ButtonSize.full}
+            textAlign={TextAlign.center}
+            paddingVertical={10}
+            onClick={handler.Vote}
+          >
+            Yes
+          </Button>
+          <div style={{ flexBasis: '15px' }} />
+          <Button
+            backgroundColor="#303030"
+            borderWidth={1.5}
+            color="white"
+            variant={ButtonVariant.filled}
+            size={ButtonSize.full}
+            textAlign={TextAlign.center}
+            paddingVertical={10}
+            onClick={handler.Vote}
+          >
+            No
+          </Button>
+        </div>
       </div>
     </ReactModal>
   );
 };
 
-export default ProposalModal;
+export default ExchangeProposalModal;

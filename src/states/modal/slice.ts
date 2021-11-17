@@ -4,7 +4,8 @@ import ThunkFetchState from '../../constants/fetch';
 export interface ModalState {
   status: ThunkFetchState;
   data: {
-    proposal: boolean;
+    transferProposal: boolean;
+    exchangeProposal: boolean;
     noContract: boolean;
     bayCreation: boolean;
     injectedConnectorError: boolean;
@@ -15,7 +16,8 @@ export interface ModalState {
 const initialState: ModalState = {
   status: ThunkFetchState.Idle,
   data: {
-    proposal: false,
+    transferProposal: false,
+    exchangeProposal: false,
     noContract: false,
     bayCreation: false,
     injectedConnectorError: false,
@@ -27,9 +29,13 @@ const modalSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-    toggleProposalModal(state, action: PayloadAction<boolean>) {
+    toggleExchangeProposalModal(state, action: PayloadAction<boolean>) {
       console.log(action);
-      state.data.proposal = action.payload;
+      state.data.exchangeProposal = action.payload;
+    },
+    toggleTransferProposalModal(state, action: PayloadAction<boolean>) {
+      console.log(action);
+      state.data.transferProposal = action.payload;
     },
     toggleNoContractModal(state, action: PayloadAction<boolean>) {
       console.log(action);
@@ -48,9 +54,10 @@ const modalSlice = createSlice({
 
 export const {
   toggleNoContractModal,
-  toggleProposalModal,
+  toggleExchangeProposalModal,
   toggleBayCreationModal,
   toggleInjectedConnectorErrorModal,
+  toggleTransferProposalModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

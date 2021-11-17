@@ -42,49 +42,53 @@ const MyBays: NextPageWithLayout = () => {
     console.error(error);
   }
 
-  const fetchedTreasureBays: BrowseTableData[][] = React.useMemo(
-    () =>
-      bays
-        .filter((bay) =>
-          (bay.name as string)
-            .toLowerCase()
-            .includes(formValues.searchInput.toLowerCase())
-        )
-        .map((bay) => [
-          {
-            value: bay.name,
-          },
-          {
-            value: BinanceIcon500x500,
-            isImage: true,
-          },
-          {
-            value: StringUtils.shortenAddress(bay.address, 10),
-            className: clsx(styles['bay-item'], styles['bay-item-address']),
-          },
-          {
-            value: StringUtils.shortenAddress(bay.creator, 10),
-            className: clsx(styles['bay-item'], styles['bay-item-address']),
-          },
-          {
-            value: NumberUtils.formatSeparators(
-              parseFloat(bay.totalValueLocked)
-            ),
-            className: clsx(styles['bay-item']),
-          },
-          {
-            value: NumberUtils.formatSeparators(bay.members.length),
-            className: clsx(styles['bay-item']),
-          },
-          {
-            value: NumberUtils.formatSeparators(
-              bay.exchangeProposals.length + bay.transferProposals.length
-            ),
-            className: clsx(styles['bay-item']),
-          },
-        ]),
-    [bays, formValues.searchInput]
-  );
+  const fetchedTreasureBays: { data: BrowseTableData[]; href: string }[] =
+    React.useMemo(
+      () =>
+        bays
+          .filter((bay) =>
+            (bay.name as string)
+              .toLowerCase()
+              .includes(formValues.searchInput.toLowerCase())
+          )
+          .map((bay) => ({
+            href: `/my-bays/${bay.address}/proposals`,
+            data: [
+              {
+                value: bay.name,
+              },
+              {
+                value: BinanceIcon500x500,
+                isImage: true,
+              },
+              {
+                value: StringUtils.shortenAddress(bay.address, 10),
+                className: clsx(styles['bay-item'], styles['bay-item-address']),
+              },
+              {
+                value: StringUtils.shortenAddress(bay.creator, 10),
+                className: clsx(styles['bay-item'], styles['bay-item-address']),
+              },
+              {
+                value: NumberUtils.formatSeparators(
+                  parseFloat(bay.totalValueLocked)
+                ),
+                className: clsx(styles['bay-item']),
+              },
+              {
+                value: NumberUtils.formatSeparators(bay.members.length),
+                className: clsx(styles['bay-item']),
+              },
+              {
+                value: NumberUtils.formatSeparators(
+                  bay.exchangeProposals.length + bay.transferProposals.length
+                ),
+                className: clsx(styles['bay-item']),
+              },
+            ],
+          })),
+      [bays, formValues.searchInput]
+    );
   const handler = {
     AddNewBay: () => {
       dispatch(toggleBayCreationModal(true));
@@ -176,7 +180,7 @@ const MyBays: NextPageWithLayout = () => {
             tableClassName={styles.tableContainer}
             headerRowClassName={styles.headerRow}
             rowClassName={styles.tableRow}
-            data={fetchedTreasureBays}
+            items={fetchedTreasureBays}
           />
         ) : (
           !loading && (

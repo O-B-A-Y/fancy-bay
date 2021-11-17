@@ -171,6 +171,7 @@ export type TreasureBayMethodNames =
   | 'allowedRecipients'
   | 'claim'
   | 'createStakeholder'
+  | 'createdAt'
   | 'creator'
   | 'exchangeProposals'
   | 'getAllTransferProposals'
@@ -300,6 +301,13 @@ export interface TreasureBay {
    * Type: function
    */
   createStakeholder(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  createdAt(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true
