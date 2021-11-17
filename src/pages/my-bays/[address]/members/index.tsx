@@ -1,53 +1,70 @@
+/* eslint-disable no-nested-ternary */
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { BayLayout, DefaultLayout } from 'src/layouts';
 import { NextPageWithLayout } from 'src/pages/_app';
 import styles from './Members.module.scss';
 import colors from '../../../../styles/colors.module.scss';
 import { Table } from 'src/components';
 import { LeftSidedContainerTab } from 'src/layouts/Bay';
+import useFetchMembers from 'src/states/treasureBay/hooks/useFetchMembers';
+import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
+import Loader from 'react-loader-spinner';
 
 const BayMembers: NextPageWithLayout = () => {
-  const mockMembers: Partial<{
+  const router = useRouter();
+  const { address } = router.query;
+  const fetchTreasureBay = useFetchTreasureBay(address as string);
+  const fetchMembers = useFetchMembers(address as string);
+  const memberInfos: Partial<{
     value: any;
     className: string;
     style: React.CSSProperties;
     isHyperLink: boolean;
     link: string;
-  }>[][] = [
-    [
-      {
-        value: `${'0x460aDc7A9b5253A765e662A031D26C8743a2EbB6'
-          .substring(0, 15)
-          .trim()}...`,
-        className: styles.member_item_address,
-        isHyperLink: true,
-        link: `https://etherscan.io/address/0x460aDc7A9b5253A765e662A031D26C8743a2EbB6`,
-      },
-      {
-        value: moment().format('DD-MM-YYYY'),
-        className: styles.member_item_joinedAt,
-      },
-      {
-        value: 1000,
-        className: styles.member_item_stakedAmount,
-      },
-      {
-        value: '20%',
-        className: styles.member_item_occupied,
-      },
-      {
-        value: 1000,
-        className: styles.member_item_contribution,
-        style: {
-          borderEndEndRadius: 10,
-          borderStartEndRadius: 10,
+  }>[][] = useMemo(
+    () =>
+      fetchMembers.members.map((member) => [
+        {
+          value: `${member.contractAddress.substring(0, 15).trim()}...`,
+          className: styles.member_item_address,
+          isHyperLink: true,
+          link: `https://etherscan.io/address/${member.contractAddress}`,
         },
-      },
-    ],
-  ];
-  return (
+        {
+          value: moment
+            .unix(parseInt(member.joinedAt, 10))
+            .format('DD-MM-YYYY'),
+          className: styles.member_item_joinedAt,
+        },
+        {
+          value: member.balance,
+          className: styles.member_item_stakedAmount,
+        },
+        {
+          value: `${
+            (parseFloat(member.balance) * 100) /
+              parseFloat((fetchTreasureBay.bay as any).totalValueLocked) || 0
+          }%`,
+          className: styles.member_item_occupied,
+        },
+      ]),
+    [fetchMembers]
+  );
+  return fetchMembers.loading || fetchTreasureBay.loading ? (
+    <div
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '300px',
+        display: 'flex',
+      }}
+    >
+      <Loader type="Rings" color="#49fdc0" height={80} width={80} />
+    </div>
+  ) : fetchMembers.members.length > 0 ? (
     <Table
       header={[
         { value: 'Rank' },
@@ -55,13 +72,12 @@ const BayMembers: NextPageWithLayout = () => {
         { value: 'Joined at' },
         { value: 'Staked amount' },
         { value: 'Occupied' },
-        { value: 'Contribution' },
       ]}
       rowStyle={{
         backgroundColor: colors.dark700,
         cursor: 'pointer',
       }}
-      items={mockMembers.map((memberData, index) => ({
+      items={memberInfos.map((memberData, index) => ({
         data: [
           {
             value: index + 1,
@@ -82,6 +98,22 @@ const BayMembers: NextPageWithLayout = () => {
         href: '',
       }))}
     />
+  ) : (
+    <div
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '80%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>☹︎</p>
+      <h3 style={{ color: colors.dark500 }}>
+        Treasure bay has no member, something wrong!
+      </h3>
+    </div>
   );
 };
 BayMembers.getLayout = function getLayout(page: ReactElement) {

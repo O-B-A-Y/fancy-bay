@@ -20,3 +20,10 @@ export interface CreateNewBayArguments {
   limitNumberOfTreasureHunters: string;
   limitNumberOfStakeholders: string;
 }
+
+export interface MemberType {
+  contractAddress: string;
+  joinedAt: string;
+  balance: string;
+  claimedInterval: string;
+}

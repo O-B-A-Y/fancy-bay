@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import React, { ChangeEvent, useMemo } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
-import moment from 'moment';
 import { CurrencyUtils } from 'src/utils';
 import { Button, Container, Grid, TextInput } from 'src/components';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
@@ -28,6 +27,7 @@ import NumberUtils from 'src/utils/number';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
 import Loader from 'react-loader-spinner';
 import StringUtils from 'src/utils/string';
+import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
 
 const ImageLoader = ({
   src,
@@ -70,6 +70,7 @@ const Bay = ({
   const { account } = useAppSelector(
     (state) => state.walletSlice.data.environment
   );
+  const fetchMember = useFetchMember(account as string);
   const walletSlice = useAppSelector((state) => state.walletSlice);
   const tokenInfo = useTokenInfo('OBAY');
   const { bay, error, loading } = useFetchTreasureBay(address);
@@ -236,7 +237,9 @@ const Bay = ({
                         />
                         <div className={styles.rowItem}>
                           <div className={styles.metaLabel}>Total</div>
-                          <p className={styles.metaContent}>{0} ETH</p>
+                          <p className={styles.metaContent}>
+                            {fetchMember.member?.balance || 0} ETH
+                          </p>
                         </div>
                       </div>
                       <Button
@@ -321,7 +324,13 @@ const Bay = ({
                   <div className={styles.meta}>
                     <div className={styles.meta_leftSide}>
                       <p>
-                        Personal Return on Investment (PROI): <span>5%</span>
+                        Personal Return on Investment (PROI):{' '}
+                        <span>
+                          {(parseFloat(fetchMember.member?.balance as string) *
+                            100) /
+                            parseFloat(bay?.totalValueLocked as string) || 0}
+                          %
+                        </span>
                       </p>
                     </div>
                     <div className={styles.meta_rightSide}>
