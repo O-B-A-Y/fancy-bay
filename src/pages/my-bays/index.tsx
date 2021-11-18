@@ -6,6 +6,7 @@ import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
 import useFormValidation from 'src/hooks/useFormValidation';
+import useWeb3 from 'src/hooks/useWeb3';
 import { useAppDispatch } from 'src/states/hooks';
 import { toggleBayCreationModal } from 'src/states/modal/slice';
 import useFetchYourTreasureBays from 'src/states/treasureBay/hooks/useFetchYourTreasureBays';
@@ -33,6 +34,7 @@ interface BrowseTableData {
 // eslint-disable-next-line arrow-body-style
 const MyBays: NextPageWithLayout = () => {
   const dispatch = useAppDispatch();
+  const web3 = useWeb3();
   const { formValues, handleSetFieldValue } = useFormValidation({
     searchInput: '',
   });
@@ -71,7 +73,7 @@ const MyBays: NextPageWithLayout = () => {
               },
               {
                 value: NumberUtils.formatSeparators(
-                  parseFloat(bay.totalValueLocked)
+                  parseFloat(web3.utils.fromWei(bay.totalValueLocked, 'ether'))
                 ),
                 className: clsx(styles['bay-item']),
               },

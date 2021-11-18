@@ -11,9 +11,11 @@ import { LeftSidedContainerTab } from 'src/layouts/Bay';
 import useFetchMembers from 'src/states/treasureBay/hooks/useFetchMembers';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
 import Loader from 'react-loader-spinner';
+import useWeb3 from 'src/hooks/useWeb3';
 
 const BayMembers: NextPageWithLayout = () => {
   const router = useRouter();
+  const web3 = useWeb3();
   const { address } = router.query;
   const fetchTreasureBay = useFetchTreasureBay(address as string);
   const fetchMembers = useFetchMembers(address as string);
@@ -44,8 +46,12 @@ const BayMembers: NextPageWithLayout = () => {
         },
         {
           value: `${
-            (parseFloat(member.balance) * 100) /
-              parseFloat((fetchTreasureBay.bay as any).totalValueLocked) || 0
+            parseFloat(`${(member.balance as any) * 100}`) /
+              parseFloat(
+                web3.utils.fromWei(
+                  `${(fetchTreasureBay.bay as any).totalValueLocked}`
+                )
+              ) || 0
           }%`,
           className: styles.member_item_occupied,
         },

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import React, { ChangeEvent, useMemo } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
-import { CurrencyUtils } from 'src/utils';
+// import { CurrencyUtils } from 'src/utils';
 import { Button, Container, Grid, TextInput } from 'src/components';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
@@ -29,6 +29,9 @@ import Loader from 'react-loader-spinner';
 import StringUtils from 'src/utils/string';
 import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
 import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
+import { useRouter } from 'next/router';
+import useWeb3 from 'src/hooks/useWeb3';
+// import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 
 const ImageLoader = ({
   src,
@@ -64,6 +67,9 @@ const Bay = ({
   selectedTab: LeftSidedContainerTab;
 }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const web3 = useWeb3();
+  // const { rates } = useSendWyreAPI();
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
     searchProposalInput: '',
@@ -71,8 +77,8 @@ const Bay = ({
   const { account } = useAppSelector(
     (state) => state.walletSlice.data.environment
   );
-  const treasureBayMutations = useTreasureBayMutations({});
-  const fetchMember = useFetchMember(account as string);
+  const treasureBayMutations = useTreasureBayMutations();
+  const fetchMember = useFetchMember(address as string, account as string);
   const walletSlice = useAppSelector((state) => state.walletSlice);
   const tokenInfo = useTokenInfo('OBAY');
   const { bay, error, loading } = useFetchTreasureBay(address);
@@ -92,11 +98,11 @@ const Bay = ({
       bay
         ? [
             {
-              label: 'Total Fund',
-              content: `${CurrencyUtils.formatByUnit(
-                parseFloat(bay?.totalValueLocked),
-                'USD'
-              )} USD`,
+              label: 'Total ETH',
+              content: `${web3.utils.fromWei(
+                bay?.totalValueLocked,
+                'ether'
+              )} ETH`,
             },
             {
               label: 'Creator',
@@ -116,8 +122,14 @@ const Bay = ({
   );
 
   const handler = {
-    Stake: () => {},
-    Leave: () => treasureBayMutations.leaveTreasureBay(address),
+    Stake: () => treasureBayMutations.stake(address, formValues.stakedAmount),
+    Leave: () => {
+      treasureBayMutations.leaveTreasureBay(address, (success) => {
+        if (success) {
+          router.push('/my-bays');
+        }
+      });
+    },
     SearchProposal: () => {},
     ChangeSearchProposalInput: (e: ChangeEvent) => {
       handleSetFieldValue('searchProposalInput', (e.target as any).value);
@@ -127,6 +139,7 @@ const Bay = ({
         isNumeric: true,
       });
     },
+    AddNewProposal: () => {},
   };
 
   /** Render meta information of a bay */
@@ -321,6 +334,19 @@ const Bay = ({
                       onValueChanged={handler.ChangeSearchProposalInput}
                       value={formValues.searchProposalInput}
                     />
+                    <Button
+                      backgroundColor="#303030"
+                      borderWidth={1.5}
+                      color="white"
+                      variant={ButtonVariant.filled}
+                      size={ButtonSize.fit}
+                      textAlign={TextAlign.center}
+                      paddingVertical={10}
+                      paddingHorizontal={15}
+                      onClick={handler.AddNewProposal}
+                    >
+                      Add new proposal +
+                    </Button>
                   </div>
                   <div className={styles.subContainer_separator} />
                   <div className={styles.meta}>
@@ -330,7 +356,13 @@ const Bay = ({
                         <span>
                           {(parseFloat(fetchMember.member?.balance as string) *
                             100) /
-                            parseFloat(bay?.totalValueLocked as string) || 0}
+                            parseFloat(
+                              web3?.utils?.fromWei(
+                                (bay?.totalValueLocked as string)?.toString() ||
+                                  '0',
+                                'ether'
+                              )
+                            ) || 0}
                           %
                         </span>
                       </p>

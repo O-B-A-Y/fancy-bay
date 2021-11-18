@@ -7,9 +7,14 @@ import { useDispatch } from 'react-redux';
 import { setFetching } from '../slice';
 import { useAppSelector } from 'src/states/hooks';
 import { MemberType } from '../types';
+import useWeb3 from 'src/hooks/useWeb3';
 
-export default function useFetchMember(memberAddress: string) {
+export default function useFetchMember(
+  bayAddress: string,
+  memberAddress: string
+) {
   const dispatch = useDispatch();
+  const web3 = useWeb3();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [member, setMember] = useState<MemberType>();
@@ -17,11 +22,12 @@ export default function useFetchMember(memberAddress: string) {
   const {
     data: { fetching },
   } = useAppSelector((state) => state.treasureBaySlice);
+
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         setLoading(true);
-        const treasureBayContract = useTreasureBayContract(memberAddress);
+        const treasureBayContract = useTreasureBayContract(bayAddress);
         const treasureBayContractMethods: TreasureBay =
           treasureBayContract.methods;
         const member = await treasureBayContractMethods
@@ -36,9 +42,11 @@ export default function useFetchMember(memberAddress: string) {
         const memberInfo = {
           contractAddress,
           joinedAt: parseInt(joinedAt) as any,
-          balance: stakeholder.balance || '0',
+          balance: web3.utils.fromWei(stakeholder.balance, 'ether') || '0',
           claimedInterval: stakeholder.claimedInterval || '0',
         };
+
+        console.log(memberInfo);
 
         setMember(memberInfo);
         dispatch(setFetching(false));
