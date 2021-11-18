@@ -2,21 +2,20 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import Loader from 'react-loader-spinner';
+import { ToastContainer } from 'react-toastify';
+import useWeb3 from 'src/hooks/useWeb3';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBays';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
 // import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
 import { Container, Table } from '../../components';
 import Flex from '../../components/Flex';
 import StatsCard from '../../components/StatsCard';
-import ContainerSize from '../../constants/containerSize';
 import { DefaultLayout } from '../../layouts';
+import colors from '../../styles/colors.module.scss';
 import NumberUtils from '../../utils/number';
 import StringUtils from '../../utils/string';
 import { NextPageWithLayout } from '../_app';
 import styles from './Browse.module.scss';
-import colors from '../../styles/colors.module.scss';
-import { ToastContainer } from 'react-toastify';
-import useWeb3 from 'src/hooks/useWeb3';
 
 interface BrowseTableData {
   value: string | number | StaticImageData;
@@ -90,7 +89,7 @@ const Browse: NextPageWithLayout = () => {
         <title>Browse | OBAY</title>
         <meta key="description" name="description" content="Browse OBAY" />
       </Head>
-      <Container size={ContainerSize.Large}>
+      <Container>
         {/* Title section */}
         <div className={styles.infoTitleSection}>Platform Information</div>
         {/* Stats Card section */}

@@ -12995,45 +12995,19 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/TreasureBay.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        2482
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        1614
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2782
-      ],
-      "TransferProposal": [
-        2827
-      ],
-      "TreasureBay": [
-        1917
-      ],
-      "TreasureExchangeChest": [
-        2835
-      ],
-      "TreasurePool": [
-        2437
-      ],
-      "TreasureTransferChest": [
-        2941
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [2482],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [1614],
+      "Ownable": [103],
+      "Proposal": [2782],
+      "TransferProposal": [2827],
+      "TreasureBay": [1917],
+      "TreasureExchangeChest": [2835],
+      "TreasurePool": [2437],
+      "TreasureTransferChest": [2941]
     },
     "id": 1918,
     "license": "MIT",
@@ -13041,12 +13015,7 @@
     "nodes": [
       {
         "id": 1654,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:10"
       },
@@ -13199,21 +13168,11 @@
           }
         ],
         "canonicalName": "TreasureBay",
-        "contractDependencies": [
-          2827
-        ],
+        "contractDependencies": [2827],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1917,
-        "linearizedBaseContracts": [
-          1917,
-          2835,
-          2941,
-          103,
-          2437,
-          774,
-          1614
-        ],
+        "linearizedBaseContracts": [1917, 2835, 2941, 103, 2437, 774, 1614],
         "name": "TreasureBay",
         "nameLocation": "417:11:10",
         "nodeType": "ContractDefinition",
@@ -13797,10 +13756,7 @@
                       "id": 1707,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1074:7:10",
                       "typeDescriptions": {
@@ -14032,10 +13988,7 @@
                       "id": 1722,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1196:7:10",
                       "typeDescriptions": {
@@ -14916,9 +14869,7 @@
                   },
                   "id": 1821,
                   "initializationExpression": {
-                    "assignments": [
-                      1786
-                    ],
+                    "assignments": [1786],
                     "declarations": [
                       {
                         "constant": false,
@@ -15202,10 +15153,7 @@
                       "id": 1835,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2269:7:10",
                       "typeDescriptions": {
@@ -16238,45 +16186,19 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/TreasureBay.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        2482
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        1614
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2782
-      ],
-      "TransferProposal": [
-        2827
-      ],
-      "TreasureBay": [
-        1917
-      ],
-      "TreasureExchangeChest": [
-        2835
-      ],
-      "TreasurePool": [
-        2437
-      ],
-      "TreasureTransferChest": [
-        2941
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [2482],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [1614],
+      "Ownable": [103],
+      "Proposal": [2782],
+      "TransferProposal": [2827],
+      "TreasureBay": [1917],
+      "TreasureExchangeChest": [2835],
+      "TreasurePool": [2437],
+      "TreasureTransferChest": [2941]
     },
     "id": 1918,
     "license": "MIT",
@@ -16284,12 +16206,7 @@
     "nodes": [
       {
         "id": 1654,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:10"
       },
@@ -16442,21 +16359,11 @@
           }
         ],
         "canonicalName": "TreasureBay",
-        "contractDependencies": [
-          2827
-        ],
+        "contractDependencies": [2827],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1917,
-        "linearizedBaseContracts": [
-          1917,
-          2835,
-          2941,
-          103,
-          2437,
-          774,
-          1614
-        ],
+        "linearizedBaseContracts": [1917, 2835, 2941, 103, 2437, 774, 1614],
         "name": "TreasureBay",
         "nameLocation": "417:11:10",
         "nodeType": "ContractDefinition",
@@ -17040,10 +16947,7 @@
                       "id": 1707,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1074:7:10",
                       "typeDescriptions": {
@@ -17275,10 +17179,7 @@
                       "id": 1722,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1196:7:10",
                       "typeDescriptions": {
@@ -18159,9 +18060,7 @@
                   },
                   "id": 1821,
                   "initializationExpression": {
-                    "assignments": [
-                      1786
-                    ],
+                    "assignments": [1786],
                     "declarations": [
                       {
                         "constant": false,
@@ -18445,10 +18344,7 @@
                       "id": 1835,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2269:7:10",
                       "typeDescriptions": {

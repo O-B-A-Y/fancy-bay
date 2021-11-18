@@ -12,10 +12,9 @@ import { toggleBayCreationModal } from 'src/states/modal/slice';
 import useFetchYourTreasureBays from 'src/states/treasureBay/hooks/useFetchYourTreasureBays';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
 // import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
-import { Container, Table, TextInput, Button } from '../../components';
+import { Button, Container, Table, TextInput } from '../../components';
 import Flex from '../../components/Flex';
 import FlexItem from '../../components/FlexItem';
-import ContainerSize from '../../constants/containerSize';
 import TextInputVariant from '../../constants/textInputVariant';
 import { DefaultLayout } from '../../layouts';
 import colors from '../../styles/colors.module.scss';
@@ -97,7 +96,7 @@ const MyBays: NextPageWithLayout = () => {
     },
   };
   return (
-    <Container size={ContainerSize.Large}>
+    <Container>
       <div className={styles.container}>
         {/* MyBay Header section */}
         <Flex

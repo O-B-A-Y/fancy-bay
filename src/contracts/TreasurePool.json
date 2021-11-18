@@ -4768,12 +4768,8 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/TreasurePool.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "TreasurePool": [
-        2437
-      ]
+      "Context": [774],
+      "TreasurePool": [2437]
     },
     "id": 2438,
     "license": "MIT",
@@ -4781,12 +4777,7 @@
     "nodes": [
       {
         "id": 2068,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:12"
       },
@@ -4823,10 +4814,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2437,
-        "linearizedBaseContracts": [
-          2437,
-          774
-        ],
+        "linearizedBaseContracts": [2437, 774],
         "name": "TreasurePool",
         "nameLocation": "120:12:12",
         "nodeType": "ContractDefinition",
@@ -5848,10 +5836,7 @@
                       "id": 2144,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1033:7:12",
                       "typeDescriptions": {
@@ -5981,10 +5966,7 @@
                       "id": 2163,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1188:7:12",
                       "typeDescriptions": {
@@ -6753,10 +6735,7 @@
                       "id": 2217,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1701:7:12",
                       "typeDescriptions": {
@@ -6873,10 +6852,7 @@
                       "id": 2225,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1754:7:12",
                       "typeDescriptions": {
@@ -7539,10 +7515,7 @@
                       "id": 2272,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2145:7:12",
                       "typeDescriptions": {
@@ -7717,10 +7690,7 @@
                       "id": 2286,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2292:7:12",
                       "typeDescriptions": {
@@ -8753,9 +8723,7 @@
                   },
                   "id": 2385,
                   "initializationExpression": {
-                    "assignments": [
-                      2350
-                    ],
+                    "assignments": [2350],
                     "declarations": [
                       {
                         "constant": false,
@@ -9208,10 +9176,7 @@
                       "id": 2405,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3171:7:12",
                       "typeDescriptions": {
@@ -9493,12 +9458,8 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/TreasurePool.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "TreasurePool": [
-        2437
-      ]
+      "Context": [774],
+      "TreasurePool": [2437]
     },
     "id": 2438,
     "license": "MIT",
@@ -9506,12 +9467,7 @@
     "nodes": [
       {
         "id": 2068,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:12"
       },
@@ -9548,10 +9504,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2437,
-        "linearizedBaseContracts": [
-          2437,
-          774
-        ],
+        "linearizedBaseContracts": [2437, 774],
         "name": "TreasurePool",
         "nameLocation": "120:12:12",
         "nodeType": "ContractDefinition",
@@ -10573,10 +10526,7 @@
                       "id": 2144,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1033:7:12",
                       "typeDescriptions": {
@@ -10706,10 +10656,7 @@
                       "id": 2163,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1188:7:12",
                       "typeDescriptions": {
@@ -11478,10 +11425,7 @@
                       "id": 2217,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1701:7:12",
                       "typeDescriptions": {
@@ -11598,10 +11542,7 @@
                       "id": 2225,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1754:7:12",
                       "typeDescriptions": {
@@ -12264,10 +12205,7 @@
                       "id": 2272,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2145:7:12",
                       "typeDescriptions": {
@@ -12442,10 +12380,7 @@
                       "id": 2286,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2292:7:12",
                       "typeDescriptions": {
@@ -13478,9 +13413,7 @@
                   },
                   "id": 2385,
                   "initializationExpression": {
-                    "assignments": [
-                      2350
-                    ],
+                    "assignments": [2350],
                     "declarations": [
                       {
                         "constant": false,
@@ -13933,10 +13866,7 @@
                       "id": 2405,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3171:7:12",
                       "typeDescriptions": {

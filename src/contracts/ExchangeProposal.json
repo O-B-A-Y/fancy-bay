@@ -6794,18 +6794,10 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/ExchangeProposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ExchangeProposal": [
-        2298
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ]
+      "Context": [774],
+      "ExchangeProposal": [2298],
+      "Ownable": [103],
+      "Proposal": [2598]
     },
     "id": 2299,
     "license": "MIT",
@@ -6813,12 +6805,7 @@
     "nodes": [
       {
         "id": 2255,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:17"
       },
@@ -6855,12 +6842,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2298,
-        "linearizedBaseContracts": [
-          2298,
-          2598,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2298, 2598, 103, 774],
         "name": "ExchangeProposal",
         "nameLocation": "93:16:17",
         "nodeType": "ContractDefinition",
@@ -7342,18 +7324,10 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/ExchangeProposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ExchangeProposal": [
-        2298
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ]
+      "Context": [774],
+      "ExchangeProposal": [2298],
+      "Ownable": [103],
+      "Proposal": [2598]
     },
     "id": 2299,
     "license": "MIT",
@@ -7361,12 +7335,7 @@
     "nodes": [
       {
         "id": 2255,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:17"
       },
@@ -7403,12 +7372,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2298,
-        "linearizedBaseContracts": [
-          2298,
-          2598,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2298, 2598, 103, 774],
         "name": "ExchangeProposal",
         "nameLocation": "93:16:17",
         "nodeType": "ContractDefinition",

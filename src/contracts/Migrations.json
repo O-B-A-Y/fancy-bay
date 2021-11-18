@@ -675,9 +675,7 @@
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [
-        1586
-      ]
+      "Migrations": [1586]
     },
     "id": 1587,
     "license": "MIT",
@@ -685,12 +683,7 @@
     "nodes": [
       {
         "id": 1555,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:12"
       },
@@ -702,9 +695,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1586,
-        "linearizedBaseContracts": [
-          1586
-        ],
+        "linearizedBaseContracts": [1586],
         "name": "Migrations",
         "nameLocation": "67:10:12",
         "nodeType": "ContractDefinition",
@@ -888,10 +879,7 @@
                       "id": 1563,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "191:7:12",
                       "typeDescriptions": {
@@ -1069,9 +1057,7 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [
-        1586
-      ]
+      "Migrations": [1586]
     },
     "id": 1587,
     "license": "MIT",
@@ -1079,12 +1065,7 @@
     "nodes": [
       {
         "id": 1555,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:12"
       },
@@ -1096,9 +1077,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1586,
-        "linearizedBaseContracts": [
-          1586
-        ],
+        "linearizedBaseContracts": [1586],
         "name": "Migrations",
         "nameLocation": "67:10:12",
         "nodeType": "ContractDefinition",
@@ -1282,10 +1261,7 @@
                       "id": 1563,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "191:7:12",
                       "typeDescriptions": {

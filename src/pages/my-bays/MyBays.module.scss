@@ -9,8 +9,6 @@
   border: 1px solid $dark500;
   box-sizing: border-box;
   border-radius: map-get($border-radiuses, 'sm');
-  margin-bottom: 50px;
-
   @include glow-shadow;
 }
 

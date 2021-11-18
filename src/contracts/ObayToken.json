@@ -6862,24 +6862,12 @@
   "ast": {
     "absolutePath": "project:/contracts/features/token/ObayToken.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ObayToken": [
-        2978
-      ],
-      "Ownable": [
-        103
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ObayToken": [2978],
+      "Ownable": [103]
     },
     "id": 2979,
     "license": "MIT",
@@ -6887,12 +6875,7 @@
     "nodes": [
       {
         "id": 2901,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:22"
       },
@@ -6987,14 +6970,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2978,
-        "linearizedBaseContracts": [
-          2978,
-          103,
-          649,
-          752,
-          727,
-          774
-        ],
+        "linearizedBaseContracts": [2978, 103, 649, 752, 727, 774],
         "name": "ObayToken",
         "nameLocation": "177:9:22",
         "nodeType": "ContractDefinition",
@@ -7345,10 +7321,7 @@
                       "id": 2940,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "534:7:22",
                       "typeDescriptions": {
@@ -7648,10 +7621,7 @@
                       "id": 2963,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "702:7:22",
                       "typeDescriptions": {
@@ -7856,24 +7826,12 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/token/ObayToken.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ObayToken": [
-        2978
-      ],
-      "Ownable": [
-        103
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ObayToken": [2978],
+      "Ownable": [103]
     },
     "id": 2979,
     "license": "MIT",
@@ -7881,12 +7839,7 @@
     "nodes": [
       {
         "id": 2901,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:22"
       },
@@ -7981,14 +7934,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2978,
-        "linearizedBaseContracts": [
-          2978,
-          103,
-          649,
-          752,
-          727,
-          774
-        ],
+        "linearizedBaseContracts": [2978, 103, 649, 752, 727, 774],
         "name": "ObayToken",
         "nameLocation": "177:9:22",
         "nodeType": "ContractDefinition",
@@ -8339,10 +8285,7 @@
                       "id": 2940,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "534:7:22",
                       "typeDescriptions": {
@@ -8642,10 +8585,7 @@
                       "id": 2963,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "702:7:22",
                       "typeDescriptions": {
