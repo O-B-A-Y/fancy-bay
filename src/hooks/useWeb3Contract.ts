@@ -1,4 +1,4 @@
-import Web3 from 'web3';
+import useWeb3 from './useWeb3';
 
 const useWeb3Contract = (
   address: string,
@@ -9,7 +9,7 @@ const useWeb3Contract = (
     value: any;
   }
 ) => {
-  const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
+  const web3 = useWeb3();
   const contract = new web3.eth.Contract(ABI, address, options);
   return contract;
 };

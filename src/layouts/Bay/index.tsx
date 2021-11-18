@@ -29,6 +29,9 @@ import Loader from 'react-loader-spinner';
 import StringUtils from 'src/utils/string';
 import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
 import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
+import { useRouter } from 'next/router';
+import useWeb3 from 'src/hooks/useWeb3';
+import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 
 const ImageLoader = ({
   src,
@@ -64,6 +67,9 @@ const Bay = ({
   selectedTab: LeftSidedContainerTab;
 }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const web3 = useWeb3();
+  const { rates } = useSendWyreAPI();
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
     searchProposalInput: '',
@@ -71,8 +77,8 @@ const Bay = ({
   const { account } = useAppSelector(
     (state) => state.walletSlice.data.environment
   );
-  const treasureBayMutations = useTreasureBayMutations({});
-  const fetchMember = useFetchMember(account as string);
+  const treasureBayMutations = useTreasureBayMutations();
+  const fetchMember = useFetchMember(address as string, account as string);
   const walletSlice = useAppSelector((state) => state.walletSlice);
   const tokenInfo = useTokenInfo('OBAY');
   const { bay, error, loading } = useFetchTreasureBay(address);
@@ -93,10 +99,13 @@ const Bay = ({
         ? [
             {
               label: 'Total Fund',
-              content: `${CurrencyUtils.formatByUnit(
-                parseFloat(bay?.totalValueLocked),
+              content: CurrencyUtils.formatByUnit(
+                (1 / (rates as any)?.ETHUSDT) *
+                  parseFloat(
+                    web3.utils.fromWei(bay?.totalValueLocked, 'ether')
+                  ),
                 'USD'
-              )} USD`,
+              ),
             },
             {
               label: 'Creator',
@@ -116,8 +125,14 @@ const Bay = ({
   );
 
   const handler = {
-    Stake: () => {},
-    Leave: () => treasureBayMutations.leaveTreasureBay(address),
+    Stake: () => treasureBayMutations.stake(address, formValues.stakedAmount),
+    Leave: () => {
+      treasureBayMutations.leaveTreasureBay(address, (success) => {
+        if (success) {
+          router.push('/my-bays');
+        }
+      });
+    },
     SearchProposal: () => {},
     ChangeSearchProposalInput: (e: ChangeEvent) => {
       handleSetFieldValue('searchProposalInput', (e.target as any).value);
@@ -330,7 +345,12 @@ const Bay = ({
                         <span>
                           {(parseFloat(fetchMember.member?.balance as string) *
                             100) /
-                            parseFloat(bay?.totalValueLocked as string) || 0}
+                            parseFloat(
+                              web3.utils.fromWei(
+                                bay?.totalValueLocked as string,
+                                'ether'
+                              )
+                            ) || 0}
                           %
                         </span>
                       </p>

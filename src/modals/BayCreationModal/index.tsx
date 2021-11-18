@@ -44,7 +44,7 @@ const ReusableTextInput = ({
 
 const BayCreationModal = () => {
   const dispatch = useAppDispatch();
-  const { createNewTreasureBay, loading } = useTreasureBayMutations({});
+  const { createNewTreasureBay, loading } = useTreasureBayMutations();
   const { formValues, handleSetFieldValue } = useFormValidation({
     name: '',
     limitNumberOfTreasureHunters: '',

@@ -18,10 +18,8 @@ export default function useFetchTreasureBay(address: string) {
 
   useEffect(() => {
     const fetchTreasureBay = async () => {
-      console.log('fetchTreasureBay');
       try {
         setLoading(true);
-        console.log(address);
         const treasureBayContract = useTreasureBayContract(address);
         const treasureBayContractMethods: TreasureBay =
           treasureBayContract.methods;
