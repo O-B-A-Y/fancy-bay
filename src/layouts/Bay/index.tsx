@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import React, { ChangeEvent, useMemo } from 'react';
 import styles from './Bay.module.scss';
 import Head from 'next/head';
-import { CurrencyUtils } from 'src/utils';
+// import { CurrencyUtils } from 'src/utils';
 import { Button, Container, Grid, TextInput } from 'src/components';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
@@ -31,7 +31,7 @@ import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
 import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
 import { useRouter } from 'next/router';
 import useWeb3 from 'src/hooks/useWeb3';
-import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
+// import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 
 const ImageLoader = ({
   src,
@@ -69,7 +69,7 @@ const Bay = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const web3 = useWeb3();
-  const { rates } = useSendWyreAPI();
+  // const { rates } = useSendWyreAPI();
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
     searchProposalInput: '',
@@ -98,14 +98,11 @@ const Bay = ({
       bay
         ? [
             {
-              label: 'Total Fund',
-              content: CurrencyUtils.formatByUnit(
-                (1 / (rates as any)?.ETHUSDT) *
-                  parseFloat(
-                    web3.utils.fromWei(bay?.totalValueLocked, 'ether')
-                  ),
-                'USD'
-              ),
+              label: 'Total ETH',
+              content: `${web3.utils.fromWei(
+                bay?.totalValueLocked,
+                'ether'
+              )} ETH`,
             },
             {
               label: 'Creator',
@@ -142,6 +139,7 @@ const Bay = ({
         isNumeric: true,
       });
     },
+    AddNewProposal: () => {},
   };
 
   /** Render meta information of a bay */
@@ -336,6 +334,19 @@ const Bay = ({
                       onValueChanged={handler.ChangeSearchProposalInput}
                       value={formValues.searchProposalInput}
                     />
+                    <Button
+                      backgroundColor="#303030"
+                      borderWidth={1.5}
+                      color="white"
+                      variant={ButtonVariant.filled}
+                      size={ButtonSize.fit}
+                      textAlign={TextAlign.center}
+                      paddingVertical={10}
+                      paddingHorizontal={15}
+                      onClick={handler.AddNewProposal}
+                    >
+                      Add new proposal +
+                    </Button>
                   </div>
                   <div className={styles.subContainer_separator} />
                   <div className={styles.meta}>
@@ -346,8 +357,9 @@ const Bay = ({
                           {(parseFloat(fetchMember.member?.balance as string) *
                             100) /
                             parseFloat(
-                              web3.utils.fromWei(
-                                bay?.totalValueLocked as string,
+                              web3?.utils?.fromWei(
+                                (bay?.totalValueLocked as string)?.toString() ||
+                                  '0',
                                 'ether'
                               )
                             ) || 0}

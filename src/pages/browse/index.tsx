@@ -16,6 +16,7 @@ import { NextPageWithLayout } from '../_app';
 import styles from './Browse.module.scss';
 import colors from '../../styles/colors.module.scss';
 import { ToastContainer } from 'react-toastify';
+import useWeb3 from 'src/hooks/useWeb3';
 
 interface BrowseTableData {
   value: string | number | StaticImageData;
@@ -32,6 +33,7 @@ const mockInformation = {
 };
 
 const Browse: NextPageWithLayout = () => {
+  const web3 = useWeb3();
   const { bays, error, loading } = useFetchTreasureBay();
   const convertedBays: { data: BrowseTableData[]; href: string }[] = bays.map(
     (bay, index) => ({
@@ -58,7 +60,9 @@ const Browse: NextPageWithLayout = () => {
           className: clsx(styles['bay-item']),
         },
         {
-          value: NumberUtils.formatSeparators(parseFloat(bay.totalValueLocked)),
+          value: NumberUtils.formatSeparators(
+            parseFloat(web3.utils.fromWei(bay.totalValueLocked, 'ether'))
+          ),
           className: clsx(styles['bay-item']),
         },
         {
