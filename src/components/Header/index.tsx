@@ -18,6 +18,7 @@ import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
 import useTokenInfo from 'src/hooks/useTokenInfo';
+import useWeb3 from 'src/hooks/useWeb3';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import {
   toggleInjectedConnectorErrorModal,
@@ -29,7 +30,6 @@ import {
   switchWeb3Environment,
 } from 'src/states/wallet/slice';
 import NumberUtils from 'src/utils/number';
-import Web3 from 'web3';
 import { Button, TextInput } from '..';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import colors from '../../styles/colors.module.scss';
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
   const init = async () => {
     try {
       setLoading(true);
-      const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
+      const web3 = useWeb3();
       const [accounts, chainId] = await Promise.all([
         web3.eth.getAccounts(),
         web3.eth.getChainId(),
