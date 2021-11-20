@@ -71,9 +71,7 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/ITreasureBay.sol",
     "exportedSymbols": {
-      "ITreasureBay": [
-        2422
-      ]
+      "ITreasureBay": [2422]
     },
     "id": 2423,
     "license": "MIT",
@@ -81,12 +79,7 @@
     "nodes": [
       {
         "id": 2403,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:14"
       },
@@ -98,9 +91,7 @@
         "contractKind": "interface",
         "fullyImplemented": true,
         "id": 2422,
-        "linearizedBaseContracts": [
-          2422
-        ],
+        "linearizedBaseContracts": [2422],
         "name": "ITreasureBay",
         "nameLocation": "68:12:14",
         "nodeType": "ContractDefinition",
@@ -344,9 +335,7 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/ITreasureBay.sol",
     "exportedSymbols": {
-      "ITreasureBay": [
-        2422
-      ]
+      "ITreasureBay": [2422]
     },
     "id": 2423,
     "license": "MIT",
@@ -354,12 +343,7 @@
     "nodes": [
       {
         "id": 2403,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:14"
       },
@@ -371,9 +355,7 @@
         "contractKind": "interface",
         "fullyImplemented": true,
         "id": 2422,
-        "linearizedBaseContracts": [
-          2422
-        ],
+        "linearizedBaseContracts": [2422],
         "name": "ITreasureBay",
         "nameLocation": "68:12:14",
         "nodeType": "ContractDefinition",

@@ -4,7 +4,6 @@
 @import '../../styles/abstracts/mixins';
 
 .infoTitleSection {
-  color: #fff;
   font-size: map-get($font-sizes, medium);
   font-weight: 400;
   margin-top: 35px;
@@ -12,7 +11,6 @@
 }
 
 .bayTitleSection {
-  color: #fff;
   font-size: map-get($font-sizes, medium);
   font-weight: 400;
   margin-top: 60px;
@@ -24,7 +22,6 @@
   border: 1px solid $dark500;
   border-radius: map-get($border-radiuses, 'sm');
   min-height: 50vh;
-  margin-bottom: 50px;
   // box-shadow: 0px 4px 87px 27px rgba(165, 140, 102, 0.15);
   @include glow-shadow;
   @include respond-to('xs') {
@@ -45,7 +42,7 @@
     font-weight: normal;
     line-height: 20px;
     &-name {
-      color: #fff;
+      color: $dark200;
     }
     &-address {
       color: $green500;

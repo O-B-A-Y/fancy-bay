@@ -41,7 +41,6 @@ $container-height: 700px;
       justify-content: space-evenly;
       .tab {
         &_active {
-          color: white;
           background-color: $teal500;
           &:hover {
             background-color: $teal700 !important;
@@ -50,7 +49,7 @@ $container-height: 700px;
         &:hover {
           background-color: $dark700;
         }
-        color: $dark400;
+        color: $dark100;
         background: transparent;
         transition: 0.3s;
         border: unset;
@@ -70,7 +69,7 @@ $container-height: 700px;
   padding: 5px 10px;
   border-radius: 5px;
   border: unset;
-  color: white;
+  color: $dark100;
   font-weight: bold;
 }
 
@@ -82,7 +81,6 @@ $container-height: 700px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
   margin-bottom: 5px;
   .metaLabel {
     font-weight: 400;

@@ -23,6 +23,6 @@ export const TokenMapAddress: {
     OBAY: '0xe26d20Ef036bAa1200a639ac5E0ccA0804027789',
   },
   DEVELOPMENT: {
-    OBAY: '0x00929ec67439480E6b817bb1C330777D6a205F0A',
+    OBAY: process.env.OBAY_TOKEN_CONTRACT_ADDRESS,
   },
 };

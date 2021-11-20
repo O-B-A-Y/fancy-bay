@@ -326,15 +326,9 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/Proposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [2598]
     },
     "id": 2599,
     "license": "MIT",
@@ -342,12 +336,7 @@
     "nodes": [
       {
         "id": 2300,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:18"
       },
@@ -384,11 +373,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2598,
-        "linearizedBaseContracts": [
-          2598,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2598, 103, 774],
         "name": "Proposal",
         "nameLocation": "130:8:18",
         "nodeType": "ContractDefinition",
@@ -2350,10 +2335,7 @@
                       "id": 2457,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2029:7:18",
                       "typeDescriptions": {
@@ -2663,10 +2645,7 @@
                       "id": 2483,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2198:7:18",
                       "typeDescriptions": {
@@ -3075,10 +3054,7 @@
                       "id": 2514,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2416:7:18",
                       "typeDescriptions": {
@@ -3487,10 +3463,7 @@
                       "id": 2545,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2632:7:18",
                       "typeDescriptions": {
@@ -4129,15 +4102,9 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/Proposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [2598]
     },
     "id": 2599,
     "license": "MIT",
@@ -4145,12 +4112,7 @@
     "nodes": [
       {
         "id": 2300,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:18"
       },
@@ -4187,11 +4149,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2598,
-        "linearizedBaseContracts": [
-          2598,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2598, 103, 774],
         "name": "Proposal",
         "nameLocation": "130:8:18",
         "nodeType": "ContractDefinition",
@@ -6153,10 +6111,7 @@
                       "id": 2457,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2029:7:18",
                       "typeDescriptions": {
@@ -6466,10 +6421,7 @@
                       "id": 2483,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2198:7:18",
                       "typeDescriptions": {
@@ -6878,10 +6830,7 @@
                       "id": 2514,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2416:7:18",
                       "typeDescriptions": {
@@ -7290,10 +7239,7 @@
                       "id": 2545,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2632:7:18",
                       "typeDescriptions": {

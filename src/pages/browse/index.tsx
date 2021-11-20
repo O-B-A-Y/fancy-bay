@@ -1,33 +1,32 @@
 import clsx from 'clsx';
+import moment from 'moment';
 import Head from 'next/head';
 import React, { ReactElement, useState } from 'react';
+import { FaShare } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
+import ReactModal from 'react-modal';
+import { ToastContainer } from 'react-toastify';
+import { chainNetworkMapping } from 'src/connectors';
+import ButtonSize from 'src/constants/buttonConstant';
+import ButtonVariant from 'src/constants/buttonVariant';
+import TextAlign from 'src/constants/textAlign';
+import useWeb3 from 'src/hooks/useWeb3';
+import { useAppSelector } from 'src/states/hooks';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBays';
+import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
+import { TreasureBayType } from 'src/states/treasureBay/types';
+import DateUtils from 'src/utils/date';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
 // import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
-import { Container, Table, Button } from '../../components';
+import { Button, Container, Table } from '../../components';
 import Flex from '../../components/Flex';
 import StatsCard from '../../components/StatsCard';
-import ContainerSize from '../../constants/containerSize';
 import { DefaultLayout } from '../../layouts';
+import colors from '../../styles/colors.module.scss';
 import NumberUtils from '../../utils/number';
 import StringUtils from '../../utils/string';
 import { NextPageWithLayout } from '../_app';
 import styles from './Browse.module.scss';
-import colors from '../../styles/colors.module.scss';
-import { ToastContainer } from 'react-toastify';
-import useWeb3 from 'src/hooks/useWeb3';
-import ReactModal from 'react-modal';
-import { TreasureBayType } from 'src/states/treasureBay/types';
-import { FaShare } from 'react-icons/fa';
-import { chainNetworkMapping } from 'src/connectors';
-import { useAppSelector } from 'src/states/hooks';
-import ButtonVariant from 'src/constants/buttonVariant';
-import ButtonSize from 'src/constants/buttonConstant';
-import TextAlign from 'src/constants/textAlign';
-import moment from 'moment';
-import DateUtils from 'src/utils/date';
-import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
 
 interface BrowseTableData {
   value: string | number | StaticImageData;
@@ -115,7 +114,7 @@ const Browse: NextPageWithLayout = () => {
         <title>Browse | OBAY</title>
         <meta key="description" name="description" content="Browse OBAY" />
       </Head>
-      <Container size={ContainerSize.Large}>
+      <Container>
         {/* Title section */}
         <div className={styles.infoTitleSection}>Platform Information</div>
         {/* Stats Card section */}
