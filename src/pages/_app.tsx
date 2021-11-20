@@ -6,11 +6,13 @@ import 'react-dropdown/style.css';
 import { Provider } from 'react-redux';
 import BayCreationModal from 'src/modals/BayCreationModal';
 import NoContractModal from 'src/modals/NoContractModal';
-import ProposalModal from 'src/modals/ExchangeProposalModal';
+import ExchangeProposalModal from 'src/modals/ExchangeProposalModal';
+import TransferProposalModal from 'src/modals/TransferProposalModal';
 import { Web3ReactUtils } from 'src/utils';
 import { store } from '../states/store';
 import '../styles/globals.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import ProposalCreationModal from 'src/modals/ProposalCreationModal';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -27,9 +29,11 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <Web3ReactProvider getLibrary={Web3ReactUtils.getLibrary}>
       <Provider store={store}>
         {getLayout(<Component {...pageProps} />)}
-        <ProposalModal />
+        <ExchangeProposalModal />
+        <TransferProposalModal />
         <NoContractModal />
         <BayCreationModal />
+        <ProposalCreationModal />
       </Provider>
     </Web3ReactProvider>
   );

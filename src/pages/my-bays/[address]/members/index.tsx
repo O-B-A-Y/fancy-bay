@@ -27,35 +27,41 @@ const BayMembers: NextPageWithLayout = () => {
     link: string;
   }>[][] = useMemo(
     () =>
-      fetchMembers.members.map((member) => [
-        {
-          value: `${member.contractAddress.substring(0, 15).trim()}...`,
-          className: styles.member_item_address,
-          isHyperLink: true,
-          link: `https://etherscan.io/address/${member.contractAddress}`,
-        },
-        {
-          value: moment
-            .unix(parseInt(member.joinedAt, 10))
-            .format('DD-MM-YYYY'),
-          className: styles.member_item_joinedAt,
-        },
-        {
-          value: member.balance,
-          className: styles.member_item_stakedAmount,
-        },
-        {
-          value: `${
-            parseFloat(`${(member.balance as any) * 100}`) /
-              parseFloat(
-                web3.utils.fromWei(
-                  `${(fetchTreasureBay.bay as any).totalValueLocked}`
+      fetchMembers.members
+        .sort((memberA, memberB) =>
+          memberA.balance > memberB.balance ? -1 : 1
+        )
+        .map((member) => [
+          {
+            value: `${member.contractAddress.substring(0, 15).trim()}...`,
+            className: styles.member_item_address,
+            isHyperLink: true,
+            link: `https://etherscan.io/address/${member.contractAddress}`,
+          },
+          {
+            value: moment
+              .unix(parseInt(member.joinedAt, 10))
+              .format('DD-MM-YYYY'),
+            className: styles.member_item_joinedAt,
+          },
+          {
+            value: member.balance,
+            className: styles.member_item_stakedAmount,
+          },
+          {
+            value: `${
+              (
+                parseFloat(`${(member.balance as any) * 100}`) /
+                parseFloat(
+                  web3.utils.fromWei(
+                    `${(fetchTreasureBay.bay as any).totalValueLocked}`
+                  )
                 )
-              ) || 0
-          }%`,
-          className: styles.member_item_occupied,
-        },
-      ]),
+              ).toFixed(2) || 0
+            }%`,
+            className: styles.member_item_occupied,
+          },
+        ]),
     [fetchMembers]
   );
   return fetchMembers.loading || fetchTreasureBay.loading ? (

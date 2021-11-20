@@ -12,6 +12,7 @@ interface TreasureBayState {
     fetching: boolean;
     treasureBays: TreasureBayType[];
     yourTreasureBays: TreasureBayType[];
+    selectedBay: TreasureBayType;
   };
   error: null | object | string;
 }
@@ -22,6 +23,16 @@ const initialState: TreasureBayState = {
     fetching: false,
     treasureBays: [],
     yourTreasureBays: [],
+    selectedBay: {
+      address: '',
+      creator: '',
+      exchangeProposals: [],
+      transferProposals: [],
+      members: [],
+      name: '',
+      stakeholders: [],
+      totalValueLocked: '',
+    },
   },
   error: null,
 };
@@ -75,10 +86,13 @@ const treasureBaySlice = createSlice({
     setYourBays(state, action: PayloadAction<TreasureBayType[]>) {
       state.data.yourTreasureBays = action.payload;
     },
+    setSelectedBay(state, action: PayloadAction<TreasureBayType>) {
+      state.data.selectedBay = action.payload;
+    },
   },
 });
 
-export const { setTreasureBays, setYourBays, setFetching } =
+export const { setTreasureBays, setYourBays, setFetching, setSelectedBay } =
   treasureBaySlice.actions;
 
 export default treasureBaySlice.reducer;

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import moment from 'moment';
 import React from 'react';
 import ReactModal from 'react-modal';
 import { useDispatch } from 'react-redux';
@@ -6,8 +7,10 @@ import { Button } from 'src/components';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
+import useWeb3 from 'src/hooks/useWeb3';
 import { useAppSelector } from 'src/states/hooks';
-import { toggleExchangeProposalModal } from 'src/states/modal/slice';
+import { toggleTransferProposalModal } from 'src/states/modal/slice';
+import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
 import colors from '../../styles/colors.module.scss';
 import styles from './TransferProposalModal.module.scss';
 
@@ -17,59 +20,67 @@ enum ProposalGenre {
   Member = 'Member',
 }
 
-const CurrencyContainer = ({
-  tokenName,
-  amount,
-  type,
-}: {
-  tokenName: string;
-  amount: number;
-  type: 'From' | 'To';
-}) => (
-  <div
-    style={{
-      backgroundColor: colors.dark700,
-      borderRadius: 10,
-      padding: '5px 20px',
-      marginBottom: 10,
-    }}
-  >
-    <p style={{ fontSize: 13, color: colors.dark300 }}>{type}</p>
-    <div
-      className={styles.rowItem}
-      style={{
-        fontSize: 20,
-      }}
-    >
-      <p
-        style={{
-          margin: 0,
-          marginBottom: 10,
-        }}
-      >
-        {tokenName}
-      </p>
-      <p
-        style={{
-          margin: 0,
-          marginBottom: 10,
-        }}
-      >
-        {amount}
-      </p>
-    </div>
-  </div>
-);
+// const CurrencyContainer = ({
+//   tokenName,
+//   amount,
+//   type,
+// }: {
+//   tokenName: string;
+//   amount: number;
+//   type: 'From' | 'To';
+// }) => (
+//   <div
+//     style={{
+//       backgroundColor: colors.dark700,
+//       borderRadius: 10,
+//       padding: '5px 20px',
+//       marginBottom: 10,
+//     }}
+//   >
+//     <p style={{ fontSize: 13, color: colors.dark300 }}>{type}</p>
+//     <div
+//       className={styles.rowItem}
+//       style={{
+//         fontSize: 20,
+//       }}
+//     >
+//       <p
+//         style={{
+//           margin: 0,
+//           marginBottom: 10,
+//         }}
+//       >
+//         {tokenName}
+//       </p>
+//       <p
+//         style={{
+//           margin: 0,
+//           marginBottom: 10,
+//         }}
+//       >
+//         {amount}
+//       </p>
+//     </div>
+//   </div>
+// );
 
-const ExchangeProposalModal = () => {
+const TransferProposalModal = () => {
   const { data } = useAppSelector((state) => state.modalSlice);
+  const { voteTransferProposal } = useTreasureBayMutations();
+  const {
+    data: { selectedTransferProposal },
+  } = useAppSelector((state) => state.proposalSlice);
   const dispatch = useDispatch();
-  const handler = { Vote: () => {} };
+  const web3 = useWeb3();
+  const handler = {
+    VoteYes: () => voteTransferProposal(selectedTransferProposal.address, true),
+    VoteNo: () => voteTransferProposal(selectedTransferProposal.address, false),
+  };
   return (
     <ReactModal
       ariaHideApp={false}
-      isOpen={data.exchangeProposal}
-      onRequestClose={() => dispatch(toggleExchangeProposalModal(false))}
+      isOpen={data.transferProposal}
+      onRequestClose={() => dispatch(toggleTransferProposalModal(false))}
       style={{
         content: {
           top: '50%',
@@ -86,7 +97,7 @@ const ExchangeProposalModal = () => {
           backgroundColor: 'rgba(0,0,0,.53)',
         },
       }}
-      contentLabel="ExchangeProposalModal"
+      contentLabel="TransferProposalModal"
     >
       <div className={styles.container} style={{ width: 400, maxWidth: 400 }}>
         <div
@@ -96,39 +107,43 @@ const ExchangeProposalModal = () => {
             borderBottom: `2px solid ${colors.dark600}`,
           }}
         >
-          <p>Buy SHIB 200</p>
+          <p>{selectedTransferProposal.title}</p>
           <p style={{ color: colors.dark400 }}>
-            {ProposalGenre.Exchange.toString()}
+            {ProposalGenre.Transfer.toString()}
           </p>
         </div>
         <div className={styles.rowItem}>
           <p>Requested by</p>
           <p style={{ color: colors.green500 }}>
-            {`${'0x460aDc7A9b5253A765e662A031D26C8743a2EbB6'
-              .substring(0, 15)
-              .trim()}...`}
+            {`${selectedTransferProposal.creator.substring(0, 15).trim()}...`}
           </p>
         </div>
         <div className={styles.rowItem}>
           <p>Description</p>
-          <p>Buy Shiba Inu</p>
+          <p>{selectedTransferProposal.description}</p>
         </div>
-        <CurrencyContainer tokenName="OBAY" amount={200} type="From" />
-        <CurrencyContainer tokenName="ETH" amount={1.25} type="To" />
+        {/* <CurrencyContainer tokenName="OBAY" amount={200} type="From" />
+        <CurrencyContainer tokenName="ETH" amount={1.25} type="To" /> */}
         <div className={styles.metaContainer}>
           <div
             className={clsx(styles.rowItem, styles.rowItem_meta)}
             style={{ fontSize: 14 }}
           >
-            <p>Price</p>
-            <p>1 ETH ~ 1.25 OBAY</p>
+            <p>Amount</p>
+            <p>
+              {web3.utils.fromWei(selectedTransferProposal.amount, 'ether')} ETH
+            </p>
           </div>
           <div
             className={clsx(styles.rowItem, styles.rowItem_meta)}
             style={{ fontSize: 14 }}
           >
             <p>Expired time</p>
-            <p>70 minutes</p>
+            <p>
+              {moment
+                .unix(parseFloat(selectedTransferProposal.votingDeadline))
+                .fromNow()}
+            </p>
           </div>
           <div
             className={clsx(styles.rowItem, styles.rowItem_meta)}
@@ -136,13 +151,6 @@ const ExchangeProposalModal = () => {
           >
             <p>Oracle</p>
             <p>Chainlink</p>
-          </div>
-          <div
-            className={clsx(styles.rowItem, styles.rowItem_meta)}
-            style={{ fontSize: 14 }}
-          >
-            <p>Pool changed</p>
-            <p>200 OBAY</p>
           </div>
           <div
             className={clsx(styles.rowItem, styles.rowItem_meta)}
@@ -156,7 +164,10 @@ const ExchangeProposalModal = () => {
                 fontWeight: 'bold',
               }}
             >
-              35%
+              {(selectedTransferProposal.numberOfYesVotes as any) /
+                ((selectedTransferProposal.numberOfNoVotes +
+                  selectedTransferProposal.numberOfYesVotes) as any) || 0}
+              %
             </p>
           </div>
         </div>
@@ -169,7 +180,7 @@ const ExchangeProposalModal = () => {
             size={ButtonSize.full}
             textAlign={TextAlign.center}
             paddingVertical={10}
-            onClick={handler.Vote}
+            onClick={handler.VoteYes}
           >
             Yes
           </Button>
@@ -182,7 +193,7 @@ const ExchangeProposalModal = () => {
             size={ButtonSize.full}
             textAlign={TextAlign.center}
             paddingVertical={10}
-            onClick={handler.Vote}
+            onClick={handler.VoteNo}
           >
             No
           </Button>
@@ -192,4 +203,4 @@ const ExchangeProposalModal = () => {
   );
 };
 
-export default ExchangeProposalModal;
+export default TransferProposalModal;

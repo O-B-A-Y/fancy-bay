@@ -44,7 +44,6 @@ export default function useFetchTransferProposals(bayAddress: string) {
                 useTransferProposalContract(proposal);
               const transferProposalMethods: TransferProposal =
                 transferProposalContract.methods;
-
               const [
                 amount,
                 createdAt,
@@ -55,7 +54,6 @@ export default function useFetchTransferProposals(bayAddress: string) {
                 creator,
                 recipient,
                 votingDeadline,
-                checkApprovalStatus,
               ] = await Promise.all([
                 transferProposalMethods.amount().call(),
                 transferProposalMethods.createdAt().call(),
@@ -66,10 +64,10 @@ export default function useFetchTransferProposals(bayAddress: string) {
                 transferProposalMethods.creator().call(),
                 transferProposalMethods.recipient().call(),
                 transferProposalMethods.votingDeadline().call(),
-                transferProposalMethods.checkApprovalStatus().call(),
               ]);
 
               return {
+                address: proposal,
                 type: 'TRANSFER',
                 amount,
                 createdAt,
@@ -80,7 +78,10 @@ export default function useFetchTransferProposals(bayAddress: string) {
                 creator,
                 recipient,
                 votingDeadline,
-                checkApprovalStatus,
+                checkApprovalStatus: `${
+                  (numberOfYesVotes as any) /
+                    ((numberOfYesVotes + numberOfNoVotes) as any) || 0
+                }`,
               };
             }
           )

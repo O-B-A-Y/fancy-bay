@@ -45,15 +45,23 @@ const ReusableTextInput = ({
 const BayCreationModal = () => {
   const dispatch = useAppDispatch();
   const { createNewTreasureBay, loading } = useTreasureBayMutations();
-  const { formValues, handleSetFieldValue } = useFormValidation({
-    name: '',
-    limitNumberOfTreasureHunters: '',
-    limitNumberOfStakeholders: '',
-  });
+  const { formValues, handleSetFieldValue, handleResetFormValues } =
+    useFormValidation({
+      name: '',
+      limitNumberOfTreasureHunters: '',
+      limitNumberOfStakeholders: '',
+    });
   const { data } = useAppSelector((state) => state.modalSlice);
   const handler = {
-    AddNewBay: async () => createNewTreasureBay(formValues),
-    CloseModal: () => dispatch(toggleBayCreationModal(false)),
+    AddNewBay: async () => {
+      createNewTreasureBay(formValues);
+      dispatch(toggleBayCreationModal(false));
+      handleResetFormValues();
+    },
+    CloseModal: () => {
+      dispatch(toggleBayCreationModal(false));
+      handleResetFormValues();
+    },
   };
   return (
     <>

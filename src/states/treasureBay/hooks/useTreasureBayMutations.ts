@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import useWeb3 from 'src/hooks/useWeb3';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
+import useTransferProposalContract from 'src/states/proposal/hooks/useTransferProposalContract';
+import { TransferProposal } from 'src/types/TransferProposal';
 import { TreasureBay } from 'src/types/TreasureBay';
 import { TreasureBayFactory } from 'src/types/TreasureBayFactory';
-import Web3 from 'web3';
 import { setFetching } from '../slice';
 import useFetchTreasureBays from './useFetchTreasureBays';
 import useTreasureBayContract from './useTreasureBayContract';
@@ -49,6 +50,22 @@ const useTreasureBayMutations = () => {
       console.error(error.message);
       setLoading(false);
       return callback?.(false);
+    }
+  };
+
+  const voteTransferProposal = (proposalAddress: string, isYes: boolean) => {
+    const transferProposalContract =
+      useTransferProposalContract(proposalAddress);
+    const transferProposalMethods: TransferProposal =
+      transferProposalContract.methods;
+    if (isYes) {
+      transferProposalMethods.voteYes().send({
+        from: data.environment.account as string,
+      });
+    } else {
+      transferProposalMethods.voteNo().send({
+        from: data.environment.account as string,
+      });
     }
   };
 
@@ -118,6 +135,35 @@ const useTreasureBayMutations = () => {
     setLoading(false);
   };
 
+  const createNewTransferProposal = async (
+    bayAddress: string,
+    args: {
+      _title: string;
+      _description: string;
+      _debatingPeriod: string;
+      _recipient: string;
+      _amount: string;
+    }
+  ) => {
+    setLoading(true);
+    const treasureBayContract = useTreasureBayContract(bayAddress);
+    const bayMethods: TreasureBay = treasureBayContract.methods;
+    console.log(args);
+    await bayMethods
+      .createNewTransferProposal(
+        args._title,
+        args._description,
+        args._debatingPeriod,
+        args._recipient,
+        web3.utils.toWei(args._amount, 'ether')
+      )
+      .send({
+        from: data.environment.account as string,
+      });
+    dispatch(setFetching(true));
+    setLoading(false);
+  };
+
   const stake = async (bayAddress: string, amount: string) => {
     setLoading(true);
     const treasureBayContract = useTreasureBayContract(bayAddress);
@@ -142,9 +188,12 @@ const useTreasureBayMutations = () => {
   return {
     leaveTreasureBay,
     createNewTreasureBay,
+    createNewTransferProposal,
+    voteTransferProposal,
     stake,
     unstake,
     loading,
+    leave,
     join,
   };
 };

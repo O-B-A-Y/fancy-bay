@@ -24,11 +24,11 @@
     flex-wrap: wrap;
     flex-basis: auto;
     overflow: auto;
-    height: 550px;
+    height: fit-content;
     position: relative;
   }
   &_item {
-    width: auto;
+    width: 230px;
     border-radius: 20px;
     border: 1px solid $dark500;
     background-color: $dark700;

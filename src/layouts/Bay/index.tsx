@@ -31,6 +31,9 @@ import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
 import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
 import { useRouter } from 'next/router';
 import useWeb3 from 'src/hooks/useWeb3';
+import DateUtils from 'src/utils/date';
+import { toggleProposalCreationModal } from 'src/states/modal/slice';
+import { setSelectedBay } from 'src/states/treasureBay/slice';
 // import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 
 const ImageLoader = ({
@@ -139,7 +142,14 @@ const Bay = ({
         isNumeric: true,
       });
     },
-    AddNewProposal: () => {},
+    AddNewProposal: () => {
+      if (bay) {
+        dispatch(setSelectedBay(bay));
+        dispatch(toggleProposalCreationModal(true));
+      } else {
+        alert(error);
+      }
+    },
   };
 
   /** Render meta information of a bay */
@@ -257,18 +267,42 @@ const Bay = ({
                           </p>
                         </div>
                       </div>
-                      <Button
-                        backgroundColor="#303030"
-                        borderWidth={1.5}
-                        color="white"
-                        variant={ButtonVariant.filled}
-                        size={ButtonSize.full}
-                        textAlign={TextAlign.center}
-                        paddingVertical={10}
-                        onClick={handler.Leave}
-                      >
-                        Leave the bay
-                      </Button>
+                      {bay?.members.some(
+                        (member) => member.contractAddress === account
+                      ) && (
+                        <>
+                          {DateUtils.isNotReachDay(
+                            parseInt(
+                              bay.members
+                                .filter(
+                                  (member) => member.contractAddress === account
+                                )
+                                .map((member) => member.joinedAt)[0],
+                              10
+                            ),
+                            3
+                          ) ? (
+                            <div
+                              style={{ color: colors.dark500, fontSize: 15 }}
+                            >
+                              You must in the bay for more than 3 days to leave
+                            </div>
+                          ) : (
+                            <Button
+                              backgroundColor="#303030"
+                              borderWidth={1.5}
+                              color="white"
+                              variant={ButtonVariant.filled}
+                              size={ButtonSize.full}
+                              textAlign={TextAlign.center}
+                              paddingVertical={10}
+                              onClick={handler.Leave}
+                            >
+                              Leave the bay
+                            </Button>
+                          )}
+                        </>
+                      )}
                     </>
                   ) : (
                     <div
@@ -354,15 +388,18 @@ const Bay = ({
                       <p>
                         Personal Return on Investment (PROI):{' '}
                         <span>
-                          {(parseFloat(fetchMember.member?.balance as string) *
-                            100) /
-                            parseFloat(
-                              web3?.utils?.fromWei(
-                                (bay?.totalValueLocked as string)?.toString() ||
-                                  '0',
-                                'ether'
-                              )
-                            ) || 0}
+                          {(
+                            (parseFloat(fetchMember.member?.balance as string) *
+                              100) /
+                              parseFloat(
+                                web3?.utils?.fromWei(
+                                  (
+                                    bay?.totalValueLocked as string
+                                  )?.toString() || '0',
+                                  'ether'
+                                )
+                              ) || 0
+                          ).toFixed(2)}
                           %
                         </span>
                       </p>

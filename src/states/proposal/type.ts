@@ -1,4 +1,5 @@
 export type TransferProposalType = {
+  address: string;
   amount: string;
   createdAt: string;
   description: string;
