@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
@@ -12,10 +13,10 @@ import { toggleBayCreationModal } from 'src/states/modal/slice';
 import useFetchYourTreasureBays from 'src/states/treasureBay/hooks/useFetchYourTreasureBays';
 import BinanceIcon500x500 from '../../../public/icons/binance-icon-500x500.png';
 // import FintechIcon500x500 from '../../../public/icons/fintech-icon-500x500.png';
-import { Container, Table, TextInput, Button } from '../../components';
+import { Button, Container, Table, TextInput } from '../../components';
+import Divider from '../../components/Divider';
 import Flex from '../../components/Flex';
 import FlexItem from '../../components/FlexItem';
-import ContainerSize from '../../constants/containerSize';
 import TextInputVariant from '../../constants/textInputVariant';
 import { DefaultLayout } from '../../layouts';
 import colors from '../../styles/colors.module.scss';
@@ -97,95 +98,66 @@ const MyBays: NextPageWithLayout = () => {
     },
   };
   return (
-    <Container size={ContainerSize.Large}>
-      <div className={styles.container}>
-        {/* MyBay Header section */}
-        <Flex
-          className={styles.myBaysHeaderSection}
-          direction="row"
-          alignItems="baseline"
-        >
-          <FlexItem className={styles.firstItem}>
-            <span
-              style={{
-                color: '#fff',
-                fontSize: 20,
-              }}
-            >
-              MyBays
-            </span>
-          </FlexItem>
-          <FlexItem>
-            <Flex direction="row">
-              <TextInput
-                hasButton
-                variant={TextInputVariant.outlined}
-                borderWidth={1}
-                backgroundColor={colors.dark500}
-                placeholder="Search for your Bays"
-                inputClassName={styles.baySearchInput}
-                onValueChanged={(e) =>
-                  handleSetFieldValue('searchInput', (e.target as any).value)
-                }
-                placeholderStyle={{
-                  color: 'white',
-                }}
-                buttonClassName={styles.inputButton}
-                buttonText="Search"
-              />
-              <Button
-                backgroundColor="#303030"
-                borderWidth={1.5}
-                color="white"
-                variant={ButtonVariant.filled}
-                size={ButtonSize.full}
-                textAlign={TextAlign.center}
-                paddingVertical={10}
-                paddingHorizontal={20}
-                onClick={handler.AddNewBay}
-              >
-                Add new bay <FaPlus style={{ fontSize: 10, marginLeft: 10 }} />
-              </Button>
-            </Flex>
-          </FlexItem>
-        </Flex>
-        {/* Divider */}
-        <div className={styles.divider} />
-        {/* MyBays table of items  */}
-        {loading && (
-          <div
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-              height: '600px',
-              display: 'flex',
-            }}
+    <>
+      <Head>
+        <title>MyBays | OBAY</title>
+        <meta key="description" name="description" content="Exchange OBAY" />
+      </Head>
+      <Container>
+        <div className={styles.container}>
+          {/* MyBay Header section */}
+          <Flex
+            className={styles.myBaysHeaderSection}
+            direction="row"
+            alignItems="baseline"
           >
-            <Loader type="Grid" color="#49fdc0" height={100} width={100} />
-          </div>
-        )}
-        {bays.length > 0 && !loading ? (
-          <Table
-            header={[
-              {
-                value: 'Name',
-              },
-              { value: 'Logo' },
-
-              { value: 'Address' },
-              { value: 'Creator' },
-              { value: 'Total Staked Amount' },
-              { value: 'Members' },
-              { value: 'Proposals' },
-            ]}
-            tableClassName={styles.tableContainer}
-            headerRowClassName={styles.headerRow}
-            rowClassName={styles.tableRow}
-            items={fetchedTreasureBays}
-          />
-        ) : (
-          !loading && (
+            <FlexItem className={styles.firstItem}>
+              <span
+                style={{
+                  fontSize: 20,
+                }}
+              >
+                MyBays
+              </span>
+            </FlexItem>
+            <FlexItem>
+              <Flex direction="row">
+                <TextInput
+                  hasButton
+                  variant={TextInputVariant.outlined}
+                  borderWidth={1}
+                  backgroundColor={colors.dark500}
+                  placeholder="Search for your Bays"
+                  inputClassName={styles.baySearchInput}
+                  onValueChanged={(e) =>
+                    handleSetFieldValue('searchInput', (e.target as any).value)
+                  }
+                  placeholderStyle={{
+                    color: 'white',
+                  }}
+                  buttonClassName={styles.inputButton}
+                  buttonText="Search"
+                />
+                <Button
+                  backgroundColor="#303030"
+                  borderWidth={1.5}
+                  variant={ButtonVariant.filled}
+                  size={ButtonSize.full}
+                  textAlign={TextAlign.center}
+                  paddingVertical={10}
+                  paddingHorizontal={20}
+                  onClick={handler.AddNewBay}
+                >
+                  Add new bay{' '}
+                  <FaPlus style={{ fontSize: 10, marginLeft: 10 }} />
+                </Button>
+              </Flex>
+            </FlexItem>
+          </Flex>
+          {/* Divider */}
+          <Divider />
+          {/* MyBays table of items  */}
+          {loading && (
             <div
               style={{
                 justifyContent: 'center',
@@ -193,20 +165,54 @@ const MyBays: NextPageWithLayout = () => {
                 width: '100%',
                 height: '600px',
                 display: 'flex',
-                flexDirection: 'column',
               }}
             >
-              <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
-                ☃︎
-              </p>
-              <h3 style={{ color: colors.dark500 }}>
-                You have no treasure bays, create one now!
-              </h3>
+              <Loader type="Grid" color="#49fdc0" height={100} width={100} />
             </div>
-          )
-        )}
-      </div>
-    </Container>
+          )}
+          {bays.length > 0 ? (
+            <Table
+              header={[
+                {
+                  value: 'Name',
+                },
+                { value: 'Logo' },
+
+                { value: 'Address' },
+                { value: 'Creator' },
+                { value: 'Total Staked Amount' },
+                { value: 'Members' },
+                { value: 'Proposals' },
+              ]}
+              tableClassName={styles.tableContainer}
+              headerRowClassName={styles.headerRow}
+              rowClassName={styles.tableRow}
+              items={fetchedTreasureBays}
+            />
+          ) : (
+            !loading && (
+              <div
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '600px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: 150, color: colors.dark500 }}>
+                  ☃︎
+                </p>
+                <h3 style={{ color: colors.dark500 }}>
+                  You have no treasure bays, create one now!
+                </h3>
+              </div>
+            )
+          )}
+        </div>
+      </Container>
+    </>
   );
 };
 

@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
-import styles from './Button.module.scss';
 import colors from '../../styles/colors.module.scss';
+import styles from './Button.module.scss';
 
 const Button: React.FC<
   Partial<
@@ -19,6 +19,8 @@ const Button: React.FC<
       marginVertical: number;
       borderWidth: number;
       size: ButtonSize;
+      className: string;
+      style: React.CSSProperties;
       onClick: React.MouseEventHandler;
     } & React.HTMLAttributes<HTMLDivElement>
   >
@@ -32,6 +34,8 @@ const Button: React.FC<
   paddingHorizontal,
   borderWidth,
   size,
+  className,
+  style,
   onClick,
 }) => (
   <>
@@ -47,13 +51,13 @@ const Button: React.FC<
           variant === ButtonVariant.filled
             ? backgroundColor || 'transparent'
             : 'transparent',
-        color: color || 'white',
+        color: color || colors.dark200,
         textAlign,
         padding: `${paddingVertical || 0}px ${paddingHorizontal || 0}px`,
         borderRadius: 5,
-        ...styles,
+        ...style,
       }}
-      className={styles.container}
+      className={`${styles.container} ${className}`}
     >
       {children}
     </button>

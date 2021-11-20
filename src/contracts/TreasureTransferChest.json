@@ -1636,21 +1636,11 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureTransferChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ],
-      "TransferProposal": [
-        2643
-      ],
-      "TreasureTransferChest": [
-        2757
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [2598],
+      "TransferProposal": [2643],
+      "TreasureTransferChest": [2757]
     },
     "id": 2758,
     "license": "MIT",
@@ -1658,12 +1648,7 @@
     "nodes": [
       {
         "id": 2653,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:21"
       },
@@ -1712,11 +1697,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2757,
-        "linearizedBaseContracts": [
-          2757,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2757, 103, 774],
         "name": "TreasureTransferChest",
         "nameLocation": "154:21:21",
         "nodeType": "ContractDefinition",
@@ -1953,9 +1934,7 @@
               "src": "649:366:21",
               "statements": [
                 {
-                  "assignments": [
-                    2693
-                  ],
+                  "assignments": [2693],
                   "declarations": [
                     {
                       "constant": false,
@@ -2926,21 +2905,11 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureTransferChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2598
-      ],
-      "TransferProposal": [
-        2643
-      ],
-      "TreasureTransferChest": [
-        2757
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [2598],
+      "TransferProposal": [2643],
+      "TreasureTransferChest": [2757]
     },
     "id": 2758,
     "license": "MIT",
@@ -2948,12 +2917,7 @@
     "nodes": [
       {
         "id": 2653,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:21"
       },
@@ -3002,11 +2966,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2757,
-        "linearizedBaseContracts": [
-          2757,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [2757, 103, 774],
         "name": "TreasureTransferChest",
         "nameLocation": "154:21:21",
         "nodeType": "ContractDefinition",
@@ -3243,9 +3203,7 @@
               "src": "649:366:21",
               "statements": [
                 {
-                  "assignments": [
-                    2693
-                  ],
+                  "assignments": [2693],
                   "declarations": [
                     {
                       "constant": false,

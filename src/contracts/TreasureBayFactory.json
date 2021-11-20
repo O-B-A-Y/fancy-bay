@@ -4707,51 +4707,21 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/TreasureBayFactory.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        2440
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        1574
-      ],
-      "ITreasureBayFactory": [
-        1612
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2740
-      ],
-      "TransferProposal": [
-        2785
-      ],
-      "TreasureBay": [
-        1877
-      ],
-      "TreasureBayFactory": [
-        2024
-      ],
-      "TreasureExchangeChest": [
-        2793
-      ],
-      "TreasurePool": [
-        2395
-      ],
-      "TreasureTransferChest": [
-        2899
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [2440],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [1574],
+      "ITreasureBayFactory": [1612],
+      "Ownable": [103],
+      "Proposal": [2740],
+      "TransferProposal": [2785],
+      "TreasureBay": [1877],
+      "TreasureBayFactory": [2024],
+      "TreasureExchangeChest": [2793],
+      "TreasurePool": [2395],
+      "TreasureTransferChest": [2899]
     },
     "id": 2025,
     "license": "MIT",
@@ -4759,12 +4729,7 @@
     "nodes": [
       {
         "id": 1879,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:15"
       },
@@ -4833,18 +4798,11 @@
           }
         ],
         "canonicalName": "TreasureBayFactory",
-        "contractDependencies": [
-          1877
-        ],
+        "contractDependencies": [1877],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2024,
-        "linearizedBaseContracts": [
-          2024,
-          103,
-          774,
-          1612
-        ],
+        "linearizedBaseContracts": [2024, 103, 774, 1612],
         "name": "TreasureBayFactory",
         "nameLocation": "185:18:15",
         "nodeType": "ContractDefinition",
@@ -4946,18 +4904,14 @@
             "visibility": "internal"
           },
           {
-            "baseFunctions": [
-              1596
-            ],
+            "baseFunctions": [1596],
             "body": {
               "id": 1945,
               "nodeType": "Block",
               "src": "486:269:15",
               "statements": [
                 {
-                  "assignments": [
-                    1909
-                  ],
+                  "assignments": [1909],
                   "declarations": [
                     {
                       "constant": false,
@@ -5959,9 +5913,7 @@
                   },
                   "id": 1988,
                   "initializationExpression": {
-                    "assignments": [
-                      1952
-                    ],
+                    "assignments": [1952],
                     "declarations": [
                       {
                         "constant": false,
@@ -6161,9 +6113,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1603
-            ],
+            "baseFunctions": [1603],
             "body": {
               "id": 2005,
               "nodeType": "Block",
@@ -6266,9 +6216,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1611
-            ],
+            "baseFunctions": [1611],
             "body": {
               "id": 2022,
               "nodeType": "Block",
@@ -6470,51 +6418,21 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/TreasureBayFactory.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        2440
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        1574
-      ],
-      "ITreasureBayFactory": [
-        1612
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        2740
-      ],
-      "TransferProposal": [
-        2785
-      ],
-      "TreasureBay": [
-        1877
-      ],
-      "TreasureBayFactory": [
-        2024
-      ],
-      "TreasureExchangeChest": [
-        2793
-      ],
-      "TreasurePool": [
-        2395
-      ],
-      "TreasureTransferChest": [
-        2899
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [2440],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [1574],
+      "ITreasureBayFactory": [1612],
+      "Ownable": [103],
+      "Proposal": [2740],
+      "TransferProposal": [2785],
+      "TreasureBay": [1877],
+      "TreasureBayFactory": [2024],
+      "TreasureExchangeChest": [2793],
+      "TreasurePool": [2395],
+      "TreasureTransferChest": [2899]
     },
     "id": 2025,
     "license": "MIT",
@@ -6522,12 +6440,7 @@
     "nodes": [
       {
         "id": 1879,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:15"
       },
@@ -6596,18 +6509,11 @@
           }
         ],
         "canonicalName": "TreasureBayFactory",
-        "contractDependencies": [
-          1877
-        ],
+        "contractDependencies": [1877],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2024,
-        "linearizedBaseContracts": [
-          2024,
-          103,
-          774,
-          1612
-        ],
+        "linearizedBaseContracts": [2024, 103, 774, 1612],
         "name": "TreasureBayFactory",
         "nameLocation": "185:18:15",
         "nodeType": "ContractDefinition",
@@ -6709,18 +6615,14 @@
             "visibility": "internal"
           },
           {
-            "baseFunctions": [
-              1596
-            ],
+            "baseFunctions": [1596],
             "body": {
               "id": 1945,
               "nodeType": "Block",
               "src": "486:269:15",
               "statements": [
                 {
-                  "assignments": [
-                    1909
-                  ],
+                  "assignments": [1909],
                   "declarations": [
                     {
                       "constant": false,
@@ -7722,9 +7624,7 @@
                   },
                   "id": 1988,
                   "initializationExpression": {
-                    "assignments": [
-                      1952
-                    ],
+                    "assignments": [1952],
                     "declarations": [
                       {
                         "constant": false,
@@ -7924,9 +7824,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1603
-            ],
+            "baseFunctions": [1603],
             "body": {
               "id": 2005,
               "nodeType": "Block",
@@ -8029,9 +7927,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1611
-            ],
+            "baseFunctions": [1611],
             "body": {
               "id": 2022,
               "nodeType": "Block",

@@ -1,18 +1,21 @@
+import clsx from 'clsx';
 import React from 'react';
-import ContainerSize from '../../constants/containerSize';
 import styles from './Container.module.scss';
 
 interface ContainerProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  className?: string;
 }
 
-const Container: React.FC<ContainerProps> = ({
-  children,
-  size = ContainerSize.ExtraLarge,
-}) => (
-  <>
-    <div className={styles[`container-${size}`]}>{children}</div>
-  </>
-);
+const Container: React.FC<ContainerProps> = ({ children, className }) => {
+  const classNames = clsx({
+    [styles.container]: true,
+    [`${className}`]: className,
+  });
+  return (
+    <>
+      <div className={classNames}>{children}</div>
+    </>
+  );
+};
 
 export default Container;

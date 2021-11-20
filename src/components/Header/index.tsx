@@ -189,7 +189,7 @@ const Header: React.FC = () => {
         </Link>
       </li>
       <li className={styles.headerItem}>
-        <Link href="/exchange">
+        <Link href="/exchange/swap">
           <a className={styles.headerLink}>Exchange</a>
         </Link>
       </li>
@@ -383,7 +383,7 @@ const Header: React.FC = () => {
                 backgroundColor="#4E4E4E"
                 buttonClassName={styles.inputButton}
                 placeholderStyle={{
-                  color: 'white',
+                  color: '#d6d6d6',
                 }}
                 disabled
               />
