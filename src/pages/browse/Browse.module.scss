@@ -22,6 +22,7 @@
   border: 1px solid $dark500;
   border-radius: map-get($border-radiuses, 'sm');
   min-height: 50vh;
+  margin-bottom: 50px;
   // box-shadow: 0px 4px 87px 27px rgba(165, 140, 102, 0.15);
   @include glow-shadow;
   @include respond-to('xs') {

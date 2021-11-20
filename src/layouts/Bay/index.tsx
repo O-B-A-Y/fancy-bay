@@ -200,221 +200,219 @@ const Bay = ({
           <Loader type="Grid" color="#49fdc0" height={60} width={60} />
         </div>
       ) : (
-        <Container size={ContainerSize.ExtraLarge}>
-          <div className={styles.container}>
-            <Grid
-              cols={{
-                xs: 1,
-                md: 2,
-                lg: 7,
-              }}
-              rows={{
-                xs: 1,
-                md: 1,
-                lg: 1,
-              }}
-              rowGap="xs"
-            >
-              <GridItem rowSpan={1} colSpan={2}>
-                <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
-                  <RenderMetaContainer />
-                  <div className={styles.separator} />
+        // <Container size={ContainerSize.ExtraLarge}>
+        <div className={styles.container}>
+          <Grid
+            cols={{
+              xs: 1,
+              md: 2,
+              lg: 7,
+            }}
+            rows={{
+              xs: 1,
+              md: 1,
+              lg: 1,
+            }}
+            rowGap="xs"
+            colGap="md"
+          >
+            <GridItem rowSpan={1} colSpan={2}>
+              <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
+                <RenderMetaContainer />
+                <div className={styles.separator} />
 
-                  {account && walletSlice.data.tokens.OBAY ? (
-                    <>
-                      <div className={styles.bottomContainer}>
-                        <div className={styles.rowItem}>
-                          <p
-                            data-tip={account}
-                            data-for="address-tooltip"
-                            data-place="bottom"
-                          >
-                            <Image src={MetamaskIcon} width={15} height={15} />
-                            <span style={{ marginLeft: 10 }}>{`${account
-                              .substring(0, 10)
-                              .trim()}...`}</span>
-                          </p>
-                          <div style={{ alignItems: 'center' }}>
-                            <span>
-                              {NumberUtils.truncate(
-                                walletSlice.data.tokens.OBAY.balance,
-                                3
-                              )}{' '}
-                            </span>
-                            <Image src={LogoIcon} width={15} height={15} />
-                          </div>
-                        </div>
-                        <TextInput
-                          hasButton
-                          variant={TextInputVariant.filled}
-                          borderWidth={1}
-                          backgroundColor={colors.$dark500}
-                          placeholder="Enter the amount"
-                          placeholderStyle={{
-                            color: 'white',
-                          }}
-                          buttonClassName={styles.inputButton}
-                          buttonText="Stake"
-                          onButtonClicked={handler.Stake}
-                          onValueChanged={handler.ChangeStakedAmount}
-                          value={formValues.stakedAmount}
-                        />
-                        <div className={styles.rowItem}>
-                          <div className={styles.metaLabel}>Total</div>
-                          <p className={styles.metaContent}>
-                            {fetchMember.member?.balance || 0} ETH
-                          </p>
+                {account && walletSlice.data.tokens.OBAY ? (
+                  <>
+                    <div className={styles.bottomContainer}>
+                      <div className={styles.rowItem}>
+                        <p
+                          data-tip={account}
+                          data-for="address-tooltip"
+                          data-place="bottom"
+                        >
+                          <Image src={MetamaskIcon} width={15} height={15} />
+                          <span style={{ marginLeft: 10 }}>{`${account
+                            .substring(0, 10)
+                            .trim()}...`}</span>
+                        </p>
+                        <div style={{ alignItems: 'center' }}>
+                          <span>
+                            {NumberUtils.truncate(
+                              walletSlice.data.tokens.OBAY.balance,
+                              3
+                            )}{' '}
+                          </span>
+                          <Image src={LogoIcon} width={15} height={15} />
                         </div>
                       </div>
-                      {bay?.members.some(
-                        (member) => member.contractAddress === account
-                      ) && (
-                        <>
-                          {DateUtils.isNotReachDay(
-                            parseInt(
-                              bay.members
-                                .filter(
-                                  (member) => member.contractAddress === account
-                                )
-                                .map((member) => member.joinedAt)[0],
-                              10
-                            ),
-                            3
-                          ) ? (
-                            <div
-                              style={{ color: colors.dark500, fontSize: 15 }}
-                            >
-                              You must in the bay for more than 3 days to leave
-                            </div>
-                          ) : (
-                            <Button
-                              backgroundColor="#303030"
-                              borderWidth={1.5}
-                              color="white"
-                              variant={ButtonVariant.filled}
-                              size={ButtonSize.full}
-                              textAlign={TextAlign.center}
-                              paddingVertical={10}
-                              onClick={handler.Leave}
-                            >
-                              Leave the bay
-                            </Button>
-                          )}
-                        </>
-                      )}
-                    </>
-                  ) : (
+                      <TextInput
+                        hasButton
+                        variant={TextInputVariant.filled}
+                        borderWidth={1}
+                        backgroundColor={colors.$dark500}
+                        placeholder="Enter the amount"
+                        placeholderStyle={{
+                          color: 'white',
+                        }}
+                        buttonClassName={styles.inputButton}
+                        buttonText="Stake"
+                        onButtonClicked={handler.Stake}
+                        onValueChanged={handler.ChangeStakedAmount}
+                        value={formValues.stakedAmount}
+                      />
+                      <div className={styles.rowItem}>
+                        <div className={styles.metaLabel}>Total</div>
+                        <p className={styles.metaContent}>
+                          {fetchMember.member?.balance || 0} ETH
+                        </p>
+                      </div>
+                    </div>
+                    {bay?.members.some(
+                      (member) => member.contractAddress === account
+                    ) && (
+                      <>
+                        {DateUtils.isNotReachDay(
+                          parseInt(
+                            bay.members
+                              .filter(
+                                (member) => member.contractAddress === account
+                              )
+                              .map((member) => member.joinedAt)[0],
+                            10
+                          ),
+                          3
+                        ) ? (
+                          <div style={{ color: colors.dark500, fontSize: 15 }}>
+                            You must in the bay for more than 3 days to leave
+                          </div>
+                        ) : (
+                          <Button
+                            backgroundColor="#303030"
+                            borderWidth={1.5}
+                            color="white"
+                            variant={ButtonVariant.filled}
+                            size={ButtonSize.full}
+                            textAlign={TextAlign.center}
+                            paddingVertical={10}
+                            onClick={handler.Leave}
+                          >
+                            Leave the bay
+                          </Button>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
                     <div
                       style={{
+                        height: 250,
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        flexDirection: 'column',
+                        color: colors.dark500,
                       }}
                     >
-                      <div
-                        style={{
-                          height: 250,
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          flexDirection: 'column',
-                          color: colors.dark500,
-                        }}
+                      <p style={{ fontSize: 55, margin: 0 }}>☻</p>
+                      <p>Wallet is not connected</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </GridItem>
+            <GridItem rowSpan={1} colSpan={5}>
+              <div className={styles.subContainer}>
+                <div className={styles.header}>
+                  <div className={styles.header_left}>
+                    {[
+                      LeftSidedContainerTab.Proposals,
+                      LeftSidedContainerTab.Members,
+                      LeftSidedContainerTab.Portfolio,
+                    ].map((tab) => (
+                      <Link
+                        key={tab}
+                        href={`/my-bays/${bay?.address}/${tab.toLowerCase()}`}
                       >
-                        <p style={{ fontSize: 55, margin: 0 }}>☻</p>
-                        <p>Wallet is not connected</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </GridItem>
-              <GridItem rowSpan={1} colSpan={5}>
-                <div className={styles.subContainer}>
-                  <div className={styles.header}>
-                    <div className={styles.header_left}>
-                      {[
-                        LeftSidedContainerTab.Proposals,
-                        LeftSidedContainerTab.Members,
-                        LeftSidedContainerTab.Portfolio,
-                      ].map((tab) => (
-                        <Link
-                          key={tab}
-                          href={`/my-bays/${bay?.address}/${tab.toLowerCase()}`}
+                        <div
+                          className={clsx({
+                            [styles.tab]: true,
+                            [styles.tab_active]: selectedTab === tab,
+                          })}
                         >
-                          <div
-                            className={clsx({
-                              [styles.tab]: true,
-                              [styles.tab_active]: selectedTab === tab,
-                            })}
-                          >
-                            <p className={styles.tabText}>{tab}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                    <TextInput
-                      hasButton
-                      variant={TextInputVariant.outlined}
-                      borderWidth={1}
-                      backgroundColor={colors.dark500}
-                      placeholder="Search for proposal"
-                      placeholderStyle={{
-                        color: 'white',
-                      }}
-                      buttonClassName={styles.inputButton}
-                      buttonText="Search"
-                      onButtonClicked={handler.SearchProposal}
-                      onValueChanged={handler.ChangeSearchProposalInput}
-                      value={formValues.searchProposalInput}
-                    />
-                    <Button
-                      backgroundColor="#303030"
-                      borderWidth={1.5}
-                      color="white"
-                      variant={ButtonVariant.filled}
-                      size={ButtonSize.fit}
-                      textAlign={TextAlign.center}
-                      paddingVertical={10}
-                      paddingHorizontal={15}
-                      onClick={handler.AddNewProposal}
-                    >
-                      Add new proposal +
-                    </Button>
+                          <p className={styles.tabText}>{tab}</p>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                  <div className={styles.subContainer_separator} />
-                  <div className={styles.meta}>
-                    <div className={styles.meta_leftSide}>
-                      <p>
-                        Personal Return on Investment (PROI):{' '}
-                        <span>
-                          {(
-                            (parseFloat(fetchMember.member?.balance as string) *
-                              100) /
-                              parseFloat(
-                                web3?.utils?.fromWei(
-                                  (
-                                    bay?.totalValueLocked as string
-                                  )?.toString() || '0',
-                                  'ether'
-                                )
-                              ) || 0
-                          ).toFixed(2)}
-                          %
-                        </span>
-                      </p>
-                    </div>
-                    <div className={styles.meta_rightSide}>
-                      <p>
-                        Next run: <span>22: 10: 30</span>
-                      </p>
-                    </div>
-                  </div>
-                  {children}
+                  <TextInput
+                    hasButton
+                    variant={TextInputVariant.outlined}
+                    borderWidth={1}
+                    backgroundColor={colors.dark500}
+                    placeholder="Search for proposal"
+                    placeholderStyle={{
+                      color: 'white',
+                    }}
+                    buttonClassName={styles.inputButton}
+                    buttonText="Search"
+                    onButtonClicked={handler.SearchProposal}
+                    onValueChanged={handler.ChangeSearchProposalInput}
+                    value={formValues.searchProposalInput}
+                  />
+                  <Button
+                    backgroundColor="#303030"
+                    borderWidth={1.5}
+                    color="white"
+                    variant={ButtonVariant.filled}
+                    size={ButtonSize.fit}
+                    textAlign={TextAlign.center}
+                    paddingVertical={10}
+                    paddingHorizontal={15}
+                    onClick={handler.AddNewProposal}
+                  >
+                    Add new proposal +
+                  </Button>
                 </div>
-              </GridItem>
-            </Grid>
-          </div>
-        </Container>
+                <div className={styles.subContainer_separator} />
+                <div className={styles.meta}>
+                  <div className={styles.meta_leftSide}>
+                    <p>
+                      Personal Return on Investment (PROI):{' '}
+                      <span>
+                        {(
+                          (parseFloat(fetchMember.member?.balance as string) *
+                            100) /
+                            parseFloat(
+                              web3?.utils?.fromWei(
+                                (bay?.totalValueLocked as string)?.toString() ||
+                                  '0',
+                                'ether'
+                              )
+                            ) || 0
+                        ).toFixed(2)}
+                        %
+                      </span>
+                    </p>
+                  </div>
+                  <div className={styles.meta_rightSide}>
+                    <p>
+                      Next run: <span>22: 10: 30</span>
+                    </p>
+                  </div>
+                </div>
+                {children}
+              </div>
+            </GridItem>
+          </Grid>
+        </div>
+        // </Container>
       )}
 
       <ReactTooltip
