@@ -214,7 +214,6 @@ const Bay = ({
                 lg: 1,
               }}
               rowGap="xs"
-              colGap="md"
             >
               <GridItem rowSpan={1} colSpan={2}>
                 <div className={clsx(styles.bayInfoInner, styles.subContainer)}>

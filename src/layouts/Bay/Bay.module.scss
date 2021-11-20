@@ -21,6 +21,9 @@ $container-height: 700px;
   border-radius: 10px;
   padding: 25px 30px;
   height: 100%;
+  // &:first-child {
+  //   width: 80%;
+  // }
   // overflow: auto;
   border: 1px solid $dark500;
   @include glow-shadow;
