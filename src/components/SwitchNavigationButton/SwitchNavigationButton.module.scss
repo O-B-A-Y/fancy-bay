@@ -1,0 +1,27 @@
+@import '../../styles/abstracts/colors';
+
+.switchBox {
+  background-color: $dark700;
+  height: 38px;
+  border: 1px solid $dark500;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-left: 4px;
+  padding-right: 3px;
+  padding-bottom: 4px;
+  width: 240px;
+}
+
+.switchButton {
+  text-align: center;
+  cursor: pointer;
+  padding: 9px;
+}
+
+.active {
+  background-color: $teal400;
+  color: $dark100;
+  border: 1px solid $dark500;
+  box-sizing: border-box;
+  border-radius: 5px;
+}

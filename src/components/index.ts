@@ -1,12 +1,14 @@
-import Grid from './Grid';
 import Button from './Button';
-import Container from './Container';
-import TextInput from './TextInput';
 import ConnectorImage from './ConnectorImage';
+import Container from './Container';
 import DropzoneWithPreview from './DropzoneWithPreview';
-import Table from './Table';
 import Flex from './Flex';
 import FlexItem from './FlexItem';
+import Grid from './Grid';
+import NumberInput from './NumberInput';
+import SwitchNavigationButton from './SwitchNavigationButton';
+import Table from './Table';
+import TextInput from './TextInput';
 
 export {
   Grid,
@@ -18,4 +20,6 @@ export {
   Flex,
   FlexItem,
   DropzoneWithPreview,
+  SwitchNavigationButton,
+  NumberInput,
 };

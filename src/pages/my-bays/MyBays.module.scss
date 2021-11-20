@@ -17,7 +17,7 @@
   padding: 5px 10px;
   border-radius: 5px;
   border: unset;
-  color: white;
+  color: $dark200;
   font-weight: bold;
 }
 
@@ -32,12 +32,6 @@
   border-radius: 10px;
 }
 
-.divider {
-  width: 100%;
-  height: 9px;
-  background: rgba(90, 179, 200, 0.23);
-}
-
 .myBaysHeaderSection {
   padding: 25px;
 }
@@ -48,7 +42,6 @@
 
 .firstItem {
   margin-right: auto;
-  color: #fff;
   font-size: map-get($font-sizes, medium);
 }
 
@@ -66,7 +59,7 @@
     line-height: 20px;
     height: 85px;
     &-name {
-      color: #fff;
+      color: $dark200;
     }
     &-address {
       color: $green500;

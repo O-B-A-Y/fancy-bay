@@ -1,10 +1,12 @@
+@import './abstracts/colors';
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: 'Rubik', sans-serif;
+  color: $dark200;
   overflow-x: hidden;
-  background-color: #0c0c0a;
 }
 
 html,
@@ -21,4 +23,16 @@ div#__next > div {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

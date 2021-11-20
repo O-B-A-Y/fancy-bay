@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import clsx from 'clsx';
 import React from 'react';
 import Size from '../../constants/size';
@@ -39,6 +41,7 @@ interface FlexItemProps {
   alignSelf?: Breakpoint<AlignSelf> | AlignSelf;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 const FlexItem: React.FC<FlexItemProps> = ({
@@ -50,6 +53,7 @@ const FlexItem: React.FC<FlexItemProps> = ({
   alignSelf,
   className,
   style,
+  onClick,
 }) => {
   const classNames = clsx({
     // Default
@@ -168,7 +172,7 @@ const FlexItem: React.FC<FlexItemProps> = ({
     [`${className}`]: className,
   });
   return (
-    <div className={classNames} style={style}>
+    <div className={classNames} style={style} onClick={onClick}>
       {children}
     </div>
   );

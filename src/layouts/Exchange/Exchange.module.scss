@@ -1,0 +1,51 @@
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/effects';
+@import '../../styles/abstracts/mixins';
+
+.container {
+  padding-top: 80px;
+}
+
+.innerContainer {
+  margin: 0 auto;
+  min-height: 498px;
+  max-height: 50vh;
+  max-width: 680px;
+  background-color: $dark800;
+  border: 1px solid $dark500;
+  border-radius: map-get($border-radiuses, 'sm');
+  box-shadow: 0px 4px 87px 27px rgba(165, 140, 102, 0.15);
+  @include glow-shadow;
+}
+
+.selectBox {
+  background-color: $dark700;
+  height: 57px;
+  border: 1px solid $dark500;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: map-get($border-radiuses, 'sm');
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}
+
+.firstItem {
+  margin-right: auto;
+  font-size: map-get($font-sizes, medium);
+}
+
+.dropdownIcon {
+  color: $dark600;
+  font-size: map-get($font-sizes, extra-medium);
+  &:hover {
+    color: $dark500;
+    cursor: pointer;
+  }
+}
+
+.interactiveSection {
+  padding: 15px;
+}

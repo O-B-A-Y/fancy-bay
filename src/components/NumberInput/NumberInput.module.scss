@@ -1,0 +1,15 @@
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/effects';
+@import '../../styles/abstracts/mixins';
+.input {
+  background-color: $dark700;
+  border: 1px solid $dark500;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: $dark200;
+  padding: 10px;
+  &:focus {
+    outline: none !important;
+  }
+}

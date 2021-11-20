@@ -1,0 +1,68 @@
+@import '../../../styles/abstracts/measures';
+@import '../../../styles/abstracts/colors';
+@import '../../../styles/abstracts/effects';
+@import '../../../styles/abstracts/mixins';
+
+.inputSection {
+  background-color: $dark700;
+  border: 1px solid $dark500;
+  box-sizing: border-box;
+  border-radius: 10px;
+  height: 74px;
+  padding: 10px;
+}
+
+.submitBtn {
+  font-size: map-get($font-sizes, medium);
+  background-color: $dark600 !important;
+  border: 1px solid $dark500 !important;
+  margin-top: 8px;
+  height: 64px;
+}
+
+.symbolImg {
+  object-fit: cover;
+  border: 1px solid $dark500;
+  border-radius: 10px;
+}
+
+.symbolIcon {
+  width: 53px;
+  height: 53px;
+  border: 1px solid $dark500;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.swapIcon {
+  color: $dark600;
+  font-size: map-get($font-sizes, large);
+  &:hover {
+    color: $dark500;
+    cursor: pointer;
+  }
+  margin: 0 auto;
+}
+
+.annotationContainer {
+  margin-left: 10px;
+}
+
+.guideAnnotation {
+  font-size: map-get($font-sizes, small);
+}
+
+.currencyAnnotation {
+  font-size: map-get($font-sizes, medium);
+}
+
+.rightItem {
+  width: 60%;
+}
+
+.valueInput {
+  height: 100%;
+  width: 100%;
+  font-size: map-get($font-sizes, medium);
+}
