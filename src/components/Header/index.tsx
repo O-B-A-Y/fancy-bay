@@ -395,7 +395,17 @@ const Header: React.FC = () => {
                 }}
               >
                 <a
-                  href={`https://etherscan.io/address/${environment.account}`}
+                  href={
+                    chainNetworkMapping[
+                      environment.chainId as any
+                    ].toLowerCase() === 'mainnet'
+                      ? `https://etherscan.io/address/${environment.account}`
+                      : `https://${chainNetworkMapping[
+                          environment.chainId as any
+                        ].toLowerCase()}.etherscan.io/address/${
+                          environment.account
+                        }`
+                  }
                   style={{ marginTop: 13 }}
                 >
                   <span style={{ color: colors.teal500 }}>

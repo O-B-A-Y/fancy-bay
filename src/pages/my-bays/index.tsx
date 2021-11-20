@@ -165,7 +165,7 @@ const MyBays: NextPageWithLayout = () => {
             <Loader type="Grid" color="#49fdc0" height={100} width={100} />
           </div>
         )}
-        {bays.length > 0 ? (
+        {bays.length > 0 && !loading ? (
           <Table
             header={[
               {

@@ -16,7 +16,9 @@ export default function useFetchTreasureBays() {
   const treasureBayFactoryContract = useTreasureBayFactoryContract();
   const [retries, setRetries] = useState(5);
   const {
-    data: { environment },
+    data: {
+      environment: { account },
+    },
   } = useAppSelector((state) => state.walletSlice);
   const {
     data: { fetching },
@@ -95,7 +97,7 @@ export default function useFetchTreasureBays() {
     };
 
     fetchTreasureBays();
-  }, [fetching, retries]);
+  }, [fetching, retries, account]);
 
   return { bays, loading, error };
 }

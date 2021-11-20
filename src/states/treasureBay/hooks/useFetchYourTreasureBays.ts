@@ -39,18 +39,25 @@ export default function useFetchYourTreasureBays() {
           setLoading(false);
           return;
         } else {
-          const filterTreasureBays = treasureBayAddresses.filter(
-            async (address) => {
-              const treasureBayContract = useTreasureBayContract(address);
-              const treasureBayContractMethods: TreasureBay =
-                treasureBayContract.methods;
+          let filterTreasureBays: string[] = [];
+          for (let index = 0; index < treasureBayAddresses.length; index++) {
+            const treasureBayContract = useTreasureBayContract(
+              treasureBayAddresses[index]
+            );
+            const treasureBayContractMethods: TreasureBay =
+              treasureBayContract.methods;
 
-              const creator = await treasureBayContractMethods.creator().call();
-              console.log(creator, account);
-              return creator === account;
+            const treasureHunters = await treasureBayContractMethods
+              .listOfTreasureHunters()
+              .call();
+            if (
+              treasureHunters.some(
+                (hunter) => hunter.contractAddress === account
+              )
+            ) {
+              filterTreasureBays.push(treasureBayAddresses[index]);
             }
-          );
-          console.log(filterTreasureBays);
+          }
           const treasureBays = await Promise.all(
             filterTreasureBays.map(async (address) => {
               const treasureBayContract = useTreasureBayContract(address);
@@ -105,7 +112,7 @@ export default function useFetchYourTreasureBays() {
     };
 
     fetchYourTreasureBays();
-  }, [fetching, retries]);
+  }, [fetching, retries, account]);
 
   return { bays, loading, error };
 }

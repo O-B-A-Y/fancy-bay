@@ -21,6 +21,7 @@ const Table: React.FC<{
       link?: string;
     }[];
     href: string;
+    onClick?: () => void;
   }[];
   rowStyle?: React.CSSProperties;
   tableClassName?: string;
@@ -57,6 +58,7 @@ const Table: React.FC<{
       {items?.map((d) => (
         <Link href={d.href} passHref>
           <tr
+            onClick={d.onClick}
             style={rowStyle}
             className={clsx(styles.container_item, rowClassName)}
           >
