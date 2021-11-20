@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import ReactDropdown from 'react-dropdown';
-import { FaTimes } from 'react-icons/fa';
+import { FaGithub, FaTimes } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
@@ -199,6 +199,14 @@ const Header: React.FC = () => {
   const RenderRightSidedBoxesContainer = () => (
     <>
       <li className={styles.headerItem}>
+        <div className={styles.network}>
+          <a
+            href="https://github.com/O-B-A-Y"
+            style={{ color: 'white', display: 'flex', alignItems: 'center' }}
+          >
+            Github <FaGithub style={{ marginLeft: '10px' }} />
+          </a>
+        </div>
         {!environment.active ? (
           <div style={{ marginRight: 45 }}>
             <ReactDropdown
@@ -280,7 +288,7 @@ const Header: React.FC = () => {
   );
 
   return (
-    <div>
+    <div style={{ zIndex: 100 }}>
       <ul className={styles.header}>
         <RenderLeftSidedBoxesContainer />
         {/* Filler box */}

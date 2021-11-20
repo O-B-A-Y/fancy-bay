@@ -95,7 +95,7 @@ export default function useFetchTreasureBays() {
     };
 
     fetchTreasureBays();
-  }, [fetching, retries, environment]);
+  }, [fetching, retries]);
 
   return { bays, loading, error };
 }

@@ -39,50 +39,51 @@ export default function useFetchYourTreasureBays() {
           setLoading(false);
           return;
         } else {
+          const filterTreasureBays = treasureBayAddresses.filter(
+            async (address) => {
+              const treasureBayContract = useTreasureBayContract(address);
+              const treasureBayContractMethods: TreasureBay =
+                treasureBayContract.methods;
+
+              const creator = await treasureBayContractMethods.creator().call();
+              console.log(creator, account);
+              return creator === account;
+            }
+          );
+          console.log(filterTreasureBays);
           const treasureBays = await Promise.all(
-            treasureBayAddresses
-              .filter(async (address) => {
-                const treasureBayContract = useTreasureBayContract(address);
-                const treasureBayContractMethods: TreasureBay =
-                  treasureBayContract.methods;
+            filterTreasureBays.map(async (address) => {
+              const treasureBayContract = useTreasureBayContract(address);
+              const treasureBayContractMethods: TreasureBay =
+                treasureBayContract.methods;
 
-                const creator = await treasureBayContractMethods
-                  .creator()
-                  .call();
-                return creator === account;
-              })
-              .map(async (address) => {
-                const treasureBayContract = useTreasureBayContract(address);
-                const treasureBayContractMethods: TreasureBay =
-                  treasureBayContract.methods;
+              const [
+                name,
+                creator,
+                stakeholders,
+                treasureHunters,
+                transferProposals,
+                totalStakedAmount,
+              ] = await Promise.all([
+                treasureBayContractMethods.name().call(),
+                treasureBayContractMethods.creator().call(),
+                treasureBayContractMethods.listOfStakeholders().call(),
+                treasureBayContractMethods.listOfTreasureHunters().call(),
+                treasureBayContractMethods.getAllTransferProposals().call(),
+                treasureBayContractMethods.totalStakedAmount().call(),
+              ]);
 
-                const [
-                  name,
-                  creator,
-                  stakeholders,
-                  treasureHunters,
-                  transferProposals,
-                  totalStakedAmount,
-                ] = await Promise.all([
-                  treasureBayContractMethods.name().call(),
-                  treasureBayContractMethods.creator().call(),
-                  treasureBayContractMethods.listOfStakeholders().call(),
-                  treasureBayContractMethods.listOfTreasureHunters().call(),
-                  treasureBayContractMethods.getAllTransferProposals().call(),
-                  treasureBayContractMethods.totalStakedAmount().call(),
-                ]);
-
-                return {
-                  name,
-                  address,
-                  stakeholders,
-                  members: treasureHunters,
-                  transferProposals,
-                  creator: creator,
-                  exchangeProposals: [],
-                  totalValueLocked: totalStakedAmount,
-                };
-              })
+              return {
+                name,
+                address,
+                stakeholders,
+                members: treasureHunters,
+                transferProposals,
+                creator: creator,
+                exchangeProposals: [],
+                totalValueLocked: totalStakedAmount,
+              };
+            })
           );
 
           setBays(treasureBays);
