@@ -17,6 +17,11 @@ export default function useFetchMembers(bayAddress: string) {
   const {
     data: { fetching },
   } = useAppSelector((state) => state.treasureBaySlice);
+  const {
+    data: {
+      environment: { account },
+    },
+  } = useAppSelector((state) => state.walletSlice);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -62,7 +67,7 @@ export default function useFetchMembers(bayAddress: string) {
     };
 
     fetchMembers();
-  }, [fetching, retries]);
+  }, [fetching, retries, account]);
 
   return { members, loading, error };
 }

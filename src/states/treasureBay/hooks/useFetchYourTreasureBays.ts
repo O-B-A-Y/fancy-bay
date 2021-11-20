@@ -39,50 +39,58 @@ export default function useFetchYourTreasureBays() {
           setLoading(false);
           return;
         } else {
+          let filterTreasureBays: string[] = [];
+          for (let index = 0; index < treasureBayAddresses.length; index++) {
+            const treasureBayContract = useTreasureBayContract(
+              treasureBayAddresses[index]
+            );
+            const treasureBayContractMethods: TreasureBay =
+              treasureBayContract.methods;
+
+            const treasureHunters = await treasureBayContractMethods
+              .listOfTreasureHunters()
+              .call();
+            if (
+              treasureHunters.some(
+                (hunter) => hunter.contractAddress === account
+              )
+            ) {
+              filterTreasureBays.push(treasureBayAddresses[index]);
+            }
+          }
           const treasureBays = await Promise.all(
-            treasureBayAddresses
-              .filter(async (address) => {
-                const treasureBayContract = useTreasureBayContract(address);
-                const treasureBayContractMethods: TreasureBay =
-                  treasureBayContract.methods;
+            filterTreasureBays.map(async (address) => {
+              const treasureBayContract = useTreasureBayContract(address);
+              const treasureBayContractMethods: TreasureBay =
+                treasureBayContract.methods;
 
-                const creator = await treasureBayContractMethods
-                  .creator()
-                  .call();
-                return creator === account;
-              })
-              .map(async (address) => {
-                const treasureBayContract = useTreasureBayContract(address);
-                const treasureBayContractMethods: TreasureBay =
-                  treasureBayContract.methods;
+              const [
+                name,
+                creator,
+                stakeholders,
+                treasureHunters,
+                transferProposals,
+                totalStakedAmount,
+              ] = await Promise.all([
+                treasureBayContractMethods.name().call(),
+                treasureBayContractMethods.creator().call(),
+                treasureBayContractMethods.listOfStakeholders().call(),
+                treasureBayContractMethods.listOfTreasureHunters().call(),
+                treasureBayContractMethods.getAllTransferProposals().call(),
+                treasureBayContractMethods.totalStakedAmount().call(),
+              ]);
 
-                const [
-                  name,
-                  creator,
-                  stakeholders,
-                  treasureHunters,
-                  transferProposals,
-                  totalStakedAmount,
-                ] = await Promise.all([
-                  treasureBayContractMethods.name().call(),
-                  treasureBayContractMethods.creator().call(),
-                  treasureBayContractMethods.listOfStakeholders().call(),
-                  treasureBayContractMethods.listOfTreasureHunters().call(),
-                  treasureBayContractMethods.getAllTransferProposals().call(),
-                  treasureBayContractMethods.totalStakedAmount().call(),
-                ]);
-
-                return {
-                  name,
-                  address,
-                  stakeholders,
-                  members: treasureHunters,
-                  transferProposals,
-                  creator: creator,
-                  exchangeProposals: [],
-                  totalValueLocked: totalStakedAmount,
-                };
-              })
+              return {
+                name,
+                address,
+                stakeholders,
+                members: treasureHunters,
+                transferProposals,
+                creator: creator,
+                exchangeProposals: [],
+                totalValueLocked: totalStakedAmount,
+              };
+            })
           );
 
           setBays(treasureBays);
@@ -104,7 +112,7 @@ export default function useFetchYourTreasureBays() {
     };
 
     fetchYourTreasureBays();
-  }, [fetching, retries]);
+  }, [fetching, retries, account]);
 
   return { bays, loading, error };
 }

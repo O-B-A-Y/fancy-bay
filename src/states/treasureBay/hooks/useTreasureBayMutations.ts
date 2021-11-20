@@ -81,14 +81,7 @@ const useTreasureBayMutations = () => {
             });
           console.log(response.events.NewBayCreated);
           if (response.events.NewBayCreated) {
-            const treasureBayContract = useTreasureBayContract(
-              response.events.NewBayCreated.returnValues.bayAddress
-            );
-            const method: TreasureBay = treasureBayContract.methods;
-            await method.createTreasureHunter().send({
-              from: data.environment.account,
-            });
-            dispatch(setFetching(true));
+            join(response.events.NewBayCreated.returnValues.bayAddress, false);
           }
           callback?.(true);
         }
@@ -100,6 +93,29 @@ const useTreasureBayMutations = () => {
         callback?.(false);
       }
     }
+  };
+
+  const join = async (bayAddress: string, loading: boolean) => {
+    if (loading) {
+      setLoading(true);
+    }
+    const treasureBayContract = useTreasureBayContract(bayAddress);
+    const bayMethods: TreasureBay = treasureBayContract.methods;
+    await bayMethods.createTreasureHunter().send({
+      from: data.environment.account as string,
+    });
+    dispatch(setFetching(true));
+    if (loading) {
+      setLoading(false);
+    }
+  };
+
+  const leave = async (bayAddress: string) => {
+    setLoading(true);
+    const treasureBayContract = useTreasureBayContract(bayAddress);
+    const bayMethods: TreasureBay = treasureBayContract.methods;
+    // TODO implement leave bay
+    setLoading(false);
   };
 
   const stake = async (bayAddress: string, amount: string) => {
@@ -123,7 +139,14 @@ const useTreasureBayMutations = () => {
     setLoading(false);
   };
 
-  return { leaveTreasureBay, createNewTreasureBay, stake, unstake, loading };
+  return {
+    leaveTreasureBay,
+    createNewTreasureBay,
+    stake,
+    unstake,
+    loading,
+    join,
+  };
 };
 
 export default useTreasureBayMutations;

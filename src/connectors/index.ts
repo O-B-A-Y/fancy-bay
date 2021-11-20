@@ -24,6 +24,7 @@ export const chainNetworkMapping: any = {
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.GÖRLI]: 'Goerli',
   [ChainId.BSC]: 'BSC',
+  [ChainId.BSC_TESTNET]: 'BSC Testnet',
   [ChainId.MATIC]: 'MATIC',
   [DevelopmentChainId.OPTION_1]: DevChainName,
   [DevelopmentChainId.OPTION_2]: DevChainName,

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import ReactDropdown from 'react-dropdown';
-import { FaTimes } from 'react-icons/fa';
+import { FaGithub, FaTimes } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
@@ -18,6 +18,7 @@ import useActiveWeb3React from 'src/hooks/useActiveWeb3React';
 import useEagerConnect from 'src/hooks/useEagerConnect';
 import useInactiveListener from 'src/hooks/useInactiveListener';
 import useTokenInfo from 'src/hooks/useTokenInfo';
+import useWeb3 from 'src/hooks/useWeb3';
 import { useAppDispatch, useAppSelector } from 'src/states/hooks';
 import {
   toggleInjectedConnectorErrorModal,
@@ -29,7 +30,6 @@ import {
   switchWeb3Environment,
 } from 'src/states/wallet/slice';
 import NumberUtils from 'src/utils/number';
-import Web3 from 'web3';
 import { Button, TextInput } from '..';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import colors from '../../styles/colors.module.scss';
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
   const init = async () => {
     try {
       setLoading(true);
-      const web3 = new Web3(Web3.givenProvider || 'https://localhost:8545');
+      const web3 = useWeb3();
       const [accounts, chainId] = await Promise.all([
         web3.eth.getAccounts(),
         web3.eth.getChainId(),
@@ -199,6 +199,14 @@ const Header: React.FC = () => {
   const RenderRightSidedBoxesContainer = () => (
     <>
       <li className={styles.headerItem}>
+        <div className={styles.network}>
+          <a
+            href="https://github.com/O-B-A-Y"
+            style={{ color: 'white', display: 'flex', alignItems: 'center' }}
+          >
+            Github <FaGithub style={{ marginLeft: '10px' }} />
+          </a>
+        </div>
         {!environment.active ? (
           <div style={{ marginRight: 45 }}>
             <ReactDropdown
@@ -280,7 +288,7 @@ const Header: React.FC = () => {
   );
 
   return (
-    <div>
+    <div style={{ zIndex: 100 }}>
       <ul className={styles.header}>
         <RenderLeftSidedBoxesContainer />
         {/* Filler box */}
@@ -387,7 +395,17 @@ const Header: React.FC = () => {
                 }}
               >
                 <a
-                  href={`https://etherscan.io/address/${environment.account}`}
+                  href={
+                    chainNetworkMapping[
+                      environment.chainId as any
+                    ].toLowerCase() === 'mainnet'
+                      ? `https://etherscan.io/address/${environment.account}`
+                      : `https://${chainNetworkMapping[
+                          environment.chainId as any
+                        ].toLowerCase()}.etherscan.io/address/${
+                          environment.account
+                        }`
+                  }
                   style={{ marginTop: 13 }}
                 >
                   <span style={{ color: colors.teal500 }}>

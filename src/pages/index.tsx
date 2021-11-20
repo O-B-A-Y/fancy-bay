@@ -1,14 +1,16 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import Image from 'next/image';
 import { ReactElement } from 'react';
-import Container from '../components/Container';
-import Flex from '../components/Flex';
-import FlexItem from '../components/FlexItem';
-import Grid from '../components/Grid';
-import GridItem from '../components/GridItem';
 import { DefaultLayout } from '../layouts';
 import styles from './index.module.scss';
 import { NextPageWithLayout } from './_app';
+import ObayBanner from '../../public/images/obay-banner.gif';
+import TreasureChest from '../../public/images/treasure-chest.png';
+import colors from '../styles/colors.module.scss';
+import { Button } from 'src/components';
+import ButtonVariant from 'src/constants/buttonVariant';
+import ButtonSize from 'src/constants/buttonConstant';
+import TextAlign from 'src/constants/textAlign';
 
 const Home: NextPageWithLayout = () => (
   <>
@@ -16,126 +18,47 @@ const Home: NextPageWithLayout = () => (
       <title>OBAY</title>
       <meta key="description" name="description" content="OBAY" />
     </Head>
-    <Container>
-      {/* Welcome section */}
-      <h1 className={styles.tealHeader}>
-        Welcome to{' '}
-        <Link href="/">
-          <a>OBAY</a>
-        </Link>
-      </h1>
-      {/* Grid test */}
-      <div>
-        <h2 className={styles.tealHeader}>1. Grid playground</h2>
-      </div>
-      <Grid
-        cols={{
-          xs: 1,
-          md: 2,
-          lg: 3,
-        }}
-        rows={{
-          xs: 1,
-          md: 2,
-          lg: 2,
-        }}
-        rowGap="md"
-        colGap="md"
-      >
-        <GridItem
-          rowSpan={1}
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #1
-        </GridItem>
-        <GridItem
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #2
-        </GridItem>
-        <GridItem
-          rowSpan={1}
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #3
-        </GridItem>
-        <GridItem
-          rowSpan={1}
-          colSpan={2}
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #4
-        </GridItem>
-      </Grid>
-      {/* Flexbox test */}
-      <div>
-        <h2 className={styles.tealHeader}>2. Flexbox playground</h2>
-      </div>
-      <Flex
-        direction={{
-          xs: 'row-reverse',
-        }}
-        colGap={{
-          xs: 'md',
-        }}
-        justifyContent={{
-          xs: 'center',
+    <main
+      style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+      }}
+    >
+      <Image src={ObayBanner} layout="fill" />
+      <div
+        style={{
+          position: 'absolute',
+          backgroundColor: 'rgb(0, 0, 0, 0.5)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
-        <FlexItem
+        <div
           style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             textAlign: 'center',
           }}
         >
-          #1
-        </FlexItem>
-        <FlexItem
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #2
-        </FlexItem>
-        <FlexItem
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #3
-        </FlexItem>
-        <FlexItem
-          style={{
-            backgroundColor: '#5bbbc8',
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          #4
-        </FlexItem>
-      </Flex>
-    </Container>
+          <Image src={TreasureChest} height={200} width={300} />
+          <div style={{ marginLeft: '-20px' }}>
+            <h3 style={{ color: 'white', fontSize: 30, margin: 0 }}>
+              Where your treasures lies
+            </h3>
+            <h1 style={{ color: 'white', fontSize: '13vw', margin: 0 }}>
+              OBAY
+            </h1>
+          </div>
+        </div>
+      </div>
+    </main>
   </>
 );
 
