@@ -22,21 +22,21 @@ const SwitchNavigationButton: React.FC<SwitchButtonProps> = ({ labels }) => {
       {/* Switch Mode (Swap | Liquidity) */}
       <Flex direction="row" className={styles.switchBox}>
         {labels.map((l, index) => (
-          <FlexItem
-            key={index.toString()}
-            className={clsx([
-              styles.switchButton,
-              {
-                [styles.active]: l.path === router.pathname,
-              },
-            ])}
-            flex="one"
-            alignSelf="stretch"
-          >
-            <Link href={l.path} passHref>
+          <Link href={l.path} passHref>
+            <FlexItem
+              key={index.toString()}
+              className={clsx([
+                styles.switchButton,
+                {
+                  [styles.active]: l.path === router.pathname,
+                },
+              ])}
+              flex="one"
+              alignSelf="stretch"
+            >
               <a>{l.name}</a>
-            </Link>
-          </FlexItem>
+            </FlexItem>
+          </Link>
         ))}
         {/* Swap Switch */}
       </Flex>

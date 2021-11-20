@@ -99,8 +99,8 @@ const Exchange: NextPageWithLayout = () => (
 
 Exchange.getLayout = function getLayout(page: ReactElement) {
   const myBayNames = [
-    'Hội Những Người Giàu Vì Coin Rác',
     'Venture of the future',
+    'Hội Những Người Giàu Vì Coin Rác',
   ];
   return (
     <DefaultLayout>
