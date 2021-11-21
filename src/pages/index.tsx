@@ -1,16 +1,10 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { ReactElement } from 'react';
-import { DefaultLayout } from '../layouts';
-import styles from './index.module.scss';
-import { NextPageWithLayout } from './_app';
 import ObayBanner from '../../public/images/obay-banner.gif';
 import TreasureChest from '../../public/images/treasure-chest.png';
-import colors from '../styles/colors.module.scss';
-import { Button } from 'src/components';
-import ButtonVariant from 'src/constants/buttonVariant';
-import ButtonSize from 'src/constants/buttonConstant';
-import TextAlign from 'src/constants/textAlign';
+import { DefaultLayout } from '../layouts';
+import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => (
   <>
@@ -18,14 +12,20 @@ const Home: NextPageWithLayout = () => (
       <title>OBAY</title>
       <meta key="description" name="description" content="OBAY" />
     </Head>
-    <main
+    <div
       style={{
         width: '100%',
-        height: '100%',
+        height: '92.2vh',
         position: 'relative',
       }}
     >
-      <Image src={ObayBanner} layout="fill" />
+      <Image
+        src={ObayBanner}
+        alt="OBAY Banner"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+      />
       <div
         style={{
           position: 'absolute',
@@ -58,7 +58,7 @@ const Home: NextPageWithLayout = () => (
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </>
 );
 

@@ -11,14 +11,15 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: auto;
     padding-bottom: 10px;
   }
 
   @include respond-to('md') {
     padding-top: 10px;
-    height: 54px;
     display: inline-flex;
     flex-direction: row;
+    height: $header-height;
     gap: 42px;
     width: 100vw;
     border-bottom: 1px solid $dark400;

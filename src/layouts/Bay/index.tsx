@@ -10,7 +10,7 @@ import Loader from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 // import { CurrencyUtils } from 'src/utils';
-import { Button, Container, Grid, TextInput } from 'src/components';
+import { Button, Container, Flex, Grid, TextInput } from 'src/components';
 import GridItem from 'src/components/GridItem';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
@@ -330,28 +330,37 @@ const Bay = ({
               </GridItem>
               <GridItem rowSpan={1} colSpan={5}>
                 <div className={styles.subContainer}>
-                  <div className={styles.header}>
-                    <div className={styles.header_left}>
-                      {[
-                        LeftSidedContainerTab.Proposals,
-                        LeftSidedContainerTab.Members,
-                        LeftSidedContainerTab.Portfolio,
-                      ].map((tab) => (
-                        <Link
-                          key={tab}
-                          href={`/my-bays/${bay?.address}/${tab.toLowerCase()}`}
+                  {/* Flex Header */}
+                  <Flex
+                    direction={{
+                      na: 'column',
+                      md: 'row',
+                    }}
+                    wrap="nowrap"
+                    colGap="xs"
+                    className={styles.header}
+                  >
+                    {/* Header Left */}
+                    {[
+                      LeftSidedContainerTab.Proposals,
+                      LeftSidedContainerTab.Members,
+                      LeftSidedContainerTab.Portfolio,
+                    ].map((tab) => (
+                      <Link
+                        key={tab}
+                        href={`/my-bays/${bay?.address}/${tab.toLowerCase()}`}
+                      >
+                        <div
+                          className={clsx({
+                            [styles.tab]: true,
+                            [styles.tab_active]: selectedTab === tab,
+                          })}
                         >
-                          <div
-                            className={clsx({
-                              [styles.tab]: true,
-                              [styles.tab_active]: selectedTab === tab,
-                            })}
-                          >
-                            <p className={styles.tabText}>{tab}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                          <p className={styles.tabText}>{tab}</p>
+                        </div>
+                      </Link>
+                    ))}
+                    {/* Header Right */}
                     <TextInput
                       hasButton
                       variant={TextInputVariant.outlined}
@@ -366,6 +375,9 @@ const Bay = ({
                       onButtonClicked={handler.SearchProposal}
                       onValueChanged={handler.ChangeSearchProposalInput}
                       value={formValues.searchProposalInput}
+                      style={{
+                        minWidth: 0,
+                      }}
                     />
                     <Button
                       backgroundColor="#303030"
@@ -378,9 +390,9 @@ const Bay = ({
                       paddingHorizontal={15}
                       onClick={handler.AddNewProposal}
                     >
-                      Add new proposal +
+                      Add Proposal +
                     </Button>
-                  </div>
+                  </Flex>
                   <div className={styles.subContainer_separator} />
                   <div className={styles.meta}>
                     <div className={styles.meta_leftSide}>
