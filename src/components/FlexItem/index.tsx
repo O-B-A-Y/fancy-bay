@@ -57,11 +57,27 @@ const FlexItem: React.FC<FlexItemProps> = ({
 }) => {
   const classNames = clsx({
     // Default
-    [styles[`flex-${flex}@${Size.NotAvailable}`]]: flex,
-    [styles[`flex-grow-${grow}@${Size.NotAvailable}`]]: grow,
-    [styles[`flex-shrink-${shrink}@${Size.NotAvailable}`]]: shrink,
-    [styles[`order-${order}@${Size.NotAvailable}`]]: order,
-    [styles[`align-self-${alignSelf}@${Size.NotAvailable}`]]: alignSelf,
+    [styles[
+      `flex-${(flex as Breakpoint<Flex>)?.na ?? flex}@${Size.NotAvailable}`
+    ]]: (flex as Breakpoint<Flex>)?.na ?? flex,
+    [styles[
+      `flex-grow-${(grow as Breakpoint<FlexGrow>)?.na ?? grow}@${
+        Size.NotAvailable
+      }`
+    ]]: (grow as Breakpoint<FlexGrow>)?.na ?? grow,
+    [styles[
+      `flex-shrink-${(shrink as Breakpoint<FlexShrink>)?.na ?? shrink}@${
+        Size.NotAvailable
+      }`
+    ]]: (shrink as Breakpoint<FlexShrink>)?.na ?? shrink,
+    [styles[
+      `order-${(order as Breakpoint<Order>)?.na ?? order}@${Size.NotAvailable}`
+    ]]: (order as Breakpoint<Order>)?.na ?? order,
+    [styles[
+      `align-self-${(alignSelf as Breakpoint<AlignSelf>)?.na ?? alignSelf}@${
+        Size.NotAvailable
+      }`
+    ]]: (alignSelf as Breakpoint<AlignSelf>)?.na ?? alignSelf,
 
     /* * Breakpoints * */
     // -FLEX-
