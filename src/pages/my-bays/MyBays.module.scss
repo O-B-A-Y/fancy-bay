@@ -10,7 +10,6 @@
   box-sizing: border-box;
   border-radius: map-get($border-radiuses, 'sm');
   @include glow-shadow;
-  margin-bottom: 50px;
 }
 
 .inputButton {
@@ -38,11 +37,10 @@
 }
 
 .baySearchInput {
-  width: 377px;
+  width: 100%;
 }
 
 .firstItem {
-  margin-right: auto;
   font-size: map-get($font-sizes, medium);
 }
 

@@ -1,39 +1,38 @@
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable react/no-array-index-key */
+import clsx from 'clsx';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, { ChangeEvent, useMemo } from 'react';
-import styles from './Bay.module.scss';
-import Head from 'next/head';
+import Loader from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
 // import { CurrencyUtils } from 'src/utils';
-import { Button, Container, Grid, TextInput } from 'src/components';
+import { Button, Container, Flex, Grid, TextInput } from 'src/components';
+import GridItem from 'src/components/GridItem';
+import ButtonSize from 'src/constants/buttonConstant';
+import ButtonVariant from 'src/constants/buttonVariant';
+import TextAlign from 'src/constants/textAlign';
+import TextInputVariant from 'src/constants/textInputVariant';
+import useFormValidation from 'src/hooks/useFormValidation';
+import useTokenInfo from 'src/hooks/useTokenInfo';
+import useWeb3 from 'src/hooks/useWeb3';
+import { useAppSelector } from 'src/states/hooks';
+import { toggleProposalCreationModal } from 'src/states/modal/slice';
+import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
+import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
+import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
+import { setSelectedBay } from 'src/states/treasureBay/slice';
+import { addToken } from 'src/states/wallet/slice';
+import DateUtils from 'src/utils/date';
+import NumberUtils from 'src/utils/number';
+import StringUtils from 'src/utils/string';
 import LogoIcon from '../../../public/icons/icon-74x68.png';
 import MetamaskIcon from '../../../public/icons/metamask-icon-54x56.png';
-import ReactTooltip from 'react-tooltip';
 import colors from '../../styles/colors.module.scss';
-import useFormValidation from 'src/hooks/useFormValidation';
-import ButtonSize from 'src/constants/buttonConstant';
-import TextAlign from 'src/constants/textAlign';
-import ButtonVariant from 'src/constants/buttonVariant';
-import TextInputVariant from 'src/constants/textInputVariant';
-import GridItem from 'src/components/GridItem';
-import ContainerSize from 'src/constants/containerSize';
-import useTokenInfo from 'src/hooks/useTokenInfo';
-import { addToken } from 'src/states/wallet/slice';
-import { useDispatch } from 'react-redux';
-import { useAppSelector } from 'src/states/hooks';
-import NumberUtils from 'src/utils/number';
-import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
-import Loader from 'react-loader-spinner';
-import StringUtils from 'src/utils/string';
-import useFetchMember from 'src/states/treasureBay/hooks/useFetchMember';
-import useTreasureBayMutations from 'src/states/treasureBay/hooks/useTreasureBayMutations';
-import { useRouter } from 'next/router';
-import useWeb3 from 'src/hooks/useWeb3';
-import DateUtils from 'src/utils/date';
-import { toggleProposalCreationModal } from 'src/states/modal/slice';
-import { setSelectedBay } from 'src/states/treasureBay/slice';
+import styles from './Bay.module.scss';
 // import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 
 const ImageLoader = ({
@@ -200,137 +199,148 @@ const Bay = ({
           <Loader type="Grid" color="#49fdc0" height={60} width={60} />
         </div>
       ) : (
-        // <Container size={ContainerSize.ExtraLarge}>
-        <div className={styles.container}>
-          <Grid
-            cols={{
-              xs: 1,
-              md: 2,
-              lg: 7,
-            }}
-            rows={{
-              xs: 1,
-              md: 1,
-              lg: 1,
-            }}
-            rowGap="xs"
-            colGap="md"
-          >
-            <GridItem rowSpan={1} colSpan={2}>
-              <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
-                <RenderMetaContainer />
-                <div className={styles.separator} />
+        <Container>
+          <div className={styles.container}>
+            <Grid
+              cols={{
+                xs: 1,
+                md: 2,
+                lg: 7,
+              }}
+              rows={{
+                xs: 1,
+                md: 1,
+                lg: 1,
+              }}
+              rowGap="xs"
+              colGap="md"
+            >
+              <GridItem rowSpan={1} colSpan={2}>
+                <div className={clsx(styles.bayInfoInner, styles.subContainer)}>
+                  <RenderMetaContainer />
+                  <div className={styles.separator} />
 
-                {account && walletSlice.data.tokens.OBAY ? (
-                  <>
-                    <div className={styles.bottomContainer}>
-                      <div className={styles.rowItem}>
-                        <p
-                          data-tip={account}
-                          data-for="address-tooltip"
-                          data-place="bottom"
-                        >
-                          <Image src={MetamaskIcon} width={15} height={15} />
-                          <span style={{ marginLeft: 10 }}>{`${account
-                            .substring(0, 10)
-                            .trim()}...`}</span>
-                        </p>
-                        <div style={{ alignItems: 'center' }}>
-                          <span>
-                            {NumberUtils.truncate(
-                              walletSlice.data.tokens.OBAY.balance,
-                              3
-                            )}{' '}
-                          </span>
-                          <Image src={LogoIcon} width={15} height={15} />
+                  {account && walletSlice.data.tokens.OBAY ? (
+                    <>
+                      <div className={styles.bottomContainer}>
+                        <div className={styles.rowItem}>
+                          <p
+                            data-tip={account}
+                            data-for="address-tooltip"
+                            data-place="bottom"
+                          >
+                            <Image src={MetamaskIcon} width={15} height={15} />
+                            <span style={{ marginLeft: 10 }}>{`${account
+                              .substring(0, 10)
+                              .trim()}...`}</span>
+                          </p>
+                          <div style={{ alignItems: 'center' }}>
+                            <span>
+                              {NumberUtils.truncate(
+                                walletSlice.data.tokens.OBAY.balance,
+                                3
+                              )}{' '}
+                            </span>
+                            <Image src={LogoIcon} width={15} height={15} />
+                          </div>
+                        </div>
+                        <TextInput
+                          hasButton
+                          variant={TextInputVariant.filled}
+                          borderWidth={1}
+                          backgroundColor={colors.$dark500}
+                          placeholder="Enter the amount"
+                          placeholderStyle={{
+                            color: 'white',
+                          }}
+                          buttonClassName={styles.inputButton}
+                          buttonText="Stake"
+                          onButtonClicked={handler.Stake}
+                          onValueChanged={handler.ChangeStakedAmount}
+                          value={formValues.stakedAmount}
+                        />
+                        <div className={styles.rowItem}>
+                          <div className={styles.metaLabel}>Total</div>
+                          <p className={styles.metaContent}>
+                            {fetchMember.member?.balance || 0} ETH
+                          </p>
                         </div>
                       </div>
-                      <TextInput
-                        hasButton
-                        variant={TextInputVariant.filled}
-                        borderWidth={1}
-                        backgroundColor={colors.$dark500}
-                        placeholder="Enter the amount"
-                        placeholderStyle={{
-                          color: 'white',
-                        }}
-                        buttonClassName={styles.inputButton}
-                        buttonText="Stake"
-                        onButtonClicked={handler.Stake}
-                        onValueChanged={handler.ChangeStakedAmount}
-                        value={formValues.stakedAmount}
-                      />
-                      <div className={styles.rowItem}>
-                        <div className={styles.metaLabel}>Total</div>
-                        <p className={styles.metaContent}>
-                          {fetchMember.member?.balance || 0} ETH
-                        </p>
-                      </div>
-                    </div>
-                    {bay?.members.some(
-                      (member) => member.contractAddress === account
-                    ) && (
-                      <>
-                        {DateUtils.isNotReachDay(
-                          parseInt(
-                            bay.members
-                              .filter(
-                                (member) => member.contractAddress === account
-                              )
-                              .map((member) => member.joinedAt)[0],
-                            10
-                          ),
-                          3
-                        ) ? (
-                          <div style={{ color: colors.dark500, fontSize: 15 }}>
-                            You must in the bay for more than 3 days to leave
-                          </div>
-                        ) : (
-                          <Button
-                            backgroundColor="#303030"
-                            borderWidth={1.5}
-                            color="white"
-                            variant={ButtonVariant.filled}
-                            size={ButtonSize.full}
-                            textAlign={TextAlign.center}
-                            paddingVertical={10}
-                            onClick={handler.Leave}
-                          >
-                            Leave the bay
-                          </Button>
-                        )}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                      {bay?.members.some(
+                        (member) => member.contractAddress === account
+                      ) && (
+                        <>
+                          {DateUtils.isNotReachDay(
+                            parseInt(
+                              bay.members
+                                .filter(
+                                  (member) => member.contractAddress === account
+                                )
+                                .map((member) => member.joinedAt)[0],
+                              10
+                            ),
+                            3
+                          ) ? (
+                            <div
+                              style={{ color: colors.dark500, fontSize: 15 }}
+                            >
+                              You must in the bay for more than 3 days to leave
+                            </div>
+                          ) : (
+                            <Button
+                              backgroundColor="#303030"
+                              borderWidth={1.5}
+                              color="white"
+                              variant={ButtonVariant.filled}
+                              size={ButtonSize.full}
+                              textAlign={TextAlign.center}
+                              paddingVertical={10}
+                              onClick={handler.Leave}
+                            >
+                              Leave the bay
+                            </Button>
+                          )}
+                        </>
+                      )}
+                    </>
+                  ) : (
                     <div
                       style={{
-                        height: 250,
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        flexDirection: 'column',
-                        color: colors.dark500,
                       }}
                     >
-                      <p style={{ fontSize: 55, margin: 0 }}>☻</p>
-                      <p>Wallet is not connected</p>
+                      <div
+                        style={{
+                          height: 250,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          flexDirection: 'column',
+                          color: colors.dark500,
+                        }}
+                      >
+                        <p style={{ fontSize: 55, margin: 0 }}>☻</p>
+                        <p>Wallet is not connected</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </GridItem>
-            <GridItem rowSpan={1} colSpan={5}>
-              <div className={styles.subContainer}>
-                <div className={styles.header}>
-                  <div className={styles.header_left}>
+                  )}
+                </div>
+              </GridItem>
+              <GridItem rowSpan={1} colSpan={5}>
+                <div className={styles.subContainer}>
+                  {/* Flex Header */}
+                  <Flex
+                    direction={{
+                      na: 'column',
+                      md: 'row',
+                    }}
+                    wrap="nowrap"
+                    colGap="xs"
+                    className={styles.header}
+                  >
+                    {/* Header Left */}
                     {[
                       LeftSidedContainerTab.Proposals,
                       LeftSidedContainerTab.Members,
@@ -350,69 +360,73 @@ const Bay = ({
                         </div>
                       </Link>
                     ))}
+                    {/* Header Right */}
+                    <TextInput
+                      hasButton
+                      variant={TextInputVariant.outlined}
+                      borderWidth={1}
+                      backgroundColor={colors.dark500}
+                      placeholder="Search for proposal"
+                      placeholderStyle={{
+                        color: 'white',
+                      }}
+                      buttonClassName={styles.inputButton}
+                      buttonText="Search"
+                      onButtonClicked={handler.SearchProposal}
+                      onValueChanged={handler.ChangeSearchProposalInput}
+                      value={formValues.searchProposalInput}
+                      style={{
+                        minWidth: 0,
+                      }}
+                    />
+                    <Button
+                      backgroundColor="#303030"
+                      borderWidth={1.5}
+                      color="white"
+                      variant={ButtonVariant.filled}
+                      size={ButtonSize.fit}
+                      textAlign={TextAlign.center}
+                      paddingVertical={10}
+                      paddingHorizontal={15}
+                      onClick={handler.AddNewProposal}
+                    >
+                      Add Proposal +
+                    </Button>
+                  </Flex>
+                  <div className={styles.subContainer_separator} />
+                  <div className={styles.meta}>
+                    <div className={styles.meta_leftSide}>
+                      <p>
+                        Personal Return on Investment (PROI):{' '}
+                        <span>
+                          {(
+                            (parseFloat(fetchMember.member?.balance as string) *
+                              100) /
+                              parseFloat(
+                                web3?.utils?.fromWei(
+                                  (
+                                    bay?.totalValueLocked as string
+                                  )?.toString() || '0',
+                                  'ether'
+                                )
+                              ) || 0
+                          ).toFixed(2)}
+                          %
+                        </span>
+                      </p>
+                    </div>
+                    <div className={styles.meta_rightSide}>
+                      <p>
+                        Next run: <span>22: 10: 30</span>
+                      </p>
+                    </div>
                   </div>
-                  <TextInput
-                    hasButton
-                    variant={TextInputVariant.outlined}
-                    borderWidth={1}
-                    backgroundColor={colors.dark500}
-                    placeholder="Search for proposal"
-                    placeholderStyle={{
-                      color: 'white',
-                    }}
-                    buttonClassName={styles.inputButton}
-                    buttonText="Search"
-                    onButtonClicked={handler.SearchProposal}
-                    onValueChanged={handler.ChangeSearchProposalInput}
-                    value={formValues.searchProposalInput}
-                  />
-                  <Button
-                    backgroundColor="#303030"
-                    borderWidth={1.5}
-                    color="white"
-                    variant={ButtonVariant.filled}
-                    size={ButtonSize.fit}
-                    textAlign={TextAlign.center}
-                    paddingVertical={10}
-                    paddingHorizontal={15}
-                    onClick={handler.AddNewProposal}
-                  >
-                    Add new proposal +
-                  </Button>
+                  {children}
                 </div>
-                <div className={styles.subContainer_separator} />
-                <div className={styles.meta}>
-                  <div className={styles.meta_leftSide}>
-                    <p>
-                      Personal Return on Investment (PROI):{' '}
-                      <span>
-                        {(
-                          (parseFloat(fetchMember.member?.balance as string) *
-                            100) /
-                            parseFloat(
-                              web3?.utils?.fromWei(
-                                (bay?.totalValueLocked as string)?.toString() ||
-                                  '0',
-                                'ether'
-                              )
-                            ) || 0
-                        ).toFixed(2)}
-                        %
-                      </span>
-                    </p>
-                  </div>
-                  <div className={styles.meta_rightSide}>
-                    <p>
-                      Next run: <span>22: 10: 30</span>
-                    </p>
-                  </div>
-                </div>
-                {children}
-              </div>
-            </GridItem>
-          </Grid>
-        </div>
-        // </Container>
+              </GridItem>
+            </Grid>
+          </div>
+        </Container>
       )}
 
       <ReactTooltip

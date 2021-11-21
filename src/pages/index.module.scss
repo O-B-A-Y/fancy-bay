@@ -3,3 +3,11 @@
 .tealHeader {
   color: $teal400;
 }
+
+.fillImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  resize: none;
+  min-height: 100vh;
+}

@@ -8,10 +8,8 @@ $container-height: 700px;
 
 .container {
   margin: 0px auto;
-  padding: 30px 60px;
-  height: $container-height;
-  max-height: 700px;
-  margin-bottom: 50px;
+  padding: 40px 60px;
+  height: 100%;
   position: relative;
 }
 
@@ -36,33 +34,26 @@ $container-height: 700px;
     margin-bottom: 20px;
   }
   .header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    &_left {
-      display: flex;
-      justify-content: space-evenly;
-      .tab {
-        &_active {
-          background-color: $teal500;
-          &:hover {
-            background-color: $teal700 !important;
-          }
-        }
+    .tab {
+      flex: 1;
+      &_active {
+        background-color: $teal500;
         &:hover {
-          background-color: $dark700;
+          background-color: $teal700 !important;
         }
-        color: $dark100;
-        background: transparent;
-        transition: 0.3s;
-        border: unset;
-        cursor: pointer;
-        font-weight: bold;
-        padding: 0px 35px;
-        font-size: 14px;
-        border-radius: 5px;
-        margin-right: 20px;
       }
+      &:hover {
+        background-color: $dark700;
+      }
+      color: $dark100;
+      background: transparent;
+      transition: 0.3s;
+      border: unset;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0px 35px;
+      font-size: 14px;
+      border-radius: 5px;
     }
   }
 }

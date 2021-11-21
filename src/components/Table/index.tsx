@@ -41,7 +41,7 @@ const Table: React.FC<{
   headerRowClassName,
   onFieldClick,
 }) => (
-  <>
+  <div style={{ overflowX: 'auto' }}>
     <table className={clsx(styles.container, tableClassName)} style={style}>
       <tr
         style={headerRowStyle}
@@ -82,7 +82,7 @@ const Table: React.FC<{
         </Link>
       ))}
     </table>
-  </>
+  </div>
 );
 
 export default Table;
