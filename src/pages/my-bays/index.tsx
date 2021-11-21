@@ -108,49 +108,77 @@ const MyBays: NextPageWithLayout = () => {
           {/* MyBay Header section */}
           <Flex
             className={styles.myBaysHeaderSection}
-            direction="row"
+            direction={{
+              na: 'column',
+              sm: 'row',
+            }}
             alignItems="baseline"
           >
-            <FlexItem className={styles.firstItem}>
+            <FlexItem
+              className={styles.firstItem}
+              flex={{
+                xs: 'initial',
+                md: 'one',
+              }}
+              grow={{
+                xs: 1,
+              }}
+            >
               <span
                 style={{
                   fontSize: 20,
+                  marginRight: 10,
                 }}
               >
                 MyBays
               </span>
             </FlexItem>
-            <FlexItem>
-              <Flex direction="row">
-                <TextInput
-                  hasButton
-                  variant={TextInputVariant.outlined}
-                  borderWidth={1}
-                  backgroundColor={colors.dark500}
-                  placeholder="Search for your Bays"
-                  inputClassName={styles.baySearchInput}
-                  onValueChanged={(e) =>
-                    handleSetFieldValue('searchInput', (e.target as any).value)
-                  }
-                  placeholderStyle={{
-                    color: 'white',
-                  }}
-                  buttonClassName={styles.inputButton}
-                  buttonText="Search"
-                />
-                <Button
-                  backgroundColor="#303030"
-                  borderWidth={1.5}
-                  variant={ButtonVariant.filled}
-                  size={ButtonSize.full}
-                  textAlign={TextAlign.center}
-                  paddingVertical={10}
-                  paddingHorizontal={20}
-                  onClick={handler.AddNewBay}
-                >
-                  Add new bay{' '}
-                  <FaPlus style={{ fontSize: 10, marginLeft: 10 }} />
-                </Button>
+            <FlexItem
+              flex={{
+                xs: 'initial',
+                md: 'one',
+              }}
+            >
+              <Flex direction="row" colGap="sm">
+                <FlexItem flex="one">
+                  <TextInput
+                    hasButton
+                    variant={TextInputVariant.outlined}
+                    borderWidth={1}
+                    backgroundColor={colors.dark500}
+                    placeholder="Search for your Bays"
+                    inputClassName={styles.baySearchInput}
+                    onValueChanged={(e) =>
+                      handleSetFieldValue(
+                        'searchInput',
+                        (e.target as any).value
+                      )
+                    }
+                    placeholderStyle={{
+                      color: 'white',
+                    }}
+                    buttonClassName={styles.inputButton}
+                    buttonText="Search"
+                  />
+                </FlexItem>
+                <FlexItem>
+                  <Button
+                    backgroundColor="#303030"
+                    borderWidth={1.5}
+                    variant={ButtonVariant.filled}
+                    size={ButtonSize.full}
+                    textAlign={TextAlign.center}
+                    paddingVertical={10}
+                    paddingHorizontal={20}
+                    onClick={handler.AddNewBay}
+                    style={{
+                      height: '100%',
+                    }}
+                  >
+                    Add new bay
+                    <FaPlus style={{ fontSize: 10, marginLeft: 10 }} />
+                  </Button>
+                </FlexItem>
               </Flex>
             </FlexItem>
           </Flex>

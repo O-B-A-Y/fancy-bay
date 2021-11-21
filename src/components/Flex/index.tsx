@@ -59,15 +59,39 @@ const Flex: React.FC<FlexProps> = ({
   const classNames = clsx({
     // Default
     [styles.flex]: true,
-    [styles[`flex-${direction}@${Size.NotAvailable}`]]: direction,
-    [styles[`flex-${wrap}@${Size.NotAvailable}`]]: wrap,
-    [styles[`justify-content-${justifyContent}@${Size.NotAvailable}`]]:
-      justifyContent,
-    [styles[`align-items-${alignItems}@${Size.NotAvailable}`]]: alignItems,
-    [styles[`align-content-${alignContent}@${Size.NotAvailable}`]]:
-      alignContent,
-    [styles[`gap-row-${rowGap}@${Size.NotAvailable}`]]: rowGap,
-    [styles[`gap-col-${colGap}@${Size.NotAvailable}`]]: colGap,
+    [styles[
+      `flex-${(direction as Breakpoint<FlexDirection>)?.na ?? direction}@${
+        Size.NotAvailable
+      }`
+    ]]: (direction as Breakpoint<FlexDirection>)?.na ?? direction,
+    [styles[
+      `flex-${(wrap as Breakpoint<FlexWrap>)?.na ?? wrap}@${Size.NotAvailable}`
+    ]]: (wrap as Breakpoint<FlexWrap>)?.na ?? wrap,
+    [styles[
+      `justify-content-${
+        (justifyContent as Breakpoint<JustifyContent>)?.na ?? justifyContent
+      }@${Size.NotAvailable}`
+    ]]: (justifyContent as Breakpoint<JustifyContent>)?.na ?? justifyContent,
+    [styles[
+      `align-items-${
+        (alignItems as Breakpoint<AlignItems>)?.na ?? alignItems
+      }@${Size.NotAvailable}`
+    ]]: (alignItems as Breakpoint<AlignItems>)?.na ?? alignItems,
+    [styles[
+      `align-content-${
+        (alignContent as Breakpoint<AlignContent>)?.na ?? alignContent
+      }@${Size.NotAvailable}`
+    ]]: (alignContent as Breakpoint<AlignContent>)?.na ?? alignContent,
+    [styles[
+      `gap-row-${(rowGap as Breakpoint<GapSize>)?.na ?? rowGap}@${
+        Size.NotAvailable
+      }`
+    ]]: (rowGap as Breakpoint<GapSize>)?.na ?? rowGap,
+    [styles[
+      `gap-col-${(colGap as Breakpoint<GapSize>)?.na ?? colGap}@${
+        Size.NotAvailable
+      }`
+    ]]: (colGap as Breakpoint<GapSize>)?.na ?? colGap,
 
     /* * Breakpoints * */
     // --DIRECTION--
