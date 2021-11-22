@@ -5,7 +5,6 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 export enum DevelopmentChainId {
   OPTION_1 = 5777,
   OPTION_2 = 1337,
-  OPTION_3 = 1,
 }
 
 export const supportedChainIds = [
@@ -28,7 +27,6 @@ export const chainNetworkMapping: any = {
   [ChainId.MATIC]: 'MATIC',
   [DevelopmentChainId.OPTION_1]: DevChainName,
   [DevelopmentChainId.OPTION_2]: DevChainName,
-  [DevelopmentChainId.OPTION_3]: DevChainName,
 };
 
 const RPC = {

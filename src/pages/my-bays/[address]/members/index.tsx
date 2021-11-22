@@ -49,16 +49,14 @@ const BayMembers: NextPageWithLayout = () => {
             className: styles.member_item_stakedAmount,
           },
           {
-            value: `${
-              (
-                parseFloat(`${(member.balance as any) * 100}`) /
+            value: `${(
+              parseFloat(`${(member.balance as any) * 100}`) /
                 parseFloat(
                   web3.utils.fromWei(
                     `${(fetchTreasureBay.bay as any).totalValueLocked}`
                   )
-                )
-              ).toFixed(2) || 0
-            }%`,
+                ) || 0
+            ).toFixed(2)}%`,
             className: styles.member_item_occupied,
           },
         ]),

@@ -37,6 +37,7 @@
     "*.{json,md,css}": "yarn prettier:fix"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.2.14",
     "@ethersproject/address": "^5.5.0",
     "@ethersproject/bignumber": "^5.5.0",
     "@ethersproject/constants": "^5.5.0",

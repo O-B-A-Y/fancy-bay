@@ -54,6 +54,7 @@ const useTreasureBayMutations = () => {
   };
 
   const voteTransferProposal = (proposalAddress: string, isYes: boolean) => {
+    setLoading(true);
     const transferProposalContract =
       useTransferProposalContract(proposalAddress);
     const transferProposalMethods: TransferProposal =
@@ -67,6 +68,7 @@ const useTreasureBayMutations = () => {
         from: data.environment.account as string,
       });
     }
+    setLoading(false);
   };
 
   const createNewTreasureBay = async ({

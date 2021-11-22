@@ -39,7 +39,7 @@ const ProposalItem = ({
       <div className={styles.rowItem}>
         <p className={styles.proposal_item_label}>Expired in</p>
         <p className={styles.proposal_item_time}>
-          {moment.unix(parseFloat(proposal.votingDeadline)).toNow()}
+          {moment.unix(parseFloat(proposal.votingDeadline)).fromNow()}
         </p>
       </div>
       <div className={styles.rowItem}>
