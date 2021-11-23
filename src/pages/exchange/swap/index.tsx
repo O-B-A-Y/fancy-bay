@@ -2,6 +2,7 @@ import { buildUrl } from 'cloudinary-build-url';
 import Head from 'next/head';
 import Image from 'next/image';
 import React, { ReactElement } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import { MdSwapVerticalCircle } from 'react-icons/md';
 import { Button, Flex, FlexItem, NumberInput } from '../../../components';
 import { DefaultLayout, ExchangeLayout } from '../../../layouts';
@@ -39,12 +40,16 @@ const Exchange: NextPageWithLayout = () => (
           {/* Annotation - FROM */}
           <Flex
             direction="column"
-            alignItems="center"
             justifyContent="center"
             className={styles.annotationContainer}
           >
             <FlexItem className={styles.guideAnnotation}>From:</FlexItem>
-            <FlexItem className={styles.currencyAnnotation}>ETH</FlexItem>
+            <FlexItem className={styles.currencyAnnotation}>
+              ETH
+              <div className={styles.selectCurrency}>
+                <IoIosArrowDown className={styles.selectCurrencyIcon} />
+              </div>
+            </FlexItem>
           </Flex>
         </Flex>
       </FlexItem>
@@ -78,12 +83,17 @@ const Exchange: NextPageWithLayout = () => (
           {/* Annotation - TO */}
           <Flex
             direction="column"
-            alignItems="center"
             justifyContent="center"
+            alignContent="center"
             className={styles.annotationContainer}
           >
             <FlexItem className={styles.guideAnnotation}>To:</FlexItem>
-            <FlexItem className={styles.currencyAnnotation}>USDT</FlexItem>
+            <FlexItem className={styles.currencyAnnotation}>
+              USDT
+              <div className={styles.selectCurrency}>
+                <IoIosArrowDown className={styles.selectCurrencyIcon} />
+              </div>
+            </FlexItem>
           </Flex>
         </Flex>
       </FlexItem>

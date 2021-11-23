@@ -66,3 +66,21 @@
   width: 100%;
   font-size: map-get($font-sizes, medium);
 }
+
+.selectCurrency {
+  display: inline-block;
+  &::before {
+    content: '\00a0';
+  }
+}
+
+.selectCurrencyIcon {
+  color: $dark400;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 15px;
+  &:hover {
+    color: $dark300;
+    cursor: pointer;
+  }
+}

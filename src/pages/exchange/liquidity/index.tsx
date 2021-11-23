@@ -44,7 +44,7 @@ const Liquidity: NextPageWithLayout = () => (
           {/* Annotation - FROM */}
           <Flex
             direction="column"
-            alignItems="center"
+            alignContent="center"
             justifyContent="center"
             className={styles.annotationContainer}
           >
@@ -83,7 +83,7 @@ const Liquidity: NextPageWithLayout = () => (
           {/* Annotation - TO */}
           <Flex
             direction="column"
-            alignItems="center"
+            alignContent="center"
             justifyContent="center"
             className={styles.annotationContainer}
           >

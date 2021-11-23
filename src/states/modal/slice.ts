@@ -10,6 +10,7 @@ export interface ModalState {
     noContract: boolean;
     bayCreation: boolean;
     injectedConnectorError: boolean;
+    selectTokenPair: boolean;
   };
   error: null | object | string;
 }
@@ -23,6 +24,7 @@ const initialState: ModalState = {
     noContract: false,
     bayCreation: false,
     injectedConnectorError: false,
+    selectTokenPair: false,
   },
   error: null,
 };
@@ -55,6 +57,10 @@ const modalSlice = createSlice({
       console.log(action);
       state.data.bayCreation = action.payload;
     },
+    toggleSelectTokenPairModal(state, action: PayloadAction<boolean>) {
+      console.log(action);
+      state.data.selectTokenPair = action.payload;
+    },
   },
 });
 
@@ -65,6 +71,7 @@ export const {
   toggleInjectedConnectorErrorModal,
   toggleTransferProposalModal,
   toggleProposalCreationModal,
+  toggleSelectTokenPairModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

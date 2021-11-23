@@ -22,9 +22,8 @@ const SwitchNavigationButton: React.FC<SwitchButtonProps> = ({ labels }) => {
       {/* Switch Mode (Swap | Liquidity) */}
       <Flex direction="row" className={styles.switchBox}>
         {labels.map((l, index) => (
-          <Link href={l.path} passHref>
+          <Link href={l.path} passHref key={index.toString()}>
             <FlexItem
-              key={index.toString()}
               className={clsx([
                 styles.switchButton,
                 {

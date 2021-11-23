@@ -3,8 +3,8 @@ import { useState } from 'react';
 /**
  * @function useFormValidation
  * @description A custom hook used for managing and validating form values
- * @param {*} initialFormValues - initial form values
- * @param {Function} validate - Optional. A function validate form values `(formValues) => { valid: Boolean, errors: { [key:string]: error } }`
+ * @param initialFormValues - initial form values
+ * @param validate - Optional. A function validate form values `(formValues) => { valid: Boolean, errors: { [key:string]: error } }`
  */
 function useFormValidation<S = {}>(
   initialFormValues: S,
