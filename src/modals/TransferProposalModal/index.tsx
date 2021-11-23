@@ -68,6 +68,9 @@ const TransferProposalModal = () => {
   const { data } = useAppSelector((state) => state.modalSlice);
   const { voteTransferProposal } = useTreasureBayMutations();
   const {
+    data: { environment },
+  } = useAppSelector((state) => state.walletSlice);
+  const {
     data: { selectedTransferProposal },
   } = useAppSelector((state) => state.proposalSlice);
   const dispatch = useDispatch();
@@ -171,33 +174,35 @@ const TransferProposalModal = () => {
             </p>
           </div>
         </div>
-        <div style={{ display: 'flex' }}>
-          <Button
-            backgroundColor="#303030"
-            borderWidth={1.5}
-            color="white"
-            variant={ButtonVariant.filled}
-            size={ButtonSize.full}
-            textAlign={TextAlign.center}
-            paddingVertical={10}
-            onClick={handler.VoteYes}
-          >
-            Yes
-          </Button>
-          <div style={{ flexBasis: '15px' }} />
-          <Button
-            backgroundColor="#303030"
-            borderWidth={1.5}
-            color="white"
-            variant={ButtonVariant.filled}
-            size={ButtonSize.full}
-            textAlign={TextAlign.center}
-            paddingVertical={10}
-            onClick={handler.VoteNo}
-          >
-            No
-          </Button>
-        </div>
+        {selectedTransferProposal.creator === environment.account && (
+          <div style={{ display: 'flex' }}>
+            <Button
+              backgroundColor="#303030"
+              borderWidth={1.5}
+              color="white"
+              variant={ButtonVariant.filled}
+              size={ButtonSize.full}
+              textAlign={TextAlign.center}
+              paddingVertical={10}
+              onClick={handler.VoteYes}
+            >
+              Yes
+            </Button>
+            <div style={{ flexBasis: '15px' }} />
+            <Button
+              backgroundColor="#303030"
+              borderWidth={1.5}
+              color="white"
+              variant={ButtonVariant.filled}
+              size={ButtonSize.full}
+              textAlign={TextAlign.center}
+              paddingVertical={10}
+              onClick={handler.VoteNo}
+            >
+              No
+            </Button>
+          </div>
+        )}
       </div>
     </ReactModal>
   );

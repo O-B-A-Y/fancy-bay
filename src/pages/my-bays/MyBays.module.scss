@@ -10,6 +10,7 @@
   box-sizing: border-box;
   border-radius: map-get($border-radiuses, 'sm');
   @include glow-shadow;
+  margin-bottom: 50px;
 }
 
 .inputButton {

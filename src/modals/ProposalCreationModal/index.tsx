@@ -66,7 +66,9 @@ const ProposalCreationModal = () => {
     AddNewBay: async () => {
       createNewTransferProposal(selectedBay.address, {
         _amount: formValues.amount,
-        _debatingPeriod: `${moment().add(formValues.deadlineDay).unix()}`,
+        _debatingPeriod: `${moment()
+          .add(formValues.deadlineDay, 'days')
+          .unix()}`,
         _description: formValues.description,
         _recipient: formValues.recipient,
         _title: formValues.title,
