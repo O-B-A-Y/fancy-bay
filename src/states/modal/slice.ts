@@ -30,7 +30,7 @@ const initialState: ModalState = {
 };
 
 const modalSlice = createSlice({
-  name: 'wallet',
+  name: 'modal',
   initialState,
   reducers: {
     toggleExchangeProposalModal(state, action: PayloadAction<boolean>) {

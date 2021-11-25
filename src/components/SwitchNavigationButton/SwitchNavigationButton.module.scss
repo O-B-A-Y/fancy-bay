@@ -21,6 +21,7 @@
 .active {
   background-color: $teal400;
   color: $dark100;
+  transition: 0.3s;
   border: 1px solid $dark500;
   box-sizing: border-box;
   border-radius: 5px;

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Flex from '../Flex';
-import FlexItem from '../FlexItem';
 import styles from './SwitchNavigationButton.module.scss';
 
 interface SwitchLabel {
@@ -23,18 +22,23 @@ const SwitchNavigationButton: React.FC<SwitchButtonProps> = ({ labels }) => {
       <Flex direction="row" className={styles.switchBox}>
         {labels.map((l, index) => (
           <Link href={l.path} passHref key={index.toString()}>
-            <FlexItem
-              className={clsx([
-                styles.switchButton,
-                {
-                  [styles.active]: l.path === router.pathname,
-                },
-              ])}
-              flex="one"
-              alignSelf="stretch"
+            <a
+              style={{
+                flex: '1 1 0%',
+                alignSelf: 'stretch',
+              }}
             >
-              <a>{l.name}</a>
-            </FlexItem>
+              <div
+                className={clsx([
+                  styles.switchButton,
+                  {
+                    [styles.active]: l.path === router.pathname,
+                  },
+                ])}
+              >
+                {l.name}
+              </div>
+            </a>
           </Link>
         ))}
         {/* Swap Switch */}

@@ -1,17 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import ThunkFetchState from '../../constants/fetch';
-
-interface TokenDetails {
-  name?: string;
-  symbol?: string;
-  address?: string;
-}
+import { NativeCurrencyDetails, TokenDetails } from '../../types/Token';
 
 interface ExchangeState {
   status: ThunkFetchState;
   data: {
-    firstPair?: TokenDetails | null;
-    secondPair?: TokenDetails | null;
+    firstPair?: TokenDetails | NativeCurrencyDetails | null;
+    secondPair?: TokenDetails | NativeCurrencyDetails | null;
   };
   error: null | object | string;
 }
@@ -20,27 +15,36 @@ const initialState: ExchangeState = {
   status: ThunkFetchState.Idle,
   data: {
     firstPair: {
+      chainId: 1,
+      decimals: 18,
       name: 'Ethereum',
       symbol: 'ETH',
+      logoURI: 'ipfs://QmXtMayDwgVLDuDhzy89uw27bY9cRtVJXecTUcCksPZgsV',
     },
     secondPair: null,
   },
   error: null,
 };
 
-const greetingSlice = createSlice({
+const exchangeSlice = createSlice({
   name: 'exchange',
   initialState,
   reducers: {
-    selectFirstPair(state, action: PayloadAction<TokenDetails>) {
+    selectFirstPair(
+      state,
+      action: PayloadAction<TokenDetails | NativeCurrencyDetails>
+    ) {
       state.data.firstPair = action.payload;
     },
-    selectSecondPair(state, action: PayloadAction<TokenDetails>) {
+    selectSecondPair(
+      state,
+      action: PayloadAction<TokenDetails | NativeCurrencyDetails>
+    ) {
       state.data.secondPair = action.payload;
     },
   },
 });
 
-export const { selectFirstPair, selectSecondPair } = greetingSlice.actions;
+export const { selectFirstPair, selectSecondPair } = exchangeSlice.actions;
 
-export default greetingSlice.reducer;
+export default exchangeSlice.reducer;

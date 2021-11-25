@@ -8,10 +8,11 @@ export enum DevelopmentChainId {
 }
 
 export const supportedChainIds = [
-  ChainId.KOVAN, // mainnet
-  ChainId.MAINNET, // ropsten
-  ChainId.ROPSTEN, // rinkeby
-  ChainId.GÖRLI, // kovan,
+  // ChainId.MAINNET, // mainnet
+  ChainId.KOVAN, // kovan test net
+  ChainId.MAINNET, // ropsten test net
+  ChainId.ROPSTEN, // rinkeby test net
+  ChainId.GÖRLI, // GÖRLI test net
 ];
 
 const DevChainName = 'Devnet';

@@ -1,4 +1,5 @@
 @import './abstracts/colors';
+@import './abstracts/mixins';
 
 html,
 body {
@@ -35,4 +36,33 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.53) !important;
+  transition: opacity 250ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin-right: -50% !important;
+  transform: translate(-50%, -50%) !important;
+  background-color: $dark800 !important;
+  border: 1px solid $dark600 !important;
+  @include respond-to(sm) {
+    width: 422px !important;
+    height: auto !important;
+  }
 }
