@@ -1,29 +1,52 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { ChainId } from '@sushiswap/sdk';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdSwapVerticalCircle } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import { Button, Flex, FlexItem, NumberInput } from '../../../components';
 import { DefaultLayout, ExchangeLayout } from '../../../layouts';
 import ExchangeSelectModal from '../../../modals/ExchangeSelectModal';
-import useExchangeSelectModal from '../../../states/exchange/hooks/useExchangeSelectModal';
+import {
+  importTokenList,
+  switchChainCurrency,
+} from '../../../states/exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../../states/hooks';
-import { importTokenList } from '../../../states/token/slice';
+import useExchangeSelectModal from '../../../states/modal/hooks/useExchangeSelectModal';
 import colors from '../../../styles/colors.module.scss';
 import URLUtils from '../../../utils/url';
 import { NextPageWithLayout } from '../../_app';
 import styles from './Swap.module.scss';
 
 const Exchange: NextPageWithLayout = () => {
+  const [selectOrder, setSelectOrder] = useState<number>(0);
   const { openExchangeSelectModal } = useExchangeSelectModal();
-  const tokenData = useAppSelector((state) => state.tokenSlice.data.tokens);
-  const { firstPair, secondPair } = useAppSelector(
+  const { nativeCurrency, token: tokenData } = useAppSelector(
     (state) => state.exchangeSlice.data
+  );
+  const { firstItem, secondItem } = useAppSelector(
+    (state) => state.exchangeSlice.data.pair
+  );
+  const { chainId } = useAppSelector(
+    (state) => state.walletSlice.data.environment
   );
   const dispatch = useAppDispatch();
 
+  // Filter tokens by chainId
+  const chainTokens = useMemo(() => {
+    if (chainId && tokenData.list.length > 0)
+      return tokenData.list.filter((t) => t.chainId === 1);
+    return [];
+  }, [chainId, tokenData]);
+
+  // Init native currency for specific chainId
+  useEffect(() => {
+    if (chainId) dispatch(switchChainCurrency(chainId as ChainId));
+  }, [chainId]);
+
+  // Fetch initial default token list of OBAY Exchange
   useEffect(() => {
     // Initial token list (Stablecoin)
     (async () => {
@@ -34,7 +57,7 @@ const Exchange: NextPageWithLayout = () => {
           )
         ).unwrap();
       } catch (err) {
-        toast.error(`ERROR! Cannot import list of tokens!`, {
+        toast.error(`ERROR! Cannot import default list of tokens!`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           hideProgressBar: false,
@@ -46,6 +69,10 @@ const Exchange: NextPageWithLayout = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {});
+
+  /* * * */
   return (
     <>
       <Head>
@@ -65,7 +92,10 @@ const Exchange: NextPageWithLayout = () => {
             {/* Logo */}
             <FlexItem className={styles.symbolIcon} alignSelf="center">
               <Image
-                src={URLUtils.processValidURL(firstPair!.logoURI)}
+                src={URLUtils.processValidURL(
+                  firstItem?.logoURI ??
+                    'ipfs://Qmdhd65V2sC7LXoVypL53qNgUmQDG6hpFBKPyevssrSkqQ'
+                )}
                 width={52}
                 height={52}
                 className={styles.symbolImg}
@@ -79,17 +109,18 @@ const Exchange: NextPageWithLayout = () => {
             >
               <FlexItem className={styles.guideAnnotation}>From:</FlexItem>
               <FlexItem className={styles.currencyAnnotation}>
-                {firstPair?.symbol}
+                {firstItem?.symbol ?? '?'}
                 <div
                   className={styles.selectCurrency}
-                  onClick={openExchangeSelectModal}
+                  onClick={() => {
+                    setSelectOrder(0);
+                    openExchangeSelectModal();
+                  }}
                   role="button"
                   tabIndex={0}
                 >
                   <IoIosArrowDown className={styles.selectCurrencyIcon} />
                 </div>
-                {/* React Modal */}
-                <ExchangeSelectModal tokens={tokenData} />
               </FlexItem>
             </Flex>
           </Flex>
@@ -109,7 +140,7 @@ const Exchange: NextPageWithLayout = () => {
             <FlexItem className={styles.symbolIcon} alignSelf="center">
               <Image
                 src={URLUtils.processValidURL(
-                  secondPair?.logoURI ??
+                  secondItem?.logoURI ??
                     'ipfs://Qmdhd65V2sC7LXoVypL53qNgUmQDG6hpFBKPyevssrSkqQ'
                 )}
                 width={52}
@@ -126,10 +157,13 @@ const Exchange: NextPageWithLayout = () => {
             >
               <FlexItem className={styles.guideAnnotation}>To:</FlexItem>
               <FlexItem className={styles.currencyAnnotation}>
-                {secondPair?.symbol ?? '?'}
+                {secondItem?.symbol ?? '?'}
                 <div
                   className={styles.selectCurrency}
-                  onClick={openExchangeSelectModal}
+                  onClick={() => {
+                    setSelectOrder(1);
+                    openExchangeSelectModal();
+                  }}
                   role="button"
                   tabIndex={0}
                 >
@@ -145,6 +179,11 @@ const Exchange: NextPageWithLayout = () => {
         </FlexItem>
       </Flex>
       <Button className={styles.submitBtn}>Submit</Button>
+      {/* React Modal */}
+      <ExchangeSelectModal
+        items={nativeCurrency ? [nativeCurrency, ...chainTokens] : chainTokens}
+        currentSelectOrder={selectOrder}
+      />
       <ToastContainer
         position="top-right"
         autoClose={5000}

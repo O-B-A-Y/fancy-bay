@@ -3,7 +3,6 @@ import logger from 'redux-logger';
 import exchangeSlice from '../states/exchange/slice';
 import modalSlice from '../states/modal/slice';
 import proposalSlice from '../states/proposal/slice';
-import tokenSlice from '../states/token/slice';
 import treasureBaySlice from '../states/treasureBay/slice';
 import walletSlice from '../states/wallet/slice';
 /* Main Redux Global Store configurations */
@@ -16,7 +15,6 @@ export const store = configureStore({
     treasureBaySlice,
     proposalSlice,
     exchangeSlice,
-    tokenSlice,
   },
 });
 

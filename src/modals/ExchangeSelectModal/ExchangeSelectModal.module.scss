@@ -23,6 +23,14 @@
   border-radius: 10px;
 }
 
+.selectedSymbolImg {
+  filter: brightness(60%);
+}
+
+.selectedAnnotation {
+  color: $dark400;
+}
+
 .tokenInput {
   color: $dark200;
   width: 100%;
@@ -30,6 +38,15 @@
 
 .annotationName {
   font-weight: 200;
+}
+
+.tokenContainer {
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: $dark600;
+    border-radius: 10px;
+  }
 }
 
 .manageBtn {
