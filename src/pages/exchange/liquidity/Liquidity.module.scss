@@ -38,10 +38,6 @@
 .addIcon {
   color: $dark600;
   font-size: map-get($font-sizes, large);
-  &:hover {
-    color: $dark500;
-    cursor: pointer;
-  }
   margin: 0 auto;
 }
 

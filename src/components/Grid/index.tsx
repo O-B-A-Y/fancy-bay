@@ -32,8 +32,8 @@ type JustifyContent =
   | 'space-evenly';
 
 interface GridProps {
-  rows?: GridBreakpoint | Rows;
-  cols?: GridBreakpoint | Cols;
+  rows?: Breakpoint<Rows> | Rows;
+  cols?: Breakpoint<Cols> | Cols;
   rowGap?: Breakpoint<GapSize> | GapSize;
   colGap?: Breakpoint<GapSize> | GapSize;
   flowRow?: boolean;
@@ -69,17 +69,41 @@ const Grid: React.FC<GridProps> = ({
   const classNames = clsx({
     [styles.grid]: children,
     // Default
-    [styles[`grid-rows-${rows}@${Size.NotAvailable}`]]: rows,
-    [styles[`grid-cols-${cols}@${Size.NotAvailable}`]]: cols,
-    [styles[`gap-row-${rowGap}@${Size.NotAvailable}`]]: rowGap,
-    [styles[`gap-col-${colGap}@${Size.NotAvailable}`]]: colGap,
-    [styles[`justify-content-${justifyContent}@${Size.NotAvailable}`]]:
-      justifyContent,
-    [styles[`align-items-${alignItems}@${Size.NotAvailable}`]]: alignItems,
-    [styles[`justify-items-${justifyItems}@${Size.NotAvailable}`]]:
-      justifyItems,
-    [styles[`align-content-${alignContent}@${Size.NotAvailable}`]]:
-      alignContent,
+    [styles[
+      `grid-rows-${(rows as Breakpoint<Rows>)?.na ?? rows}@${Size.NotAvailable}`
+    ]]: (rows as Breakpoint<Rows>)?.na ?? rows,
+    [styles[`grid-cols-${cols}@${Size.NotAvailable}`]]:
+      (cols as Breakpoint<Cols>)?.na ?? cols,
+    [styles[
+      `gap-row-${(rowGap as Breakpoint<GapSize>)?.na ?? rowGap}@${
+        Size.NotAvailable
+      }`
+    ]]: (rowGap as Breakpoint<GapSize>)?.na ?? rowGap,
+    [styles[
+      `gap-col-${(colGap as Breakpoint<GapSize>)?.na ?? colGap}@${
+        Size.NotAvailable
+      }`
+    ]]: (colGap as Breakpoint<GapSize>)?.na ?? colGap,
+    [styles[
+      `justify-content-${
+        (justifyContent as Breakpoint<JustifyContent>)?.na ?? justifyContent
+      }@${Size.NotAvailable}`
+    ]]: (justifyContent as Breakpoint<JustifyContent>)?.na ?? justifyContent,
+    [styles[
+      `align-items-${(alignItems as Breakpoint<AlignItems>)?.na}@${
+        Size.NotAvailable
+      }`
+    ]]: (alignItems as Breakpoint<AlignItems>)?.na,
+    [styles[
+      `justify-items-${
+        (justifyItems as Breakpoint<JustifyItems>)?.na ?? justifyItems
+      }@${Size.NotAvailable}`
+    ]]: (justifyItems as Breakpoint<JustifyItems>)?.na ?? justifyItems,
+    [styles[
+      `align-content-${
+        (alignContent as Breakpoint<AlignContent>)?.na ?? alignContent
+      }@${Size.NotAvailable}`
+    ]]: (alignContent as Breakpoint<AlignContent>)?.na ?? alignContent,
     // Responsive rows
     [styles[`grid-rows-${(rows as GridBreakpoint).xs}@${Size.ExtraSmall}`]]: (
       rows as GridBreakpoint

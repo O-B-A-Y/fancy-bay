@@ -4,26 +4,18 @@ import Size from '../../constants/size';
 import { Breakpoint } from '../../types/style';
 import styles from './GridItem.module.scss';
 
-type GridSpanBreakpoint = {
-  [key in Size]?: GridSpan;
-};
-
-type GridPositionBreakpoint = {
-  [key in Size]?: GridPosition;
-};
-
 type GridSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type GridPosition = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 type JustifySelf = 'start' | 'end' | 'center' | 'stretch';
 type AlignSelf = 'start' | 'end' | 'center' | 'stretch';
 
 interface GridItemProps {
-  rowSpan?: GridSpanBreakpoint | GridSpan;
-  colSpan?: GridSpanBreakpoint | GridSpan;
-  rowStart?: GridPositionBreakpoint | GridPosition;
-  rowEnd?: GridPositionBreakpoint | GridPosition;
-  colStart?: GridPositionBreakpoint | GridPosition;
-  colEnd?: GridPositionBreakpoint | GridPosition;
+  rowSpan?: Breakpoint<GridSpan> | GridSpan;
+  colSpan?: Breakpoint<GridSpan> | GridSpan;
+  rowStart?: Breakpoint<GridPosition> | GridPosition;
+  rowEnd?: Breakpoint<GridPosition> | GridPosition;
+  colStart?: Breakpoint<GridPosition> | GridPosition;
+  colEnd?: Breakpoint<GridPosition> | GridPosition;
   justifySelf?: Breakpoint<JustifySelf> | JustifySelf;
   alignSelf?: Breakpoint<AlignSelf> | AlignSelf;
   className?: string;
@@ -44,111 +36,153 @@ const GridItem: React.FC<GridItemProps> = ({
   style,
 }) => {
   const classNames = clsx({
-    // Default Spans & Positions
-    [styles[`row-span-${rowSpan}@${Size.NotAvailable}`]]: rowSpan,
-    [styles[`col-span-${colSpan}@${Size.NotAvailable}`]]: colSpan,
-    [styles[`row-start-${rowStart}@${Size.NotAvailable}`]]: rowStart,
-    [styles[`row-end-${rowEnd}@${Size.NotAvailable}`]]: rowEnd,
-    [styles[`col-start-${colStart}@${Size.NotAvailable}`]]: colStart,
-    [styles[`col-end-${colEnd}@${Size.NotAvailable}`]]: colEnd,
-    [styles[`justify-self-${justifySelf}@${Size.NotAvailable}`]]: justifySelf,
-    [styles[`align-self-${alignSelf}@${Size.NotAvailable}`]]: alignSelf,
+    // Default Spans & Positions (NA: 0px)
+    [styles[
+      `row-span-${(rowSpan as Breakpoint<GridSpan>)?.na ?? rowSpan}@${
+        Size.NotAvailable
+      }`
+    ]]: (rowSpan as Breakpoint<GridSpan>)?.na ?? rowSpan,
+    [styles[
+      `col-span-${(colSpan as Breakpoint<GridSpan>)?.na ?? colSpan}@${
+        Size.NotAvailable
+      }`
+    ]]: (colSpan as Breakpoint<GridSpan>)?.na ?? colSpan,
+    [styles[
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.na ?? rowStart}@${
+        Size.NotAvailable
+      }`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.na ?? rowStart,
+    [styles[
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.na ?? rowEnd}@${
+        Size.NotAvailable
+      }`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.na ?? rowEnd,
+    [styles[
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.na ?? colStart}@${
+        Size.NotAvailable
+      }`
+    ]]: (colStart as Breakpoint<GridPosition>)?.na ?? colStart,
+    [styles[
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.na ?? colEnd}@${
+        Size.NotAvailable
+      }`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.na ?? colEnd,
+    [styles[
+      `justify-self-${
+        (justifySelf as Breakpoint<JustifySelf>)?.na ?? justifySelf
+      }@${Size.NotAvailable}`
+    ]]: (justifySelf as Breakpoint<JustifySelf>)?.na ?? justifySelf,
+    [styles[
+      `align-self-${(alignSelf as Breakpoint<AlignSelf>)?.na ?? alignSelf}@${
+        Size.NotAvailable
+      }`
+    ]]: (alignSelf as Breakpoint<AlignSelf>)?.na ?? alignSelf,
     /* * Responsive Spans * */
     // xs
     [styles[
-      `row-span-${(rowSpan as GridSpanBreakpoint)?.xs}@${Size.ExtraSmall}`
-    ]]: (rowSpan as GridSpanBreakpoint)?.xs,
+      `row-span-${(rowSpan as Breakpoint<GridSpan>)?.xs}@${Size.ExtraSmall}`
+    ]]: (rowSpan as Breakpoint<GridSpan>)?.xs,
     [styles[`col-span-${colSpan}@${Size.ExtraSmall}`]]: (
-      colSpan as GridSpanBreakpoint
+      colSpan as Breakpoint<GridSpan>
     )?.xs,
     // sm
-    [styles[`row-span-${(rowSpan as GridSpanBreakpoint)?.sm}@${Size.Small}`]]: (
-      rowSpan as GridSpanBreakpoint
-    )?.sm,
-    [styles[`col-span-${(colSpan as GridSpanBreakpoint)?.sm}@${Size.Small}`]]: (
-      colSpan as GridSpanBreakpoint
-    )?.sm,
+    [styles[`row-span-${(rowSpan as Breakpoint<GridSpan>)?.sm}@${Size.Small}`]]:
+      (rowSpan as Breakpoint<GridSpan>)?.sm,
+    [styles[`col-span-${(colSpan as Breakpoint<GridSpan>)?.sm}@${Size.Small}`]]:
+      (colSpan as Breakpoint<GridSpan>)?.sm,
     // md
-    [styles[`row-span-${(rowSpan as GridSpanBreakpoint)?.md}@${Size.Medium}`]]:
-      (rowSpan as GridSpanBreakpoint)?.md,
-    [styles[`col-span-${(colSpan as GridSpanBreakpoint)?.md}@${Size.Medium}`]]:
-      (colSpan as GridSpanBreakpoint)?.md,
+    [styles[
+      `row-span-${(rowSpan as Breakpoint<GridSpan>)?.md}@${Size.Medium}`
+    ]]: (rowSpan as Breakpoint<GridSpan>)?.md,
+    [styles[
+      `col-span-${(colSpan as Breakpoint<GridSpan>)?.md}@${Size.Medium}`
+    ]]: (colSpan as Breakpoint<GridSpan>)?.md,
     // lg
-    [styles[`row-span-${(rowSpan as GridSpanBreakpoint)?.lg}@${Size.Large}`]]: (
-      rowSpan as GridSpanBreakpoint
-    )?.lg,
-    [styles[`col-span-${(colSpan as GridSpanBreakpoint)?.lg}@${Size.Large}`]]: (
-      colSpan as GridSpanBreakpoint
-    )?.lg,
+    [styles[`row-span-${(rowSpan as Breakpoint<GridSpan>)?.lg}@${Size.Large}`]]:
+      (rowSpan as Breakpoint<GridSpan>)?.lg,
+    [styles[`col-span-${(colSpan as Breakpoint<GridSpan>)?.lg}@${Size.Large}`]]:
+      (colSpan as Breakpoint<GridSpan>)?.lg,
     // xl
     [styles[
-      `row-span-${(rowSpan as GridSpanBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (rowSpan as GridSpanBreakpoint)?.xl,
+      `row-span-${(rowSpan as Breakpoint<GridSpan>)?.xl}@${Size.ExtraLarge}`
+    ]]: (rowSpan as Breakpoint<GridSpan>)?.xl,
     [styles[
-      `col-span-${(colSpan as GridSpanBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (colSpan as GridSpanBreakpoint)?.xl,
+      `col-span-${(colSpan as Breakpoint<GridSpan>)?.xl}@${Size.ExtraLarge}`
+    ]]: (colSpan as Breakpoint<GridSpan>)?.xl,
     /* * Responsive Positions (Start - End) * */
     // xs
     [styles[
-      `row-start-${(rowStart as GridPositionBreakpoint)?.xs}@${Size.ExtraSmall}`
-    ]]: (rowStart as GridPositionBreakpoint)?.xs,
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.xs}@${
+        Size.ExtraSmall
+      }`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.xs,
     [styles[
-      `row-end-${(rowEnd as GridPositionBreakpoint)?.xs}@${Size.ExtraSmall}`
-    ]]: (rowEnd as GridPositionBreakpoint)?.xs,
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.xs}@${Size.ExtraSmall}`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.xs,
     [styles[
-      `col-start-${(colStart as GridPositionBreakpoint)?.xs}@${Size.ExtraSmall}`
-    ]]: (colStart as GridPositionBreakpoint)?.xs,
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.xs}@${
+        Size.ExtraSmall
+      }`
+    ]]: (colStart as Breakpoint<GridPosition>)?.xs,
     [styles[
-      `col-end-${(colEnd as GridPositionBreakpoint)?.xs}@${Size.ExtraSmall}`
-    ]]: (colEnd as GridPositionBreakpoint)?.xs,
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.xs}@${Size.ExtraSmall}`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.xs,
     // sm
     [styles[
-      `row-start-${(rowStart as GridPositionBreakpoint)?.sm}@${Size.Small}`
-    ]]: (rowStart as GridPositionBreakpoint)?.sm,
-    [styles[`row-end-${(rowEnd as GridPositionBreakpoint)?.sm}@${Size.Small}`]]:
-      (rowEnd as GridPositionBreakpoint)?.sm,
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.sm}@${Size.Small}`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.sm,
     [styles[
-      `col-start-${(colStart as GridPositionBreakpoint)?.sm}@${Size.Small}`
-    ]]: (colStart as GridPositionBreakpoint)?.sm,
-    [styles[`col-end-${(colEnd as GridPositionBreakpoint)?.sm}@${Size.Small}`]]:
-      (colEnd as GridPositionBreakpoint)?.sm,
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.sm}@${Size.Small}`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.sm,
+    [styles[
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.sm}@${Size.Small}`
+    ]]: (colStart as Breakpoint<GridPosition>)?.sm,
+    [styles[
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.sm}@${Size.Small}`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.sm,
     // md
     [styles[
-      `row-start-${(rowStart as GridPositionBreakpoint)?.md}@${Size.Medium}`
-    ]]: (rowStart as GridPositionBreakpoint)?.md,
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.md}@${Size.Medium}`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.md,
     [styles[
-      `row-end-${(rowEnd as GridPositionBreakpoint)?.md}@${Size.Medium}`
-    ]]: (rowEnd as GridPositionBreakpoint)?.md,
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.md}@${Size.Medium}`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.md,
     [styles[
-      `col-start-${(colStart as GridPositionBreakpoint)?.md}@${Size.Medium}`
-    ]]: (colStart as GridPositionBreakpoint)?.md,
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.md}@${Size.Medium}`
+    ]]: (colStart as Breakpoint<GridPosition>)?.md,
     [styles[
-      `col-end-${(colEnd as GridPositionBreakpoint)?.md}@${Size.Medium}`
-    ]]: (colEnd as GridPositionBreakpoint)?.md,
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.md}@${Size.Medium}`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.md,
     // lg
     [styles[
-      `row-start-${(rowStart as GridPositionBreakpoint)?.lg}@${Size.Large}`
-    ]]: (rowStart as GridPositionBreakpoint)?.lg,
-    [styles[`row-end-${(rowEnd as GridPositionBreakpoint)?.lg}@${Size.Large}`]]:
-      (rowEnd as GridPositionBreakpoint)?.lg,
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.lg}@${Size.Large}`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.lg,
     [styles[
-      `col-start-${(colStart as GridPositionBreakpoint)?.lg}@${Size.Large}`
-    ]]: (colStart as GridPositionBreakpoint)?.lg,
-    [styles[`col-end-${(colEnd as GridPositionBreakpoint)?.lg}@${Size.Large}`]]:
-      (colEnd as GridPositionBreakpoint)?.lg,
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.lg}@${Size.Large}`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.lg,
+    [styles[
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.lg}@${Size.Large}`
+    ]]: (colStart as Breakpoint<GridPosition>)?.lg,
+    [styles[
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.lg}@${Size.Large}`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.lg,
     // xl
     [styles[
-      `row-start-${(rowStart as GridPositionBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (rowStart as GridPositionBreakpoint)?.xl,
+      `row-start-${(rowStart as Breakpoint<GridPosition>)?.xl}@${
+        Size.ExtraLarge
+      }`
+    ]]: (rowStart as Breakpoint<GridPosition>)?.xl,
     [styles[
-      `row-end-${(rowEnd as GridPositionBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (rowEnd as GridPositionBreakpoint)?.xl,
+      `row-end-${(rowEnd as Breakpoint<GridPosition>)?.xl}@${Size.ExtraLarge}`
+    ]]: (rowEnd as Breakpoint<GridPosition>)?.xl,
     [styles[
-      `col-start-${(colStart as GridPositionBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (colStart as GridPositionBreakpoint)?.xl,
+      `col-start-${(colStart as Breakpoint<GridPosition>)?.xl}@${
+        Size.ExtraLarge
+      }`
+    ]]: (colStart as Breakpoint<GridPosition>)?.xl,
     [styles[
-      `col-end-${(colEnd as GridPositionBreakpoint)?.xl}@${Size.ExtraLarge}`
-    ]]: (colEnd as GridPositionBreakpoint)?.xl,
+      `col-end-${(colEnd as Breakpoint<GridPosition>)?.xl}@${Size.ExtraLarge}`
+    ]]: (colEnd as Breakpoint<GridPosition>)?.xl,
     // --ALIGN-SELF--
     [styles[
       `align-self-${(alignSelf as Breakpoint<AlignSelf>)?.xs}@${

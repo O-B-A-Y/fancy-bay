@@ -1,0 +1,63 @@
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/effects';
+@import '../../styles/abstracts/mixins';
+
+.closeModalIcon {
+  color: $dark600;
+  font-size: map-get($font-sizes, medium);
+  cursor: pointer;
+  &:hover {
+    color: $dark500;
+  }
+}
+
+.tokenList {
+  height: 420px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.symbolImg {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.selectedSymbolImg {
+  filter: brightness(60%);
+}
+
+.selectedAnnotation {
+  color: $dark400;
+}
+
+.tokenInput {
+  color: $dark200;
+  width: 100%;
+}
+
+.annotationName {
+  font-weight: 200;
+}
+
+.tokenContainer {
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: $dark600;
+    border-radius: 10px;
+  }
+}
+
+.selectedTokenContainer {
+  pointer-events: none !important;
+}
+
+.manageBtn {
+  font-size: map-get($font-sizes, medium);
+  background-color: $dark600 !important;
+  border: 1px solid $dark500 !important;
+  margin-top: 8px;
+  height: 48px;
+  width: 100%;
+}
