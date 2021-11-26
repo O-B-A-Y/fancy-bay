@@ -1,30 +1,36 @@
 import { NativeCurrencyDetails, TokenDetails } from '../../../types/Token';
 import { selectFirstItem, selectSecondItem } from '../../exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { toggleSelectTokenPairModal } from '../slice';
+import { toggleTokenPairSelectionModal } from '../slice';
 
-const useExchangeSelectModal = () => {
-  const { selectTokenPair } = useAppSelector((state) => state.modalSlice.data);
+const useExchangeSelectionModal = () => {
+  const { tokenPairSelection } = useAppSelector(
+    (state) => state.modalSlice.data
+  );
   const { firstItem, secondItem } = useAppSelector(
     (state) => state.exchangeSlice.data.pair
   );
   const dispatch = useAppDispatch();
   const openExchangeSelectModal = () => {
-    dispatch(toggleSelectTokenPairModal(true));
+    dispatch(toggleTokenPairSelectionModal(true));
   };
   const closeExchangeSelectModal = () => {
-    dispatch(toggleSelectTokenPairModal(false));
+    dispatch(toggleTokenPairSelectionModal(false));
   };
-  const selectFirst = (currency: TokenDetails | NativeCurrencyDetails) => {
+  const selectFirst = (
+    currency: TokenDetails | NativeCurrencyDetails | null
+  ) => {
     dispatch(selectFirstItem(currency));
   };
 
-  const selectSecond = (currency: TokenDetails | NativeCurrencyDetails) => {
+  const selectSecond = (
+    currency: TokenDetails | NativeCurrencyDetails | null
+  ) => {
     dispatch(selectSecondItem(currency));
   };
 
   return {
-    selectTokenPair,
+    tokenPairSelection,
     firstItem,
     secondItem,
     selectFirst,
@@ -34,4 +40,4 @@ const useExchangeSelectModal = () => {
   };
 };
 
-export default useExchangeSelectModal;
+export default useExchangeSelectionModal;

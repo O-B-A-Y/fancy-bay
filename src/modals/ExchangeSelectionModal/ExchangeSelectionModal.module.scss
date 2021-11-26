@@ -49,6 +49,10 @@
   }
 }
 
+.selectedTokenContainer {
+  pointer-events: none !important;
+}
+
 .manageBtn {
   font-size: map-get($font-sizes, medium);
   background-color: $dark600 !important;

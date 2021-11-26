@@ -8,13 +8,16 @@ import { MdSwapVerticalCircle } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import { Button, Flex, FlexItem, NumberInput } from '../../../components';
 import { DefaultLayout, ExchangeLayout } from '../../../layouts';
-import ExchangeSelectModal from '../../../modals/ExchangeSelectModal';
+import ExchangeSelectionModal from '../../../modals/ExchangeSelectionModal';
 import {
   importTokenList,
+  selectFirstItem,
+  selectSecondItem,
   switchChainCurrency,
 } from '../../../states/exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../../states/hooks';
-import useExchangeSelectModal from '../../../states/modal/hooks/useExchangeSelectModal';
+import useExchangeSelectionModal from '../../../states/modal/hooks/useExchangeSelectionModal';
+import useMyBaysSelectionModal from '../../../states/modal/hooks/useMyBaysSelectionModal';
 import colors from '../../../styles/colors.module.scss';
 import URLUtils from '../../../utils/url';
 import { NextPageWithLayout } from '../../_app';
@@ -22,7 +25,8 @@ import styles from './Swap.module.scss';
 
 const Exchange: NextPageWithLayout = () => {
   const [selectOrder, setSelectOrder] = useState<number>(0);
-  const { openExchangeSelectModal } = useExchangeSelectModal();
+  const { openExchangeSelectModal } = useExchangeSelectionModal();
+  const { close, open, myBaysSelectionModal } = useMyBaysSelectionModal();
   const { nativeCurrency, token: tokenData } = useAppSelector(
     (state) => state.exchangeSlice.data
   );
@@ -40,6 +44,16 @@ const Exchange: NextPageWithLayout = () => {
       return tokenData.list.filter((t) => t.chainId === 1);
     return [];
   }, [chainId, tokenData]);
+
+  const swapSelectedItems = () => {
+    if (typeof firstItem !== 'undefined' && typeof secondItem !== 'undefined') {
+      const temp = firstItem;
+      dispatch(selectFirstItem(secondItem));
+      dispatch(selectSecondItem(temp));
+      return;
+    }
+    throw new Error('ERROR! Undefined items in selection');
+  };
 
   // Init native currency for specific chainId
   useEffect(() => {
@@ -130,7 +144,10 @@ const Exchange: NextPageWithLayout = () => {
           <NumberInput className={styles.valueInput} />
         </FlexItem>
       </Flex>
-      <MdSwapVerticalCircle className={styles.swapIcon} />
+      <MdSwapVerticalCircle
+        className={styles.swapIcon}
+        onClick={swapSelectedItems}
+      />
       {/* Token GET-OUT */}
       <Flex className={styles.inputSection}>
         {/* Left Side */}
@@ -180,7 +197,7 @@ const Exchange: NextPageWithLayout = () => {
       </Flex>
       <Button className={styles.submitBtn}>Submit</Button>
       {/* React Modal */}
-      <ExchangeSelectModal
+      <ExchangeSelectionModal
         items={nativeCurrency ? [nativeCurrency, ...chainTokens] : chainTokens}
         currentSelectOrder={selectOrder}
       />

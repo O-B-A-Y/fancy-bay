@@ -10,7 +10,8 @@ export interface ModalState {
     noContract: boolean;
     bayCreation: boolean;
     injectedConnectorError: boolean;
-    selectTokenPair: boolean;
+    tokenPairSelection: boolean;
+    myBaysSelectionModal: boolean;
   };
   error: null | object | string;
 }
@@ -24,7 +25,8 @@ const initialState: ModalState = {
     noContract: false,
     bayCreation: false,
     injectedConnectorError: false,
-    selectTokenPair: false,
+    tokenPairSelection: false,
+    myBaysSelectionModal: false,
   },
   error: null,
 };
@@ -34,32 +36,28 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     toggleExchangeProposalModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.exchangeProposal = action.payload;
     },
     toggleTransferProposalModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.transferProposal = action.payload;
     },
     toggleNoContractModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.noContract = action.payload;
     },
     toggleBayCreationModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.bayCreation = action.payload;
     },
     toggleProposalCreationModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.proposalCreation = action.payload;
     },
     toggleInjectedConnectorErrorModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
       state.data.bayCreation = action.payload;
     },
-    toggleSelectTokenPairModal(state, action: PayloadAction<boolean>) {
-      console.log(action);
-      state.data.selectTokenPair = action.payload;
+    toggleTokenPairSelectionModal(state, action: PayloadAction<boolean>) {
+      state.data.tokenPairSelection = action.payload;
+    },
+    toggleMyBaysSelectionModal(state, action: PayloadAction<boolean>) {
+      state.data.myBaysSelectionModal = action.payload;
     },
   },
 });
@@ -71,7 +69,8 @@ export const {
   toggleInjectedConnectorErrorModal,
   toggleTransferProposalModal,
   toggleProposalCreationModal,
-  toggleSelectTokenPairModal,
+  toggleTokenPairSelectionModal,
+  toggleMyBaysSelectionModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

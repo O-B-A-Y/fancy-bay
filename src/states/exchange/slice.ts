@@ -35,6 +35,7 @@ interface ExchangeState {
       listProviders: ListProvider[];
     };
     nativeCurrency: NativeCurrencyDetails | null;
+    myBay: null;
   };
   error: null | object | string;
 }
@@ -64,6 +65,7 @@ const initialState: ExchangeState = {
       listProviders: [],
     },
     nativeCurrency: null,
+    myBay: null,
   },
   error: null,
 };
@@ -74,13 +76,13 @@ const exchangeSlice = createSlice({
   reducers: {
     selectFirstItem(
       state,
-      action: PayloadAction<TokenDetails | NativeCurrencyDetails>
+      action: PayloadAction<TokenDetails | NativeCurrencyDetails | null>
     ) {
       state.data.pair.firstItem = action.payload;
     },
     selectSecondItem(
       state,
-      action: PayloadAction<TokenDetails | NativeCurrencyDetails>
+      action: PayloadAction<TokenDetails | NativeCurrencyDetails | null>
     ) {
       state.data.pair.secondItem = action.payload;
     },

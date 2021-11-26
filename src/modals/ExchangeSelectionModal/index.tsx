@@ -6,14 +6,14 @@ import ReactModal from 'react-modal';
 import { Button, Flex, FlexItem, TextInput } from '../../components';
 import TextInputVariant from '../../constants/textInputVariant';
 import useFormValidation from '../../hooks/useFormValidation';
-import useExchangeSelectModal from '../../states/modal/hooks/useExchangeSelectModal';
+import useExchangeSelectionModal from '../../states/modal/hooks/useExchangeSelectionModal';
 import colors from '../../styles/colors.module.scss';
 import { NativeCurrencyDetails, TokenDetails } from '../../types/Token';
 import URLUtils from '../../utils/url';
 import Web3Utils from '../../utils/web3';
-import styles from './ExchangeSelectModal.module.scss';
+import styles from './ExchangeSelectionModal.module.scss';
 
-interface ExchangeSelectModalProps {
+interface ExchangeSelectionModalProps {
   items: (TokenDetails | NativeCurrencyDetails)[];
   currentSelectOrder: number;
   className?: string;
@@ -22,14 +22,20 @@ interface ExchangeSelectModalProps {
 
 ReactModal.setAppElement('#__next');
 
-const ExchangeSelectModal: React.FC<ExchangeSelectModalProps> = ({
+const ExchangeSelectionModal: React.FC<ExchangeSelectionModalProps> = ({
   items,
   currentSelectOrder,
   className,
   style,
 }) => {
-  const { selectTokenPair, closeExchangeSelectModal } =
-    useExchangeSelectModal();
+  const {
+    tokenPairSelection,
+    firstItem,
+    secondItem,
+    closeExchangeSelectModal,
+    selectFirst,
+    selectSecond,
+  } = useExchangeSelectionModal();
   const { formValues, handleSetFieldValue } = useFormValidation({
     searchInput: '',
   });
@@ -68,10 +74,27 @@ const ExchangeSelectModal: React.FC<ExchangeSelectModalProps> = ({
     [items, formValues.searchInput]
   );
 
-  const handler = () => {};
+  /**
+   * Check if items/tokens are selected in the modal
+   * @param item Item to be checked
+   * @returns True if selected || False if not
+   */
+  const isItemSelected = (item: TokenDetails | NativeCurrencyDetails) =>
+    item.symbol === firstItem?.symbol || item.symbol === secondItem?.symbol;
+
+  /* * Handler functions * */
+  const handler = {
+    SelectByOrder(item: TokenDetails | NativeCurrencyDetails) {
+      if (currentSelectOrder === 0) {
+        return selectFirst(item);
+      }
+      return selectSecond(item);
+    },
+  };
+
   return (
     <ReactModal
-      isOpen={selectTokenPair}
+      isOpen={tokenPairSelection}
       onRequestClose={closeExchangeSelectModal}
       closeTimeoutMS={250}
       contentLabel="ExchangeSelectModal"
@@ -103,35 +126,45 @@ const ExchangeSelectModal: React.FC<ExchangeSelectModalProps> = ({
           {/* List of Tokens/Ether */}
           <Flex direction="column" rowGap="sm">
             {/* Token item */}
-            {filteredItems.map((token, index) => (
+            {filteredItems.map((token) => (
               <Flex
-                key={index.toString()}
+                key={token.symbol}
                 direction="row"
                 colGap="sm"
-                className={styles.tokenContainer}
+                className={clsx({
+                  [styles.tokenContainer]: true,
+                  [styles.selectedTokenContainer]: isItemSelected(token),
+                })}
+                onClick={() => {
+                  handler.SelectByOrder(token);
+                  closeExchangeSelectModal();
+                }}
               >
                 <FlexItem>
                   <Image
                     src={URLUtils.processValidURL(token.logoURI)}
                     width={38}
                     height={38}
-                    className={clsx(styles.symbolImg, styles.selectedSymbolImg)}
+                    className={clsx({
+                      [styles.symbolImg]: true,
+                      [styles.selectedSymbolImg]: isItemSelected(token),
+                    })}
                   />
                 </FlexItem>
                 <FlexItem>
                   <Flex direction="column">
                     <FlexItem
                       className={clsx({
-                        [styles.selectedAnnotation]: true,
+                        [styles.selectedAnnotation]: isItemSelected(token),
                       })}
                     >
                       {token.symbol}
                     </FlexItem>
                     <FlexItem
-                      className={clsx(
-                        styles.annotationName,
-                        styles.selectedAnnotation
-                      )}
+                      className={clsx({
+                        [styles.annotationName]: true,
+                        [styles.selectedAnnotation]: isItemSelected(token),
+                      })}
                     >
                       {token.name}
                     </FlexItem>
@@ -149,4 +182,4 @@ const ExchangeSelectModal: React.FC<ExchangeSelectModalProps> = ({
   );
 };
 
-export default ExchangeSelectModal;
+export default ExchangeSelectionModal;
