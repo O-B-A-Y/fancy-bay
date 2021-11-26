@@ -17,7 +17,6 @@ import {
 } from '../../../states/exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../../states/hooks';
 import useExchangeSelectionModal from '../../../states/modal/hooks/useExchangeSelectionModal';
-import useMyBaysSelectionModal from '../../../states/modal/hooks/useMyBaysSelectionModal';
 import colors from '../../../styles/colors.module.scss';
 import URLUtils from '../../../utils/url';
 import { NextPageWithLayout } from '../../_app';
@@ -26,7 +25,6 @@ import styles from './Swap.module.scss';
 const Exchange: NextPageWithLayout = () => {
   const [selectOrder, setSelectOrder] = useState<number>(0);
   const { openExchangeSelectModal } = useExchangeSelectionModal();
-  const { close, open, myBaysSelectionModal } = useMyBaysSelectionModal();
   const { nativeCurrency, token: tokenData } = useAppSelector(
     (state) => state.exchangeSlice.data
   );
@@ -84,9 +82,6 @@ const Exchange: NextPageWithLayout = () => {
     })();
   }, []);
 
-  useEffect(() => {});
-
-  /* * * */
   return (
     <>
       <Head>
@@ -196,11 +191,12 @@ const Exchange: NextPageWithLayout = () => {
         </FlexItem>
       </Flex>
       <Button className={styles.submitBtn}>Submit</Button>
-      {/* React Modal */}
+      {/* ExchangeSelectionModal */}
       <ExchangeSelectionModal
         items={nativeCurrency ? [nativeCurrency, ...chainTokens] : chainTokens}
         currentSelectOrder={selectOrder}
       />
+
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -220,13 +216,9 @@ const Exchange: NextPageWithLayout = () => {
 };
 
 Exchange.getLayout = function getLayout(page: ReactElement) {
-  const myBayNames = [
-    'Venture of the future',
-    'Hội Những Người Giàu Vì Coin Rác',
-  ];
   return (
     <DefaultLayout>
-      <ExchangeLayout myBayNames={myBayNames}>{page}</ExchangeLayout>
+      <ExchangeLayout>{page}</ExchangeLayout>
     </DefaultLayout>
   );
 };

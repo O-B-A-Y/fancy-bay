@@ -1,0 +1,13 @@
+@import '../../styles/abstracts/measures';
+@import '../../styles/abstracts/colors';
+@import '../../styles/abstracts/effects';
+@import '../../styles/abstracts/mixins';
+
+.closeModalIcon {
+  color: $dark600;
+  font-size: map-get($font-sizes, medium);
+  cursor: pointer;
+  &:hover {
+    color: $dark500;
+  }
+}
