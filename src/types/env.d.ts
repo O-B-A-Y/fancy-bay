@@ -9,5 +9,6 @@ declare namespace NodeJS {
     PINATA_API_KEY: string;
     PINATA_API_SECRET: string;
     PINATA_API_JWT_TOKEN: string;
+    DEFI_PULSE_DATA_API_KEY: string;
   }
 }

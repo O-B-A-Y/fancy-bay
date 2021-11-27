@@ -1,3 +1,5 @@
+import configs from '../configs';
+
 export default class IPFSUtils {
   static readonly ALLOWED_IPFS_PROTOCOLS = ['ipfs', 'ipns'];
 
@@ -24,7 +26,7 @@ export default class IPFSUtils {
 
   public static getGatewayURL(url: string) {
     const { CID, protocol } = this.getArtifacts(url);
-    return `${process.env.PINATA_GATEWAY_URL}/${protocol}/${CID}`;
+    return `${configs.PINATA.GATEWAY_URL}/${protocol}/${CID}`;
   }
 
   public static isValidIPFSScheme(url: string) {

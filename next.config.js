@@ -17,5 +17,6 @@ module.exports = {
     PINATA_API_KEY: process.env.PINATA_API_KEY,
     PINATA_API_SECRET: process.env.PINATA_API_SECRET,
     PINATA_API_JWT_TOKEN: process.env.PINATA_API_JWT_TOKEN,
+    DEFI_PULSE_DATA_API_KEY: process.env.DEFI_PULSE_DATA_API_KEY,
   },
 };
