@@ -56,22 +56,24 @@ const Liquidity: NextPageWithLayout = () => {
         tokenData.listProviders
           .map((p) => p.name)
           .includes(configs.DEFAULT_TOKEN_LIST_URL)
-      )
-        try {
-          await dispatch(
-            importTokenList(configs.DEFAULT_TOKEN_LIST_URL)
-          ).unwrap();
-        } catch (err) {
-          toast.error(`ERROR! Cannot import default list of tokens!`, {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+      ) {
+        return;
+      }
+      try {
+        await dispatch(
+          importTokenList(configs.DEFAULT_TOKEN_LIST_URL)
+        ).unwrap();
+      } catch (err) {
+        toast.error(`ERROR! Cannot import default list of tokens!`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     })();
   }, []);
   return (
