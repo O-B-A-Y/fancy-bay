@@ -3,6 +3,46 @@
 @import '../../styles/abstracts/effects';
 @import '../../styles/abstracts/mixins';
 
+.modal {
+  @include respond-to(sm) {
+    width: 422px !important;
+    height: auto !important;
+  }
+}
+
+.myBaysList {
+  height: 420px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.myBaysInput {
+  color: $dark200;
+  width: 100%;
+}
+
+.copyIcon {
+  vertical-align: bottom;
+  &:hover {
+    color: $dark100;
+  }
+}
+
+.checkmarkIcon {
+  vertical-align: bottom;
+  color: $green500;
+}
+
+.myBaysContainer {
+  padding: 7px;
+  cursor: pointer;
+  height: 32px;
+  &:hover {
+    background-color: $dark600;
+    border-radius: 10px;
+  }
+}
+
 .closeModalIcon {
   color: $dark600;
   font-size: map-get($font-sizes, medium);

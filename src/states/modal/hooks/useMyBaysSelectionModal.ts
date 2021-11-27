@@ -4,7 +4,6 @@ import { TreasureBayType } from '../../treasureBay/types';
 import { toggleMyBaysSelectionModal } from '../slice';
 
 const useMyBaysSelectionModal = () => {
-  // Modal state
   const { myBaysSelectionModal } = useAppSelector(
     (state) => state.modalSlice.data
   );

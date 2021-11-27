@@ -19,6 +19,10 @@
   @include glow-shadow;
 }
 
+.placeholder {
+  color: $dark400;
+}
+
 .selectBox {
   background-color: $dark700;
   height: 57px;

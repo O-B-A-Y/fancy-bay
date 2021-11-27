@@ -5,7 +5,7 @@ import React, { ReactElement, useState } from 'react';
 import { FaShare } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import ReactModal from 'react-modal';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { chainNetworkMapping } from 'src/connectors';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
@@ -39,7 +39,7 @@ const Browse: NextPageWithLayout = () => {
   const web3 = useWeb3();
   const [bayDetail, setBayDetail] = React.useState<TreasureBayType>();
   const [toggleModal, setToggleModal] = useState(false);
-  const { bays, error, loading } = useFetchTreasureBay();
+  const { bays, error, loading, retries } = useFetchTreasureBay();
   const { join } = useTreasureBayMutations();
   const {
     data: { environment },
@@ -103,9 +103,16 @@ const Browse: NextPageWithLayout = () => {
     },
     LeaveBay: () => {},
   };
-  if (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+  if (error && retries === 0) {
+    toast.error(`ERROR! Cannot retrieve list of MyBays! (${error})`, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   return (
@@ -387,6 +394,21 @@ const Browse: NextPageWithLayout = () => {
           </div>
         </ReactModal>
       </Container>
+      {/* Toast container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          backgroundColor: colors.dark800,
+        }}
+      />
     </>
   );
 };

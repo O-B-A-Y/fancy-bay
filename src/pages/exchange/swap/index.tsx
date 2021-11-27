@@ -7,6 +7,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { MdSwapVerticalCircle } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import { Button, Flex, FlexItem, NumberInput } from '../../../components';
+import configs from '../../../configs';
 import { DefaultLayout, ExchangeLayout } from '../../../layouts';
 import ExchangeSelectionModal from '../../../modals/ExchangeSelectionModal';
 import {
@@ -39,7 +40,7 @@ const Exchange: NextPageWithLayout = () => {
   // Filter tokens by chainId
   const chainTokens = useMemo(() => {
     if (chainId && tokenData.list.length > 0)
-      return tokenData.list.filter((t) => t.chainId === 1);
+      return tokenData.list.filter((t) => t.chainId === 1); // NOTE: Currently hard-coded chain ID
     return [];
   }, [chainId, tokenData]);
 
@@ -60,25 +61,29 @@ const Exchange: NextPageWithLayout = () => {
 
   // Fetch initial default token list of OBAY Exchange
   useEffect(() => {
-    // Initial token list (Stablecoin)
+    // Initial token list (Stablecoin) (if empty)
     (async () => {
-      try {
-        await dispatch(
-          importTokenList(
-            'ipfs://QmZbWsMTSGqPny7jSzbMX43RaAvUupKHsHiRAZU9hJ75WB' // Remove 'B' to cause error
-          )
-        ).unwrap();
-      } catch (err) {
-        toast.error(`ERROR! Cannot import default list of tokens!`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+      // Check if default provider is already fetched
+      if (
+        tokenData.listProviders
+          .map((p) => p.name)
+          .includes(configs.DEFAULT_TOKEN_LIST_URL)
+      )
+        try {
+          await dispatch(
+            importTokenList(configs.DEFAULT_TOKEN_LIST_URL)
+          ).unwrap();
+        } catch (err) {
+          toast.error(`ERROR! Cannot import default list of tokens!`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
     })();
   }, []);
 

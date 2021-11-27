@@ -92,8 +92,10 @@ const exchangeSlice = createSlice({
     },
     switchChainCurrency(state, action: PayloadAction<ChainId>) {
       state.data.nativeCurrency = nativeCurrency[action.payload];
-      // Replace first exchange item with native currency
-      state.data.pair.firstItem = nativeCurrency[action.payload];
+      // Replace first exchange item with native currency (if null)
+      if (!state.data.pair.firstItem) {
+        state.data.pair.firstItem = nativeCurrency[action.payload];
+      }
     },
   },
   extraReducers: (builder) => {
@@ -103,6 +105,14 @@ const exchangeSlice = createSlice({
       })
       .addCase(importTokenList.fulfilled, (state, action) => {
         state.status = ThunkFetchState.Fulfilled;
+        // Check if provider is already fetched/fulfilled (by source)
+        if (
+          state.data.token.listProviders
+            .map((p) => p.source)
+            .includes(action.payload.source)
+        ) {
+          return;
+        }
         // Push new list provider
         state.data.token.listProviders.push({
           name: action.payload.data.name,

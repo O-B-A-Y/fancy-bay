@@ -5,6 +5,7 @@ import { Container, Flex, FlexItem } from '../../components';
 import Divider from '../../components/Divider';
 import SwitchNavigationButton from '../../components/SwitchNavigationButton';
 import MyBaysSelectionModal from '../../modals/MyBaysSelectionModal';
+import { useAppSelector } from '../../states/hooks';
 import useMyBaysSelectionModal from '../../states/modal/hooks/useMyBaysSelectionModal';
 import useFetchYourTreasureBays from '../../states/treasureBay/hooks/useFetchYourTreasureBays';
 import colors from '../../styles/colors.module.scss';
@@ -15,6 +16,8 @@ interface ExchangeLayoutProps {}
 // eslint-disable-next-line arrow-body-style
 const Exchange: React.FC<ExchangeLayoutProps> = ({ children }) => {
   const { open } = useMyBaysSelectionModal();
+  const myBay = useAppSelector((state) => state.exchangeSlice.data.myBay);
+
   const { bays, error, retries } = useFetchYourTreasureBays();
   if (error && retries === 0) {
     toast.error(`ERROR! Cannot retrieve list of MyBays! (${error})`, {
@@ -32,7 +35,11 @@ const Exchange: React.FC<ExchangeLayoutProps> = ({ children }) => {
       <div className={styles.innerContainer}>
         {/* Select BAY Modal */}
         <Flex className={styles.selectBox} alignItems="center">
-          <FlexItem className={styles.firstItem}>Placeholder</FlexItem>
+          <FlexItem className={styles.firstItem}>
+            {myBay?.name ?? (
+              <span className={styles.placeholder}>Please select a Bay</span>
+            )}
+          </FlexItem>
           <FlexItem>
             <IoIosArrowDropdownCircle
               className={styles.dropdownIcon}

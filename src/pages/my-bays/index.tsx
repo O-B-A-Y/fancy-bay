@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
+import { toast, ToastContainer } from 'react-toastify';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
 import TextAlign from 'src/constants/textAlign';
@@ -39,10 +40,17 @@ const MyBays: NextPageWithLayout = () => {
   const { formValues, handleSetFieldValue } = useFormValidation({
     searchInput: '',
   });
-  const { bays, loading, error } = useFetchYourTreasureBays();
-  if (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+  const { bays, loading, error, retries } = useFetchYourTreasureBays();
+  if (error && retries === 0) {
+    toast.error(`ERROR! Cannot retrieve list of MyBays! (${error})`, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   const fetchedTreasureBays: { data: BrowseTableData[]; href: string }[] =
@@ -240,6 +248,21 @@ const MyBays: NextPageWithLayout = () => {
           )}
         </div>
       </Container>
+      {/* Toast container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          backgroundColor: colors.dark800,
+        }}
+      />
     </>
   );
 };
