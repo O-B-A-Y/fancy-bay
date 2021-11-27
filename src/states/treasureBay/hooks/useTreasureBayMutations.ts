@@ -68,6 +68,7 @@ const useTreasureBayMutations = () => {
         from: data.environment.account as string,
       });
     }
+    dispatch(setFetching(true));
     setLoading(false);
   };
 
@@ -174,6 +175,7 @@ const useTreasureBayMutations = () => {
       from: data.environment.account as string,
       value: web3.utils.toWei(amount),
     });
+    dispatch(setFetching(true));
     setLoading(false);
   };
 
@@ -184,6 +186,7 @@ const useTreasureBayMutations = () => {
     await bayMethods.unstake().send({
       from: data.environment.account as string,
     });
+    dispatch(setFetching(true));
     setLoading(false);
   };
 

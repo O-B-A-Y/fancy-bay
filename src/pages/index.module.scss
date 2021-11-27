@@ -11,3 +11,15 @@
   resize: none;
   min-height: 100vh;
 }
+
+.proposal {
+  background: linear-gradient(
+    103.34deg,
+    #2c2b2b 2.53%,
+    rgba(8, 8, 8, 0.295) 80.52%,
+    rgba(37, 37, 37, 0.384) 89.21%
+  );
+  border: 1px solid $dark500;
+  border-radius: 10px;
+  color: white;
+}

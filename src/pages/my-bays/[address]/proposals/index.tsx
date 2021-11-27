@@ -13,7 +13,11 @@ import { toggleTransferProposalModal } from 'src/states/modal/slice';
 import useFetchTransferProposals from 'src/states/proposal/hooks/useFetchTransferProposals';
 import styles from './Proposals.module.scss';
 import colors from '../../../../styles/colors.module.scss';
-import { ProposalType } from 'src/states/proposal/type';
+import {
+  ExchangeProposalType,
+  ProposalType,
+  TransferProposalType,
+} from 'src/states/proposal/type';
 import useWeb3 from 'src/hooks/useWeb3';
 import { setSelectedProposal } from 'src/states/proposal/slice';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
@@ -22,7 +26,7 @@ const ProposalItem = ({
   proposal,
   onClick,
 }: {
-  proposal: ProposalType;
+  proposal: (ProposalType & ExchangeProposalType) | TransferProposalType;
   onClick: () => void;
 }) => {
   const web3 = useWeb3();
@@ -64,8 +68,10 @@ const ProposalItem = ({
       <div className={styles.rowItem}>
         <p className={styles.proposal_item_label}>Approval</p>
         <p className={styles.proposal_item_percent}>
-          {(parseFloat(proposal.numberOfYesVotes) * 100) /
-            (bay?.members.length as any)}
+          {(
+            (parseFloat(proposal.numberOfYesVotes) * 100) /
+              ((bay?.members.length as any) - 1) || 0
+          ).toFixed(2)}
           %
         </p>
       </div>

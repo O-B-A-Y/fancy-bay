@@ -54,24 +54,20 @@ export interface MethodConstantReturnContext<TCallReturn> {
 export interface MethodReturnContext extends MethodPayableReturnContext {}
 
 export type ContractContext = Web3ContractContext<
-  TreasureBay,
-  TreasureBayMethodNames,
-  TreasureBayEventsContext,
-  TreasureBayEvents
+  ObayTreasury,
+  ObayTreasuryMethodNames,
+  ObayTreasuryEventsContext,
+  ObayTreasuryEvents
 >;
-export type TreasureBayEvents =
+export type ObayTreasuryEvents =
   | 'NewPoolCreated'
   | 'NewProposalAdded'
   | 'NewStakeholder'
-  | 'NewTransferProposalAdded'
-  | 'NewTreasureHunter'
   | 'OwnershipTransferred'
-  | 'ProposalAdded'
   | 'RemoveStakeholder'
   | 'Stake'
-  | 'Unstake'
-  | 'Voted';
-export interface TreasureBayEventsContext {
+  | 'Unstake';
+export interface ObayTreasuryEventsContext {
   NewPoolCreated(
     parameters: {
       filter?: {};
@@ -99,39 +95,12 @@ export interface TreasureBayEventsContext {
     },
     callback?: (error: Error, event: EventData) => void
   ): EventResponse;
-  NewTransferProposalAdded(
-    parameters: {
-      filter?: {};
-      fromBlock?: number;
-      toBlock?: 'latest' | number;
-      topics?: string[];
-    },
-    callback?: (error: Error, event: EventData) => void
-  ): EventResponse;
-  NewTreasureHunter(
-    parameters: {
-      filter?: {};
-      fromBlock?: number;
-      toBlock?: 'latest' | number;
-      topics?: string[];
-    },
-    callback?: (error: Error, event: EventData) => void
-  ): EventResponse;
   OwnershipTransferred(
     parameters: {
       filter?: {
         previousOwner?: string | string[];
         newOwner?: string | string[];
       };
-      fromBlock?: number;
-      toBlock?: 'latest' | number;
-      topics?: string[];
-    },
-    callback?: (error: Error, event: EventData) => void
-  ): EventResponse;
-  ProposalAdded(
-    parameters: {
-      filter?: { proposalID?: string | string[] };
       fromBlock?: number;
       toBlock?: 'latest' | number;
       topics?: string[];
@@ -165,49 +134,31 @@ export interface TreasureBayEventsContext {
     },
     callback?: (error: Error, event: EventData) => void
   ): EventResponse;
-  Voted(
-    parameters: {
-      filter?: { proposalID?: string | string[]; voter?: string | string[] };
-      fromBlock?: number;
-      toBlock?: 'latest' | number;
-      topics?: string[];
-    },
-    callback?: (error: Error, event: EventData) => void
-  ): EventResponse;
 }
-export type TreasureBayMethodNames =
+export type ObayTreasuryMethodNames =
   | 'new'
   | 'admin'
-  | 'allowedRecipients'
   | 'claim'
   | 'createStakeholder'
-  | 'createdAt'
-  | 'creator'
-  | 'exchangeProposals'
   | 'getAllProposals'
-  | 'getAllTransferProposals'
   | 'getProposal'
-  | 'getTransferProposal'
   | 'limitNumberOfStakeholders'
-  | 'limitNumberOfTreasureHunters'
   | 'listOfStakeholders'
   | 'minimumStakedAmount'
-  | 'name'
   | 'numberOfStakeholders'
   | 'owner'
   | 'removeStakeholder'
   | 'renounceOwnership'
   | 'stake'
   | 'stakeholders'
+  | 'token'
   | 'totalNumberOfStakeholders'
   | 'totalStakedAmount'
   | 'transferOwnership'
-  | 'treasureHunters'
   | 'unstake'
-  | 'listOfTreasureHunters'
-  | 'leaveBay'
-  | 'createTreasureHunter'
-  | 'createNewTransferProposal';
+  | 'createNewProposal'
+  | 'stakeNative'
+  | 'unstakeNative';
 export interface NewPoolCreatedEventEmittedResponse {
   owner: string;
   lockedAmount: string;
@@ -219,25 +170,9 @@ export interface NewProposalAddedEventEmittedResponse {
 export interface NewStakeholderEventEmittedResponse {
   stakeholder: string;
 }
-export interface NewTransferProposalAddedEventEmittedResponse {
-  _title: string;
-  _sourceAddress: string;
-  _destinationAddress: string;
-  _amount: string;
-}
-export interface NewTreasureHunterEventEmittedResponse {
-  treasureHunter: string;
-  timestamp: string;
-}
 export interface OwnershipTransferredEventEmittedResponse {
   previousOwner: string;
   newOwner: string;
-}
-export interface ProposalAddedEventEmittedResponse {
-  proposalID: string;
-  recipient: string;
-  amount: string;
-  description: string;
 }
 export interface RemoveStakeholderEventEmittedResponse {
   stakeholder: string;
@@ -249,11 +184,6 @@ export interface StakeEventEmittedResponse {
 export interface UnstakeEventEmittedResponse {
   stakeholder: string;
   amount: string;
-}
-export interface VotedEventEmittedResponse {
-  proposalID: string;
-  position: boolean;
-  voter: string;
 }
 export interface StakeholderResponse {
   balance: string;
@@ -267,29 +197,14 @@ export interface StakeholdersResponse {
   claimedInterval: string;
   joinedAt: string;
 }
-export interface TreasureHuntersResponse {
-  contractAddress: string;
-  joinedAt: string;
-}
-export interface TreasurehunterResponse {
-  contractAddress: string;
-  joinedAt: string;
-}
-export interface TreasureBay {
+export interface ObayTreasury {
   /**
-   * Payable: true
+   * Payable: false
    * Constant: false
-   * StateMutability: payable
+   * StateMutability: nonpayable
    * Type: constructor
-   * @param name_ Type: string, Indexed: false
-   * @param limitNumberOfStakeholders_ Type: uint64, Indexed: false
-   * @param limitNumberOfTreasureHunters_ Type: uint64, Indexed: false
    */
-  'new'(
-    name_: string,
-    limitNumberOfStakeholders_: string,
-    limitNumberOfTreasureHunters_: string
-  ): MethodPayableReturnContext;
+  'new'(): MethodReturnContext;
   /**
    * Payable: false
    * Constant: true
@@ -297,14 +212,6 @@ export interface TreasureBay {
    * Type: function
    */
   admin(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param parameter0 Type: address, Indexed: false
-   */
-  allowedRecipients(parameter0: string): MethodConstantReturnContext<boolean>;
   /**
    * Payable: true
    * Constant: false
@@ -325,36 +232,7 @@ export interface TreasureBay {
    * StateMutability: view
    * Type: function
    */
-  createdAt(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  creator(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param parameter0 Type: uint256, Indexed: false
-   */
-  exchangeProposals(parameter0: string): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
   getAllProposals(): MethodConstantReturnContext<string[]>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  getAllTransferProposals(): MethodConstantReturnContext<string[]>;
   /**
    * Payable: false
    * Constant: true
@@ -368,25 +246,8 @@ export interface TreasureBay {
    * Constant: true
    * StateMutability: view
    * Type: function
-   * @param _proposalAddress Type: address, Indexed: false
-   */
-  getTransferProposal(
-    _proposalAddress: string
-  ): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
    */
   limitNumberOfStakeholders(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  limitNumberOfTreasureHunters(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true
@@ -401,13 +262,6 @@ export interface TreasureBay {
    * Type: function
    */
   minimumStakedAmount(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  name(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
    * Constant: true
@@ -460,6 +314,13 @@ export interface TreasureBay {
    * StateMutability: view
    * Type: function
    */
+  token(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
   totalNumberOfStakeholders(): MethodConstantReturnContext<string>;
   /**
    * Payable: false
@@ -477,16 +338,6 @@ export interface TreasureBay {
    */
   transferOwnership(newOwner: string): MethodReturnContext;
   /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param parameter0 Type: address, Indexed: false
-   */
-  treasureHunters(
-    parameter0: string
-  ): MethodConstantReturnContext<TreasureHuntersResponse>;
-  /**
    * Payable: true
    * Constant: false
    * StateMutability: payable
@@ -495,43 +346,30 @@ export interface TreasureBay {
   unstake(): MethodPayableReturnContext;
   /**
    * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  listOfTreasureHunters(): MethodConstantReturnContext<
-    TreasurehunterResponse[]
-  >;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  leaveBay(): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  createTreasureHunter(): MethodReturnContext;
-  /**
-   * Payable: false
    * Constant: false
    * StateMutability: nonpayable
    * Type: function
    * @param _title Type: string, Indexed: false
    * @param _description Type: string, Indexed: false
    * @param _debatingPeriod Type: uint64, Indexed: false
-   * @param _recipient Type: address, Indexed: false
-   * @param _amount Type: uint256, Indexed: false
    */
-  createNewTransferProposal(
+  createNewProposal(
     _title: string,
     _description: string,
-    _debatingPeriod: string,
-    _recipient: string,
-    _amount: string
+    _debatingPeriod: string
   ): MethodReturnContext;
+  /**
+   * Payable: true
+   * Constant: false
+   * StateMutability: payable
+   * Type: function
+   */
+  stakeNative(): MethodPayableReturnContext;
+  /**
+   * Payable: true
+   * Constant: false
+   * StateMutability: payable
+   * Type: function
+   */
+  unstakeNative(): MethodPayableReturnContext;
 }

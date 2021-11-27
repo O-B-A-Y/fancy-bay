@@ -12,3 +12,9 @@
   display: flex;
   padding: 0px 20px;
 }
+.modal {
+  @include respond-to(sm) {
+    width: 300px !important;
+    height: auto !important;
+  }
+}

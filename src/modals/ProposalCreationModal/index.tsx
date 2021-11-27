@@ -84,28 +84,9 @@ const ProposalCreationModal = () => {
         isOpen={data.proposalCreation}
         onRequestClose={handler.CloseModal}
         ariaHideApp={false}
-        style={{
-          content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: colors.dark800,
-            color: 'white',
-            border: `1px solid ${colors.dark600}`,
-          },
-          overlay: {
-            backgroundColor: 'rgba(0,0,0,.53)',
-          },
-        }}
         contentLabel="ProposalCreationModal"
       >
-        <div
-          className={styles.container}
-          style={{ width: 700 / 2, maxWidth: 700 / 2 }}
-        >
+        <div className={styles.container}>
           <div className={styles.rowItem}>
             <h3>Create a new proposal</h3>
             <FaTimes

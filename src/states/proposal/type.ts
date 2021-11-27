@@ -1,19 +1,15 @@
-export type TransferProposalType = {
-  address: string;
+export type TransferProposalType = ProposalType & {
   amount: string;
-  createdAt: string;
-  description: string;
-  title: string;
-  numberOfYesVotes: string;
-  numberOfNoVotes: string;
-  creator: string;
   recipient: string;
-  votingDeadline: string;
-  checkApprovalStatus: string;
-  type: 'EXCHANGE' | 'TRANSFER';
+  type: 'TRANSFER';
 };
 
-export type ExchangeProposalType = {
+export type ExchangeProposalType = ProposalType & {
+  type: 'EXCHANGE';
+};
+
+export type ProposalType = {
+  address: string;
   createdAt: string;
   description: string;
   title: string;
@@ -22,7 +18,4 @@ export type ExchangeProposalType = {
   creator: string;
   votingDeadline: string;
   checkApprovalStatus: string;
-  type: 'EXCHANGE' | 'TRANSFER';
 };
-
-export type ProposalType = TransferProposalType | ExchangeProposalType;

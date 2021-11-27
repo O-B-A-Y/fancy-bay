@@ -27,7 +27,9 @@
     "gat-token": "abi-types-generator ./src/contracts/ERC20.json --output=./src/types",
     "gat-dao": "abi-types-generator ./src/contracts/TreasureBay.json --output=./src/types",
     "gat-dao-factory": "abi-types-generator ./src/contracts/TreasureBayFactory.json --output=./src/types",
-    "gat-transfer-proposal": "abi-types-generator ./src/contracts/TransferProposal.json --output=./src/types"
+    "gat-transfer-proposal": "abi-types-generator ./src/contracts/TransferProposal.json --output=./src/types",
+    "gat-treasury": "abi-types-generator ./src/contracts/ObayTreasury.json --output=./src/types",
+    "gat-proposal": "abi-types-generator ./src/contracts/Proposal.json --output=./src/types"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -38,6 +40,8 @@
   },
   "dependencies": {
     "@ant-design/charts": "^1.2.14",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "@ethersproject/address": "^5.5.0",
     "@ethersproject/bignumber": "^5.5.0",
     "@ethersproject/constants": "^5.5.0",
@@ -45,6 +49,7 @@
     "@ethersproject/providers": "^5.5.0",
     "@ethersproject/solidity": "^5.5.0",
     "@ethersproject/units": "^5.5.0",
+    "@mui/material": "^5.2.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@sushiswap/core": "^2.0.0-canary.1",
     "@sushiswap/core-sdk": "1.0.0-canary.1",
@@ -79,6 +84,7 @@
     "react-table": "^7.7.0",
     "react-toastify": "^8.1.0",
     "react-tooltip": "^4.2.21",
+    "react-tradingview-embed": "^2.2.6",
     "redux-logger": "^3.0.6",
     "sass": "^1.43.4",
     "web3": "^1.6.0",

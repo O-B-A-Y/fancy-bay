@@ -1,16 +1,19 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable react/no-array-index-key */
 import clsx from 'clsx';
+import moment from 'moment';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { ChangeEvent, useMemo } from 'react';
+import React, { ChangeEvent, useMemo, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 // import { CurrencyUtils } from 'src/utils';
-import { Button, Container, Flex, Grid, TextInput } from 'src/components';
+import { Button, Flex, Grid, TextInput } from 'src/components';
 import GridItem from 'src/components/GridItem';
 import ButtonSize from 'src/constants/buttonConstant';
 import ButtonVariant from 'src/constants/buttonVariant';
@@ -58,6 +61,7 @@ export enum LeftSidedContainerTab {
   Stakeholders = 'Stakeholders',
   Portfolio = 'Portfolio',
 }
+const fixDate = moment().add(10, 'days').unix();
 
 const Bay = ({
   address,
@@ -71,6 +75,7 @@ const Bay = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const web3 = useWeb3();
+
   // const { rates } = useSendWyreAPI();
   const { formValues, handleSetFieldValue } = useFormValidation({
     stakedAmount: '',
@@ -79,15 +84,47 @@ const Bay = ({
   const { account } = useAppSelector(
     (state) => state.walletSlice.data.environment
   );
+
+  const [retries, setRetries] = React.useState(0);
   const treasureBayMutations = useTreasureBayMutations();
   const fetchMember = useFetchMember(address as string, account as string);
   const walletSlice = useAppSelector((state) => state.walletSlice);
   const tokenInfo = useTokenInfo('OBAY');
   const { bay, error, loading } = useFetchTreasureBay(address);
+  const time = React.useMemo<{
+    seconds: number;
+    minutes: number;
+    hours: number;
+  }>(() => {
+    if (bay) {
+      const splittedTime = moment
+        .unix(fixDate - (moment().unix() - parseFloat(bay?.createdAt as any)))
+        .format('HH:mm:ss')
+        .split(':');
+      if (splittedTime) {
+        const hours = parseFloat(splittedTime[0]);
+        const minutes = parseFloat(splittedTime[1]);
+        const seconds = parseFloat(splittedTime[2]);
+        return {
+          hours,
+          seconds,
+          minutes,
+        };
+      }
+    }
+
+    return { hours: 0, minutes: 0, seconds: 0 };
+  }, [bay, retries]);
   if (!bay || error) {
     // eslint-disable-next-line no-console
     console.error(error);
   }
+
+  React.useEffect(() => {
+    setInterval(() => {
+      setRetries((r) => (r += 1));
+    }, 1000);
+  }, []);
 
   React.useEffect(() => {
     if (tokenInfo) {
@@ -414,7 +451,10 @@ const Bay = ({
                   </div>
                   <div className={styles.meta_rightSide}>
                     <p>
-                      Next run: <span>22: 10: 30</span>
+                      Next run:{' '}
+                      <span>
+                        {time.hours}:{time.minutes}:{time.seconds}
+                      </span>
                     </p>
                   </div>
                 </div>

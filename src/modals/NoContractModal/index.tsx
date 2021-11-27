@@ -17,25 +17,9 @@ const NoContractModal = () => {
     <ReactModal
       ariaHideApp={false}
       isOpen={data.noContract}
-      style={{
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: colors.dark800,
-          color: 'white',
-          border: `1px solid ${colors.dark600}`,
-        },
-        overlay: {
-          backgroundColor: 'rgba(0,0,0,.53)',
-        },
-      }}
       contentLabel="NoContractModal"
     >
-      <div className={styles.container} style={{ width: 350, maxWidth: 300 }}>
+      <div className={styles.modal}>
         <div
           style={{
             display: 'flex',

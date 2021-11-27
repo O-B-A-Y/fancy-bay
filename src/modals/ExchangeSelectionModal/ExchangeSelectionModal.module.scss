@@ -12,6 +12,13 @@
   }
 }
 
+.modal {
+  @include respond-to(sm) {
+    width: 422px !important;
+    height: auto !important;
+  }
+}
+
 .tokenList {
   height: 420px;
   overflow-y: auto;

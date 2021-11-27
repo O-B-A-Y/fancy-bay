@@ -325,11 +325,7 @@ const Header: React.FC = () => {
         }}
         contentLabel="Account"
       >
-        <div
-          data-aos="fade-down"
-          data-aos-duration="500"
-          style={{ width: 300 }}
-        >
+        <div>
           <div
             style={{
               display: 'flex',

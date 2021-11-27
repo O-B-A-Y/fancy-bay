@@ -1,17 +1,19 @@
 /* eslint-disable react/no-array-index-key */
 import { useRouter } from 'next/dist/client/router';
 import React, { ReactElement } from 'react';
-import Image from 'next/image';
 import { BayLayout, DefaultLayout } from 'src/layouts';
 import { LeftSidedContainerTab } from 'src/layouts/Bay';
 import { NextPageWithLayout } from 'src/pages/_app';
 import styles from './Portfolio.module.scss';
-import PortfolioImage from '../../../../../public/images/portfolio.png';
 import { Line } from '@ant-design/charts';
 import useWeb3 from 'src/hooks/useWeb3';
 import useFetchTreasureBay from 'src/states/treasureBay/hooks/useFetchTreasureBay';
 import useSendWyreAPI from 'src/hooks/useSendWyreAPI';
 import { CurrencyUtils } from 'src/utils';
+import colors from '../../../../styles/colors.module.scss';
+import GridItem from 'src/components/GridItem';
+import { Grid } from 'src/components';
+import { AdvancedChart } from 'react-tradingview-embed';
 
 const BayPortfolio: NextPageWithLayout = () => {
   const router = useRouter();
@@ -60,7 +62,6 @@ const BayPortfolio: NextPageWithLayout = () => {
       position: 'top',
     },
     smooth: true,
-    // @TODO 后续会换一种动画方式
     animation: {
       appear: {
         animation: 'path-in',
@@ -69,10 +70,17 @@ const BayPortfolio: NextPageWithLayout = () => {
     },
   };
   return (
-    <div className={styles.container} style={{ marginTop: '55px' }}>
+    <div className={styles.container} style={{ marginTop: '15px' }}>
       {/* <Image src={PortfolioImage} layout="responsive" />
        */}
-      <Line {...config} />
+      <AdvancedChart
+        widgetProps={{
+          theme: 'dark',
+          height: '78%',
+          autosize: true,
+          symbol: 'ETHUSDT',
+        }}
+      />
     </div>
   );
 };
