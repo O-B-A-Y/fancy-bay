@@ -101,7 +101,7 @@ const ExchangeSelectionModal: React.FC<ExchangeSelectionModalProps> = ({
       className={className}
       style={style}
     >
-      <Flex direction="column" rowGap="md">
+      <Flex className={styles.modal} direction="column" rowGap="md">
         {/* Header */}
         <Flex direction="row">
           <FlexItem flex="one">Select a Token</FlexItem>

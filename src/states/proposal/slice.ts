@@ -31,6 +31,7 @@ const initialState: ProposalState = {
       title: '',
       type: 'TRANSFER',
       votingDeadline: '',
+      address: '',
     },
   },
   error: null,

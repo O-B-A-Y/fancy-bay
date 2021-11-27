@@ -61,8 +61,4 @@ input[type='number'] {
   transform: translate(-50%, -50%) !important;
   background-color: $dark800 !important;
   border: 1px solid $dark600 !important;
-  @include respond-to(sm) {
-    width: 422px !important;
-    height: auto !important;
-  }
 }

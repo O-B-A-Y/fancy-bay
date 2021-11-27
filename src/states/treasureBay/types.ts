@@ -1,4 +1,3 @@
-import { TransferProposal } from 'src/types/TransferProposal';
 import {
   StakeholderResponse,
   TreasurehunterResponse,
@@ -6,6 +5,7 @@ import {
 
 export interface TreasureBayType {
   name: string;
+  createdAt: string;
   address: string;
   members: TreasurehunterResponse[];
   stakeholders: StakeholderResponse[];
@@ -13,6 +13,13 @@ export interface TreasureBayType {
   totalValueLocked: string;
   transferProposals: string[];
   exchangeProposals: any;
+}
+
+export interface TreasuryType {
+  proposals: string[];
+  address: string;
+  stakeholders: StakeholderResponse[];
+  totalValueLocked: string;
 }
 
 export interface CreateNewBayArguments {

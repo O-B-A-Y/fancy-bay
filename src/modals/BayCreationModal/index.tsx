@@ -69,28 +69,9 @@ const BayCreationModal = () => {
         isOpen={data.bayCreation}
         onRequestClose={handler.CloseModal}
         ariaHideApp={false}
-        style={{
-          content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: colors.dark800,
-            color: 'white',
-            border: `1px solid ${colors.dark600}`,
-          },
-          overlay: {
-            backgroundColor: 'rgba(0,0,0,.53)',
-          },
-        }}
         contentLabel="BayCreationModal"
       >
-        <div
-          className={styles.container}
-          style={{ width: 700 / 2, maxWidth: 700 / 2 }}
-        >
+        <div className={styles.container}>
           <div className={styles.rowItem}>
             <h3>Create new bay</h3>
             <FaTimes

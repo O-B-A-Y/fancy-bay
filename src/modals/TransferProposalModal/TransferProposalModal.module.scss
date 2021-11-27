@@ -28,3 +28,34 @@
     margin-top: 15px;
   }
 }
+
+.member {
+  &_container {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+    width: 100%;
+  }
+  &_item {
+    // background-color: $dark700;
+    text-align: center;
+    color: white;
+    &_rank {
+      color: yellow;
+    }
+    &_address {
+      color: white;
+    }
+    &_joinedAt {
+      color: $dark400;
+    }
+    &_contribution {
+      color: $green500;
+    }
+    &_stakedAmount {
+      color: white;
+    }
+    &_occupied {
+      color: white;
+    }
+  }
+}

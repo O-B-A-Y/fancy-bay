@@ -25,6 +25,7 @@ export default function useFetchTreasureBay(address: string) {
           treasureBayContract.methods;
 
         const [
+          createdAt,
           name,
           creator,
           stakeholders,
@@ -32,6 +33,7 @@ export default function useFetchTreasureBay(address: string) {
           transferProposals,
           totalStakedAmount,
         ] = await Promise.all([
+          treasureBayContractMethods.createdAt().call(),
           treasureBayContractMethods.name().call(),
           treasureBayContractMethods.creator().call(),
           treasureBayContractMethods.listOfStakeholders().call(),
@@ -47,6 +49,7 @@ export default function useFetchTreasureBay(address: string) {
           members: treasureHunters,
           transferProposals,
           creator: creator,
+          createdAt: createdAt,
           exchangeProposals: [],
           totalValueLocked: totalStakedAmount,
         };

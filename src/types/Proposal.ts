@@ -54,17 +54,17 @@ export interface MethodConstantReturnContext<TCallReturn> {
 export interface MethodReturnContext extends MethodPayableReturnContext {}
 
 export type ContractContext = Web3ContractContext<
-  TransferProposal,
-  TransferProposalMethodNames,
-  TransferProposalEventsContext,
-  TransferProposalEvents
+  Proposal,
+  ProposalMethodNames,
+  ProposalEventsContext,
+  ProposalEvents
 >;
-export type TransferProposalEvents =
+export type ProposalEvents =
   | 'OwnershipTransferred'
   | 'ProposalClosed'
   | 'ProposalUnvoted'
   | 'ProposalVoted';
-export interface TransferProposalEventsContext {
+export interface ProposalEventsContext {
   OwnershipTransferred(
     parameters: {
       filter?: {
@@ -111,30 +111,28 @@ export interface TransferProposalEventsContext {
     callback?: (error: Error, event: EventData) => void
   ): EventResponse;
 }
-export type TransferProposalMethodNames =
+export type ProposalMethodNames =
   | 'new'
-  | 'amount'
-  | 'checkApprovalStatus'
-  | 'close'
   | 'createdAt'
   | 'creator'
   | 'description'
-  | 'getVoters'
   | 'numberOfNoVote'
   | 'numberOfYesVote'
   | 'open'
   | 'owner'
   | 'proposalPassed'
-  | 'recipient'
   | 'renounceOwnership'
   | 'title'
   | 'transferOwnership'
-  | 'unvote'
-  | 'voteNo'
-  | 'voteYes'
   | 'votedNo'
   | 'votedYes'
-  | 'votingDeadline';
+  | 'votingDeadline'
+  | 'getVoters'
+  | 'checkApprovalStatus'
+  | 'close'
+  | 'voteYes'
+  | 'voteNo'
+  | 'unvote';
 export interface OwnershipTransferredEventEmittedResponse {
   previousOwner: string;
   newOwner: string;
@@ -157,7 +155,7 @@ export interface VoterResponse {
   votedAt: string;
   approved: boolean;
 }
-export interface TransferProposal {
+export interface Proposal {
   /**
    * Payable: false
    * Constant: false
@@ -167,38 +165,13 @@ export interface TransferProposal {
    * @param _description Type: string, Indexed: false
    * @param _title Type: string, Indexed: false
    * @param _debatingPeriod Type: uint256, Indexed: false
-   * @param _recipient Type: address, Indexed: false
-   * @param _amount Type: uint256, Indexed: false
    */
   'new'(
     _creator: string,
     _description: string,
     _title: string,
-    _debatingPeriod: string,
-    _recipient: string,
-    _amount: string
+    _debatingPeriod: string
   ): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  amount(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  checkApprovalStatus(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  close(): MethodReturnContext;
   /**
    * Payable: false
    * Constant: true
@@ -220,13 +193,6 @@ export interface TransferProposal {
    * Type: function
    */
   description(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  getVoters(): MethodConstantReturnContext<VoterResponse[]>;
   /**
    * Payable: false
    * Constant: true
@@ -264,13 +230,6 @@ export interface TransferProposal {
   proposalPassed(): MethodConstantReturnContext<boolean>;
   /**
    * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   */
-  recipient(): MethodConstantReturnContext<string>;
-  /**
-   * Payable: false
    * Constant: false
    * StateMutability: nonpayable
    * Type: function
@@ -291,27 +250,6 @@ export interface TransferProposal {
    * @param newOwner Type: address, Indexed: false
    */
   transferOwnership(newOwner: string): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  unvote(): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  voteNo(): MethodReturnContext;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   */
-  voteYes(): MethodReturnContext;
   /**
    * Payable: false
    * Constant: true
@@ -335,4 +273,46 @@ export interface TransferProposal {
    * Type: function
    */
   votingDeadline(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  getVoters(): MethodConstantReturnContext<VoterResponse[]>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  checkApprovalStatus(): MethodConstantReturnContext<string>;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  close(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  voteYes(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  voteNo(): MethodReturnContext;
+  /**
+   * Payable: false
+   * Constant: false
+   * StateMutability: nonpayable
+   * Type: function
+   */
+  unvote(): MethodReturnContext;
 }

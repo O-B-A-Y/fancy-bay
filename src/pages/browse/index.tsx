@@ -123,7 +123,7 @@ const Browse: NextPageWithLayout = () => {
           <StatsCard title="Epoch" stats={0} />
           <StatsCard title="Avg. Bay ROI" stats={0} />
           <StatsCard
-            title="Number of Exchanges"
+            title="Number of Proposals"
             stats={
               bays.map(
                 (bay) =>
