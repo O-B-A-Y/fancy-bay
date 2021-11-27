@@ -1624,18 +1624,10 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureWoodyChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasureWoodyChest": [4092]
     },
     "id": 4093,
     "license": "MIT",
@@ -1643,12 +1635,7 @@
     "nodes": [
       {
         "id": 4000,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:25"
       },
@@ -1697,11 +1684,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 4092,
-        "linearizedBaseContracts": [
-          4092,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [4092, 103, 774],
         "name": "TreasureWoodyChest",
         "nameLocation": "146:18:25",
         "nodeType": "ContractDefinition",
@@ -1881,9 +1864,7 @@
               "src": "479:264:25",
               "statements": [
                 {
-                  "assignments": [
-                    4032
-                  ],
+                  "assignments": [4032],
                   "declarations": [
                     {
                       "constant": false,
@@ -2735,18 +2716,10 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureWoodyChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasureWoodyChest": [4092]
     },
     "id": 4093,
     "license": "MIT",
@@ -2754,12 +2727,7 @@
     "nodes": [
       {
         "id": 4000,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:25"
       },
@@ -2808,11 +2776,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 4092,
-        "linearizedBaseContracts": [
-          4092,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [4092, 103, 774],
         "name": "TreasureWoodyChest",
         "nameLocation": "146:18:25",
         "nodeType": "ContractDefinition",
@@ -2992,9 +2956,7 @@
               "src": "479:264:25",
               "statements": [
                 {
-                  "assignments": [
-                    4032
-                  ],
+                  "assignments": [4032],
                   "declarations": [
                     {
                       "constant": false,

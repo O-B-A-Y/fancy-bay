@@ -13883,48 +13883,20 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/TreasureBay.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        2422
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ],
-      "TreasureBay": [
-        2931
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureTransferChest": [
-        3998
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [3494],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [2422],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884],
+      "TreasureBay": [2931],
+      "TreasureExchangeChest": [3892],
+      "TreasurePool": [3449],
+      "TreasureTransferChest": [3998],
+      "TreasureWoodyChest": [4092]
     },
     "id": 2932,
     "license": "MIT",
@@ -13932,12 +13904,7 @@
     "nodes": [
       {
         "id": 2663,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:17"
       },
@@ -14114,21 +14081,12 @@
           }
         ],
         "canonicalName": "TreasureBay",
-        "contractDependencies": [
-          3884
-        ],
+        "contractDependencies": [3884],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2931,
         "linearizedBaseContracts": [
-          2931,
-          4092,
-          3892,
-          3998,
-          103,
-          3449,
-          774,
-          2422
+          2931, 4092, 3892, 3998, 103, 3449, 774, 2422
         ],
         "name": "TreasureBay",
         "nameLocation": "461:11:17",
@@ -14713,10 +14671,7 @@
                       "id": 2719,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1140:7:17",
                       "typeDescriptions": {
@@ -14948,10 +14903,7 @@
                       "id": 2734,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1262:7:17",
                       "typeDescriptions": {
@@ -15832,9 +15784,7 @@
                   },
                   "id": 2835,
                   "initializationExpression": {
-                    "assignments": [
-                      2800
-                    ],
+                    "assignments": [2800],
                     "declarations": [
                       {
                         "constant": false,
@@ -16132,10 +16082,7 @@
                       "id": 2849,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2354:7:17",
                       "typeDescriptions": {
@@ -17168,48 +17115,20 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/TreasureBay.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        2422
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ],
-      "TreasureBay": [
-        2931
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureTransferChest": [
-        3998
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [3494],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [2422],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884],
+      "TreasureBay": [2931],
+      "TreasureExchangeChest": [3892],
+      "TreasurePool": [3449],
+      "TreasureTransferChest": [3998],
+      "TreasureWoodyChest": [4092]
     },
     "id": 2932,
     "license": "MIT",
@@ -17217,12 +17136,7 @@
     "nodes": [
       {
         "id": 2663,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:17"
       },
@@ -17399,21 +17313,12 @@
           }
         ],
         "canonicalName": "TreasureBay",
-        "contractDependencies": [
-          3884
-        ],
+        "contractDependencies": [3884],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2931,
         "linearizedBaseContracts": [
-          2931,
-          4092,
-          3892,
-          3998,
-          103,
-          3449,
-          774,
-          2422
+          2931, 4092, 3892, 3998, 103, 3449, 774, 2422
         ],
         "name": "TreasureBay",
         "nameLocation": "461:11:17",
@@ -17998,10 +17903,7 @@
                       "id": 2719,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1140:7:17",
                       "typeDescriptions": {
@@ -18233,10 +18135,7 @@
                       "id": 2734,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1262:7:17",
                       "typeDescriptions": {
@@ -19117,9 +19016,7 @@
                   },
                   "id": 2835,
                   "initializationExpression": {
-                    "assignments": [
-                      2800
-                    ],
+                    "assignments": [2800],
                     "declarations": [
                       {
                         "constant": false,
@@ -19417,10 +19314,7 @@
                       "id": 2849,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2354:7:17",
                       "typeDescriptions": {

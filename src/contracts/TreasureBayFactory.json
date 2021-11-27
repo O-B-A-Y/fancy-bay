@@ -4707,54 +4707,22 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/TreasureBayFactory.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        2422
-      ],
-      "ITreasureBayFactory": [
-        2460
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ],
-      "TreasureBay": [
-        2931
-      ],
-      "TreasureBayFactory": [
-        3078
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureTransferChest": [
-        3998
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [3494],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [2422],
+      "ITreasureBayFactory": [2460],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884],
+      "TreasureBay": [2931],
+      "TreasureBayFactory": [3078],
+      "TreasureExchangeChest": [3892],
+      "TreasurePool": [3449],
+      "TreasureTransferChest": [3998],
+      "TreasureWoodyChest": [4092]
     },
     "id": 3079,
     "license": "MIT",
@@ -4762,12 +4730,7 @@
     "nodes": [
       {
         "id": 2933,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:18"
       },
@@ -4836,18 +4799,11 @@
           }
         ],
         "canonicalName": "TreasureBayFactory",
-        "contractDependencies": [
-          2931
-        ],
+        "contractDependencies": [2931],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3078,
-        "linearizedBaseContracts": [
-          3078,
-          103,
-          774,
-          2460
-        ],
+        "linearizedBaseContracts": [3078, 103, 774, 2460],
         "name": "TreasureBayFactory",
         "nameLocation": "185:18:18",
         "nodeType": "ContractDefinition",
@@ -4949,18 +4905,14 @@
             "visibility": "internal"
           },
           {
-            "baseFunctions": [
-              2444
-            ],
+            "baseFunctions": [2444],
             "body": {
               "id": 2999,
               "nodeType": "Block",
               "src": "486:269:18",
               "statements": [
                 {
-                  "assignments": [
-                    2963
-                  ],
+                  "assignments": [2963],
                   "declarations": [
                     {
                       "constant": false,
@@ -5962,9 +5914,7 @@
                   },
                   "id": 3042,
                   "initializationExpression": {
-                    "assignments": [
-                      3006
-                    ],
+                    "assignments": [3006],
                     "declarations": [
                       {
                         "constant": false,
@@ -6164,9 +6114,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              2451
-            ],
+            "baseFunctions": [2451],
             "body": {
               "id": 3059,
               "nodeType": "Block",
@@ -6269,9 +6217,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              2459
-            ],
+            "baseFunctions": [2459],
             "body": {
               "id": 3076,
               "nodeType": "Block",
@@ -6473,54 +6419,22 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/TreasureBayFactory.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ITreasureBay": [
-        2422
-      ],
-      "ITreasureBayFactory": [
-        2460
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ],
-      "TreasureBay": [
-        2931
-      ],
-      "TreasureBayFactory": [
-        3078
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureTransferChest": [
-        3998
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "ExchangeProposal": [3494],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ITreasureBay": [2422],
+      "ITreasureBayFactory": [2460],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884],
+      "TreasureBay": [2931],
+      "TreasureBayFactory": [3078],
+      "TreasureExchangeChest": [3892],
+      "TreasurePool": [3449],
+      "TreasureTransferChest": [3998],
+      "TreasureWoodyChest": [4092]
     },
     "id": 3079,
     "license": "MIT",
@@ -6528,12 +6442,7 @@
     "nodes": [
       {
         "id": 2933,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:18"
       },
@@ -6602,18 +6511,11 @@
           }
         ],
         "canonicalName": "TreasureBayFactory",
-        "contractDependencies": [
-          2931
-        ],
+        "contractDependencies": [2931],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3078,
-        "linearizedBaseContracts": [
-          3078,
-          103,
-          774,
-          2460
-        ],
+        "linearizedBaseContracts": [3078, 103, 774, 2460],
         "name": "TreasureBayFactory",
         "nameLocation": "185:18:18",
         "nodeType": "ContractDefinition",
@@ -6715,18 +6617,14 @@
             "visibility": "internal"
           },
           {
-            "baseFunctions": [
-              2444
-            ],
+            "baseFunctions": [2444],
             "body": {
               "id": 2999,
               "nodeType": "Block",
               "src": "486:269:18",
               "statements": [
                 {
-                  "assignments": [
-                    2963
-                  ],
+                  "assignments": [2963],
                   "declarations": [
                     {
                       "constant": false,
@@ -7728,9 +7626,7 @@
                   },
                   "id": 3042,
                   "initializationExpression": {
-                    "assignments": [
-                      3006
-                    ],
+                    "assignments": [3006],
                     "declarations": [
                       {
                         "constant": false,
@@ -7930,9 +7826,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              2451
-            ],
+            "baseFunctions": [2451],
             "body": {
               "id": 3059,
               "nodeType": "Block",
@@ -8035,9 +7929,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              2459
-            ],
+            "baseFunctions": [2459],
             "body": {
               "id": 3076,
               "nodeType": "Block",
