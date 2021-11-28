@@ -1,12 +1,12 @@
-import useTreasureBayFactoryContract from './useTreasureBayFactoryContract';
-import { TreasureBayFactory } from 'src/types/TreasureBayFactory';
 import { useEffect, useState } from 'react';
-import { TreasureBay } from 'src/types/TreasureBay';
-import useTreasureBayContract from './useTreasureBayContract';
-import { TreasureBayType } from '../types';
 import { useDispatch } from 'react-redux';
-import { setFetching, setTreasureBays } from '../slice';
 import { useAppSelector } from 'src/states/hooks';
+import { TreasureBay } from 'src/types/TreasureBay';
+import { TreasureBayFactory } from 'src/types/TreasureBayFactory';
+import { setFetching, setTreasureBays } from '../slice';
+import { TreasureBayType } from '../types';
+import useTreasureBayContract from './useTreasureBayContract';
+import useTreasureBayFactoryContract from './useTreasureBayFactoryContract';
 
 export default function useFetchTreasureBays() {
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ export default function useFetchTreasureBays() {
 
         if (treasureBayAddresses.length === 0) {
           setBays([]);
+          setError(null); // Clear error on success
           setLoading(false);
           return;
         } else {
@@ -78,6 +79,7 @@ export default function useFetchTreasureBays() {
           );
 
           setBays(treasureBays);
+          setError(null); // Clear error on success
           dispatch(setTreasureBays(treasureBays));
           dispatch(setFetching(false));
           setLoading(false);
@@ -99,5 +101,5 @@ export default function useFetchTreasureBays() {
     fetchTreasureBays();
   }, [fetching, retries, account]);
 
-  return { bays, loading, error };
+  return { bays, loading, error, retries };
 }

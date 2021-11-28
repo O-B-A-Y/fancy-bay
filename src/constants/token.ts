@@ -1,3 +1,5 @@
+import configs from '../configs';
+
 export type TokenAllowed = 'OBAY';
 export interface Token {
   name: string;
@@ -23,6 +25,6 @@ export const TokenMapAddress: {
     OBAY: '0xe26d20Ef036bAa1200a639ac5E0ccA0804027789',
   },
   DEVELOPMENT: {
-    OBAY: process.env.OBAY_TOKEN_CONTRACT_ADDRESS,
+    OBAY: configs.CONTRACT_ADDRESS.OBAY_TOKEN,
   },
 };

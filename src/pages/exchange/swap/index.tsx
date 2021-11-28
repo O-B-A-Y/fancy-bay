@@ -7,6 +7,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { MdSwapVerticalCircle } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import { Button, Flex, FlexItem, NumberInput } from '../../../components';
+import configs from '../../../configs';
 import { DefaultLayout, ExchangeLayout } from '../../../layouts';
 import ExchangeSelectionModal from '../../../modals/ExchangeSelectionModal';
 import {
@@ -17,7 +18,6 @@ import {
 } from '../../../states/exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../../states/hooks';
 import useExchangeSelectionModal from '../../../states/modal/hooks/useExchangeSelectionModal';
-import useMyBaysSelectionModal from '../../../states/modal/hooks/useMyBaysSelectionModal';
 import colors from '../../../styles/colors.module.scss';
 import URLUtils from '../../../utils/url';
 import { NextPageWithLayout } from '../../_app';
@@ -26,7 +26,6 @@ import styles from './Swap.module.scss';
 const Exchange: NextPageWithLayout = () => {
   const [selectOrder, setSelectOrder] = useState<number>(0);
   const { openExchangeSelectModal } = useExchangeSelectionModal();
-  const { close, open, myBaysSelectionModal } = useMyBaysSelectionModal();
   const { nativeCurrency, token: tokenData } = useAppSelector(
     (state) => state.exchangeSlice.data
   );
@@ -41,7 +40,7 @@ const Exchange: NextPageWithLayout = () => {
   // Filter tokens by chainId
   const chainTokens = useMemo(() => {
     if (chainId && tokenData.list.length > 0)
-      return tokenData.list.filter((t) => t.chainId === 1);
+      return tokenData.list.filter((t) => t.chainId === 1); // NOTE: Currently hard-coded chain ID
     return [];
   }, [chainId, tokenData]);
 
@@ -62,13 +61,19 @@ const Exchange: NextPageWithLayout = () => {
 
   // Fetch initial default token list of OBAY Exchange
   useEffect(() => {
-    // Initial token list (Stablecoin)
+    // Initial token list (Stablecoin) (if empty)
     (async () => {
+      // Check if default provider is already fetched
+      if (
+        tokenData.listProviders
+          .map((p) => p.name)
+          .includes(configs.DEFAULT_TOKEN_LIST_URL)
+      ) {
+        return;
+      }
       try {
         await dispatch(
-          importTokenList(
-            'ipfs://QmZbWsMTSGqPny7jSzbMX43RaAvUupKHsHiRAZU9hJ75WB' // Remove 'B' to cause error
-          )
+          importTokenList(configs.DEFAULT_TOKEN_LIST_URL)
         ).unwrap();
       } catch (err) {
         toast.error(`ERROR! Cannot import default list of tokens!`, {
@@ -84,9 +89,6 @@ const Exchange: NextPageWithLayout = () => {
     })();
   }, []);
 
-  useEffect(() => {});
-
-  /* * * */
   return (
     <>
       <Head>
@@ -196,11 +198,12 @@ const Exchange: NextPageWithLayout = () => {
         </FlexItem>
       </Flex>
       <Button className={styles.submitBtn}>Submit</Button>
-      {/* React Modal */}
+      {/* ExchangeSelectionModal */}
       <ExchangeSelectionModal
         items={nativeCurrency ? [nativeCurrency, ...chainTokens] : chainTokens}
         currentSelectOrder={selectOrder}
       />
+
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -220,13 +223,9 @@ const Exchange: NextPageWithLayout = () => {
 };
 
 Exchange.getLayout = function getLayout(page: ReactElement) {
-  const myBayNames = [
-    'Venture of the future',
-    'Hội Những Người Giàu Vì Coin Rác',
-  ];
   return (
     <DefaultLayout>
-      <ExchangeLayout myBayNames={myBayNames}>{page}</ExchangeLayout>
+      <ExchangeLayout>{page}</ExchangeLayout>
     </DefaultLayout>
   );
 };

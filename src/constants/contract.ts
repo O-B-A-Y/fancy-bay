@@ -1,3 +1,4 @@
+import configs from '../configs';
 import { ENVIRONMENT } from './token';
 
 export enum ListOfContracts {
@@ -17,7 +18,7 @@ export const ContractMapAddress: {
     OBAY_TREASURY: '',
   },
   DEVELOPMENT: {
-    TREASURE_BAY_FACTORY: process.env.TREASURE_BAY_FACTORY_CONTRACT_ADDRESS,
-    OBAY_TREASURY: '0xA549cb5Fa013999F67347602bbD1840a7Cd8612d',
+    TREASURE_BAY_FACTORY: configs.CONTRACT_ADDRESS.TREASURE_BAY_FACTORY,
+    OBAY_TREASURY: configs.CONTRACT_ADDRESS.OBAY_TREASURY,
   },
 };

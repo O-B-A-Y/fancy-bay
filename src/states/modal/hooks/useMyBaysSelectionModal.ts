@@ -1,8 +1,9 @@
+import { selectMyBay } from '../../exchange/slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { TreasureBayType } from '../../treasureBay/types';
 import { toggleMyBaysSelectionModal } from '../slice';
 
 const useMyBaysSelectionModal = () => {
-  // Modal state
   const { myBaysSelectionModal } = useAppSelector(
     (state) => state.modalSlice.data
   );
@@ -13,11 +14,15 @@ const useMyBaysSelectionModal = () => {
   const open = () => {
     dispatch(toggleMyBaysSelectionModal(true));
   };
+  const select = (myBay: TreasureBayType) => {
+    dispatch(selectMyBay(myBay));
+  };
 
   return {
     myBaysSelectionModal,
     close,
     open,
+    select,
   };
 };
 

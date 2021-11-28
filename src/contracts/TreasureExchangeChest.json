@@ -336,21 +336,11 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureExchangeChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ]
+      "Context": [774],
+      "ExchangeProposal": [3494],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasureExchangeChest": [3892]
     },
     "id": 3893,
     "license": "MIT",
@@ -358,12 +348,7 @@
     "nodes": [
       {
         "id": 3886,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:23"
       },
@@ -387,9 +372,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3892,
-        "linearizedBaseContracts": [
-          3892
-        ],
+        "linearizedBaseContracts": [3892],
         "name": "TreasureExchangeChest",
         "nameLocation": "101:21:23",
         "nodeType": "ContractDefinition",
@@ -449,21 +432,11 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/TreasureExchangeChest.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ExchangeProposal": [
-        3494
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasureExchangeChest": [
-        3892
-      ]
+      "Context": [774],
+      "ExchangeProposal": [3494],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasureExchangeChest": [3892]
     },
     "id": 3893,
     "license": "MIT",
@@ -471,12 +444,7 @@
     "nodes": [
       {
         "id": 3886,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:23"
       },
@@ -500,9 +468,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3892,
-        "linearizedBaseContracts": [
-          3892
-        ],
+        "linearizedBaseContracts": [3892],
         "name": "TreasureExchangeChest",
         "nameLocation": "101:21:23",
         "nodeType": "ContractDefinition",

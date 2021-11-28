@@ -9250,36 +9250,16 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/ObayTreasury.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ObayToken": [
-        4171
-      ],
-      "ObayTreasury": [
-        2661
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ObayToken": [4171],
+      "ObayTreasury": [2661],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasurePool": [3449],
+      "TreasureWoodyChest": [4092]
     },
     "id": 2662,
     "license": "MIT",
@@ -9287,12 +9267,7 @@
     "nodes": [
       {
         "id": 2462,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:16"
       },
@@ -9373,20 +9348,11 @@
           }
         ],
         "canonicalName": "ObayTreasury",
-        "contractDependencies": [
-          3839,
-          4171
-        ],
+        "contractDependencies": [3839, 4171],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2661,
-        "linearizedBaseContracts": [
-          2661,
-          4092,
-          103,
-          3449,
-          774
-        ],
+        "linearizedBaseContracts": [2661, 4092, 103, 3449, 774],
         "name": "ObayTreasury",
         "nameLocation": "231:12:16",
         "nodeType": "ContractDefinition",
@@ -10017,10 +9983,7 @@
                       "id": 2517,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "762:7:16",
                       "typeDescriptions": {
@@ -10137,10 +10100,7 @@
                       "id": 2525,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "815:7:16",
                       "typeDescriptions": {
@@ -10975,10 +10935,7 @@
                       "id": 2585,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1274:7:16",
                       "typeDescriptions": {
@@ -11153,10 +11110,7 @@
                       "id": 2599,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1421:7:16",
                       "typeDescriptions": {
@@ -11868,36 +11822,16 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/ObayTreasury.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "ERC20": [
-        649
-      ],
-      "IERC20": [
-        727
-      ],
-      "IERC20Metadata": [
-        752
-      ],
-      "ObayToken": [
-        4171
-      ],
-      "ObayTreasury": [
-        2661
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TreasurePool": [
-        3449
-      ],
-      "TreasureWoodyChest": [
-        4092
-      ]
+      "Context": [774],
+      "ERC20": [649],
+      "IERC20": [727],
+      "IERC20Metadata": [752],
+      "ObayToken": [4171],
+      "ObayTreasury": [2661],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TreasurePool": [3449],
+      "TreasureWoodyChest": [4092]
     },
     "id": 2662,
     "license": "MIT",
@@ -11905,12 +11839,7 @@
     "nodes": [
       {
         "id": 2462,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:16"
       },
@@ -11991,20 +11920,11 @@
           }
         ],
         "canonicalName": "ObayTreasury",
-        "contractDependencies": [
-          3839,
-          4171
-        ],
+        "contractDependencies": [3839, 4171],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2661,
-        "linearizedBaseContracts": [
-          2661,
-          4092,
-          103,
-          3449,
-          774
-        ],
+        "linearizedBaseContracts": [2661, 4092, 103, 3449, 774],
         "name": "ObayTreasury",
         "nameLocation": "231:12:16",
         "nodeType": "ContractDefinition",
@@ -12635,10 +12555,7 @@
                       "id": 2517,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "762:7:16",
                       "typeDescriptions": {
@@ -12755,10 +12672,7 @@
                       "id": 2525,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "815:7:16",
                       "typeDescriptions": {
@@ -13593,10 +13507,7 @@
                       "id": 2585,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1274:7:16",
                       "typeDescriptions": {
@@ -13771,10 +13682,7 @@
                       "id": 2599,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1421:7:16",
                       "typeDescriptions": {

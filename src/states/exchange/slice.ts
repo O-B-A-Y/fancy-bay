@@ -10,6 +10,7 @@ import {
 } from '../../types/Token';
 import ArrayUtils from '../../utils/array';
 import URLUtils from '../../utils/url';
+import { TreasureBayType } from '../treasureBay/types';
 
 interface ListProvider {
   name: string;
@@ -35,7 +36,7 @@ interface ExchangeState {
       listProviders: ListProvider[];
     };
     nativeCurrency: NativeCurrencyDetails | null;
-    myBay: null;
+    myBay: null | TreasureBayType;
   };
   error: null | object | string;
 }
@@ -86,10 +87,15 @@ const exchangeSlice = createSlice({
     ) {
       state.data.pair.secondItem = action.payload;
     },
+    selectMyBay(state, action: PayloadAction<TreasureBayType | null>) {
+      state.data.myBay = action.payload;
+    },
     switchChainCurrency(state, action: PayloadAction<ChainId>) {
       state.data.nativeCurrency = nativeCurrency[action.payload];
-      // Replace first exchange item with native currency
-      state.data.pair.firstItem = nativeCurrency[action.payload];
+      // Replace first exchange item with native currency (if null)
+      if (!state.data.pair.firstItem) {
+        state.data.pair.firstItem = nativeCurrency[action.payload];
+      }
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +105,14 @@ const exchangeSlice = createSlice({
       })
       .addCase(importTokenList.fulfilled, (state, action) => {
         state.status = ThunkFetchState.Fulfilled;
+        // Check if provider is already fetched/fulfilled (by source)
+        if (
+          state.data.token.listProviders
+            .map((p) => p.source)
+            .includes(action.payload.source)
+        ) {
+          return;
+        }
         // Push new list provider
         state.data.token.listProviders.push({
           name: action.payload.data.name,
@@ -123,7 +137,11 @@ const exchangeSlice = createSlice({
   },
 });
 
-export const { selectFirstItem, selectSecondItem, switchChainCurrency } =
-  exchangeSlice.actions;
+export const {
+  selectFirstItem,
+  selectSecondItem,
+  selectMyBay,
+  switchChainCurrency,
+} = exchangeSlice.actions;
 
 export default exchangeSlice.reducer;

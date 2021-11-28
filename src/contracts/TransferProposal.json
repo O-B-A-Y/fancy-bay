@@ -7567,18 +7567,10 @@
   "ast": {
     "absolutePath": "project:/contracts/features/dao/proposal/TransferProposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884]
     },
     "id": 3885,
     "license": "MIT",
@@ -7586,12 +7578,7 @@
     "nodes": [
       {
         "id": 3841,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:22"
       },
@@ -7628,12 +7615,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3884,
-        "linearizedBaseContracts": [
-          3884,
-          3839,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [3884, 3839, 103, 774],
         "name": "TransferProposal",
         "nameLocation": "93:16:22",
         "nodeType": "ContractDefinition",
@@ -8115,18 +8097,10 @@
   "legacyAST": {
     "absolutePath": "project:/contracts/features/dao/proposal/TransferProposal.sol",
     "exportedSymbols": {
-      "Context": [
-        774
-      ],
-      "Ownable": [
-        103
-      ],
-      "Proposal": [
-        3839
-      ],
-      "TransferProposal": [
-        3884
-      ]
+      "Context": [774],
+      "Ownable": [103],
+      "Proposal": [3839],
+      "TransferProposal": [3884]
     },
     "id": 3885,
     "license": "MIT",
@@ -8134,12 +8108,7 @@
     "nodes": [
       {
         "id": 3841,
-        "literals": [
-          "solidity",
-          ">=",
-          "0.4",
-          ".0"
-        ],
+        "literals": ["solidity", ">=", "0.4", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:24:22"
       },
@@ -8176,12 +8145,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 3884,
-        "linearizedBaseContracts": [
-          3884,
-          3839,
-          103,
-          774
-        ],
+        "linearizedBaseContracts": [3884, 3839, 103, 774],
         "name": "TransferProposal",
         "nameLocation": "93:16:22",
         "nodeType": "ContractDefinition",
